@@ -184,3 +184,7 @@ Below is a list of references we plan to use when creating our project.
 -   <https://stackoverflow.com/questions/52087675/interactive-shiny-app-with-r-hovering-over-points-and-displaying-info>
 -   <https://rviews.rstudio.com/2019/10/09/building-interactive-world-maps-in-shiny/>
 -   <https://stackoverflow.com/questions/52087675/interactive-shiny-app-with-r-hovering-over-points-and-displaying-info>
+
+## Data Reference
+
+-   <https://www.kaggle.com/pavan9065/air-pollution>
