@@ -1,0 +1,186 @@
+Project Proposal
+================
+
+## Load Data
+
+``` r
+# still need to upload deaths by risk factor (I am getting an error that says "Unexpected Response from Server, probably because the file is large)
+
+death_rates_total_air_pollution <- read_csv(here("data", "death-rates-total-air-pollution.csv"))
+```
+
+    ## Rows: 6468 Columns: 4
+
+    ## ── Column specification ────────────────────────────────────────────────────────
+    ## Delimiter: ","
+    ## chr (2): Entity, Code
+    ## dbl (2): Year, Deaths - Air pollution - Sex: Both - Age: Age-standardized (R...
+
+    ## 
+    ## ℹ Use `spec()` to retrieve the full column specification for this data.
+    ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+
+``` r
+death_rates_from_air_pollution <- read_csv(here("data", "death-rates-from-air-pollution.csv"))
+```
+
+    ## Rows: 6468 Columns: 7
+
+    ## ── Column specification ────────────────────────────────────────────────────────
+    ## Delimiter: ","
+    ## chr (2): Entity, Code
+    ## dbl (5): Year, Deaths - Air pollution - Sex: Both - Age: Age-standardized (R...
+
+    ## 
+    ## ℹ Use `spec()` to retrieve the full column specification for this data.
+    ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+
+``` r
+share_deaths_air_pollution <- read_csv(here("data", "share-deaths-air-pollution.csv"))
+```
+
+    ## Rows: 6412 Columns: 4
+
+    ## ── Column specification ────────────────────────────────────────────────────────
+    ## Delimiter: ","
+    ## chr (2): Entity, Code
+    ## dbl (2): Year, Air pollution (total) (IHME, 2019)
+
+    ## 
+    ## ℹ Use `spec()` to retrieve the full column specification for this data.
+    ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+
+``` r
+glimpse(death_rates_total_air_pollution)
+```
+
+    ## Rows: 6,468
+    ## Columns: 4
+    ## $ Entity                                                              <chr> "A…
+    ## $ Code                                                                <chr> "A…
+    ## $ Year                                                                <dbl> 19…
+    ## $ `Deaths - Air pollution - Sex: Both - Age: Age-standardized (Rate)` <dbl> 29…
+
+``` r
+glimpse(death_rates_from_air_pollution)
+```
+
+    ## Rows: 6,468
+    ## Columns: 7
+    ## $ Entity                                                                                         <chr> …
+    ## $ Code                                                                                           <chr> …
+    ## $ Year                                                                                           <dbl> …
+    ## $ `Deaths - Air pollution - Sex: Both - Age: Age-standardized (Rate)`                            <dbl> …
+    ## $ `Deaths - Household air pollution from solid fuels - Sex: Both - Age: Age-standardized (Rate)` <dbl> …
+    ## $ `Deaths - Ambient particulate matter pollution - Sex: Both - Age: Age-standardized (Rate)`     <dbl> …
+    ## $ `Deaths - Ambient ozone pollution - Sex: Both - Age: Age-standardized (Rate)`                  <dbl> …
+
+``` r
+glimpse(share_deaths_air_pollution)
+```
+
+    ## Rows: 6,412
+    ## Columns: 4
+    ## $ Entity                               <chr> "Afghanistan", "Afghanistan", "Af…
+    ## $ Code                                 <chr> "AFG", "AFG", "AFG", "AFG", "AFG"…
+    ## $ Year                                 <dbl> 1990, 1991, 1992, 1993, 1994, 199…
+    ## $ `Air pollution (total) (IHME, 2019)` <dbl> 13.56, 13.19, 13.05, 12.88, 12.80…
+
+## One Sentence High-Level Goal
+
+Create an interactive spatio-temporal visualization of worldwide deaths
+related to air pollution.
+
+## Description of our Goals and Motivation
+
+A one to two paragraph description of your goals, including your
+motivation. - Depending on the focus of your project, the following
+might go in here. - If using a particular dataset(s), a brief
+description of each dataset including the reason why you chose the
+particular dataset, its dataset, its dimensions and any other relevant
+metadata. (Make sure to load the data and use inline code for some of
+this information.) - If answering a particular research question, the
+question itself and the reason why you chose this question.
+
+## Weekly Plan of Attack
+
+1.  Week 1 of project (week of Mon, Oct 18): Pick a focus for your
+    project.
+
+-   Brainstormed project ideas and pick data (All during Lab).
+-   Ran project idea by Vittorio (All during Lab.)
+
+2.  Week 2 of project (week of Mon, Oct 25): Work on developing your
+    project proposal and setting up the structure for your repository.
+
+-   Set up repo structure (Courtney.)
+-   Start working on proposal (All assigned out own parts.)
+
+3.  Week 3 of project (week of Mon, Nov 1): Finalize your project
+    proposal.
+
+-   **Proposals for peer review: due Fri, Nov 5 at 5pm.**
+-   Talk with Professor Cetinkaya-Rundel during office hours to receive
+    semi-approval to begin working on the project. We hope to get
+    started early in anticipation of challenges, and we do not want to
+    be doing this project last minute. (Whoever is available during
+    office hours time.)
+-   Ideally, start working on framework for project. Picking which
+    variables to use for the visualization and brainstorming a “draft”
+    visualization. (All of us during weekly meeting)
+
+4.  Week 4 of project (week of Mon, Nov 8): Conduct peer review on
+    project proposals, and optionally, submit in an updated version of
+    your proposal.
+
+-   **Revised proposals for instructor review: due Fri, Nov 12 at 5pm**
+-   Update proposal (All during weekly meeting).
+-   Research information about creating interactive spatio-temporal
+    visualizations on Shiny. (All.)
+-   Organize notes in the Google Doc. (All, while doing research.)
+-   Ideally, this step will help us from jumping in blind to the project
+    and will provide us a solid foundation to begin our work on.
+
+5.  Week 5 of project (week of Mon, Nov 15): Continue working on your
+    project.
+
+-   Start coding the spatio-temporal visualization of worldwide deaths
+    related to air pollution.
+-   At this point, we would like to decide if we will need to introduce
+    any other data to our visualization.
+
+6  Week 6 of project (week of Mon, Nov 22): Continue working on your
+project. + Continue working on the visualization. + If necessary,
+introduce outside/additional data.
+
+7  Week 7 of project (week of Mon, Nov 29): Conduct another round of
+peer review. + Ideally, we would like to have the coding part of our
+project done by the end of this week. That would give us the following
+week to reflect, make any final touches, and plan for the presentation.
+
+8.  Write-up and presentation: due Fri, Dec 3 at noon (beginning of
+    class).
+
+-   Make any final touches.
+-   Craft presentation. Prepare for in-class presenation on LDOC.
+
+### Weekly Meeting Date and Time
+
+We plan to have our scheduled meetings weekly on Wednesdays before
+lecture. We will decide how early to start before class based on how
+much work we anticipate needed to get through for the day.
+
+## Describe Repo
+
+The final organization of your project repository. This means describing
+the project organization in your proposal as well as implementing that
+organization in your repo. Create any folders needed and place a
+README.md in each folder explaining what goes in there
+
+## References
+
+Below is a list of references we plan to use when creating our project.
+
+-   <https://stackoverflow.com/questions/52087675/interactive-shiny-app-with-r-hovering-over-points-and-displaying-info>
+-   <https://rviews.rstudio.com/2019/10/09/building-interactive-world-maps-in-shiny/>
+-   <https://stackoverflow.com/questions/52087675/interactive-shiny-app-with-r-hovering-over-points-and-displaying-info>
