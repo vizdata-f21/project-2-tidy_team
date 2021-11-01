@@ -84,13 +84,10 @@ We plan to have our scheduled meetings weekly on Wednesdays before lecture. We w
 
 The project is organized into 4 main folders: 
 
-- `data`: includes our world air pollution datasets
-
-- `images`: includes any images, logos, and gifs for our Shiny App
-
-- `proposal`: includes our Project 2 proposal files
-
-- `shinyapp`: contains our files that build to the Shiny App. We will include more subfolders into this folder as we build the app as needed
+* `data`: includes our world air pollution datasets
+* `images`: includes any images, logos, and gifs for our Shiny App
+* `proposal`: includes our Project 2 proposal files
+* `shinyapp`: contains our files that build to the Shiny App. We will include more subfolders into this folder as we build the app as needed
 
 ## References 
 
