@@ -170,7 +170,8 @@ Non-exclusive breast feeding, discontinued breast feeding and child
 wasting etc.) by country from 1990 to 2017 - 32 variables and
 \_\_\_\_\_\_ observations. The 4th csv file includes the proportion of
 deaths attributed to air pollution in countries from 1990 to 2017 - 4
-variables and 6412 observations
+variables and 6412 observations. Visual draft of our map can be found in
+the appendix.
 
 ## Weekly Plan of Attack
 
@@ -178,13 +179,13 @@ variables and 6412 observations
     project.
 
 -   Brainstormed project ideas and pick data (All during Lab).
--   Ran project idea by Vittorio (All during Lab.)
+-   Ran project idea by Vittorio (All during Lab).
 
 2.  Week 2 of project (week of Mon, Oct 25): Work on developing your
     project proposal and setting up the structure for your repository.
 
--   Set up repo structure (Courtney.)
--   Start working on proposal (All assigned out own parts.)
+-   Set up repo structure (Courtney).
+-   Start working on proposal (All assigned out own parts).
 
 3.  Week 3 of project (week of Mon, Nov 1): Finalize your project
     proposal.
@@ -194,20 +195,20 @@ variables and 6412 observations
     semi-approval to begin working on the project. We hope to get
     started early in anticipation of challenges, and we do not want to
     be doing this project last minute. (Whoever is available during
-    office hours time.)
+    office hours time).
 -   Ideally, start working on framework for project. Picking which
     variables to use for the visualization and brainstorming a “draft”
-    visualization. (All of us during weekly meeting)
+    visualization (All of us during weekly meeting).
 
 4.  Week 4 of project (week of Mon, Nov 8): Conduct peer review on
     project proposals, and optionally, submit in an updated version of
     your proposal.
 
 -   **Revised proposals for instructor review: due Fri, Nov 12 at 5pm**
--   Update proposal (All during weekly meeting).
+-   Update proposal (All during weekly meeting)
 -   Research information about creating interactive spatio-temporal
-    visualizations on Shiny. (All.)
--   Organize notes in the Google Doc. (All, while doing research.)
+    visualizations on Shiny. (All)
+-   Organize notes in the Google Doc. (All, while doing research)
 -   Ideally, this step will help us from jumping in blind to the project
     and will provide us a solid foundation to begin our work on.
 
@@ -250,6 +251,10 @@ The project is organized into 4 main folders:
 -   `shinyapp`: contains our files that build to the Shiny App. We will
     include more subfolders into this folder as we build the app as
     needed
+
+## Appendix
+
+![Map Brainstorm](../images/map_brainstorm.jpg)
 
 ## References
 
