@@ -6,7 +6,7 @@ Project Proposal
 ``` r
 # still need to upload deaths by risk factor (I am getting an error that says "Unexpected Response from Server, probably because the file is large)
 
-death_rates_total_air_pollution <- read_csv(here("data", "death-rates-total-air-pollution.csv"))
+death_rates_total_air_pollution_csv <- read_csv(here("data", "death-rates-total-air-pollution.csv"))
 ```
 
     ## Rows: 6468 Columns: 4
@@ -21,7 +21,7 @@ death_rates_total_air_pollution <- read_csv(here("data", "death-rates-total-air-
     ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 
 ``` r
-death_rates_from_air_pollution <- read_csv(here("data", "death-rates-from-air-pollution.csv"))
+death_rates_from_air_pollution_csv <- read_csv(here("data", "death-rates-from-air-pollution.csv"))
 ```
 
     ## Rows: 6468 Columns: 7
@@ -36,7 +36,7 @@ death_rates_from_air_pollution <- read_csv(here("data", "death-rates-from-air-po
     ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 
 ``` r
-share_deaths_air_pollution <- read_csv(here("data", "share-deaths-air-pollution.csv"))
+share_deaths_air_pollution_csv <- read_csv(here("data", "share-deaths-air-pollution.csv"))
 ```
 
     ## Rows: 6412 Columns: 4
@@ -51,15 +51,41 @@ share_deaths_air_pollution <- read_csv(here("data", "share-deaths-air-pollution.
     ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 
 ``` r
+#added _csv ending to eliminate need for naming later versions "clean"
+```
+
+``` r
+death_rates_total_air_pollution <- death_rates_total_air_pollution_csv %>%
+  clean_names() %>% 
+  rename(death_rate_air_pollution = 
+           deaths_air_pollution_sex_both_age_age_standardized_rate)
+
+death_rates_from_air_pollution <- death_rates_from_air_pollution_csv %>%
+  clean_names() %>% 
+  rename(death_rate_air_pollution = 
+           deaths_air_pollution_sex_both_age_age_standardized_rate, 
+       death_rate_household_pollution = deaths_household_air_pollution_from_solid_fuels_sex_both_age_age_standardized_rate, 
+       death_rate_ambient_matter_pollution = deaths_ambient_particulate_matter_pollution_sex_both_age_age_standardized_rate, 
+       death_rate_ozone_pollution = 
+         deaths_ambient_ozone_pollution_sex_both_age_age_standardized_rate)
+
+#this looks messy but the column names are originally super long 
+
+share_deaths_air_pollution <- share_deaths_air_pollution_csv %>% 
+  clean_names() %>% 
+  rename(share_death_air_pollution = air_pollution_total_ihme_2019)
+```
+
+``` r
 glimpse(death_rates_total_air_pollution)
 ```
 
     ## Rows: 6,468
     ## Columns: 4
-    ## $ Entity                                                              <chr> "A…
-    ## $ Code                                                                <chr> "A…
-    ## $ Year                                                                <dbl> 19…
-    ## $ `Deaths - Air pollution - Sex: Both - Age: Age-standardized (Rate)` <dbl> 29…
+    ## $ entity                   <chr> "Afghanistan", "Afghanistan", "Afghanistan", …
+    ## $ code                     <chr> "AFG", "AFG", "AFG", "AFG", "AFG", "AFG", "AF…
+    ## $ year                     <dbl> 1990, 1991, 1992, 1993, 1994, 1995, 1996, 199…
+    ## $ death_rate_air_pollution <dbl> 299.4773, 291.2780, 278.9631, 278.7908, 287.1…
 
 ``` r
 glimpse(death_rates_from_air_pollution)
@@ -67,13 +93,13 @@ glimpse(death_rates_from_air_pollution)
 
     ## Rows: 6,468
     ## Columns: 7
-    ## $ Entity                                                                                         <chr> …
-    ## $ Code                                                                                           <chr> …
-    ## $ Year                                                                                           <dbl> …
-    ## $ `Deaths - Air pollution - Sex: Both - Age: Age-standardized (Rate)`                            <dbl> …
-    ## $ `Deaths - Household air pollution from solid fuels - Sex: Both - Age: Age-standardized (Rate)` <dbl> …
-    ## $ `Deaths - Ambient particulate matter pollution - Sex: Both - Age: Age-standardized (Rate)`     <dbl> …
-    ## $ `Deaths - Ambient ozone pollution - Sex: Both - Age: Age-standardized (Rate)`                  <dbl> …
+    ## $ entity                              <chr> "Afghanistan", "Afghanistan", "Afg…
+    ## $ code                                <chr> "AFG", "AFG", "AFG", "AFG", "AFG",…
+    ## $ year                                <dbl> 1990, 1991, 1992, 1993, 1994, 1995…
+    ## $ death_rate_air_pollution            <dbl> 299.4773, 291.2780, 278.9631, 278.…
+    ## $ death_rate_household_pollution      <dbl> 250.3629, 242.5751, 232.0439, 231.…
+    ## $ death_rate_ambient_matter_pollution <dbl> 46.44659, 46.03384, 44.24377, 44.4…
+    ## $ death_rate_ozone_pollution          <dbl> 5.616442, 5.603960, 5.611822, 5.65…
 
 ``` r
 glimpse(share_deaths_air_pollution)
@@ -81,10 +107,10 @@ glimpse(share_deaths_air_pollution)
 
     ## Rows: 6,412
     ## Columns: 4
-    ## $ Entity                               <chr> "Afghanistan", "Afghanistan", "Af…
-    ## $ Code                                 <chr> "AFG", "AFG", "AFG", "AFG", "AFG"…
-    ## $ Year                                 <dbl> 1990, 1991, 1992, 1993, 1994, 199…
-    ## $ `Air pollution (total) (IHME, 2019)` <dbl> 13.56, 13.19, 13.05, 12.88, 12.80…
+    ## $ entity                    <chr> "Afghanistan", "Afghanistan", "Afghanistan",…
+    ## $ code                      <chr> "AFG", "AFG", "AFG", "AFG", "AFG", "AFG", "A…
+    ## $ year                      <dbl> 1990, 1991, 1992, 1993, 1994, 1995, 1996, 19…
+    ## $ share_death_air_pollution <dbl> 13.56, 13.19, 13.05, 12.88, 12.80, 12.98, 12…
 
 ## One Sentence High-Level Goal
 
@@ -175,11 +201,8 @@ much work we anticipate needed to get through for the day.
 The project is organized into 4 main folders:
 
 -   `data`: includes our world air pollution datasets
-
 -   `images`: includes any images, logos, and gifs for our Shiny App
-
 -   `proposal`: includes our Project 2 proposal files
-
 -   `shinyapp`: contains our files that build to the Shiny App. We will
     include more subfolders into this folder as we build the app as
     needed

@@ -9,6 +9,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 library(tidyverse)
 library(here)
+library(janitor)
 ```
 
 ## Load Data 
@@ -16,9 +17,33 @@ library(here)
 ```{r load data}
 # still need to upload deaths by risk factor (I am getting an error that says "Unexpected Response from Server, probably because the file is large)
 
-death_rates_total_air_pollution <- read_csv(here("data", "death-rates-total-air-pollution.csv"))
-death_rates_from_air_pollution <- read_csv(here("data", "death-rates-from-air-pollution.csv"))
-share_deaths_air_pollution <- read_csv(here("data", "share-deaths-air-pollution.csv"))
+death_rates_total_air_pollution_csv <- read_csv(here("data", "death-rates-total-air-pollution.csv"))
+death_rates_from_air_pollution_csv <- read_csv(here("data", "death-rates-from-air-pollution.csv"))
+share_deaths_air_pollution_csv <- read_csv(here("data", "share-deaths-air-pollution.csv"))
+
+#added _csv ending to eliminate need for naming later versions "clean"
+```
+
+```{r clean datasets}
+death_rates_total_air_pollution <- death_rates_total_air_pollution_csv %>%
+  clean_names() %>% 
+  rename(death_rate_air_pollution = 
+           deaths_air_pollution_sex_both_age_age_standardized_rate)
+
+death_rates_from_air_pollution <- death_rates_from_air_pollution_csv %>%
+  clean_names() %>% 
+  rename(death_rate_air_pollution = 
+           deaths_air_pollution_sex_both_age_age_standardized_rate, 
+       death_rate_household_pollution = deaths_household_air_pollution_from_solid_fuels_sex_both_age_age_standardized_rate, 
+       death_rate_ambient_matter_pollution = deaths_ambient_particulate_matter_pollution_sex_both_age_age_standardized_rate, 
+       death_rate_ozone_pollution = 
+         deaths_ambient_ozone_pollution_sex_both_age_age_standardized_rate)
+
+#this looks messy but the column names are originally super long 
+
+share_deaths_air_pollution <- share_deaths_air_pollution_csv %>% 
+  clean_names() %>% 
+  rename(share_death_air_pollution = air_pollution_total_ihme_2019)
 ```
 
 
