@@ -6,6 +6,7 @@ Project Proposal
 ``` r
 # still need to upload deaths by risk factor (I am getting an error that says "Unexpected Response from Server, probably because the file is large)
 
+# air pollution data
 death_rates_total_air_pollution_csv <- read_csv(here("data", "death-rates-total-air-pollution.csv"))
 ```
 
@@ -51,7 +52,10 @@ share_deaths_air_pollution_csv <- read_csv(here("data", "share-deaths-air-pollut
     ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 
 ``` r
-#added _csv ending to eliminate need for naming later versions "clean"
+# added _csv ending to eliminate need for naming later versions "clean"
+
+# world map data 
+world_map <- map_data("world") %>% as_tibble()
 ```
 
 ``` r
@@ -111,6 +115,19 @@ glimpse(share_deaths_air_pollution)
     ## $ code                      <chr> "AFG", "AFG", "AFG", "AFG", "AFG", "AFG", "A…
     ## $ year                      <dbl> 1990, 1991, 1992, 1993, 1994, 1995, 1996, 19…
     ## $ share_death_air_pollution <dbl> 13.56, 13.19, 13.05, 12.88, 12.80, 12.98, 12…
+
+``` r
+glimpse(world_map)
+```
+
+    ## Rows: 99,338
+    ## Columns: 6
+    ## $ long      <dbl> -69.89912, -69.89571, -69.94219, -70.00415, -70.06612, -70.0…
+    ## $ lat       <dbl> 12.45200, 12.42300, 12.43853, 12.50049, 12.54697, 12.59707, …
+    ## $ group     <dbl> 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, …
+    ## $ order     <int> 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 17, 18, 1…
+    ## $ region    <chr> "Aruba", "Aruba", "Aruba", "Aruba", "Aruba", "Aruba", "Aruba…
+    ## $ subregion <chr> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …
 
 ## One Sentence High-Level Goal
 
