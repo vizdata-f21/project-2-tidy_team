@@ -80,9 +80,17 @@ A one to two paragraph description of your goals, including your motivation.
 
 We plan to have our scheduled meetings weekly on Wednesdays before lecture. We will decide how early to start before class based on how much work we anticipate needed to get through for the day.
 
-## Describe Repo 
+## Repo Organization
 
-The final organization of your project repository. This means describing the project organization in your proposal as well as implementing that organization in your repo. Create any folders needed and place a README.md in each folder explaining what goes in there
+The project is organized into 4 main folders: 
+
+- `data`: includes our world air pollution datasets
+
+- `images`: includes any images, logos, and gifs for our Shiny App
+
+- `proposal`: includes our Project 2 proposal files
+
+- `shinyapp`: contains our files that build to the Shiny App. We will include more subfolders into this folder as we build the app as needed
 
 ## References 
 
