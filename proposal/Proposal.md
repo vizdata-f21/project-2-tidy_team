@@ -237,7 +237,7 @@ The project is organized into 4 main folders:
 
 ## Appendix
 
-! \[Alt text\] (/images/map\_brainstorm.jpg)
+![Map Brainstorm](../images/map_brainstorm.jpg)
 
 ## References
 
