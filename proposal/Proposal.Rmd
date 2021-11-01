@@ -67,29 +67,29 @@ A one to two paragraph description of your goals, including your motivation.
 
 The goal of our Shiny App is to communicate the harmful effects of air pollution on the world through time by visually displaying the deaths caused by air pollution. Our interactive map will display death rates in countries across the world from 1990 to 2017 caused by different types of air pollution (e.g., household air pollution from solid fuels and ambient particulate matter pollution). The app will also utilize the hover feature to display more detailed information about the deaths, including age and sex. The motivation to create such an app is to effectively show the  deadly effects of air pollution across the globe, potentially showing the inequitable harm on countries that have less resources to protect against air pollution. By consolidating the huge amount of data available in a concise and informative way, the need to address air pollution can be better understood by more people. 
 
-Our dataset involves four different csv files. The first csv file includes death figures (by air pollution type) by country from 1990 to 2017 - 7 variables and 6468 observations. The 2nd csv file simply includes the death figures by country from 1990 to 2017, regardless of air pollution type - 4 variables and 6468 observations . The 3rd csv file includes death figures (by risk factor - unsafe water, unsafe sanitation, no access to hand wash, household air pollution, Non-exclusive breast feeding, discontinued breast feeding and child wasting etc.) by country from 1990 to 2017 - 32 variables and ______ observations. The 4th csv file includes the proportion of deaths attributed to air pollution in countries from 1990 to 2017 -  4 variables and 6412 observations
+Our dataset involves four different csv files. The first csv file includes death figures (by air pollution type) by country from 1990 to 2017 - 7 variables and 6468 observations. The 2nd csv file simply includes the death figures by country from 1990 to 2017, regardless of air pollution type - 4 variables and 6468 observations . The 3rd csv file includes death figures (by risk factor - unsafe water, unsafe sanitation, no access to hand wash, household air pollution, Non-exclusive breast feeding, discontinued breast feeding and child wasting etc.) by country from 1990 to 2017 - 32 variables and ______ observations. The 4th csv file includes the proportion of deaths attributed to air pollution in countries from 1990 to 2017 -  4 variables and 6412 observations. Visual draft of our map can be found in the appendix.
 
 
 ## Weekly Plan of Attack
 
 1. Week 1 of project (week of Mon, Oct 18): Pick a focus for your project.
   + Brainstormed project ideas and pick data (All during Lab). 
-  + Ran project idea by Vittorio (All during Lab.)
+  + Ran project idea by Vittorio (All during Lab).
 
 2. Week 2 of project (week of Mon, Oct 25): Work on developing your project proposal and setting up the structure for your repository.
-  + Set up repo structure (Courtney.)
-  + Start working on proposal (All assigned out own parts.)
+  + Set up repo structure (Courtney).
+  + Start working on proposal (All assigned out own parts).
 
 3. Week 3 of project (week of Mon, Nov 1): Finalize your project proposal.
   + **Proposals for peer review: due Fri, Nov 5 at 5pm.**
-  + Talk with Professor Cetinkaya-Rundel during office hours to receive semi-approval to begin working on the project. We hope to get started early in anticipation of challenges, and we do not want to be doing this project last minute. (Whoever is available during office hours time.)
-  + Ideally, start working on framework for project. Picking which variables to use for the visualization and brainstorming a "draft" visualization. (All of us during weekly meeting)
+  + Talk with Professor Cetinkaya-Rundel during office hours to receive semi-approval to begin working on the project. We hope to get started early in anticipation of challenges, and we do not want to be doing this project last minute. (Whoever is available during office hours time).
+  + Ideally, start working on framework for project. Picking which variables to use for the visualization and brainstorming a "draft" visualization (All of us during weekly meeting).
 
 4. Week 4 of project (week of Mon, Nov 8): Conduct peer review on project proposals, and optionally, submit in an updated version of your proposal.
   + **Revised proposals for instructor review: due Fri, Nov 12 at 5pm**
-  + Update proposal (All during weekly meeting). 
-  + Research information about creating interactive spatio-temporal visualizations on Shiny. (All.)
-  + Organize notes in the Google Doc. (All, while doing research.)
+  + Update proposal (All during weekly meeting)
+  + Research information about creating interactive spatio-temporal visualizations on Shiny. (All)
+  + Organize notes in the Google Doc. (All, while doing research)
   + Ideally, this step will help us from jumping in blind to the project and will provide us a solid foundation to begin our work on. 
 
 5. Week 5 of project (week of Mon, Nov 15): Continue working on your project.
@@ -119,6 +119,10 @@ The project is organized into 4 main folders:
 * `images`: includes any images, logos, and gifs for our Shiny App
 * `proposal`: includes our Project 2 proposal files
 * `shinyapp`: contains our files that build to the Shiny App. We will include more subfolders into this folder as we build the app as needed
+
+## Appendix
+
+! [Alt text] (/images/map_brainstorm.jpg)
 
 ## References 
 
