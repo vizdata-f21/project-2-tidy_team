@@ -14,19 +14,17 @@ library(janitor)
 
 ## Load Data 
 
-```{r load data}
-# still need to upload deaths by risk factor (I am getting an error that says "Unexpected Response from Server, probably because the file is large)
-
+```{r load data, message = FALSE}
 # air pollution data
 death_rates_total_air_pollution_csv <- read_csv(here("data", "death-rates-total-air-pollution.csv"))
 death_rates_from_air_pollution_csv <- read_csv(here("data", "death-rates-from-air-pollution.csv"))
 share_deaths_air_pollution_csv <- read_csv(here("data", "share-deaths-air-pollution.csv"))
+number_deaths_by_risk_factor_csv <- read_csv(here("data","number-of-deaths-by-risk-factor.csv"))
 
 # added _csv ending to eliminate need for naming later versions "clean"
 
 # world map data 
 world_map <- map_data("world") %>% as_tibble()
-
 ```
 
 ```{r clean datasets}
@@ -49,6 +47,9 @@ death_rates_from_air_pollution <- death_rates_from_air_pollution_csv %>%
 share_deaths_air_pollution <- share_deaths_air_pollution_csv %>% 
   clean_names() %>% 
   rename(share_death_air_pollution = air_pollution_total_ihme_2019)
+
+number_deaths_by_risk_factor <- number_deaths_by_risk_factor_csv %>% 
+  clean_names()
 ```
 
 
@@ -56,6 +57,7 @@ share_deaths_air_pollution <- share_deaths_air_pollution_csv %>%
 glimpse(death_rates_total_air_pollution)
 glimpse(death_rates_from_air_pollution)
 glimpse(share_deaths_air_pollution)
+glimpse(number_deaths_by_risk_factor)
 glimpse(world_map)
 ```
 
