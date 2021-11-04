@@ -1,20 +1,9 @@
----
-title: "Project Work"
-output: github_document
----
+Project Work
+================
 
+## Load Data
 
-```{r setup, include = FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-
-library(tidyverse)
-library(here)
-library(janitor)
-```
-
-## Load Data 
-
-```{r load data, message = FALSE}
+``` r
 # air pollution data
 death_rates_total_air_pollution_csv <- read_csv(here("data", "death-rates-total-air-pollution.csv"))
 death_rates_from_air_pollution_csv <- read_csv(here("data", "death-rates-from-air-pollution.csv"))
@@ -27,7 +16,7 @@ number_deaths_by_risk_factor_csv <- read_csv(here("data","number-of-deaths-by-ri
 world_map <- map_data("world") %>% as_tibble()
 ```
 
-```{r clean datasets}
+``` r
 death_rates_total_air_pollution <- death_rates_total_air_pollution_csv %>%
   clean_names() %>% 
   rename(death_rate_air_pollution = 
@@ -52,8 +41,7 @@ number_deaths_by_risk_factor <- number_deaths_by_risk_factor_csv %>%
   clean_names()
 ```
 
-```{r world map plot}
-
+``` r
 test_df <- death_rates_total_air_pollution %>% 
   full_join(world_map, by = c("entity" = "region")) %>% 
   filter(year == 1990) #becasue this is a static version of the later product
@@ -65,3 +53,4 @@ ggplot(test_df, aes(long, lat)) +
   theme_void()
 ```
 
+![](Project_Work_files/figure-gfm/world%20map%20plot-1.png)<!-- -->
