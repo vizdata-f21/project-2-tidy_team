@@ -136,15 +136,6 @@ related to air pollution.
 
 ## Description of our Goals and Motivation
 
-A one to two paragraph description of your goals, including your
-motivation. - Depending on the focus of your project, the following
-might go in here. - If using a particular dataset(s), a brief
-description of each dataset including the reason why you chose the
-particular dataset, its dataset, its dimensions and any other relevant
-metadata. (Make sure to load the data and use inline code for some of
-this information.) - If answering a particular research question, the
-question itself and the reason why you chose this question.
-
 The goal of our Shiny App is to communicate the harmful effects of air
 pollution on the world through time by visually displaying the deaths
 caused by air pollution. Our interactive map will display death rates in
@@ -159,19 +150,19 @@ resources to protect against air pollution. By consolidating the huge
 amount of data available in a concise and informative way, the need to
 address air pollution can be better understood by more people.
 
-Our dataset involves four different csv files. The first csv file
-includes death figures (by air pollution type) by country from 1990 to
-2017 - 7 variables and 6468 observations. The 2nd csv file simply
-includes the death figures by country from 1990 to 2017, regardless of
-air pollution type - 4 variables and 6468 observations . The 3rd csv
-file includes death figures (by risk factor - unsafe water, unsafe
-sanitation, no access to hand wash, household air pollution,
-Non-exclusive breast feeding, discontinued breast feeding and child
-wasting etc.) by country from 1990 to 2017 - 32 variables and
-\_\_\_\_\_\_ observations. The 4th csv file includes the proportion of
-deaths attributed to air pollution in countries from 1990 to 2017 - 4
-variables and 6412 observations. Visual draft of our map can be found in
-the appendix.
+Our dataset involves four different imported csv files. The first csv
+file includes the rate of death by air pollution type and by country
+from 1990 to 2017 - 7 variables and 6468 observations. The 2nd csv file
+simply includes the rate of death by country from 1990 to 2017,
+regardless of air pollution type - 4 variables and 6468 observations.
+The 3rd csv file includes the number of deaths by risk factor (unsafe
+water, unsafe sanitation, no access to hand wash, household air
+pollution, Non-exclusive breast feeding, discontinued breast feeding and
+child wasting etc.) and by country from 1990 to 2017 - 32 variables and
+6468 observations. The 4th csv file includes the proportion of deaths
+attributed to air pollution in countries from 1990 to 2017 - 7 variables
+and 6412 observations. Visual draft of our map can be found in the
+appendix.
 
 ## Weekly Plan of Attack
 
