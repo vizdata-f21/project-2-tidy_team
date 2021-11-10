@@ -143,15 +143,23 @@ The goal of our Shiny App is to communicate the harmful effects of air
 pollution on the world through time by visually displaying the deaths
 caused by air pollution. Our interactive map will display death rates in
 countries across the world from 1990 to 2017 caused by different types
-of air pollution (e.g., household air pollution from solid fuels and
+of air pollution (e.g. household air pollution from solid fuels and
 ambient particulate matter pollution). The app will also utilize the
 hover feature to display more detailed information about the deaths,
-including age and sex. The motivation to create such an app is to
-effectively show the deadly effects of air pollution across the globe,
-potentially showing the inequitable harm on countries that have less
-resources to protect against air pollution. By consolidating the huge
-amount of data available in a concise and informative way, the need to
-address air pollution can be better understood by more people.
+including a breakdown or proportions by age and sex. The motivation to
+create such an app is to effectively show the deadly effects of air
+pollution across the globe, potentially showing the inequitable harm on
+countries that have less resources to protect against air pollution. By
+consolidating the huge amount of data available in a concise and
+informative way, the need to address air pollution can be better
+understood by more people.
+
+Moreover, the user will have the ability to slide to a specific year
+between 1990 to 2017 to display the map of that specific year. As the
+user interacts with the slider, and picks the filter, the map shifts
+shades of colors according to the year according to the chosen type of
+pollution setting Additionally, there will be another tab in the shiny
+app for specific range of years that show interesting trends/information
 
 Our dataset involves four different imported csv files. The first csv
 file includes the rate of death by air pollution type and by country
@@ -269,3 +277,8 @@ world’s most pressing issues so that anyone has the tools and
 information they need to work toward combating a particular global
 problem. The data was posted to Kaggle about a month ago and includes
 data spanning the years 1990 to 2017.
+
+Hi Drew — that’s no problem as long as you’re creating the app from
+scratch yourself. If you’re inspired by it you should cite it in your
+project, and describe how you were inspired and how yours is different.
+ADD INSPIRATION – we designed it first but were insprided by
