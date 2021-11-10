@@ -29,6 +29,7 @@ to allow for comparisons between countries and over time." (https://ourworldinda
 |death_rate_air_pollution | Death rate from air pollution | 
 |death_rate_household_pollution | Death rate from household pollution | 
 |death_rate_ambient_matter_pollution | Death rate from ambient matter pollution | 
+|death_rate_ozone_pollution | Death rate from ozone pollution | 
 
 
 ## share-deaths-air-pollution.csv: dataset from Kaggle, after cleaned
