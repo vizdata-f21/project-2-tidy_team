@@ -282,3 +282,5 @@ Hi Drew — that’s no problem as long as you’re creating the app from
 scratch yourself. If you’re inspired by it you should cite it in your
 project, and describe how you were inspired and how yours is different.
 ADD INSPIRATION – we designed it first but were insprided by
+
+<https://ourworldindata.org/air-pollution>

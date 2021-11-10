@@ -143,3 +143,5 @@ Below is a list of references we plan to use when creating our project.
 Although accessed via [Kaggle](https://www.kaggle.com/pavan9065/air-pollution), the data's original source is [Our World in Data](https://ourworldindata.org/), which is a public data collection initiative led by the nonprofit Global Change Data Lab. The nonprofit shares knowledge (and data) about the world's most pressing issues so that anyone has the tools and information they need to work toward combating a particular global problem. The data was posted to Kaggle about a month ago and includes data spanning the years 1990 to 2017.
 
 Hi Drew — that’s no problem as long as you’re creating the app from scratch yourself. If you’re inspired by it you should cite it in your project, and describe how you were inspired and how yours is different. ADD INSPIRATION -- we designed it first but were insprided by
+
+https://ourworldindata.org/air-pollution
