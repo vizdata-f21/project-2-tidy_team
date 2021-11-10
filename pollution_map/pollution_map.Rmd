@@ -1,0 +1,6 @@
+---
+title: "pollution_map"
+output: html_document
+---
+
+We will use this for data wrangling prior to the creating the shiny app. 
