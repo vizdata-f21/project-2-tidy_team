@@ -1,1 +1,1 @@
-# Project 2 Proposal
+This folder holds our Project 2 Proposal

@@ -1,11 +1,1 @@
-# Pollution Map
-
-Include: 
-
-- Dashboard
-
-- Interactive spatial map visualization
-
-  - click on state, see county level data
-
-- Interactive time series plot
+This is the folder where we will do data wrangling and build the interactive world map, which will then be put on the shiny app (which is currently housed in the shiny_app folder within the population_map folder)
