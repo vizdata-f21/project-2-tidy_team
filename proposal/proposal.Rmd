@@ -119,12 +119,14 @@ We plan to have our scheduled meetings weekly on Wednesdays before lecture. We w
 
 ## Repo Organization
 
-The project is organized into 4 main folders: 
+The project is organized into 6 main folders: 
 
-* `data`: includes our world air pollution datasets
-* `images`: includes any images, logos, and gifs for our Shiny App
-* `proposal`: includes our Project 2 proposal files
-* `shinyapp`: contains our files that build to the Shiny App. We will include more subfolders into this folder as we build the app as needed
+* `data`: includes our world air pollution datasets and the data dictionary.
+* `images`: includes any images, logos, and gifs for our Shiny App.
+* `proposal`: includes our Project 2 proposal files.
+* `pollution_map`: contains our files that build to the Shiny App. This includes data wrangling and visualization steps, as well as the final shiny app files. We will include more sub folders into this folder as we build the app as needed.
+* `presentation`: includes our presentation files.
+* `exploratory_work` : includes any initial exploratory data analysis, visualizations, or other attempts at our project. We intend to delete this folder before the project is complete, but are using it now as a workspace. 
 
 ## Appendix
 
