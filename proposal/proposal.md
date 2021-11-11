@@ -277,11 +277,14 @@ file includes the rate of death by air pollution type and by country
 from 1990 to 2017 - 7 variables and 6468 observations. The second csv
 file simply includes the rate of death by country from 1990 to 2017,
 regardless of air pollution type - 4 variables and 6468 observations.
-The third csv file includes the number of deaths by risk factor (unsafe
-water, unsafe sanitation, no access to hand wash, household air
-pollution, Non-exclusive breast feeding, discontinued breast feeding and
-child wasting etc.) and by country from 1990 to 2017 - 32 variables and
-6468 observations. The fourth csv file includes the proportion of deaths
+According to the data source, death rates are standardized to account
+for the differences in distributions of ages of populations between
+countries. so that countries can be directly compared. The third csv
+file includes the number of deaths by risk factor (unsafe water, unsafe
+sanitation, no access to hand wash, household air pollution,
+Non-exclusive breast feeding, discontinued breast feeding and child
+wasting etc.) and by country from 1990 to 2017 - 32 variables and 6468
+observations. The fourth csv file includes the proportion of deaths
 attributed to air pollution in countries from 1990 to 2017 - 7 variables
 and 6412 observations. The fifth csv file includes the annual GDP per
 capita for each country in current USD from 1990 to 2017 - 63 variables

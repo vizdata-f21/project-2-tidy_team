@@ -1,13 +1,10 @@
 # Data Dictionary 
 
-## World Air Pollution Data:
+## World Pollution Data:
 
-### From Kaggle (https://www.kaggle.com/pavan9065/air-pollution?select=death-rates-from-air-pollution.csv)
-  - `share-deaths-air-pollution.csv`
-  - `death-rates-total-air-pollution.csv`
-  - `death-rates-from-air-pollution.csv`
+Source: [Kaggle](https://www.kaggle.com/pavan9065/air-pollution?select=death-rates-from-air-pollution.csv)
   
-### death-rates-total-air-pollution: dataset from Kaggle, after cleaned
+### death-rates-total-air-pollution:
 
 |Variable         |Description |
 |:----------------|:-----------|
@@ -16,12 +13,13 @@
 |year             | Year of measurement |
 |death_rate_air_pollution | Death rate from air pollution | 
 
-According to Our World in Data, "Death rates are measured as the number of deaths 
-per 100,000 population from both outdoor and indoor air pollution. Rates are
-age-standardized, meaning they assume a constant age structure of the population
-to allow for comparisons between countries and over time." (https://ourworldindata.org/air-pollution)
+According to [Our World in Data](https://ourworldindata.org/air-pollution), 
+"Death rates are measured as the number of deaths per 100,000 population from 
+both outdoor and indoor air pollution. Rates are
+age-standardized, meaning they assume a constant age structure of the 
+population to allow for comparisons between countries and over time."
 
-### death-rates-from-air-pollution: dataset from Kaggle, after cleaned
+### death-rates-from-air-pollution:
 
 |Variable         |Description |
 |:----------------|:-----------|
@@ -34,7 +32,7 @@ to allow for comparisons between countries and over time." (https://ourworldinda
 |death_rate_ozone_pollution | Death rate from ozone pollution | 
 
 
-### share-deaths-air-pollution.csv: dataset from Kaggle, after cleaned
+### share-deaths-air-pollution:
 
 |Variable         |Description |
 |:----------------|:-----------|
@@ -43,7 +41,7 @@ to allow for comparisons between countries and over time." (https://ourworldinda
 |year             | Year of measurement |
 |share_death_air_pollution | Share of deaths which are attributed to total air pollution – outdoor and indoor – as a risk factor. | 
 
-### number_deahts_by_riskfactor.csv: dataset from Kaggle, after cleaned
+### number_deaths_by_riskfactor:
 
 |Variable         |Description |
 |:----------------|:-----------|
@@ -78,7 +76,24 @@ to allow for comparisons between countries and over time." (https://ourworldinda
 |diet_low_in_whole_grains | Total annual number of deaths from diet low in whole grains | 
 |diet_low_in_nuts_and_seeds | Total annual number of deaths from diet low in nuts and seeds|
 
+## GDP per Capita Data:
+
+Source: [The World Bank](https://data.worldbank.org/indicator/NY.GDP.PCAP.CD?end=2017&start=1990)
+
+### gdp_by_country:
+
+|Variable         |Description |
+|:----------------|:-----------|
+|long           | Longitude |
+|lat             | Latitude |
+|group            |Group Code |
+|order | Order to connect polygons| 
+|region | Region Name| 
+|subregion | Subregion Name | 
+
 ## World Map Data: 
+
+Source: Maps Package
 
 ### world_map
 |Variable         |Description |
