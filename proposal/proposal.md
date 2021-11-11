@@ -404,7 +404,8 @@ we have seen online so far, it seems as though different maps are
 created for different data (there is no centralized map with check boxes
 for the data that is to be viewed). Additionally, we are hoping to
 include GDP information in our map, which we do not think is already
-done.
+done as differences in incomes of countries appears to just be mentioned
+in text, not the visualization.
 
 ## Data Reference
 
@@ -415,8 +416,12 @@ which is a public data collection initiative led by the nonprofit Global
 Change Data Lab. The nonprofit shares knowledge (and data) about the
 world’s most pressing issues so that anyone has the tools and
 information they need to work toward combating a particular global
-problem. The data was posted to Kaggle about a month ago and includes
-data spanning the years 1990 to 2017.
+problem. Our World in Data notes that their data sources include the
+[Institute for Health Metrics and Evaluation (Global Burden of
+Disease)](http://www.healthdata.org/results/data-visualizations) and
+[State of Global Air](https://www.stateofglobalair.org/data) The data
+was posted to Kaggle about a month ago and includes data spanning the
+years 1990 to 2017.
 
 We found GDP data for each country over the years of interest via the
 [World
