@@ -100,39 +100,45 @@ Visual draft of our map can be found in the appendix.
 ## Weekly Plan of Attack
 
 1. Week 1 of project (week of Mon, Oct 18): Pick a focus for your project.
-  + Brainstormed project ideas and pick data (All during Lab). 
-  + Ran project idea by Vittorio (All during Lab).
+  + Brainstormed project ideas and pick data (All collaborated during Lab). 
+  + Ran project idea by Vittorio (All collaborated during Lab).
 
 2. Week 2 of project (week of Mon, Oct 25): Work on developing your project proposal and setting up the structure for your repository.
   + Set up repo structure (Courtney).
-  + Start working on proposal (All assigned out own parts).
+  + Start working on proposal (All assigned our own parts).
 
 3. Week 3 of project (week of Mon, Nov 1): Finalize your project proposal.
   + **Proposals for peer review: due Fri, Nov 5 at 5pm.**
-  + Talk with Professor Cetinkaya-Rundel during office hours to receive semi-approval to begin working on the project. We hope to get started early in anticipation of challenges, and we do not want to be doing this project last minute. (Whoever is available during office hours time).
+  + Talk with Professor Cetinkaya-Rundel during office hours to receive semi-approval to begin working on the project. We hope to get started early in anticipation of challenges, and we do not want to be doing this project last minute. (Drew).
   + Ideally, start working on framework for project. Picking which variables to use for the visualization and brainstorming a "draft" visualization (All of us during weekly meeting).
 
 4. Week 4 of project (week of Mon, Nov 8): Conduct peer review on project proposals, and optionally, submit in an updated version of your proposal.
   + **Revised proposals for instructor review: due Fri, Nov 12 at 5pm**
   + Update proposal (All during weekly meeting)
-  + Research information about creating interactive spatio-temporal visualizations on Shiny. (All)
+  + Finish revising proposal. (We eat took responsibility for individual parts following our meeting.)
+  + Research information and packages about creating interactive spatio-temporal visualizations on Shiny. (All)
   + Organize notes in the Google Doc. (All, while doing research)
   + Ideally, this step will help us from jumping in blind to the project and will provide us a solid foundation to begin our work on. 
 
 5. Week 5 of project (week of Mon, Nov 15): Continue working on your project.
-  + Start coding the spatio-temporal visualization of worldwide deaths related to air pollution. 
-  + At this point, we would like to decide if we will need to introduce any other data to our visualization. 
+  + Data wrangling to fix any messiness in the code and join any needed datasets (Kathryn and Drew).
+  + Start coding the spatio-temporal visualization of worldwide deaths related to air pollution. (Kathryn and Drew)
+  + Create the framework (shell) for the shiny app (Courtney and Raghav).
+  + At this point, we will decide if we will need to introduce any other data to our visualization. 
 
-6  Week 6 of project (week of Mon, Nov 22): Continue working on your project.
-  + Continue working on the visualization. 
+6. Week 6 of project (week of Mon, Nov 22): Continue working on your project.
+  + Continue working on the visualization (Kathryn and Drew). Courtney and Rishal will provide feedback and suggest ideas for revisions. 
+  + Continue developing the shiny app (Courtney and Raghav). Kathryn and Drew will provide feedback and suggest ideas for revisions. 
+  + Thanksgiving break is this week, and we hope to be in a comfortable position to not have to work over break. However, if it appears necesarry we will spend time over break. 
   + If necessary, introduce outside/additional data. 
 
 7  Week 7 of project (week of Mon, Nov 29): Conduct another round of peer review.
-  + Ideally, we would like to have the coding part of our project done by the end of this week. That would give us the following week to reflect, make any final touches, and plan for the presentation. 
+  + Incorporate the visualization into the shiny app (All of us with collaborate).
+  + Ideally, we would like to have the coding part of our project done by the beginning of this week. That would give us the rest of the week to reflect, make any final touches, and plan for the presentation. 
+  + Make any final touches. (All)
+  + Create presentation and prepare for in-class presentation (We will assign someone to take lead on this later on.) 
 
-8. Write-up and presentation: due Fri, Dec 3 at noon (beginning of class).
-  + Make any final touches. 
-  + Craft presentation. Prepare for in-class presentation on LDOC. 
+8. Write-up and presentation: due *Fri, Dec 3 at noon* (beginning of class).
 
 ### Weekly Meeting Date and Time 
 
