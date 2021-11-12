@@ -84,12 +84,37 @@ Source: [The World Bank](https://data.worldbank.org/indicator/NY.GDP.PCAP.CD?end
 
 |Variable         |Description |
 |:----------------|:-----------|
-|long           | Longitude |
-|lat             | Latitude |
-|group            |Group Code |
-|order | Order to connect polygons| 
-|region | Region Name| 
-|subregion | Subregion Name | 
+|country_name | Country |
+|country_code | Code of Country |
+|x1990 | The year 1990 |
+|x1991 | The year 1991 |
+|x1992 | The year 1992 |
+|x1993 | The year 1993 |
+|x1994 | The year 1994 |
+|x1995 | The year 1995 |
+|x1996 | The year 1996 |
+|x1997 | The year 1997 |
+|x1998 | The year 1998 |
+|x1999 | The year 1999 |
+|x2000 | The year 2000 |
+|x2001 | The year 2001 |
+|x2002 | The year 2002 |
+|x2003 | The year 2003 |
+|x2004 | The year 2004 |
+|x2005 | The year 2005 |
+|x2006 | The year 2006 |
+|x2007 | The year 2007 |
+|x2008 | The year 2008 |
+|x2009 | The year 2009 |
+|x2010 | The year 2010 |
+|x2011 | The year 2011 |
+|x2012 | The year 2012 |
+|x2013 | The year 2013 |
+|x2014 | The year 2014 |
+|x2015 | The year 2015 |
+|x2016 | The year 2016 |
+|x2017 | The year 2017 |
+
 
 ## World Map Data: 
 

@@ -63,7 +63,8 @@ number_deaths_by_risk_factor <- number_deaths_by_risk_factor_csv %>%
   clean_names()
 
 gdp_by_country <- gdp_by_country_csv %>%
-  clean_names()
+  clean_names() %>%
+  pivot_wider()
 ```
 
 
