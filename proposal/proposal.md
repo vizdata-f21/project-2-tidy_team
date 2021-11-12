@@ -63,19 +63,25 @@ a side menu, giving them the ability to select the type of pollution the
 map will display. Each type of pollution is associated with a different
 continuous color scale. The colors on the map will go from light to dark
 according to the death rate in the country (deaths per 100,000 people).
+
 The user will also have the option to choose a type of risk factor
-instead of type of air pollution in the side menu. When selected, the
-map will instead show the number of deaths in the country by the risk
-factor. The types of risk factors are included in the appendix. After
-selecting the type of pollution/risk factor, the user selects whether or
-not the user wants to see death rates in an absolute scale or a log
-scale. After the map displays the colors according to the user’s
-selection, the user can further interact with the map by sliding the
-time slider located under the map to select a specific year to display,
-ranging from 1990 to 2017. We are also exploring animating the slider.
-On the map, the user can use their mouse to hover over each country,
-displaying a small box over the country that shows the name, GDP per
-capita, and death rate of the country.
+instead of type of air pollution in the side menu. We included this
+option to provide additional information about causes of death across
+the globe if the user wants to observe how deaths by other causes vary
+across the years and country. When selected, the map will instead show
+the number of deaths in the country by the risk factor. The types of
+risk factors are included in the appendix. After selecting the type of
+pollution/risk factor, the user selects whether or not the user wants to
+see death rates in an absolute scale or a log scale. After the map
+displays the colors according to the user’s selection, the user can
+further interact with the map by sliding the time slider located under
+the map to select a specific year to display, ranging from 1990 to 2017.
+We are also exploring animating the slider. On the map, the user can use
+their mouse to hover over each country, displaying a small box over the
+country that shows the name, GDP per capita, and death rate of the
+country.
+
+Visual draft of our map can be found in the appendix.
 
 #### Tools
 
@@ -91,6 +97,30 @@ importance and add various other layers to our map.
 Visual draft of our map can be found in the appendix.
 
 #### Data
+
+Our dataset involves five different imported csv files. The first csv
+file includes the rate of death by air pollution type and by country
+from 1990 to 2017 - 7 variables and 6468 observations. The second csv
+file simply includes the rate of death by country from 1990 to 2017,
+regardless of air pollution type - 4 variables and 6468 observations.
+According to the data source, death rates are standardized to account
+for the differences in distributions of ages of populations between
+countries. so that countries can be directly compared. The third csv
+file includes the number of deaths by risk factor (unsafe water, unsafe
+sanitation, no access to hand wash, household air pollution,
+Non-exclusive breast feeding, discontinued breast feeding and child
+wasting etc.) and by country from 1990 to 2017 - 32 variables and 6468
+observations. The fourth csv file includes the proportion of deaths
+attributed to air pollution in countries from 1990 to 2017 - 7 variables
+and 6412 observations. The fifth csv file includes the annual GDP per
+capita for each country in current USD from 1990 to 2017 - 30 variables
+and 266 observations. There is some missing data for some countries in
+the 1960s and 1970s but the vast majority of observations are complete
+so this dataset will suffice; however, limitation will be clearly noted
+in the shiny model. Perhaps we will include a tab that details missing
+data points so the user understands limitations.
+
+### Data Description
 
 Our dataset involves five different imported csv files. The first csv
 file includes the rate of death by air pollution type and by country
