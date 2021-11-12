@@ -63,19 +63,25 @@ a side menu, giving them the ability to select the type of pollution the
 map will display. Each type of pollution is associated with a different
 continuous color scale. The colors on the map will go from light to dark
 according to the death rate in the country (deaths per 100,000 people).
+
 The user will also have the option to choose a type of risk factor
-instead of type of air pollution in the side menu. When selected, the
-map will instead show the number of deaths in the country by the risk
-factor. The types of risk factors are included in the appendix. After
-selecting the type of pollution/risk factor, the user selects whether or
-not the user wants to see death rates in an absolute scale or a log
-scale. After the map displays the colors according to the user’s
-selection, the user can further interact with the map by sliding the
-time slider located under the map to select a specific year to display,
-ranging from 1990 to 2017. We are also exploring animating the slider.
-On the map, the user can use their mouse to hover over each country,
-displaying a small box over the country that shows the name, GDP per
-capita, and death rate of the country.
+instead of type of air pollution in the side menu. We included this
+option to provide additional information about causes of death across
+the globe if the user wants to observe how deaths by other causes vary
+across the years and country. When selected, the map will instead show
+the number of deaths in the country by the risk factor. The types of
+risk factors are included in the appendix. After selecting the type of
+pollution/risk factor, the user selects whether or not the user wants to
+see death rates in an absolute scale or a log scale. After the map
+displays the colors according to the user’s selection, the user can
+further interact with the map by sliding the time slider located under
+the map to select a specific year to display, ranging from 1990 to 2017.
+We are also exploring animating the slider. On the map, the user can use
+their mouse to hover over each country, displaying a small box over the
+country that shows the name, GDP per capita, and death rate of the
+country.
+
+Visual draft of our map can be found in the appendix.
 
 #### Tools
 
@@ -87,6 +93,8 @@ in class yet. The leaflet package will enable us to make the map
 interactive in the sense that not only will the user be able to zoom and
 view country labels, but we can also add markers for locations of
 importance and add various other layers to our map.
+
+### Data Description
 
 Our dataset involves five different imported csv files. The first csv
 file includes the rate of death by air pollution type and by country
@@ -109,8 +117,6 @@ the 1960s and 1970s but the vast majority of observations are complete
 so this dataset will suffice; however, limitation will be clearly noted
 in the shiny model. Perhaps we will include a tab that details missing
 data points so the user understands limitations.
-
-Visual draft of our map can be found in the appendix.
 
 ## Weekly Plan of Attack
 
