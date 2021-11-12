@@ -11,9 +11,6 @@ death_rates_total_air_pollution_csv <- read_csv(
 death_rates_from_air_pollution_csv <- read_csv(
   here("data", "death-rates-from-air-pollution.csv"), show_col_types = FALSE)
 
-share_deaths_air_pollution_csv <- read_csv(
-  here("data", "share-deaths-air-pollution.csv"), show_col_types = FALSE)
-
 number_deaths_by_risk_factor_csv <- read_csv(
   here("data", "number-of-deaths-by-risk-factor.csv"), show_col_types = FALSE)
 
@@ -261,17 +258,6 @@ glimpse(death_rates_from_air_pollution)
     ## $ death_rate_household_pollution      <dbl> 250.3629, 242.5751, 232.0439, 231.…
     ## $ death_rate_ambient_matter_pollution <dbl> 46.44659, 46.03384, 44.24377, 44.4…
     ## $ death_rate_ozone_pollution          <dbl> 5.616442, 5.603960, 5.611822, 5.65…
-
-``` r
-glimpse(share_deaths_air_pollution)
-```
-
-    ## Rows: 6,412
-    ## Columns: 4
-    ## $ entity                    <chr> "Afghanistan", "Afghanistan", "Afghanistan",…
-    ## $ code                      <chr> "AFG", "AFG", "AFG", "AFG", "AFG", "AFG", "A…
-    ## $ year                      <dbl> 1990, 1991, 1992, 1993, 1994, 1995, 1996, 19…
-    ## $ share_death_air_pollution <dbl> 13.56, 13.19, 13.05, 12.88, 12.80, 12.98, 12…
 
 ``` r
 glimpse(number_deaths_by_risk_factor)

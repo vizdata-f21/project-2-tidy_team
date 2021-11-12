@@ -22,9 +22,6 @@ death_rates_total_air_pollution_csv <- read_csv(
 death_rates_from_air_pollution_csv <- read_csv(
   here("data", "death-rates-from-air-pollution.csv"), show_col_types = FALSE)
 
-share_deaths_air_pollution_csv <- read_csv(
-  here("data", "share-deaths-air-pollution.csv"), show_col_types = FALSE)
-
 number_deaths_by_risk_factor_csv <- read_csv(
   here("data", "number-of-deaths-by-risk-factor.csv"), show_col_types = FALSE)
 
@@ -57,10 +54,6 @@ death_rates_from_air_pollution <- death_rates_from_air_pollution_csv %>%
   )
 
 # this looks messy but the column names are originally super long
-
-share_deaths_air_pollution <- share_deaths_air_pollution_csv %>%
-  clean_names() %>%
-  rename(share_death_air_pollution = air_pollution_total_ihme_2019)
 
 number_deaths_by_risk_factor <- number_deaths_by_risk_factor_csv %>%
   clean_names()
@@ -163,7 +156,6 @@ The project is organized into 6 main folders:
 ```{r glimpse-data-sets}
 glimpse(death_rates_total_air_pollution)
 glimpse(death_rates_from_air_pollution)
-glimpse(share_deaths_air_pollution)
 glimpse(number_deaths_by_risk_factor)
 glimpse(gdp_by_country)
 glimpse(world_map)
