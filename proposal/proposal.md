@@ -226,9 +226,10 @@ not the user wants to see death rates in an absolute scale or a log
 scale. After the map displays the colors according to the user’s
 selection, the user can further interact with the map by sliding the
 time slider located under the map to select a specific year to display,
-ranging from 1990 to 2017. On the map, the user can use their mouse to
-hover over each country, displaying a small box over the country that
-shows the name, GDP per capita, and death rate of the country.
+ranging from 1990 to 2017. We are also exploring animating the slider.
+On the map, the user can use their mouse to hover over each country,
+displaying a small box over the country that shows the name, GDP per
+capita, and death rate of the country.
 
 #### Tools
 
