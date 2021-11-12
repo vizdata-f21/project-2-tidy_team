@@ -88,9 +88,11 @@ The app will first display the map page, which is set as the first tab of the pa
 
 We will be using the [leaflet package](https://rstudio.github.io/leaflet/) to create our interactive map. Although we could geom_polygon for this process, we wanted to explore a new package and look into something that we have not learned in class yet. The leaflet package will enable us to make the map interactive in the sense that not only will the user be able to zoom and view country labels, but we can also add markers for locations of importance and add various other layers to our map. 
 
-Our dataset involves five different imported csv files. The first csv file includes the rate of death by air pollution type and by country from 1990 to 2017 - `r ncol(death_rates_from_air_pollution)` variables and `r nrow(death_rates_from_air_pollution)` observations. The second csv file simply includes the rate of death by country from 1990 to 2017, regardless of air pollution type - `r ncol(death_rates_total_air_pollution)` variables and `r nrow(death_rates_total_air_pollution)` observations. According to the data source, death rates are standardized to account for the differences in distributions of ages of populations between countries. so that countries can be directly compared. The third csv file includes the number of deaths by risk factor (unsafe water, unsafe sanitation, no access to hand wash, household air pollution, Non-exclusive breast feeding, discontinued breast feeding and child wasting etc.) and by country from 1990 to 2017 - `r ncol(number_deaths_by_risk_factor)` variables and `r nrow(number_deaths_by_risk_factor)` observations. The fourth csv file includes the proportion of deaths attributed to air pollution in countries from 1990 to 2017 -  `r ncol(death_rates_from_air_pollution)` variables and `r nrow(share_deaths_air_pollution)` observations. The fifth csv file includes the annual GDP per capita for each country in current USD from 1990 to 2017 - `r ncol(gdp_by_country)` variables and `r nrow(gdp_by_country)` observations. There is some missing data for some countries in the 1960s and 1970s but the vast majority of observations are complete so this dataset will suffice; however, limitation will be clearly noted in the shiny model. Perhaps we will include a tab that details missing data points so the user understands limitations. 
-
 Visual draft of our map can be found in the appendix.
+
+#### Data 
+
+Our dataset involves five different imported csv files. The first csv file includes the rate of death by air pollution type and by country from 1990 to 2017 - `r ncol(death_rates_from_air_pollution)` variables and `r nrow(death_rates_from_air_pollution)` observations. The second csv file simply includes the rate of death by country from 1990 to 2017, regardless of air pollution type - `r ncol(death_rates_total_air_pollution)` variables and `r nrow(death_rates_total_air_pollution)` observations. According to the data source, death rates are standardized to account for the differences in distributions of ages of populations between countries. so that countries can be directly compared. The third csv file includes the number of deaths by risk factor (unsafe water, unsafe sanitation, no access to hand wash, household air pollution, Non-exclusive breast feeding, discontinued breast feeding and child wasting etc.) and by country from 1990 to 2017 - `r ncol(number_deaths_by_risk_factor)` variables and `r nrow(number_deaths_by_risk_factor)` observations. The fourth csv file includes the proportion of deaths attributed to air pollution in countries from 1990 to 2017 -  `r ncol(death_rates_from_air_pollution)` variables and `r nrow(share_deaths_air_pollution)` observations. The fifth csv file includes the annual GDP per capita for each country in current USD from 1990 to 2017 - `r ncol(gdp_by_country)` variables and `r nrow(gdp_by_country)` observations. There is some missing data for some countries in the 1960s and 1970s but the vast majority of observations are complete so this dataset will suffice; however, limitation will be clearly noted in the shiny model. Perhaps we will include a tab that details missing data points so the user understands limitations. 
 
 
 ## Weekly Plan of Attack
@@ -100,8 +102,7 @@ Visual draft of our map can be found in the appendix.
   + Ran project idea by Vittorio (All collaborated during Lab).
 
 2. Week 2 of project (week of Mon, Oct 25): Work on developing your project proposal and setting up the structure for your repository.
-  + Set up repo structure (Courtney).
-  + Start working on proposal (All assigned our own parts).
+  + Start working on proposal (Drew and Raghav worked on Goals and Motivations, Kathryn cleaned data, wrote data dictionary, and wrote out timeline, Courtney set up repo structure and drew the "mock" shiny app).
 
 3. Week 3 of project (week of Mon, Nov 1): Finalize your project proposal.
   + **Proposals for peer review: due Fri, Nov 5 at 5pm.**
@@ -110,9 +111,9 @@ Visual draft of our map can be found in the appendix.
 
 4. Week 4 of project (week of Mon, Nov 8): Conduct peer review on project proposals, and optionally, submit in an updated version of your proposal.
   + **Revised proposals for instructor review: due Fri, Nov 12 at 5pm**
-  + Update proposal (All during weekly meeting)
-  + Finish revising proposal. (We eat took responsibility for individual parts following our meeting.)
-  + Research information and packages about creating interactive spatio-temporal visualizations on Shiny. (All)
+  + Update proposal (All during weekly meeting, Kathryn revised timeline, Drew and Courtney revised goals and motivations, Raghav looked for additional data and looked into leaflet)
+  + Finish revising proposal. (We each took responsibility for individual parts following our meeting. Kathryn revised repo structure. Raghav continued to research documentation of the leaflet package. Drew considered the high-level goals of our project. Courtney revised the image and cleaned data section)
+  + Research information and packages about creating interactive spatio-temporal visualizations on Shiny. (All, with Raghav as lead.)
   + Organize notes in the Google Doc. (All, while doing research)
   + Ideally, this step will help us from jumping in blind to the project and will provide us a solid foundation to begin our work on. 
 
@@ -120,19 +121,20 @@ Visual draft of our map can be found in the appendix.
   + Data wrangling to fix any messiness in the code and join any needed datasets (Kathryn and Drew).
   + Start coding the spatio-temporal visualization of worldwide deaths related to air pollution. (Kathryn and Drew)
   + Create the framework (shell) for the shiny app (Courtney and Raghav).
-  + At this point, we will decide if we will need to introduce any other data to our visualization. 
+  + At this point, we will decide if we will need to introduce any other data to our visualization (All, during weekly meeting).
 
 6. Week 6 of project (week of Mon, Nov 22): Continue working on your project.
   + Continue working on the visualization (Kathryn and Drew). Courtney and Rishal will provide feedback and suggest ideas for revisions. 
   + Continue developing the shiny app (Courtney and Raghav). Kathryn and Drew will provide feedback and suggest ideas for revisions. 
-  + Thanksgiving break is this week, and we hope to be in a comfortable position to not have to work over break. However, if it appears necesarry we will spend time over break. 
+  + Thanksgiving break is this week, and we hope to be in a comfortable position to not have to work over break. However, if it appears necessary we will spend time over break. 
   + If necessary, introduce outside/additional data. 
 
-7  Week 7 of project (week of Mon, Nov 29): Conduct another round of peer review.
-  + Incorporate the visualization into the shiny app (All of us with collaborate).
+7. Week 7 of project (week of Mon, Nov 29): Conduct another round of peer review.
+  + Incorporate the visualization into the shiny app (All of us will collaborate, with Courtney taking lead).
   + Ideally, we would like to have the coding part of our project done by the beginning of this week. That would give us the rest of the week to reflect, make any final touches, and plan for the presentation. 
   + Make any final touches. (All)
-  + Create presentation and prepare for in-class presentation (We will assign someone to take lead on this later on.) 
+  + Create shell for presentation (Raghav).
+  + Create presentation and prepare for in-class presentation (Raghav and Courtney) 
 
 8. Write-up and presentation: due *Fri, Dec 3 at noon* (beginning of class).
 

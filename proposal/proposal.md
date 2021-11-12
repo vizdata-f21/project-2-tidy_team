@@ -88,6 +88,10 @@ interactive in the sense that not only will the user be able to zoom and
 view country labels, but we can also add markers for locations of
 importance and add various other layers to our map.
 
+Visual draft of our map can be found in the appendix.
+
+#### Data
+
 Our dataset involves five different imported csv files. The first csv
 file includes the rate of death by air pollution type and by country
 from 1990 to 2017 - 7 variables and 6468 observations. The second csv
@@ -110,8 +114,6 @@ so this dataset will suffice; however, limitation will be clearly noted
 in the shiny model. Perhaps we will include a tab that details missing
 data points so the user understands limitations.
 
-Visual draft of our map can be found in the appendix.
-
 ## Weekly Plan of Attack
 
 1.  Week 1 of project (week of Mon, Oct 18): Pick a focus for your
@@ -124,8 +126,10 @@ Visual draft of our map can be found in the appendix.
 2.  Week 2 of project (week of Mon, Oct 25): Work on developing your
     project proposal and setting up the structure for your repository.
 
--   Set up repo structure (Courtney).
--   Start working on proposal (All assigned our own parts).
+-   Start working on proposal (Drew and Raghav worked on Goals and
+    Motivations, Kathryn cleaned data, wrote data dictionary, and wrote
+    out timeline, Courtney set up repo structure and drew the “mock”
+    shiny app).
 
 3.  Week 3 of project (week of Mon, Nov 1): Finalize your project
     proposal.
@@ -144,11 +148,16 @@ Visual draft of our map can be found in the appendix.
     your proposal.
 
 -   **Revised proposals for instructor review: due Fri, Nov 12 at 5pm**
--   Update proposal (All during weekly meeting)
--   Finish revising proposal. (We eat took responsibility for individual
-    parts following our meeting.)
+-   Update proposal (All during weekly meeting, Kathryn revised
+    timeline, Drew and Courtney revised goals and motivations, Raghav
+    looked for additional data and looked into leaflet)
+-   Finish revising proposal. (We each took responsibility for
+    individual parts following our meeting. Kathryn revised repo
+    structure. Raghav continued to research documentation of the leaflet
+    package. Drew considered the high-level goals of our project.
+    Courtney revised the image and cleaned data section)
 -   Research information and packages about creating interactive
-    spatio-temporal visualizations on Shiny. (All)
+    spatio-temporal visualizations on Shiny. (All, with Raghav as lead.)
 -   Organize notes in the Google Doc. (All, while doing research)
 -   Ideally, this step will help us from jumping in blind to the project
     and will provide us a solid foundation to begin our work on.
@@ -163,7 +172,7 @@ Visual draft of our map can be found in the appendix.
 -   Create the framework (shell) for the shiny app (Courtney and
     Raghav).
 -   At this point, we will decide if we will need to introduce any other
-    data to our visualization.
+    data to our visualization (All, during weekly meeting).
 
 6.  Week 6 of project (week of Mon, Nov 22): Continue working on your
     project.
@@ -174,17 +183,22 @@ Visual draft of our map can be found in the appendix.
     Drew will provide feedback and suggest ideas for revisions.
 -   Thanksgiving break is this week, and we hope to be in a comfortable
     position to not have to work over break. However, if it appears
-    necesarry we will spend time over break.
+    necessary we will spend time over break.
 -   If necessary, introduce outside/additional data.
 
-7  Week 7 of project (week of Mon, Nov 29): Conduct another round of
-peer review. + Incorporate the visualization into the shiny app (All of
-us with collaborate). + Ideally, we would like to have the coding part
-of our project done by the beginning of this week. That would give us
-the rest of the week to reflect, make any final touches, and plan for
-the presentation. + Make any final touches. (All) + Create presentation
-and prepare for in-class presentation (We will assign someone to take
-lead on this later on.)
+7.  Week 7 of project (week of Mon, Nov 29): Conduct another round of
+    peer review.
+
+-   Incorporate the visualization into the shiny app (All of us will
+    collaborate, with Courtney taking lead).
+-   Ideally, we would like to have the coding part of our project done
+    by the beginning of this week. That would give us the rest of the
+    week to reflect, make any final touches, and plan for the
+    presentation.
+-   Make any final touches. (All)
+-   Create shell for presentation (Raghav).
+-   Create presentation and prepare for in-class presentation (Raghav
+    and Courtney)
 
 8.  Write-up and presentation: due *Fri, Dec 3 at noon* (beginning of
     class).
