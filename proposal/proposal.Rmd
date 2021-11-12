@@ -16,15 +16,20 @@ library(janitor)
 
 ```{r load-data, message = FALSE}
 # air pollution data
-death_rates_total_air_pollution_csv <- read_csv(here("data", "death-rates-total-air-pollution.csv"), show_col_types = FALSE)
+death_rates_total_air_pollution_csv <- read_csv(
+  here("data", "death-rates-total-air-pollution.csv"), show_col_types = FALSE)
 
-death_rates_from_air_pollution_csv <- read_csv(here("data", "death-rates-from-air-pollution.csv"), show_col_types = FALSE)
+death_rates_from_air_pollution_csv <- read_csv(
+  here("data", "death-rates-from-air-pollution.csv"), show_col_types = FALSE)
 
-share_deaths_air_pollution_csv <- read_csv(here("data", "share-deaths-air-pollution.csv"), show_col_types = FALSE)
+share_deaths_air_pollution_csv <- read_csv(
+  here("data", "share-deaths-air-pollution.csv"), show_col_types = FALSE)
 
-number_deaths_by_risk_factor_csv <- read_csv(here("data", "number-of-deaths-by-risk-factor.csv"), show_col_types = FALSE)
+number_deaths_by_risk_factor_csv <- read_csv(
+  here("data", "number-of-deaths-by-risk-factor.csv"), show_col_types = FALSE)
 
-gdp_by_country_csv <- read_csv(here("data", "gdp-data.csv"), show_col_types = FALSE)
+gdp_by_country_csv <- read_csv(
+  here("data", "gdp-data.csv"), show_col_types = FALSE)
 
 # added _csv ending to eliminate need for naming later versions "clean"
 
@@ -32,9 +37,7 @@ gdp_by_country_csv <- read_csv(here("data", "gdp-data.csv"), show_col_types = FA
 world_map <- map_data("world") %>% as_tibble()
 ```
 
-Using `show_col_types` to suppress the message because we do not need to know what the column types are when we load the data. 
-
-```{r clean-datasets}
+```{r clean-datasets, echo = FALSE}
 death_rates_total_air_pollution <- death_rates_total_air_pollution_csv %>%
   clean_names() %>%
   rename(
@@ -67,15 +70,7 @@ gdp_by_country <- gdp_by_country_csv %>%
   pivot_wider()
 ```
 
-
-```{r glimpse-data-sets}
-glimpse(death_rates_total_air_pollution)
-glimpse(death_rates_from_air_pollution)
-glimpse(share_deaths_air_pollution)
-glimpse(number_deaths_by_risk_factor)
-glimpse(gdp_by_country)
-glimpse(world_map)
-```
+Glimpsed data can be found in the appendix.
 
 ## One Sentence High-Level Goal
 
@@ -158,6 +153,18 @@ The project is organized into 6 main folders:
 
 ## Appendix
 
+### Glimpse Data
+
+```{r glimpse-data-sets}
+glimpse(death_rates_total_air_pollution)
+glimpse(death_rates_from_air_pollution)
+glimpse(share_deaths_air_pollution)
+glimpse(number_deaths_by_risk_factor)
+glimpse(gdp_by_country)
+glimpse(world_map)
+```
+
+### Draft of Map
 ![Map Brainstorm](../images/map_appendix.jpg)
 
 ## References 
