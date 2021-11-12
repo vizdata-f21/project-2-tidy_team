@@ -31,7 +31,7 @@ Glimpsed data can be found in the appendix.
 ## One Sentence High-Level Goal
 
 Create an interactive spatio-temporal visualization of worldwide deaths
-related to air pollution.
+related to various risk factors, particularly air pollution.
 
 ## Description of our Goals and Motivation
 
@@ -96,7 +96,7 @@ importance and add various other layers to our map.
 
 Visual draft of our map can be found in the appendix.
 
-#### Data
+#### Data Description
 
 Our dataset involves five different imported csv files. The first csv
 file includes the rate of death by air pollution type and by country
@@ -111,38 +111,14 @@ sanitation, no access to hand wash, household air pollution,
 Non-exclusive breast feeding, discontinued breast feeding and child
 wasting etc.) and by country from 1990 to 2017 - 32 variables and 6468
 observations. The fourth csv file includes the proportion of deaths
-attributed to air pollution in countries from 1990 to 2017 - 7 variables
-and 6412 observations. The fifth csv file includes the annual GDP per
-capita for each country in current USD from 1990 to 2017 - 30 variables
-and 266 observations. There is some missing data for some countries in
-the 1960s and 1970s but the vast majority of observations are complete
-so this dataset will suffice; however, limitation will be clearly noted
-in the shiny model. Perhaps we will include a tab that details missing
-data points so the user understands limitations.
-
-### Data Description
-
-Our dataset involves five different imported csv files. The first csv
-file includes the rate of death by air pollution type and by country
-from 1990 to 2017 - 7 variables and 6468 observations. The second csv
-file simply includes the rate of death by country from 1990 to 2017,
-regardless of air pollution type - 4 variables and 6468 observations.
-According to the data source, death rates are standardized to account
-for the differences in distributions of ages of populations between
-countries. so that countries can be directly compared. The third csv
-file includes the number of deaths by risk factor (unsafe water, unsafe
-sanitation, no access to hand wash, household air pollution,
-Non-exclusive breast feeding, discontinued breast feeding and child
-wasting etc.) and by country from 1990 to 2017 - 32 variables and 6468
-observations. The fourth csv file includes the proportion of deaths
-attributed to air pollution in countries from 1990 to 2017 - 7 variables
-and 6412 observations. The fifth csv file includes the annual GDP per
-capita for each country in current USD from 1990 to 2017 - 30 variables
-and 266 observations. There is some missing data for some countries in
-the 1960s and 1970s but the vast majority of observations are complete
-so this dataset will suffice; however, limitation will be clearly noted
-in the shiny model. Perhaps we will include a tab that details missing
-data points so the user understands limitations.
+attributed to air pollution in countries from 1990 to 2017 - 7
+variables. The fifth csv file includes the annual GDP per capita for
+each country in current USD from 1990 to 2017 - 30 variables and 266
+observations. There is some missing data for some countries in the 1960s
+and 1970s but the vast majority of observations are complete so this
+dataset will suffice; however, limitation will be clearly noted in the
+shiny model. Perhaps we will include a tab that details missing data
+points so the user understands limitations.
 
 ## Weekly Plan of Attack
 
@@ -208,7 +184,7 @@ data points so the user understands limitations.
     project.
 
 -   Continue working on the visualization (Kathryn and Drew). Courtney
-    and Rishal will provide feedback and suggest ideas for revisions.
+    and Raghav will provide feedback and suggest ideas for revisions.
 -   Continue developing the shiny app (Courtney and Raghav). Kathryn and
     Drew will provide feedback and suggest ideas for revisions.
 -   Thanksgiving break is this week, and we hope to be in a comfortable
@@ -389,6 +365,10 @@ glimpse(world_map)
 ### Draft of Map
 
 ![Map Brainstorm](../images/map_appendix.jpg)
+
+The `number-of-deaths-by-risk-factor`dataset contains 29 risk factors
+and we will potentially be filtering these factors based on the most
+compelling findings.
 
 ## References
 

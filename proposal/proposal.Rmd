@@ -74,7 +74,7 @@ Glimpsed data can be found in the appendix.
 
 ## One Sentence High-Level Goal
 
-Create an interactive spatio-temporal visualization of worldwide deaths related to air pollution. 
+Create an interactive spatio-temporal visualization of worldwide deaths related to various risk factors, particularly air pollution. 
 
 ## Description of our Goals and Motivation 
 
@@ -94,13 +94,9 @@ We will be using the [leaflet package](https://rstudio.github.io/leaflet/) to cr
 
 Visual draft of our map can be found in the appendix.
 
-#### Data 
-
-Our dataset involves five different imported csv files. The first csv file includes the rate of death by air pollution type and by country from 1990 to 2017 - `r ncol(death_rates_from_air_pollution)` variables and `r nrow(death_rates_from_air_pollution)` observations. The second csv file simply includes the rate of death by country from 1990 to 2017, regardless of air pollution type - `r ncol(death_rates_total_air_pollution)` variables and `r nrow(death_rates_total_air_pollution)` observations. According to the data source, death rates are standardized to account for the differences in distributions of ages of populations between countries. so that countries can be directly compared. The third csv file includes the number of deaths by risk factor (unsafe water, unsafe sanitation, no access to hand wash, household air pollution, Non-exclusive breast feeding, discontinued breast feeding and child wasting etc.) and by country from 1990 to 2017 - `r ncol(number_deaths_by_risk_factor)` variables and `r nrow(number_deaths_by_risk_factor)` observations. The fourth csv file includes the proportion of deaths attributed to air pollution in countries from 1990 to 2017 -  `r ncol(death_rates_from_air_pollution)` variables and `r nrow(share_deaths_air_pollution)` observations. The fifth csv file includes the annual GDP per capita for each country in current USD from 1990 to 2017 - `r ncol(gdp_by_country)` variables and `r nrow(gdp_by_country)` observations. There is some missing data for some countries in the 1960s and 1970s but the vast majority of observations are complete so this dataset will suffice; however, limitation will be clearly noted in the shiny model. Perhaps we will include a tab that details missing data points so the user understands limitations. 
-
 #### Data Description
 
-Our dataset involves five different imported csv files. The first csv file includes the rate of death by air pollution type and by country from 1990 to 2017 - `r ncol(death_rates_from_air_pollution)` variables and `r nrow(death_rates_from_air_pollution)` observations. The second csv file simply includes the rate of death by country from 1990 to 2017, regardless of air pollution type - `r ncol(death_rates_total_air_pollution)` variables and `r nrow(death_rates_total_air_pollution)` observations. According to the data source, death rates are standardized to account for the differences in distributions of ages of populations between countries. so that countries can be directly compared. The third csv file includes the number of deaths by risk factor (unsafe water, unsafe sanitation, no access to hand wash, household air pollution, Non-exclusive breast feeding, discontinued breast feeding and child wasting etc.) and by country from 1990 to 2017 - `r ncol(number_deaths_by_risk_factor)` variables and `r nrow(number_deaths_by_risk_factor)` observations. The fourth csv file includes the proportion of deaths attributed to air pollution in countries from 1990 to 2017 -  `r ncol(death_rates_from_air_pollution)` variables and `r nrow(share_deaths_air_pollution)` observations. The fifth csv file includes the annual GDP per capita for each country in current USD from 1990 to 2017 - `r ncol(gdp_by_country)` variables and `r nrow(gdp_by_country)` observations. There is some missing data for some countries in the 1960s and 1970s but the vast majority of observations are complete so this dataset will suffice; however, limitation will be clearly noted in the shiny model. Perhaps we will include a tab that details missing data points so the user understands limitations. 
+Our dataset involves five different imported csv files. The first csv file includes the rate of death by air pollution type and by country from 1990 to 2017 - `r ncol(death_rates_from_air_pollution)` variables and `r nrow(death_rates_from_air_pollution)` observations. The second csv file simply includes the rate of death by country from 1990 to 2017, regardless of air pollution type - `r ncol(death_rates_total_air_pollution)` variables and `r nrow(death_rates_total_air_pollution)` observations. According to the data source, death rates are standardized to account for the differences in distributions of ages of populations between countries. so that countries can be directly compared. The third csv file includes the number of deaths by risk factor (unsafe water, unsafe sanitation, no access to hand wash, household air pollution, Non-exclusive breast feeding, discontinued breast feeding and child wasting etc.) and by country from 1990 to 2017 - `r ncol(number_deaths_by_risk_factor)` variables and `r nrow(number_deaths_by_risk_factor)` observations. The fourth csv file includes the proportion of deaths attributed to air pollution in countries from 1990 to 2017 -  `r ncol(death_rates_from_air_pollution)` variables. The fifth csv file includes the annual GDP per capita for each country in current USD from 1990 to 2017 - `r ncol(gdp_by_country)` variables and `r nrow(gdp_by_country)` observations. There is some missing data for some countries in the 1960s and 1970s but the vast majority of observations are complete so this dataset will suffice; however, limitation will be clearly noted in the shiny model. Perhaps we will include a tab that details missing data points so the user understands limitations. 
 
 ## Weekly Plan of Attack
 
@@ -131,7 +127,7 @@ Our dataset involves five different imported csv files. The first csv file inclu
   + At this point, we will decide if we will need to introduce any other data to our visualization (All, during weekly meeting).
 
 6. Week 6 of project (week of Mon, Nov 22): Continue working on your project.
-  + Continue working on the visualization (Kathryn and Drew). Courtney and Rishal will provide feedback and suggest ideas for revisions. 
+  + Continue working on the visualization (Kathryn and Drew). Courtney and Raghav will provide feedback and suggest ideas for revisions. 
   + Continue developing the shiny app (Courtney and Raghav). Kathryn and Drew will provide feedback and suggest ideas for revisions. 
   + Thanksgiving break is this week, and we hope to be in a comfortable position to not have to work over break. However, if it appears necessary we will spend time over break. 
   + If necessary, introduce outside/additional data. 
@@ -175,6 +171,8 @@ glimpse(world_map)
 
 ### Draft of Map
 ![Map Brainstorm](../images/map_appendix.jpg)
+
+The `number-of-deaths-by-risk-factor`dataset contains 29 risk factors and we will potentially be filtering these factors based on the most compelling findings. 
 
 ## References 
 

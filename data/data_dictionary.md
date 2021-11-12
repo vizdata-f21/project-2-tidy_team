@@ -31,16 +31,6 @@ population to allow for comparisons between countries and over time."
 |death_rate_ambient_matter_pollution | Death rate from ambient matter pollution | 
 |death_rate_ozone_pollution | Death rate from ozone pollution | 
 
-
-### share-deaths-air-pollution:
-
-|Variable         |Description |
-|:----------------|:-----------|
-|entity           | Country |
-|code             | Code of country  |
-|year             | Year of measurement |
-|share_death_air_pollution | Share of deaths which are attributed to total air pollution – outdoor and indoor – as a risk factor. | 
-
 ### number_deaths_by_riskfactor:
 
 |Variable         |Description |
