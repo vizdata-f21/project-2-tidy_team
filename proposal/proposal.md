@@ -372,13 +372,14 @@ in text, not the visualization.
 
 Although accessed via
 [Kaggle](https://www.kaggle.com/pavan9065/air-pollution), the data’s
-original source is [Our World in Data](https://ourworldindata.org/),
-which is a public data collection initiative led by the nonprofit Global
-Change Data Lab. The nonprofit shares knowledge (and data) about the
-world’s most pressing issues so that anyone has the tools and
-information they need to work toward combating a particular global
-problem. Our World in Data notes that their data sources include the
-[Institute for Health Metrics and Evaluation (Global Burden of
+original source is [Our World in
+Data](https://ourworldindata.org/air-pollution), which is a public data
+collection initiative led by the nonprofit Global Change Data Lab. The
+nonprofit shares knowledge (and data) about the world’s most pressing
+issues so that anyone has the tools and information they need to work
+toward combating a particular global problem. Our World in Data notes
+that their data sources include the [Institute for Health Metrics and
+Evaluation (Global Burden of
 Disease)](http://www.healthdata.org/results/data-visualizations) and
 [State of Global Air](https://www.stateofglobalair.org/data) The data
 was posted to Kaggle about a month ago and includes data spanning the
