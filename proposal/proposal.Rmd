@@ -14,7 +14,7 @@ library(janitor)
 
 ## Load Data 
 
-```{r load data, message = FALSE}
+```{r load-data, message = FALSE}
 # air pollution data
 death_rates_total_air_pollution_csv <- read_csv(here("data", "death-rates-total-air-pollution.csv"), show_col_types = FALSE)
 
@@ -34,7 +34,7 @@ world_map <- map_data("world") %>% as_tibble()
 
 Using `show_col_types` to suppress the message because we do not need to know what the column types are when we load the data. 
 
-```{r clean datasets}
+```{r clean-datasets}
 death_rates_total_air_pollution <- death_rates_total_air_pollution_csv %>%
   clean_names() %>%
   rename(
@@ -68,7 +68,7 @@ gdp_by_country <- gdp_by_country_csv %>%
 ```
 
 
-```{r glimpse data sets}
+```{r glimpse-data-sets}
 glimpse(death_rates_total_air_pollution)
 glimpse(death_rates_from_air_pollution)
 glimpse(share_deaths_air_pollution)
