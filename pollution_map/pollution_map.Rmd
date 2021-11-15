@@ -58,9 +58,13 @@ gdp_by_country <- gdp_by_country_csv %>%
 ```
 
 ```{r data wrangling}
+# joining air pollution data together
 air_pollution_joined <- death_rates_from_air_pollution %>% 
   left_join(number_deaths_by_risk_factor, by = c("entity", "year", "code"))
 
+# Next Step: Do a series of case_when (before join) to resolve inconsistencies (sample code below)
+
+# joining air pollution to world_map_data
 total_joined <- world_map_data %>% 
   left_join(air_pollution_joined, by = c("region" = "entity"))
 
@@ -68,73 +72,42 @@ to_do <- world_map_data %>%
   anti_join(air_pollution_joined, by = c("region" = "entity"))
   
 to_do %>% 
-  unique("region")
-
-world_map_data 
+  pull(region) %>% 
+  unique()
 
 ```
 
-```{r leaflet}
+Sample Code from Class: 
 
-# following tutorial at URL below, i think we need to figure out how to join the data first 
-bins <- c(0, 10, 20, 50, 100, 200, 500, 1000, Inf)
-pal <- colorBin("YlOrRd", domain = total_joined$death_rate_air_pollution, 
-                bins = bins)
+# clean fisheries data  ----------------------------------------------------------------
+fisheries <- fisheries %>%
+  mutate(
+    country = case_when(country == "United States" ~ "USA",
+                             country == "United Kingdom" ~ "USA",
+                             country == "" ~ "",
+         TRUE ~ country))
 
-# once we join the data this code should be a good start
+#clean world map data
 
-world_map = map("world", fill = TRUE, plot = FALSE)
-
-  leaflet(data = total_joined) %>% 
-  addTiles() %>%
-  addPolygons(fillColor = ~pal(death_rate_air_pollution), 
-              weight = 2, 
-              opacity = 1, 
-              color = "white", 
-              dashArray = "3", 
-              fillOpacity - 0.7)
-
-leaf <- 
-  leaflet(data = total_joined) %>% 
-  addTiles()
-
-my_long <- 
-  leaf %>%
-  getMapData() %>%
-  pull(long)
-
-my_lat <- 
-  leaf %>%
-  getMapData() %>%
-  pull(lat)
-
-
-  leaf %>%
-  addPolygons(fillColor = ~pal(death_rate_air_pollution), 
-              weight = 2, 
-              opacity = 1, 
-              color = "white", 
-              dashArray = "3", 
-              lng = my_long, 
-              lat = my_lat)
-
-# this is just a start, obviously 
-
-# things we want to consider: 
-  # how to not have it repeat (for user friendly-ness)
-      #setView?
-  # is it a problem this does not use ggplot? 
-  # how to change polygon fill 
-  # how to join air pollution data to world_map (which looks like a list) - prioritize asking this in Lab 
-    # https://rstudio.github.io/leaflet/choropleths.html
-  
-  
-  
-  world_map = map("world", fill = TRUE, plot = FALSE)
-
-  leaflet(data = world_map) %>% 
-  addTiles()
+world_map <- world_map_raw %>%
+  mutate(region = case_when(
+    subregion == "Hong Kong" ~ region == "Hong Kong",
+    region == "Antigua" ~ "Antigua and Barbuda",
+    region == "Barbuda" ~ "Antigua and Barbuda",
+    TRUE ~ region))
+    
+    
+```{r join and test map}
+ggplot(total_joined, aes(long, lat)) + 
+  geom_polygon(aes(group = group, fill = death_rate_air_pollution), color = "black") + 
+  coord_map(projection = "mercator", 
+            xlim = c(-180, 180)) + 
+  theme_void()
 ```
+
+
+
+
 
 
 

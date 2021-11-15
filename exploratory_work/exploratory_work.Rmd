@@ -53,10 +53,9 @@ number_deaths_by_risk_factor <- number_deaths_by_risk_factor_csv %>%
 ```
 
 ```{r world map plot}
-
 test_df <- death_rates_total_air_pollution %>% 
   full_join(world_map, by = c("entity" = "region")) %>% 
-  filter(year == 1990) #becasue this is a static version of the later product
+  filter(year == 1990) # because this is a static version of the later product
 
 ggplot(test_df, aes(long, lat)) + 
   geom_polygon(aes(group = group, fill = death_rate_air_pollution), color = "black") + 
