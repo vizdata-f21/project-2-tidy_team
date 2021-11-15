@@ -8,7 +8,7 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(here)
 library(janitor)
-install.packages("leaflet")
+install.packages("leaflet") # Source: https://rstudio.github.io/leaflet/
 library(leaflet)
 library(maps)
 ```
@@ -160,9 +160,9 @@ pal <- colorBin("YlOrRd", domain =
     # https://rstudio.github.io/leaflet/choropleths.html
 
 # proof that this is possible! 
-leaflet(data = world_map) %>% 
-  addTiles() %>%
-  addPolygons(fillColor = topo.colors(10, alpha = NULL), stroke = FALSE)
+#leaflet(data = world_map) %>% 
+  #addTiles() %>%
+  #addPolygons(fillColor = topo.colors(10, alpha = NULL), stroke = FALSE)
 
 ```
 
