@@ -265,11 +265,9 @@ test_df &lt;- death_rates_from_air_pollution %&gt;%
           # Low SDI
           # Low-middle SDI
           # Middle SDI
-
                      
 to_do &lt;- death_rates_from_air_pollution %&gt;% 
   anti_join(world_map, by = c(&quot;entity&quot; = &quot;region&quot;))
-
 
 ggplot(test_df, aes(long, lat)) + 
   geom_polygon(aes(group = group, fill = death_rate_air_pollution), color = &quot;black&quot;) + 
