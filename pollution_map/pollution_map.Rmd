@@ -10,6 +10,7 @@ library(here)
 library(janitor)
 install.packages("leaflet")
 library(leaflet)
+library(maps)
 ```
 
 ## Load Data 
@@ -57,7 +58,7 @@ gdp_by_country <- gdp_by_country_csv %>%
 
 ```{r join and test map}
 
-# this all might be irrelevant bc leaflet, stand by 
+# this all might be irrelevant bc leaflet, stand by - ok yeah i think we are going to ignore this 
 
 test_df <- death_rates_from_air_pollution %>% 
   full_join(world_map, by = c("entity" = "region")) %>% 
@@ -131,7 +132,39 @@ ggplot(test_df, aes(long, lat)) +
   theme_void()
 ```
 
-```{r leaflet }
+```{r leaflet, eval = FALSE}
+
+# following tutorial at URL below, i think we need to figure out how to join the data first 
+bins <- c(0, 10, 20, 50, 100, 200, 500, 1000, Inf)
+pal <- colorBin("YlOrRd", domain =
+                  death_rates_from_air_pollution$death_rate_air_pollution, 
+                bins = bins)
+
+# once we join the data this code should be a good start
+
+# world_map = map("world", fill = TRUE, plot = FALSE)
+# leaflet(data = world_map) %>% 
+ # addTiles() %>%
+  # addPolygons(fillColor = ~pal(death_rate_air_pollution), 
+   #           weight = 2, 
+    #          opacity = 1, 
+     #         color = "white", 
+      #        dashArray = "3", 
+       #       fillOpacity - 0.7)
+
+# this is just a start, obviously 
+
+# things we want to consider: 
+  # how to not have it repeat (for user friendly-ness)
+  # is it a problem this does not use ggplot? 
+  # how to change polygon fill 
+  # how to join air pollution data to world_map (which looks like a list) - prioritize asking this in Lab 
+    # https://rstudio.github.io/leaflet/choropleths.html
+
+# proof that this is possible! 
+leaflet(data = world_map) %>% 
+  addTiles() %>%
+  addPolygons(fillColor = topo.colors(10, alpha = NULL), stroke = FALSE)
 
 ```
 
