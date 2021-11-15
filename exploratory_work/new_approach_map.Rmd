@@ -1,0 +1,53 @@
+---
+title: "new_approach_map"
+output: html_document
+---
+
+```{r setup}
+
+library(tidyverse)
+
+# Download the shapefile. (note that I store it in a folder called DATA. You have to change that if needed.)
+download.file("http://thematicmapping.org/downloads/TM_WORLD_BORDERS_SIMPL-0.3.zip" , destfile ="/R/project-2-tidy-team/data/world_shape_file.zip")
+# You now have it in your current working directory, have a look!
+
+# Read this shape file with the rgdal library. 
+# install.packages("rgdal")
+library(rgdal)
+
+world_spdf <- readOGR( 
+  dsn = "data/world_shape_file/", 
+  layer = "TM_WORLD_BORDERS_SIMPL-0.3",
+  verbose = FALSE
+)
+
+# Clean the data object
+library(dplyr)
+world_spdf@data$POP2005[ which(world_spdf@data$POP2005 == 0)] = NA
+world_spdf@data$POP2005 <- as.numeric(as.character(world_spdf@data$POP2005)) / 1000000 %>% round(2)
+
+# -- > Now you have a Spdf object (spatial polygon data frame). You can start doing maps!
+
+```
+
+```{r}
+# Library
+library(leaflet)
+
+# Create a color palette for the map:
+mypalette <- colorNumeric( palette="viridis", domain=world_spdf@data$POP2005, na.color="transparent")
+mypalette(c(45,43))
+
+# Basic choropleth with leaflet?
+m <- leaflet(world_spdf) %>% 
+  addTiles()  %>% 
+  setView( lat=10, lng=0 , zoom=2) %>%
+  addPolygons( fillColor = ~mypalette(POP2005), stroke=FALSE )
+
+m
+
+# save the widget in a html file if needed.
+# library(htmlwidgets)
+# saveWidget(m, file=paste0( getwd(), "/HtmlWidget/choroplethLeaflet1.html"))
+```
+
