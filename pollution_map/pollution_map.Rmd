@@ -2,5 +2,137 @@
 title: "pollution_map"
 output: html_document
 ---
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE)
 
-We will use this for data wrangling prior to the creating the shiny app. 
+library(tidyverse)
+library(here)
+library(janitor)
+install.packages("leaflet")
+library(leaflet)
+```
+
+## Load Data 
+
+```{r load-data, message = FALSE}
+# air pollution data
+death_rates_from_air_pollution_csv <- read_csv(
+  here("data", "death-rates-from-air-pollution.csv"), show_col_types = FALSE)
+
+number_deaths_by_risk_factor_csv <- read_csv(
+  here("data", "number-of-deaths-by-risk-factor.csv"), show_col_types = FALSE)
+
+# gdp data
+gdp_by_country_csv <- read_csv(
+  here("data", "gdp-data.csv"), show_col_types = FALSE)
+
+# NOTE: added _csv ending to eliminate need for naming later versions "clean"
+
+# world map data
+world_map <- map_data("world") %>% as_tibble()
+```
+
+```{r clean-datasets}
+
+#renaming variables to clean them up 
+
+death_rates_from_air_pollution <- death_rates_from_air_pollution_csv %>%
+  clean_names() %>%
+  rename(
+    death_rate_air_pollution =
+      deaths_air_pollution_sex_both_age_age_standardized_rate,
+    death_rate_household_pollution = deaths_household_air_pollution_from_solid_fuels_sex_both_age_age_standardized_rate,
+    death_rate_ambient_matter_pollution = deaths_ambient_particulate_matter_pollution_sex_both_age_age_standardized_rate,
+    death_rate_ozone_pollution =
+      deaths_ambient_ozone_pollution_sex_both_age_age_standardized_rate
+  )
+
+number_deaths_by_risk_factor <- number_deaths_by_risk_factor_csv %>%
+  clean_names()
+
+gdp_by_country <- gdp_by_country_csv %>%
+  clean_names() %>%
+  pivot_wider()
+```
+
+```{r join and test map}
+
+# this all might be irrelevant bc leaflet, stand by 
+
+test_df <- death_rates_from_air_pollution %>% 
+  full_join(world_map, by = c("entity" = "region")) %>% 
+  filter(year == 1990) # because this is a static version of the later product
+
+# need to fix NAs in the join
+  # format is death_rates_from_air_pollution vs. world_map
+
+# Issues: 
+    # Wrong Country Name 
+        # Andean Latin America
+        # Antigua and Barbuda
+        # Australasia
+        # Caribbean
+        # Congo 
+        # Cote d'Ivoire
+        # Czechia
+        # Democratic Republic of Congo
+        # England
+        # Eswatini
+        # Northern Ireland
+        # Oceania
+        # Saint Vincent and the Grenadines
+        # Scotland
+        # Micronesia (country)
+        # Timor
+        # Trinidad and Tobago
+        # United Kingdom vs. UK 
+        # United States vs. USA 
+        # United States Virgin Islands
+        # Wales
+    # Region 
+        # Central Asia 
+        # Central Europe
+        # Central Europe, Eastern Europe, and Central Asia
+        # Central Latin America
+        # Central Sub-Saharan Africa
+        # East Asia 
+        # Eastern Europe
+        # Eastern Sub-Saharan Africa
+        # Latin America and Caribbean
+        # North Africa and Middle East
+        # North America
+        # South Asia
+        # Southeast Asia
+        # Southeast Asia, East Asia, and Oceania
+        # Southern Latin America
+        # Southern Sub-Saharan Africa
+        # Sub-Saharan Africa
+        # Tropical Latin America
+        # Western Europe
+        # Western Sub-Saharan Africa
+    # Economic Status
+          # High SDI
+          # High-income
+          # High-income Asia Pacific
+          # High-middle SDI  
+          # Low SDI
+          # Low-middle SDI
+          # Middle SDI
+
+                     
+to_do <- death_rates_from_air_pollution %>% 
+  anti_join(world_map, by = c("entity" = "region"))
+
+
+ggplot(test_df, aes(long, lat)) + 
+  geom_polygon(aes(group = group, fill = death_rate_air_pollution), color = "black") + 
+  coord_map(projection = "mercator", 
+            xlim = c(-180, 180)) + 
+  theme_void()
+```
+
+```{r leaflet }
+
+```
+
+
