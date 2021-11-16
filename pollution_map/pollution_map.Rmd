@@ -2,15 +2,22 @@
 title: "pollution_map"
 output: html_document
 ---
+
+Next Steps: 
+1. Finish fixing inconsistencies [prior to Wed meeting]
+2. decide if we like aesthetics [prior to Wed meeting]
+3. animate / figure out how to link to shiny selectors [at Wed meeting]
+
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 
 library(tidyverse)
 library(here)
 library(janitor)
-install.packages("leaflet") # Source: https://rstudio.github.io/leaflet/
-library(leaflet)
+# install.packages("leaflet") # Source: https://rstudio.github.io/leaflet/
+# library(leaflet)
 library(maps)
+library(scales)
 ```
 
 ## Load Data 
@@ -33,6 +40,8 @@ gdp_by_country_csv <- read_csv(
 world_map_data <- map_data("world") %>% 
   as_tibble()
 ```
+
+## Clean Data 
 
 ```{r clean-datasets}
 
@@ -57,12 +66,32 @@ gdp_by_country <- gdp_by_country_csv %>%
   pivot_wider()
 ```
 
+## Data Wrangling 
+
 ```{r data wrangling}
 # joining air pollution data together
 air_pollution_joined <- death_rates_from_air_pollution %>% 
   left_join(number_deaths_by_risk_factor, by = c("entity", "year", "code"))
 
-# Next Step: Do a series of case_when (before join) to resolve inconsistencies (sample code below)
+# Next Step: Do a series of case_when (before join) to resolve inconsistencies 
+  # noticible ones include: Cote d'ivorie, Congo, Dem. Rep of COngo, Czechnia, French Guiana
+
+# clean world_map_data 
+world_map_data <- world_map_data %>% 
+  mutate(region = case_when(
+    region == "Ivory Coast" ~ "Cote d'Ivoire", 
+    TRUE ~ region
+  ))
+
+# clean air pollution data
+
+air_pollution_joined <- air_pollution_joined %>% 
+  mutate(entity = case_when(
+    entity == "United States" ~ "USA", 
+    entity == "United Kingdom" ~ "UK",
+    TRUE ~ entity
+  ))
+
 
 # joining air pollution to world_map_data
 total_joined <- world_map_data %>% 
@@ -77,32 +106,36 @@ to_do %>%
 
 ```
 
-Sample Code from Class: 
+## Map 
 
-# clean fisheries data  ----------------------------------------------------------------
-fisheries <- fisheries %>%
-  mutate(
-    country = case_when(country == "United States" ~ "USA",
-                             country == "United Kingdom" ~ "USA",
-                             country == "" ~ "",
-         TRUE ~ country))
-
-#clean world map data
-
-world_map <- world_map_raw %>%
-  mutate(region = case_when(
-    subregion == "Hong Kong" ~ region == "Hong Kong",
-    region == "Antigua" ~ "Antigua and Barbuda",
-    region == "Barbuda" ~ "Antigua and Barbuda",
-    TRUE ~ region))
-    
-    
-```{r join and test map}
+```{r test map, out.width="100%"}
 ggplot(total_joined, aes(long, lat)) + 
-  geom_polygon(aes(group = group, fill = death_rate_air_pollution), color = "black") + 
+  geom_polygon(aes(group = group, fill = death_rate_air_pollution), 
+               color = "black", size = 0.3) + 
   coord_map(projection = "mercator", 
             xlim = c(-180, 180)) + 
-  theme_void()
+  scale_fill_viridis_c(option = "turbo", 
+                       # turbo pallet coordinates with AQI colors (https://webcam.srs.fs.fed.us/test/AQI.shtml)
+    name = "Total death rate",
+    labels = label_number(big.mark = ","),
+    na.value = "white" 
+  ) +
+  theme_void() +  
+  theme(
+    text = element_text(color = "white"),
+    legend.position = "bottom",
+    legend.key.width = unit(2, "cm"),
+    legend.key.height = unit(0.3, "cm"),
+    plot.background = element_rect(fill = "gray", color = "gray"),
+    plot.title = element_text(hjust = 0.5),
+    plot.subtitle = element_text(hjust = 0.5)
+  ) +
+  labs(
+    title = "Total Death Rate from Air Pollution",
+    subtitle = "By country, from 1970 to 2017",
+    caption = "Source: Our World in Data"
+  )
+
 ```
 
 
