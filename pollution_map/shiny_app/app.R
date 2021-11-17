@@ -50,8 +50,8 @@ ui <- fluidPage(
            fluidRow (class = "filters",
 
                      column(6,
-                            # Style Menu
-                            selectInput("style", "Style", c("All",
+                            # Year Menu
+                            selectInput("year", "Year", c("All",
                                                             "Bowl",
                                                             "Box",
                                                             "Cup",
@@ -60,8 +60,8 @@ ui <- fluidPage(
                      ),
 
                      column(6,
-                            # Country menu
-                            selectInput("country", "Country", levels(ratings$Country) %>%
+                            # Risk menu
+                            selectInput("risk", "Risk Type", levels(df2$pollution_type) %>%
                                           append("All") %>% # Add "All" option
                                           sort()) # Sort options alphabetically
 
@@ -85,36 +85,35 @@ server <- function(input, output) {
   # Create world map
   output$map <- renderLeaflet({
 
-    # Filter data based on selected Style
-    if (input$style != "All") {
-      ratings <- filter(ratings, Style == input$style)
-    }
+    # # Filter data based on selected Style
+    # if (input$style != "All") {
+    #   ratings <- filter(ratings, Style == input$style)
+    # }
 
-    # Filter data based on selected Country
-    if (input$country != "All") {
-      ratings <- filter(ratings, Country == input$country)
+    # Filter data based on selected Risk Factor
+    if (input$risk != "All") {
+      df2 <- filter(df2, Risk == input$risk)
     }
 
     # Hide map when user has filtered out all data
     validate (
-      need(nrow(ratings) > 0, "")
+      need(nrow(df2) > 0, "")
     )
 
     # Get average rating by country
-    countries <- group_by(ratings, Country) %>%
-      summarise(avgRating = mean(Stars))
+    df2 <- group_by(df2, region) %>%
+      summarise(avgdeathrate = mean(death_rate))
 
     # Add spatial data to countries dataframe
-    countries <- left_join(countries, mapData, c("Country" = "name_long"))
+    df2 <- left_join(df2, mapData, c("region" = "name_long"))
 
     # Create color palette for map
-    pal <- colorNumeric(palette = "YlOrRd", domain = countries$avgRating)
+    pal <- colorNumeric(palette = "YlOrRd", domain = region$avgdeathrate)
 
     # Create label text for map
-    map_labels <- paste("Ramen from",
-                        countries$Country,
-                        "has an average rating of",
-                        round(countries$avgRating, 1))
+    map_labels <- paste(df2$region,
+                        "has an average death rate of",
+                        round(region$avgdeathrate, 1))
 
     # Generate basemap
     map <- leaflet() %>%
@@ -123,7 +122,7 @@ server <- function(input, output) {
 
     # Add polygons to map
     map %>% addPolygons(data = countries$geom,
-                        fillColor = pal(countries$avgRating),
+                        fillColor = pal(region$avgdeathrate),
                         fillOpacity = .7,
                         color = "grey",
                         weight = 1,
@@ -132,32 +131,11 @@ server <- function(input, output) {
 
       # Add legend to map
       addLegend(pal = pal,
-                values = countries$avgRating,
+                values = region$avgdeathrate,
                 position = "bottomleft")
 
   })
 
-  # Create data table
-  output$table <- renderDataTable({
-
-    # Filter data based on selected Style
-    if (input$style != "All") {
-      ratings <- filter(ratings, Style == input$style)
-    }
-
-    # Filter data based on selected Country
-    if (input$country != "All") {
-      ratings <- filter(ratings, Country == input$country)
-    }
-
-    # Hide table when user has filtered out all data
-    validate (
-      need(nrow(ratings) > 0, "")
-    )
-
-    ratings[,2:6]
-
-  })
 
 }
 
