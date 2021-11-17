@@ -1,3 +1,5 @@
+# Load packages -----------------------------------------------------
+
 library(shiny)
 library(tidyverse)
 library(spData) # For getting spatial data
@@ -69,7 +71,8 @@ air_pollution_joined <- air_pollution_joined %>%
 total_joined <- world_map_data %>%
     left_join(air_pollution_joined, by = c("region" = "entity"))
 
-# Define UI for application that draws a histogram
+# Define UI ---------------------------------------------------------
+
 ui <- fluidPage(
 
     # Application title
