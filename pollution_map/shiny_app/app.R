@@ -52,11 +52,11 @@ ui <- fluidPage(
                      column(6,
                             # Year Menu
                             selectInput("year", "Year", c("All",
-                                                            "Bowl",
-                                                            "Box",
-                                                            "Cup",
-                                                            "Pack",
-                                                            "Tray"))
+                                                          "Bowl",
+                                                          "Box",
+                                                          "Cup",
+                                                          "Pack",
+                                                          "Tray"))
                      ),
 
                      column(6,
@@ -141,4 +141,3 @@ server <- function(input, output) {
 
 # Run the application
 shinyApp(ui = ui, server = server)
-
