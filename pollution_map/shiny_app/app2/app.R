@@ -32,8 +32,10 @@ death_rates_from_air_pollution <- death_rates_from_air_pollution_csv %>%
     rename(
         death_rate_air_pollution =
             deaths_air_pollution_sex_both_age_age_standardized_rate,
-        death_rate_household_pollution = deaths_household_air_pollution_from_solid_fuels_sex_both_age_age_standardized_rate,
-        death_rate_ambient_matter_pollution = deaths_ambient_particulate_matter_pollution_sex_both_age_age_standardized_rate,
+        death_rate_household_pollution =
+            deaths_household_air_pollution_from_solid_fuels_sex_both_age_age_standardized_rate,
+        death_rate_ambient_matter_pollution =
+            deaths_ambient_particulate_matter_pollution_sex_both_age_age_standardized_rate,
         death_rate_ozone_pollution =
             deaths_ambient_ozone_pollution_sex_both_age_age_standardized_rate
     )
@@ -80,11 +82,17 @@ ui <- fluidPage(
 
     sidebarLayout(
         sidebarPanel(
+            selectInput("air_pollution_type", label="Type of Air Pollution",
+                        choices = names(total_joined)
+                        [c("death_rate_air_pollution",
+                           "death_rate_household_pollution",
+                           "death_rate_ambient_matter_pollution",
+                           "death_rate_ozone_pollution")]),
             sliderInput("bins",
                         "Year",
                         min = 1990,
                         max = 2017,
-                        value = 1990))),
+                        value = 1990)),
     mainPanel(
              tabsetPanel(
                  type = "tabs",
@@ -98,13 +106,22 @@ ui <- fluidPage(
                              value = 1990,
                              max = 2017,
                              width = "100%"),
-                         plotOutput(outputId = "plot"))))))
+                         plotOutput(outputId = "plot")))))))
 
 
 server <- function(input, output) {
+    remaining <- reactive({
+        names(total_joined)[c("death_rate_air_pollution",
+                              "death_rate_household_pollution",
+                              "death_rate_ambient_matter_pollution",
+                              "death_rate_ozone_pollution",
+                              -match(input$air_pollution_type,
+                                     names(total_joined)))]
+    })
     output$plot <- renderPlot({
+
         ggplot(total_joined, aes(long, lat)) +
-            geom_polygon(aes(group = group, fill = death_rate_air_pollution),
+            geom_polygon(aes_string(group = group, fill = input$type_of_air_pollution),
                          color = "black", size = 0.3) +
             coord_map(projection = "mercator",
                       xlim = c(-180, 180)) +
@@ -112,7 +129,7 @@ server <- function(input, output) {
                                  # turbo pallet coordinates with AQI colors (https://webcam.srs.fs.fed.us/test/AQI.shtml)
                                  name = "Total death rate",
                                  labels = label_number(big.mark = ","),
-                                 na.value = "white"
+                                 na.value = "lightgray"
             ) +
             theme_void() +
             theme(
@@ -120,7 +137,7 @@ server <- function(input, output) {
                 legend.position = "bottom",
                 legend.key.width = unit(2, "cm"),
                 legend.key.height = unit(0.3, "cm"),
-                plot.background = element_rect(fill = "lightgray", color = "lightgray"),
+                plot.background = element_rect(fill = "white", color = "white"),
                 plot.title = element_text(hjust = 0.5),
                 plot.subtitle = element_text(hjust = 0.5)
             ) +
@@ -128,10 +145,8 @@ server <- function(input, output) {
                 title = "Total Death Rate from Air Pollution",
                 subtitle = "By country, from 1970 to 2017",
                 caption = "Source: Our World in Data"
-            )
-    }
-    )
-}
+            )})}
+
 
 # Run the application
 shinyApp(ui = ui, server = server)
