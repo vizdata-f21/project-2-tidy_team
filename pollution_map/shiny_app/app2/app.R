@@ -10,6 +10,7 @@ library(maps)
 library(scales)
 
 # Load data ---------------------------------------------------------
+
 # air pollution data
 death_rates_from_air_pollution_csv <- read_csv(
     here("data", "death-rates-from-air-pollution.csv"), show_col_types = FALSE)
@@ -75,37 +76,30 @@ total_joined <- world_map_data %>%
 
 ui <- fluidPage(
 
-    # Application title
     titlePanel("Air Pollution Deaths"),
 
-    # Sidebar with a slider input for number of bins
     sidebarLayout(
         sidebarPanel(
             sliderInput("bins",
                         "Year",
                         min = 1990,
                         max = 2017,
-                        value = c(1990, 2017))
-        ),
+                        value = 1990))),
+    mainPanel(
+             tabsetPanel(
+                 type = "tabs",
+                 tabPanel("Air Pollution", plotOutput(outputId = "plot"),
+                     conditionalPanel(
+                         condition = "input.industry.length <= 8",
+                         sliderInput(
+                             inputId = "ylim",
+                             label = "Select year",
+                             min = 1990,
+                             value = 1990,
+                             max = 2017,
+                             width = "100%"),
+                         plotOutput(outputId = "plot"))))))
 
-        # Show a plot of the generated distribution
-         mainPanel(
-    #
-    #         # Output: Tabset w/ plot, summary, and table ----
-    #         tabsetPanel(type = "tabs",
-    #                     tabPanel("Air Pollution", plotOutput("plot")),
-    #                     tabPanel("Other Risk Factors", plotOutput("plot")),
-    #                     tabPanel("Summary", verbatimTextOutput("summary")),
-    #                     tabPanel("Trends", verbatimTextOutput("summary")),
-    #                     tabPanel("Table", tableOutput("table"))
-    #         )
-    #
-    #     )
-    # ),
-
-     plotOutput(outputId = "plot")
-)
-))
 
 server <- function(input, output) {
     output$plot <- renderPlot({
