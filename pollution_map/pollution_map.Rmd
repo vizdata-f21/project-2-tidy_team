@@ -4,8 +4,8 @@ output: html_document
 ---
 
 Next Steps: 
-1. Finish fixing inconsistencies [prior to Wed meeting]
-2. decide if we like aesthetics [prior to Wed meeting]
+1. Finish fixing inconsistencies - i think all the major / noticable ones are fixed
+2. decide if we like aesthetics 
 3. animate / figure out how to link to shiny selectors [at Wed meeting]
 
 ```{r setup, include = FALSE}
@@ -74,7 +74,7 @@ air_pollution_joined <- death_rates_from_air_pollution %>%
   left_join(number_deaths_by_risk_factor, by = c("entity", "year", "code"))
 
 # Next Step: Do a series of case_when (before join) to resolve inconsistencies 
-  # noticeable ones include: Cote d'ivorie, Congo, Dem. Rep of Congo, Czechnia, French Guiana
+  # noticeable ones include: French Guiana (but there might just not be data on this)
 
 # clean world_map_data 
 world_map_data <- world_map_data %>% 
@@ -89,6 +89,9 @@ air_pollution_joined <- air_pollution_joined %>%
   mutate(entity = case_when(
     entity == "United States" ~ "USA", 
     entity == "United Kingdom" ~ "UK",
+    entity == "Czechia" ~ "Czech Republic",
+    entity == "Congo" ~ "Republic of Congo",
+    entity == "Democratic Republic of Congo" ~ "Democratic Republic of the Congo",
     TRUE ~ entity
   ))
 
@@ -118,7 +121,7 @@ ggplot(total_joined, aes(long, lat)) +
                        # turbo pallet coordinates with AQI colors (https://webcam.srs.fs.fed.us/test/AQI.shtml)
     name = "Total death rate",
     labels = label_number(big.mark = ","),
-    na.value = "white" 
+    na.value = "lightgray" 
   ) +
   theme_void() +  
   theme(
@@ -126,7 +129,7 @@ ggplot(total_joined, aes(long, lat)) +
     legend.position = "bottom",
     legend.key.width = unit(2, "cm"),
     legend.key.height = unit(0.3, "cm"),
-    plot.background = element_rect(fill = "lightgray", color = "lightgray"),
+    plot.background = element_rect(fill = "white", color = "white"),
     plot.title = element_text(hjust = 0.5),
     plot.subtitle = element_text(hjust = 0.5)
   ) +
