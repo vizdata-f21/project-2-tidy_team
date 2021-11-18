@@ -27,15 +27,16 @@ gdp_by_country_csv <- read_csv(
 # world map data
 world_map_data <- map_data("world") %>%
     as_tibble()
+
+# renaming variables to clean them up
+
 death_rates_from_air_pollution <- death_rates_from_air_pollution_csv %>%
     clean_names() %>%
     rename(
         death_rate_air_pollution =
             deaths_air_pollution_sex_both_age_age_standardized_rate,
-        death_rate_household_pollution =
-            deaths_household_air_pollution_from_solid_fuels_sex_both_age_age_standardized_rate,
-        death_rate_ambient_matter_pollution =
-            deaths_ambient_particulate_matter_pollution_sex_both_age_age_standardized_rate,
+        death_rate_household_pollution = deaths_household_air_pollution_from_solid_fuels_sex_both_age_age_standardized_rate,
+        death_rate_ambient_matter_pollution = deaths_ambient_particulate_matter_pollution_sex_both_age_age_standardized_rate,
         death_rate_ozone_pollution =
             deaths_ambient_ozone_pollution_sex_both_age_age_standardized_rate
     )
@@ -46,12 +47,13 @@ number_deaths_by_risk_factor <- number_deaths_by_risk_factor_csv %>%
 gdp_by_country <- gdp_by_country_csv %>%
     clean_names() %>%
     pivot_wider()
+
 # joining air pollution data together
 air_pollution_joined <- death_rates_from_air_pollution %>%
     left_join(number_deaths_by_risk_factor, by = c("entity", "year", "code"))
 
 # Next Step: Do a series of case_when (before join) to resolve inconsistencies
-# noticeable ones include: Cote d'ivorie, Congo, Dem. Rep of Congo, Czechnia, French Guiana
+# noticeable ones include: French Guiana (but there might just not be data on this)
 
 # clean world_map_data
 world_map_data <- world_map_data %>%
@@ -66,6 +68,9 @@ air_pollution_joined <- air_pollution_joined %>%
     mutate(entity = case_when(
         entity == "United States" ~ "USA",
         entity == "United Kingdom" ~ "UK",
+        entity == "Czechia" ~ "Czech Republic",
+        entity == "Congo" ~ "Republic of Congo",
+        entity == "Democratic Republic of Congo" ~ "Democratic Republic of the Congo",
         TRUE ~ entity
     ))
 
@@ -82,12 +87,11 @@ ui <- fluidPage(
 
     sidebarLayout(
         sidebarPanel(
-            selectInput("air_pollution_type", label="Type of Air Pollution",
-                        choices = names(total_joined)
-                        [c("death_rate_air_pollution",
-                           "death_rate_household_pollution",
-                           "death_rate_ambient_matter_pollution",
-                           "death_rate_ozone_pollution")]),
+            selectInput(inputId = "air_pollution_type", label = "Type of Air Pollution",
+                        choices = c("Air Pollution Death Rate" = "death_rate_air_pollution",
+                           "Household Pollution Death Rate" = "death_rate_household_pollution",
+                            "Ambient Matter Pollution Death Rate" =  "death_rate_ambient_matter_pollution",
+                           "Ozone Pollution Death Rate" = "death_rate_ozone_pollution")),
             sliderInput("bins",
                         "Year",
                         min = 1990,
@@ -105,8 +109,7 @@ ui <- fluidPage(
                              min = 1990,
                              value = 1990,
                              max = 2017,
-                             width = "100%"),
-                         plotOutput(outputId = "plot")))))))
+                             width = "100%")))))))
 
 
 server <- function(input, output) {
@@ -121,7 +124,7 @@ server <- function(input, output) {
     output$plot <- renderPlot({
 
         ggplot(total_joined, aes(long, lat)) +
-            geom_polygon(aes_string(group = group, fill = input$type_of_air_pollution),
+            geom_polygon(aes(group = group, fill = death_rate_air_pollution), # something needs to happen here but im not sure what
                          color = "black", size = 0.3) +
             coord_map(projection = "mercator",
                       xlim = c(-180, 180)) +
