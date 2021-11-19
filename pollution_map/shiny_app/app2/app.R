@@ -2,8 +2,6 @@
 
 library(shiny)
 library(tidyverse)
-library(spData) # For getting spatial data
-library(sf) # For preserving spatial data
 library(here)
 library(janitor)
 library(maps)
@@ -13,14 +11,20 @@ library(scales)
 
 # air pollution data
 death_rates_from_air_pollution_csv <- read_csv(
-    here("data", "death-rates-from-air-pollution.csv"), show_col_types = FALSE)
+    here("data", "death-rates-from-air-pollution.csv"),
+    show_col_types = FALSE
+)
 
 number_deaths_by_risk_factor_csv <- read_csv(
-    here("data", "number-of-deaths-by-risk-factor.csv"), show_col_types = FALSE)
+    here("data", "number-of-deaths-by-risk-factor.csv"),
+    show_col_types = FALSE
+)
 
 # gdp data
 gdp_by_country_csv <- read_csv(
-    here("data", "gdp-data.csv"), show_col_types = FALSE)
+    here("data", "gdp-data.csv"),
+    show_col_types = FALSE
+)
 
 # NOTE: added _csv ending to eliminate need for naming later versions "clean"
 
@@ -82,57 +86,70 @@ total_joined <- world_map_data %>%
 # Define UI ---------------------------------------------------------
 
 ui <- fluidPage(
-
     titlePanel("Air Pollution Deaths"),
-
     sidebarLayout(
         sidebarPanel(
-            selectInput(inputId = "air_pollution_type", label = "Type of Air Pollution",
-                        choices = c("Air Pollution Death Rate" = "death_rate_air_pollution",
-                           "Household Pollution Death Rate" = "death_rate_household_pollution",
-                            "Ambient Matter Pollution Death Rate" =  "death_rate_ambient_matter_pollution",
-                           "Ozone Pollution Death Rate" = "death_rate_ozone_pollution")),
-            sliderInput("bins",
-                        "Year",
+            selectInput(
+                inputId = "air_pollution_type", label = "Type of Air Pollution",
+                choices = c(
+                    "Air Pollution Death Rate" = "death_rate_air_pollution",
+                    "Household Pollution Death Rate" = "death_rate_household_pollution",
+                    "Ambient Matter Pollution Death Rate" = "death_rate_ambient_matter_pollution",
+                    "Ozone Pollution Death Rate" = "death_rate_ozone_pollution"
+                )
+            )
+        ),
+        mainPanel(
+            tabsetPanel(
+                type = "tabs",
+                tabPanel(
+                    "Air Pollution", plotOutput(outputId = "plot"),
+                    sliderInput(
+                        inputId = "selected_year",
+                        label = "Select year",
                         min = 1990,
+                        value = 1990,
                         max = 2017,
-                        value = 1990)),
-    mainPanel(
-             tabsetPanel(
-                 type = "tabs",
-                 tabPanel("Air Pollution", plotOutput(outputId = "plot"),
-                     conditionalPanel(
-                         condition = "input.industry.length <= 8",
-                         sliderInput(
-                             inputId = "ylim",
-                             label = "Select year",
-                             min = 1990,
-                             value = 1990,
-                             max = 2017,
-                             width = "100%")))))))
+                        width = "100%",
+                        animate = TRUE,
+                        sep = ""
+                    )
+                ),
+                tabPanel(
+                    "Tab 2"
+                )
+            )
+        )
+    )
+)
 
 
 server <- function(input, output) {
-    remaining <- reactive({
-        names(total_joined)[c("death_rate_air_pollution",
-                              "death_rate_household_pollution",
-                              "death_rate_ambient_matter_pollution",
-                              "death_rate_ozone_pollution",
-                              -match(input$air_pollution_type,
-                                     names(total_joined)))]
-    })
+    # remaining <- reactive({
+    # names(total_joined)[c("death_rate_air_pollution",
+    # "death_rate_household_pollution",
+    # "death_rate_ambient_matter_pollution",
+    # "death_rate_ozone_pollution",
+    #-match(input$air_pollution_type,
+    # names(total_joined)))]
+    # })
     output$plot <- renderPlot({
-
-        ggplot(total_joined, aes(long, lat)) +
-            geom_polygon(aes(group = group, fill = death_rate_air_pollution), # something needs to happen here but im not sure what
-                         color = "black", size = 0.3) +
-            coord_map(projection = "mercator",
-                      xlim = c(-180, 180)) +
-            scale_fill_viridis_c(option = "turbo",
-                                 # turbo pallet coordinates with AQI colors (https://webcam.srs.fs.fed.us/test/AQI.shtml)
-                                 name = "Total death rate",
-                                 labels = label_number(big.mark = ","),
-                                 na.value = "lightgray"
+        total_joined %>%
+            filter(year == input$selected_year) %>%
+            ggplot(aes(long, lat)) +
+            geom_polygon(aes_string(group = "group", fill = input$air_pollution_type),
+                         color = "black", size = 0.3
+            ) +
+            coord_map(
+                projection = "mercator",
+                xlim = c(-180, 180)
+            ) +
+            scale_fill_viridis_c(
+                option = "turbo",
+                # turbo pallet coordinates with AQI colors (https://webcam.srs.fs.fed.us/test/AQI.shtml)
+                name = "Total death rate",
+                labels = label_number(big.mark = ","),
+                na.value = "lightgray"
             ) +
             theme_void() +
             theme(
@@ -145,10 +162,12 @@ server <- function(input, output) {
                 plot.subtitle = element_text(hjust = 0.5)
             ) +
             labs(
-                title = "Total Death Rate from Air Pollution",
+                title = input$air_pollution_type,
                 subtitle = "By country, from 1970 to 2017",
                 caption = "Source: Our World in Data"
-            )})}
+            )
+    })
+}
 
 
 # Run the application
