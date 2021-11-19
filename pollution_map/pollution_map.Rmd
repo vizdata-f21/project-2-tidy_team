@@ -109,7 +109,7 @@ to_do %>%
 
 ```
 
-## Map 
+## Type of Pollution Map 
 
 ```{r test map, out.width="100%"}
 ggplot(total_joined, aes(long, lat)) + 
@@ -141,9 +141,84 @@ ggplot(total_joined, aes(long, lat)) +
 
 ```
 
+## Risk Factors Map 
+
+## Risk Factors Line Chart 
+
+```{r filter for regions and SDI}
+regions <- air_pollution_joined %>% 
+  filter(entity == "Central Asia" | 
+           entity == "Central Europe" | 
+           entity == "Central Europe, Eastern Europe, and Central Asia" | 
+           entity == "Central Latin America"| 
+           entity == "Central Sub-Saharan Africa" | 
+           entity == "East Asia "| 
+           entity == "Eastern Europe"| 
+           entity == "Eastern Sub-Saharan Africa"| 
+           entity == "Latin America and Caribbean"| 
+           entity == "North Africa and Middle East"| 
+           entity == "North America"| 
+           entity == "South Asia"| 
+           entity == "Southeast Asia"| 
+           entity == "Southeast Asia, East Asia, and Oceania"| 
+           entity == "Southern Latin America"| 
+           entity == "Southern Sub-Saharan Africa"| 
+           entity == "Sub-Saharan Africa"| 
+           entity == "Tropical Latin America"| 
+           entity == "Western Europe"| 
+           entity == "Western Sub-Saharan Africa") 
+
+regions_limited <- air_pollution_joined %>% 
+  filter(entity == "Central Asia" | 
+           entity == "Central Europe" | 
+           entity == "Central Latin America"| 
+           entity == "Central Sub-Saharan Africa" | 
+           entity == "East Asia "| 
+           entity == "Eastern Europe"| 
+           entity == "Eastern Sub-Saharan Africa"| 
+           entity == "Latin America and Caribbean"| 
+           entity == "North Africa and Middle East"| 
+           entity == "North America"| 
+           entity == "South Asia"| 
+           entity == "Southeast Asia"| 
+           entity == "Southern Latin America"| 
+           entity == "Southern Sub-Saharan Africa"| 
+           entity == "Sub-Saharan Africa"| 
+           entity == "Tropical Latin America"| 
+           entity == "Western Europe"| 
+           entity == "Western Sub-Saharan Africa") 
+
+
+sdi <- air_pollution_joined %>% 
+  filter(entity ==  "High SDI" | 
+        entity == "High-middle SDI" | 
+        entity == "Low SDI" | 
+        entity == "Low-middle SDI" |
+        entity == "Middle SDI") 
+    
+```
 
 
 
+```{r regions and SDI plot}
 
+#figure out how to have user input change y axis 
+
+# copy code to allow user to select entity plotted 
+
+ggplot(data = regions_limited, aes(x = year, y = unsafe_water_source)) + 
+  geom_line(aes(group = entity, color = entity)) + 
+  theme(legend.position = "bottom") + 
+  labs(
+        x = "Year",
+        y = "Unsafe Water Source",
+        color = "Region",
+        title = "Risk Factor")
+
+
+ggplot(data = sdi, aes(x = year, y = unsafe_water_source)) + 
+  geom_line(aes(group = entity, color = entity))
+
+```
 
 
