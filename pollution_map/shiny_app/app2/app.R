@@ -2,7 +2,7 @@
 
 library(shiny)
 library(shinyBS)
-library(ggiraph)
+library(plotly)
 library(tidyverse)
 library(here)
 library(janitor)
@@ -128,9 +128,69 @@ ui <- fluidPage(
         )
     )
 )
+    # tabPanel("Other Risk Factors",
+    #          sidebarLayout(
+    #              sidebarPanel(
+    #                  selectInput(
+    #                      inputId = "number_deaths_by_risk_factor",
+    #                      label = "Type of Risk Factor",
+    #                      choices = c(
+    #                          "Unsafe Water Source" = "unsafe_water_source",
+    #                          "Unsafe Sanitation" = "unsafe_sanitation",
+    #                          "No Hand Wash" = "no_access_to_handwash_facility",
+    #                          "Nonexclusive Breastfeeding" =
+    #                              "non_exclusive_breastfeeding",
+    #                          "Discontinued Breastfeeding" =
+    #                              "discontinued_breastfeeding",
+    #                          "Child Wasting" = "child_wasting",
+    #                          "Child Stunting" = "child_stunting",
+    #                          "Low Birth Weight" =
+    #                              "low_birth_weight_for_gestation",
+    #                          "Secondhand Smoking" = "secondhand_smoke",
+    #                          "Alcohol Use" = "alcohol_use",
+    #                          "Drug Use" = "drug_use",
+    #                          "Diet Low in Fruits" = "diet_low_in_fruits",
+    #                          "Diet Low in Vegetables" =
+    #                              "diet_low_in_vegetables",
+    #                          "Unsafe Sex" = "unsafe_sex",
+    #                          "Low Physical Activity" = "low_physical_activity",
+    #                          "High Glucose" = "high_fasting_plasma_glucose",
+    #                          "High Cholesterol" = "high_total_cholesterol",
+    #                          "High Body Mass Index" = "high_body_mass_index",
+    #                          "High Blood Pressure" =
+    #                              "high_systolic_blood_pressure",
+    #                          "Smoking" = "smoking",
+    #                          "Iron Deficiency" = "iron_deficiency",
+    #                          "Vitamin A Defficiency" = "vitamin_a_deficiency",
+    #                          "Low Bone Mineral Density" =
+    #                              "low_bone_mineral_density",
+    #                          "Diet High in Sodium" = "diet_high_in_sodium",
+    #                          "Diet Low in Whole Grains" =
+    #                              "diet_low_in_whole_grains",
+    #                          "Diet Low in Nuts and Seeds" =
+    #                              "diet_low_in_nuts_and_seeds"
+    #                          )
+    #                      )
+    #                  )
+    #              ),
+    #          mainPanel(
+    #              plotOutput(outputId = "plot2"),
+    #              sliderInput(
+    #                  inputId = "selected_year",
+    #                  label = "Select year",
+    #                  min = 1990,
+    #                  value = 1990,
+    #                  max = 2017,
+    #                  width = "100%",
+    #                  animate = TRUE,
+    #                  sep = ""
+    #                  )
+    #              )
+    #          )
+    # )
 
 
-server <- function(input, output, session) {
+server <- function(input, output) {
     # remaining <- reactive({
     # names(total_joined)[c("death_rate_air_pollution",
     # "death_rate_household_pollution",
@@ -143,7 +203,8 @@ server <- function(input, output, session) {
         total_joined %>%
             filter(year == input$selected_year) %>%
             ggplot(aes(long, lat)) +
-            geom_polygon_interactive(aes_string(
+            geom_polygon_interactive(
+                aes_string(
                 group = "group", fill = input$air_pollution_type),
                 color = "black", size = 0.3
             ) +
@@ -169,13 +230,40 @@ server <- function(input, output, session) {
                 plot.title = element_blank(),
                 plot.subtitle = element_blank()
             )
+       # plotly(output$plot, tooltip = c("group"))
+        # how to display this info?
     })
-    addPopover(session = session,
-               id = "plot",
-               title = "test",
-               # position = "bottom",
-               content = paste0("test"),
-               trigger = "hover")
+    output$plot2 <- renderPlot({
+        total_joined %>%
+            filter(year == input$selected_year) %>%
+            ggplot(aes(long, lat)) +
+            geom_polygon_interactive(
+                aes_string(group = "group", fill = input$air_pollution_type),
+                color = "black", size = 0.3
+            ) +
+            coord_map(
+                projection = "mercator",
+                xlim = c(-180, 180)
+            ) +
+            scale_fill_viridis_c(
+                option = "inferno",
+                name = "Death rate",
+                labels = label_number(big.mark = ","),
+                na.value = "lightgray"
+            ) +
+            theme_void() +
+            theme(
+                text = element_text(color = "black"),
+                legend.direction = "vertical",
+                legend.position = "left",
+                legend.key.height = unit(2, "cm"),
+                plot.background = element_rect(fill = "white", color = "white"),
+                plot.title = element_blank(),
+                plot.subtitle = element_blank()
+            )
+        # plotly(output$plot, tooltip = c("group"))
+        # how to display this info?
+    })
     }
 
 # summary info: caption = "Source: Our World in Data"
