@@ -1,13 +1,15 @@
-# Load packages -----------------------------------------------------
+# Load packages ----------------------------------------------------------------
 
 library(shiny)
+library(shinyBS)
+library(ggiraph)
 library(tidyverse)
 library(here)
 library(janitor)
 library(maps)
 library(scales)
 
-# Load data ---------------------------------------------------------
+# Load data --------------------------------------------------------------------
 
 # air pollution data
 death_rates_from_air_pollution_csv <- read_csv(
@@ -74,7 +76,8 @@ air_pollution_joined <- air_pollution_joined %>%
         entity == "United Kingdom" ~ "UK",
         entity == "Czechia" ~ "Czech Republic",
         entity == "Congo" ~ "Republic of Congo",
-        entity == "Democratic Republic of Congo" ~ "Democratic Republic of the Congo",
+        entity == "Democratic Republic of Congo" ~
+            "Democratic Republic of the Congo",
         TRUE ~ entity
     ))
 
@@ -83,18 +86,21 @@ air_pollution_joined <- air_pollution_joined %>%
 total_joined <- world_map_data %>%
     left_join(air_pollution_joined, by = c("region" = "entity"))
 
-# Define UI ---------------------------------------------------------
+# Define UI --------------------------------------------------------------------
 
 ui <- fluidPage(
     titlePanel("Air Pollution Deaths"),
     sidebarLayout(
         sidebarPanel(
             selectInput(
-                inputId = "air_pollution_type", label = "Type of Air Pollution",
+                inputId = "air_pollution_type",
+                label = "Type of Air Pollution",
                 choices = c(
                     "Air Pollution Death Rate" = "death_rate_air_pollution",
-                    "Household Pollution Death Rate" = "death_rate_household_pollution",
-                    "Ambient Matter Pollution Death Rate" = "death_rate_ambient_matter_pollution",
+                    "Household Pollution Death Rate" =
+                        "death_rate_household_pollution",
+                    "Ambient Matter Pollution Death Rate" =
+                        "death_rate_ambient_matter_pollution",
                     "Ozone Pollution Death Rate" = "death_rate_ozone_pollution"
                 )
             )
@@ -124,7 +130,7 @@ ui <- fluidPage(
 )
 
 
-server <- function(input, output) {
+server <- function(input, output, session) {
     # remaining <- reactive({
     # names(total_joined)[c("death_rate_air_pollution",
     # "death_rate_household_pollution",
@@ -137,8 +143,9 @@ server <- function(input, output) {
         total_joined %>%
             filter(year == input$selected_year) %>%
             ggplot(aes(long, lat)) +
-            geom_polygon(aes_string(group = "group", fill = input$air_pollution_type),
-                         color = "black", size = 0.3
+            geom_polygon_interactive(aes_string(
+                group = "group", fill = input$air_pollution_type),
+                color = "black", size = 0.3
             ) +
             coord_map(
                 projection = "mercator",
@@ -146,29 +153,32 @@ server <- function(input, output) {
             ) +
             scale_fill_viridis_c(
                 option = "turbo",
-                # turbo pallet coordinates with AQI colors (https://webcam.srs.fs.fed.us/test/AQI.shtml)
-                name = "Total death rate",
+                # turbo pallet coordinates with AQI colors:
+                # (https://webcam.srs.fs.fed.us/test/AQI.shtml)
+                name = "Death rate",
                 labels = label_number(big.mark = ","),
                 na.value = "lightgray"
             ) +
             theme_void() +
             theme(
                 text = element_text(color = "black"),
-                legend.position = "bottom",
-                legend.key.width = unit(2, "cm"),
-                legend.key.height = unit(0.3, "cm"),
+                legend.direction = "vertical",
+                legend.position = "left",
+                legend.key.height = unit(2, "cm"),
                 plot.background = element_rect(fill = "white", color = "white"),
-                plot.title = element_text(hjust = 0.5),
-                plot.subtitle = element_text(hjust = 0.5)
-            ) +
-            labs(
-                title = input$air_pollution_type,
-                subtitle = "By country, from 1970 to 2017",
-                caption = "Source: Our World in Data"
+                plot.title = element_blank(),
+                plot.subtitle = element_blank()
             )
     })
-}
+    addPopover(session = session,
+               id = "plot",
+               title = "test",
+               # position = "bottom",
+               content = paste0("test"),
+               trigger = "hover")
+    }
 
+# summary info: caption = "Source: Our World in Data"
 
 # Run the application
 shinyApp(ui = ui, server = server)
