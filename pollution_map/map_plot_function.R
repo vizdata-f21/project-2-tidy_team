@@ -2,7 +2,7 @@
 
 make_map <- function(data,
                      fill) {
-  geom_polygon_interactive(
+  geom_polygon_interactive(data = data,
   aes_string(group = "group", fill = fill), # need to figure out data + fill
   color = "black", size = 0.3
 ) +
@@ -28,5 +28,3 @@ make_map <- function(data,
   )
 }
 
-
-make_map(data = total_joined, fill = death_rate_air_pollution)

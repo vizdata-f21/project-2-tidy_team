@@ -202,9 +202,9 @@ sdi <- air_pollution_joined %>%
 
 ```{r regions and SDI plot}
 
-#figure out how to have user input change y axis 
-
-# copy code to allow user to select entity plotted 
+# figure out how to have user input change y axis 
+  # copy code to allow user to select entity plotted 
+  # follow same groupings as map 
 
 ggplot(data = regions_limited, aes(x = year, y = unsafe_water_source)) + 
   geom_line(aes(group = entity, color = entity)) + 
@@ -213,12 +213,13 @@ ggplot(data = regions_limited, aes(x = year, y = unsafe_water_source)) +
         x = "Year",
         y = "Unsafe Water Source",
         color = "Region",
-        title = "Risk Factor")
+        title = "Risk Factor X")
 
 
 ggplot(data = sdi, aes(x = year, y = unsafe_water_source)) + 
   geom_line(aes(group = entity, color = entity))
 
 ```
+
 
 
