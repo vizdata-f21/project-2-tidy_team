@@ -149,28 +149,6 @@ ggplot(total_joined, aes(long, lat)) +
 regions <- air_pollution_joined %>% 
   filter(entity == "Central Asia" | 
            entity == "Central Europe" | 
-           entity == "Central Europe, Eastern Europe, and Central Asia" | 
-           entity == "Central Latin America"| 
-           entity == "Central Sub-Saharan Africa" | 
-           entity == "East Asia "| 
-           entity == "Eastern Europe"| 
-           entity == "Eastern Sub-Saharan Africa"| 
-           entity == "Latin America and Caribbean"| 
-           entity == "North Africa and Middle East"| 
-           entity == "North America"| 
-           entity == "South Asia"| 
-           entity == "Southeast Asia"| 
-           entity == "Southeast Asia, East Asia, and Oceania"| 
-           entity == "Southern Latin America"| 
-           entity == "Southern Sub-Saharan Africa"| 
-           entity == "Sub-Saharan Africa"| 
-           entity == "Tropical Latin America"| 
-           entity == "Western Europe"| 
-           entity == "Western Sub-Saharan Africa") 
-
-regions_limited <- air_pollution_joined %>% 
-  filter(entity == "Central Asia" | 
-           entity == "Central Europe" | 
            entity == "Central Latin America"| 
            entity == "Central Sub-Saharan Africa" | 
            entity == "East Asia "| 
@@ -187,37 +165,76 @@ regions_limited <- air_pollution_joined %>%
            entity == "Tropical Latin America"| 
            entity == "Western Europe"| 
            entity == "Western Sub-Saharan Africa") 
-
 
 sdi <- air_pollution_joined %>% 
   filter(entity ==  "High SDI" | 
         entity == "High-middle SDI" | 
-        entity == "Low SDI" | 
+        entity == "Middle SDI" | 
         entity == "Low-middle SDI" |
-        entity == "Middle SDI") 
-    
+        entity == "Low SDI") 
+
+sdi$entity <- factor(sdi$entity, 
+                     levels = c("High SDI", "High-middle SDI", "Middle SDI", "Low-middle SDI", "Low SDI"))
 ```
 
+```{r selecting data}
+substance_use_regions <- regions %>% 
+  select(entity, code, year, secondhand_smoke, alcohol_use, drug_use, smoking)
+
+substance_use_sdi <- sdi %>% 
+  select(entity, code, year, secondhand_smoke, alcohol_use, drug_use, smoking)
+
+diet_regions <- regions %>% 
+  select(entity, code, year, diet_low_in_fruits, diet_low_in_vegetables, diet_low_in_nuts_and_seeds, diet_low_in_whole_grains, diet_high_in_sodium)
+
+diet_sdi <- sdi %>% 
+  select(entity, code, year, diet_low_in_fruits, diet_low_in_vegetables, diet_low_in_nuts_and_seeds, diet_low_in_whole_grains, diet_high_in_sodium)
+
+```
 
 
 ```{r regions and SDI plot}
 
-# figure out how to have user input change y axis 
-  # copy code to allow user to select entity plotted 
-  # follow same groupings as map 
+  # figure out how to have user input change y axis 
+  # copy code to allow user to select entities plotted
+  # follow same groupings as map (substance_use)
+  # aesthetics (mainly color)
 
-ggplot(data = regions_limited, aes(x = year, y = unsafe_water_source)) + 
+ggplot(data = substance_use_regions, aes(x = year, y = secondhand_smoke)) + 
   geom_line(aes(group = entity, color = entity)) + 
+  theme_minimal() + 
   theme(legend.position = "bottom") + 
+  scale_y_continuous(labels = comma) + 
   labs(
         x = "Year",
-        y = "Unsafe Water Source",
+        y = "Number of Deaths",
         color = "Region",
-        title = "Risk Factor X")
+        title = "Risk Factor NAME")
 
+ggplot(data = substance_use_sdi, aes(x = year, y = secondhand_smoke)) + 
+  geom_line(aes(group = entity, color = entity)) + 
+  theme_minimal() + 
+  theme(legend.position = "bottom") + 
+  scale_y_continuous(labels = comma) + 
+  labs(
+        x = "Year",
+        y = "Number of Deaths",
+        color = "Region",
+        title = "Risk Factor NAME")
 
-ggplot(data = sdi, aes(x = year, y = unsafe_water_source)) + 
-  geom_line(aes(group = entity, color = entity))
+ggplot(data = diet_sdi, aes(x = year, y = diet_low_in_fruits)) + 
+  geom_line(aes(group = entity, color = entity))  + 
+  theme_minimal() + 
+  theme(legend.position = "bottom") + 
+  scale_y_continuous(labels = comma) + 
+  labs(title = "TITLE")
+
+ggplot(data = diet_regions, aes(x = year, y = diet_low_in_fruits)) + 
+  geom_line(aes(group = entity, color = entity))  + 
+  theme_minimal() + 
+  theme(legend.position = "bottom") + 
+  scale_y_continuous(labels = comma) + 
+  labs(title = "TITLE")
 
 ```
 
