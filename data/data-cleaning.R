@@ -83,3 +83,4 @@ total_joined <- world_map_data %>%
 
 write_rds(total_joined, "data/compressed_final_data.rds", "gz")
 
+
