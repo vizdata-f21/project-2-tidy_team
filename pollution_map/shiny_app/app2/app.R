@@ -23,36 +23,36 @@ ui <- fluidPage(
     titlePanel("Deaths By Risk Factors"),
     tabsetPanel(
         tabPanel("Air Pollution",
-        sidebarLayout(
-            sidebarPanel(
-                selectInput(
-                    inputId = "air_pollution_type",
-                    label = "Type of Air Pollution",
-                    choices = c(
-                        "Air Pollution Death Rate" = "death_rate_air_pollution",
-                        "Household Pollution Death Rate" =
-                            "death_rate_household_pollution",
-                        "Ambient Matter Pollution Death Rate" =
-                            "death_rate_ambient_matter_pollution",
-                        "Ozone Pollution Death Rate" =
-                            "death_rate_ozone_pollution"
-                        )
-                    )
-                ),
-            mainPanel(
-                plotOutput(outputId = "plot"),
-                sliderInput(
-                    inputId = "selected_year",
-                    label = "Select year",
-                    min = 1990,
-                    value = 1990,
-                    max = 2017,
-                    width = "100%",
-                    animate = TRUE,
-                    sep = ""
-                    )
-                )
-            )
+                 sidebarLayout(
+                     sidebarPanel(
+                         selectInput(
+                             inputId = "air_pollution_type",
+                             label = "Type of Air Pollution",
+                             choices = c(
+                                 "Air Pollution Death Rate" = "death_rate_air_pollution",
+                                 "Household Pollution Death Rate" =
+                                     "death_rate_household_pollution",
+                                 "Ambient Matter Pollution Death Rate" =
+                                     "death_rate_ambient_matter_pollution",
+                                 "Ozone Pollution Death Rate" =
+                                     "death_rate_ozone_pollution"
+                             )
+                         )
+                     ),
+                     mainPanel(
+                         plotOutput(outputId = "plot"),
+                         sliderInput(
+                             inputId = "selected_year",
+                             label = "Select year",
+                             min = 1990,
+                             value = 1990,
+                             max = 2017,
+                             width = "100%",
+                             animate = TRUE,
+                             sep = ""
+                         )
+                     )
+                 )
         ),
         tabPanel("Substance Use",
                  sidebarLayout(
@@ -65,9 +65,9 @@ ui <- fluidPage(
                                  "Alcohol Use" = "alcohol_use",
                                  "Drug Use" = "drug_use",
                                  "Smoking" = "smoking"
-                                 )
                              )
-                         ),
+                         )
+                     ),
                      mainPanel(
                          plotOutput(outputId = "plot2"),
                          sliderInput(
@@ -79,10 +79,10 @@ ui <- fluidPage(
                              width = "100%",
                              animate = TRUE,
                              sep = ""
-                             )
                          )
                      )
-                 ),
+                 )
+        ),
         tabPanel("Diet",
                  sidebarLayout(
                      sidebarPanel(
@@ -97,9 +97,9 @@ ui <- fluidPage(
                                      "diet_low_in_whole_grains",
                                  "Low in Nuts and Seeds" =
                                      "diet_low_in_nuts_and_seeds"
-                                 )
                              )
-                         ),
+                         )
+                     ),
                      mainPanel(
                          plotOutput(outputId = "plot3"),
                          sliderInput(
@@ -111,65 +111,112 @@ ui <- fluidPage(
                              width = "100%",
                              animate = TRUE,
                              sep = ""
+                         )
+                     )
+                 )
+        ),
+        tabPanel("Sanitation",
+                 sidebarLayout(
+                     sidebarPanel(
+                         selectInput(
+                             inputId = "air_pollution_type",
+                             label = "Type of Sanitation",
+                             choices = c(
+                                 "Unsafe Water Source" = "unsafe_water_source",
+                                 "Unsafe Sanitation" = "unsafe_sanitation",
+                                 "No Hand Wash" =
+                                     "no_access_to_handwash_facility"
                              )
+                         )
+                     ),
+                     mainPanel(
+                         plotOutput(outputId = "plot3"),
+                         sliderInput(
+                             inputId = "selected_year",
+                             label = "Select year",
+                             min = 1990,
+                             value = 1990,
+                             max = 2017,
+                             width = "100%",
+                             animate = TRUE,
+                             sep = ""
+                         )
+                     )
+                 )
+        ),
+        tabPanel("Health",
+                 sidebarLayout(
+                     sidebarPanel(
+                         selectInput(
+                             inputId = "air_pollution_type",
+                             label = "Type of Health",
+                             choices = c(
+                                 "Low Physical Activity" =
+                                     "low_physical_activity",
+                                 "High Glucose" = "high_fasting_plasma_glucose",
+                                 "High Cholesterol" = "high_total_cholesterol",
+                                 "High Body Mass Index" =
+                                     "high_body_mass_index",
+                                 "High Blood Pressure" =
+                                     "high_systolic_blood_pressure",
+                                 "Iron Deficiency" = "iron_deficiency",
+                                 "Vitamin A Defficiency" =
+                                     "vitamin_a_deficiency",
+                                 "Low Bone Mineral Density" =
+                                     "low_bone_mineral_density"
+                             )
+                         )
+                     ),
+                     mainPanel(
+                         plotOutput(outputId = "plot3"),
+                         sliderInput(
+                             inputId = "selected_year",
+                             label = "Select year",
+                             min = 1990,
+                             value = 1990,
+                             max = 2017,
+                             width = "100%",
+                             animate = TRUE,
+                             sep = ""
+                         )
+                     )
+                 )
+        ),
+        tabPanel("Post-Natal Care",
+                 sidebarLayout(
+                     sidebarPanel(
+                         selectInput(
+                             inputId = "air_pollution_type",
+                             label = "Type of Post-Natal Care",
+                             choices = c(
+                                 "Nonexclusive Breastfeeding" =
+                                     "non_exclusive_breastfeeding",
+                                 "Discontinued Breastfeeding" =
+                                     "discontinued_breastfeeding",
+                                 "Child Wasting" = "child_wasting",
+                                 "Child Stunting" = "child_stunting",
+                                 "Low Birth Weight" =
+                                     "low_birth_weight_for_gestation"
+                             )
+                         )
+                     ),
+                     mainPanel(
+                         plotOutput(outputId = "plot3"),
+                         sliderInput(
+                             inputId = "selected_year",
+                             label = "Select year",
+                             min = 1990,
+                             value = 1990,
+                             max = 2017,
+                             width = "100%",
+                             animate = TRUE,
+                             sep = ""
                          )
                      )
                  )
         )
     )
-    #     tabPanel(
-    #         "Other Risk Factors",
-    #         mainPanel(
-    #             plotOutput(outputId = "plot2"),
-    #         sliderInput(
-    #             inputId = "selected_year",
-    #             label = "Select year",
-    #             min = 1990,
-    #             value = 1990,
-    #             max = 2017,
-    #             width = "100%",
-    #             animate = TRUE,
-    #             sep = ""
-    #         )
-    #         ),
-    #         sidebarLayout(
-    #             sidebarPanel(
-    #                 selectInput(
-    #                     inputId = "number_deaths_by_risk_factor",
-    #                     label = "Type of Risk Factor",
-    #                     choices = c(
-    #                          "Unsafe Water Source" = "unsafe_water_source",
-    #                          "Unsafe Sanitation" = "unsafe_sanitation",
-    #                          "No Hand Wash" = "no_access_to_handwash_facility",
-    #                          "Nonexclusive Breastfeeding" =
-    #                              "non_exclusive_breastfeeding",
-    #                          "Discontinued Breastfeeding" =
-    #                              "discontinued_breastfeeding",
-    #                          "Child Wasting" = "child_wasting",
-    #                          "Child Stunting" = "child_stunting",
-    #                          "Low Birth Weight" =
-    #                              "low_birth_weight_for_gestation",
-    #
-    #
-    #                          "Unsafe Sex" = "unsafe_sex",
-    #                          "Low Physical Activity" = "low_physical_activity",
-    #                          "High Glucose" = "high_fasting_plasma_glucose",
-    #                          "High Cholesterol" = "high_total_cholesterol",
-    #                          "High Body Mass Index" = "high_body_mass_index",
-    #                          "High Blood Pressure" =
-    #                              "high_systolic_blood_pressure",
-
-    #                          "Iron Deficiency" = "iron_deficiency",
-    #                          "Vitamin A Defficiency" = "vitamin_a_deficiency",
-    #                          "Low Bone Mineral Density" =
-    #                              "low_bone_mineral_density",
-
-    #                          )
-    #                      )
-    #                  )
-    #              )
-    #     )
-    # )
+)
 
 
 server <- function(input, output) {
