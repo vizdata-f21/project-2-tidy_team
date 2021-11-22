@@ -29,7 +29,8 @@ ui <- fluidPage(
                              inputId = "air_pollution_type",
                              label = "Type of Air Pollution",
                              choices = c(
-                                 "Air Pollution Death Rate" = "death_rate_air_pollution",
+                                 "Air Pollution Death Rate" =
+                                     "death_rate_air_pollution",
                                  "Household Pollution Death Rate" =
                                      "death_rate_household_pollution",
                                  "Ambient Matter Pollution Death Rate" =
@@ -40,7 +41,9 @@ ui <- fluidPage(
                          )
                      ),
                      mainPanel(
-                         plotOutput(outputId = "plot"),
+                         plotOutput(outputId = "plot",
+                                    hover = "plot_hover"),
+                         verbatimTextOutput("info"),
                          sliderInput(
                              inputId = "selected_year",
                              label = "Select year",
@@ -260,8 +263,9 @@ server <- function(input, output) {
                 plot.title = element_blank(),
                 plot.subtitle = element_blank()
             )
-       # plotly(output$plot, tooltip = c("group"))
-        # how to display this info?
+    })
+    output$info <- renderText({
+            paste0("country:\n Death Rate:")
     })
     output$plot2 <- renderPlot({
         total_joined %>%
