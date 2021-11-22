@@ -81,5 +81,5 @@ air_pollution_joined <- air_pollution_joined %>%
 total_joined <- world_map_data %>%
   left_join(air_pollution_joined, by = c("region" = "entity"))
 
-write_rds(total_joined, "data/compressed_final_data.rds")
+write_rds(total_joined, "data/compressed_final_data.rds", "gz")
 
