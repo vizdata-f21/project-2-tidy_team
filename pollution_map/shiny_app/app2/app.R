@@ -195,6 +195,7 @@ server <- function(input, output) {
                 xlim = c(-180, 180)
             ) +
             scale_fill_viridis_c(
+                limits = c(0, 300),
                 option = "turbo",
                 # turbo pallet coordinates with AQI colors:
                 # (https://webcam.srs.fs.fed.us/test/AQI.shtml)
