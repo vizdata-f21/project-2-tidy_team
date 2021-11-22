@@ -1,59 +1,13 @@
-data-cleaning
-================
+# Load packages -----------------------------------------------------
 
-# Load packages
-
-``` r
 library(tidyverse)
-```
-
-    ## Warning in system("timedatectl", intern = TRUE): running command 'timedatectl'
-    ## had status 1
-
-    ## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──
-
-    ## ✓ ggplot2 3.3.5     ✓ purrr   0.3.4
-    ## ✓ tibble  3.1.5     ✓ dplyr   1.0.7
-    ## ✓ tidyr   1.1.4     ✓ stringr 1.4.0
-    ## ✓ readr   2.1.0     ✓ forcats 0.5.1
-
-    ## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-    ## x dplyr::filter() masks stats::filter()
-    ## x dplyr::lag()    masks stats::lag()
-
-``` r
 library(here)
-```
-
-    ## here() starts at /home/guest/R/project-2-tidy_team-take-2
-
-``` r
 library(janitor)
-```
-
-    ## 
-    ## Attaching package: 'janitor'
-
-    ## The following objects are masked from 'package:stats':
-    ## 
-    ##     chisq.test, fisher.test
-
-``` r
 library(maps)
-```
 
-    ## 
-    ## Attaching package: 'maps'
-
-    ## The following object is masked from 'package:purrr':
-    ## 
-    ##     map
-
-# Load data
+# Load data ---------------------------------------------------------
 
 # air pollution data
-
-``` r
 death_rates_from_air_pollution_csv <- read_csv(
   here("data", "death-rates-from-air-pollution.csv"),
   show_col_types = FALSE
@@ -63,29 +17,21 @@ number_deaths_by_risk_factor_csv <- read_csv(
   here("data", "number-of-deaths-by-risk-factor.csv"),
   show_col_types = FALSE
 )
-```
 
 # gdp data
-
-``` r
 gdp_by_country_csv <- read_csv(
   here("data", "gdp-data.csv"),
   show_col_types = FALSE
 )
-```
 
-# NOTE: added \_csv ending to eliminate need for naming later versions “clean”
+# NOTE: added _csv ending to eliminate need for naming later versions "clean"
 
 # world map data
-
-``` r
 world_map_data <- map_data("world") %>%
   as_tibble()
-```
 
 # renaming variables to clean them up
 
-``` r
 death_rates_from_air_pollution <- death_rates_from_air_pollution_csv %>%
   clean_names() %>%
   rename(
@@ -103,32 +49,23 @@ number_deaths_by_risk_factor <- number_deaths_by_risk_factor_csv %>%
 gdp_by_country <- gdp_by_country_csv %>%
   clean_names() %>%
   pivot_wider()
-```
 
 # joining air pollution data together
-
-``` r
 air_pollution_joined <- death_rates_from_air_pollution %>%
   left_join(number_deaths_by_risk_factor, by = c("entity", "year", "code"))
-```
 
-# Next Step: Do a series of case\_when (before join) to resolve inconsistencies
-
+# Next Step: Do a series of case_when (before join) to resolve inconsistencies
 # noticeable ones include: French Guiana (but there might just not be data on this)
 
-# clean world\_map\_data
-
-``` r
+# clean world_map_data
 world_map_data <- world_map_data %>%
   mutate(region = case_when(
     region == "Ivory Coast" ~ "Cote d'Ivoire",
     TRUE ~ region
   ))
-```
 
 # clean air pollution data
 
-``` r
 air_pollution_joined <- air_pollution_joined %>%
   mutate(entity = case_when(
     entity == "United States" ~ "USA",
@@ -138,13 +75,11 @@ air_pollution_joined <- air_pollution_joined %>%
     entity == "Democratic Republic of Congo" ~ "Democratic Republic of the Congo",
     TRUE ~ entity
   ))
-```
 
-# joining air pollution to world\_map\_data
 
-``` r
-#total_joined <- world_map_data %>%
-  #left_join(air_pollution_joined, by = c("region" = "entity"))
+# joining air pollution to world_map_data
+total_joined <- world_map_data %>%
+  left_join(air_pollution_joined, by = c("region" = "entity"))
 
-#write_rds(total_joined, "data/final_data.rds")
-```
+write_rds(total_joined, "data/compressed_final_data.rds")
+
