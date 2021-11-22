@@ -175,21 +175,102 @@ sdi <- air_pollution_joined %>%
 
 sdi$entity <- factor(sdi$entity, 
                      levels = c("High SDI", "High-middle SDI", "Middle SDI", "Low-middle SDI", "Low SDI"))
+
+regions$entity <- factor(regions$entity, 
+                         levels = c("Central Asia", 
+                                    "East Asia ", 
+                                    "South Asia", 
+                                    "Southeast Asia",
+                                    "Central Europe",  
+                                    "Eastern Europe", 
+                                    "Western Europe",  
+                                    "Sub-Saharan Africa",
+                                    "Central Sub-Saharan Africa", 
+                                    "Southern Sub-Saharan Africa", 
+                                    "Western Sub-Saharan Africa", 
+                                    "Eastern Sub-Saharan Africa",  
+                                    "North Africa and Middle East",
+                                    "North America", 
+                                    "Latin America and Caribbean", 
+                                    "Central Latin America", 
+                                    "Southern Latin America", 
+                                    "Tropical Latin America")) 
 ```
 
 ```{r selecting data}
 substance_use_regions <- regions %>% 
-  select(entity, code, year, secondhand_smoke, alcohol_use, drug_use, smoking)
+  select(entity, code, year,
+         secondhand_smoke, 
+         alcohol_use, 
+         drug_use, 
+         smoking)
 
 substance_use_sdi <- sdi %>% 
-  select(entity, code, year, secondhand_smoke, alcohol_use, drug_use, smoking)
+  select(entity, code, year, 
+         secondhand_smoke, 
+         alcohol_use, 
+         drug_use,
+         smoking)
 
 diet_regions <- regions %>% 
-  select(entity, code, year, diet_low_in_fruits, diet_low_in_vegetables, diet_low_in_nuts_and_seeds, diet_low_in_whole_grains, diet_high_in_sodium)
+  select(entity, code, year,
+         diet_low_in_fruits, 
+         diet_low_in_vegetables, 
+         diet_low_in_nuts_and_seeds,
+         diet_low_in_whole_grains, 
+         diet_high_in_sodium)
 
 diet_sdi <- sdi %>% 
-  select(entity, code, year, diet_low_in_fruits, diet_low_in_vegetables, diet_low_in_nuts_and_seeds, diet_low_in_whole_grains, diet_high_in_sodium)
+  select(entity, code, year,
+         diet_low_in_fruits, 
+         diet_low_in_vegetables, 
+         diet_low_in_nuts_and_seeds,
+         diet_low_in_whole_grains, 
+         diet_high_in_sodium)
 
+sanitation_regions <- regions %>% 
+  select(unsafe_water_source, 
+         unsafe_sanitation, 
+         no_access_to_handwashing_facility)
+
+sanitation_sdi <- sdi %>% 
+  select(unsafe_water_source, 
+         unsafe_sanitation, 
+         no_access_to_handwashing_facility)
+
+health_regions <- regions %>%
+  select(low_physical_activity, 
+         high_fasting_plasma_glucose,
+         high_total_cholesterol,
+         high_body_mass_index, 
+         high_systolic_blood_pressure, 
+         iron_deficiency, 
+         vitamin_a_deficiency, 
+         low_bone_mineral_density)
+
+health_sdi <- sdi %>%
+  select(low_physical_activity, 
+         high_fasting_plasma_glucose, 
+         high_total_cholesterol, 
+         high_body_mass_index, 
+         high_systolic_blood_pressure, 
+         iron_deficiency, 
+         vitamin_a_deficiency, 
+         low_bone_mineral_density)
+
+post_natal_care_regions <- regions %>% 
+  select(non_exclusive_breastfeeding,
+         discontinued_breastfeeding, 
+         child_wasting, 
+         child_stunting,
+         low_birth_weight_for_gestation)
+         
+post_natal_care_sdi <- sdi %>% 
+  select(non_exclusive_breastfeeding,
+         discontinued_breastfeeding, 
+         child_wasting, 
+         child_stunting, 
+         low_birth_weight_for_gestation)
 ```
 
 
@@ -238,37 +319,4 @@ ggplot(data = diet_regions, aes(x = year, y = diet_low_in_fruits)) +
 
 ```
 
-
-
-```{r}
-
-make_map <- function(data,
-                     fill) {
-  geom_polygon_interactive(data = data,
-  aes_string(group = "group", fill = fill), # need to figure out data + fill
-  color = "black", size = 0.3
-) +
-  coord_map(
-    projection = "mercator",
-    xlim = c(-180, 180)
-  ) +
-  scale_fill_viridis_c(
-    option = "inferno",
-    name = "Death rate",
-    labels = label_number(big.mark = ","),
-    na.value = "lightgray"
-  ) +
-  theme_void() +
-  theme(
-    text = element_text(color = "black"),
-    legend.direction = "vertical",
-    legend.position = "left",
-    legend.key.height = unit(2, "cm"),
-    plot.background = element_rect(fill = "white", color = "white"),
-    plot.title = element_blank(),
-    plot.subtitle = element_blank()
-  )
-  
-make_map(data = total_joined, fill = death_rate_air_pollution)
-```
 

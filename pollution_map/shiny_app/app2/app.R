@@ -188,7 +188,7 @@ server <- function(input, output) {
             geom_polygon_interactive(
                 aes_string(
                 group = "group", fill = input$air_pollution_type),
-                color = "white", size = 0.1
+                color = "white", size = 0.2
             ) +
             coord_map(
                 projection = "mercator",
@@ -222,7 +222,7 @@ server <- function(input, output) {
             ggplot(aes(long, lat)) +
             geom_polygon_interactive(
                 aes_string(group = "group", fill = input$air_pollution_type),
-                color = "white", size = 0.1
+                color = "white", size = 0.2
             ) +
             coord_map(
                 projection = "mercator",

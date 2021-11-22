@@ -61,6 +61,7 @@ air_pollution_joined <- death_rates_from_air_pollution %>%
 world_map_data <- world_map_data %>%
   mutate(region = case_when(
     region == "Ivory Coast" ~ "Cote d'Ivoire",
+    region == "Eswatini" ~ "Swaziland",
     TRUE ~ region
   ))
 
