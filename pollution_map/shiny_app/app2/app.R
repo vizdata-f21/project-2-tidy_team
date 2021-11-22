@@ -130,7 +130,7 @@ ui <- fluidPage(
                          )
                      ),
                      mainPanel(
-                         plotOutput(outputId = "plot3"),
+                         plotOutput(outputId = "plot4"),
                          sliderInput(
                              inputId = "selected_year",
                              label = "Select year",
@@ -168,7 +168,7 @@ ui <- fluidPage(
                          )
                      ),
                      mainPanel(
-                         plotOutput(outputId = "plot3"),
+                         plotOutput(outputId = "plot5"),
                          sliderInput(
                              inputId = "selected_year",
                              label = "Select year",
@@ -201,7 +201,7 @@ ui <- fluidPage(
                          )
                      ),
                      mainPanel(
-                         plotOutput(outputId = "plot3"),
+                         plotOutput(outputId = "plot6"),
                          sliderInput(
                              inputId = "selected_year",
                              label = "Select year",
@@ -298,7 +298,7 @@ server <- function(input, output) {
             ggplot(aes(long, lat)) +
             geom_polygon_interactive(
                 aes_string(group = "group", fill = input$air_pollution_type),
-                color = "black", size = 0.3
+                color = "white", size = 0.3
             ) +
             coord_map(
                 projection = "mercator",
@@ -320,8 +320,93 @@ server <- function(input, output) {
                 plot.title = element_blank(),
                 plot.subtitle = element_blank()
             )
-        # plotly(output$plot, tooltip = c("group"))
-        # how to display this info?
+    })
+    output$plot4 <- renderPlot({
+        total_joined %>%
+            filter(year == input$selected_year) %>%
+            ggplot(aes(long, lat)) +
+            geom_polygon_interactive(
+                aes_string(group = "group", fill = input$air_pollution_type),
+                color = "white", size = 0.3
+            ) +
+            coord_map(
+                projection = "mercator",
+                xlim = c(-180, 180)
+            ) +
+            scale_fill_viridis_c(
+                option = "magma",
+                name = "Death rate",
+                labels = label_number(big.mark = ","),
+                na.value = "lightgray"
+            ) +
+            theme_void() +
+            theme(
+                text = element_text(color = "black"),
+                legend.direction = "vertical",
+                legend.position = "left",
+                legend.key.height = unit(2, "cm"),
+                plot.background = element_rect(fill = "white", color = "white"),
+                plot.title = element_blank(),
+                plot.subtitle = element_blank()
+            )
+    })
+    output$plot5 <- renderPlot({
+        total_joined %>%
+            filter(year == input$selected_year) %>%
+            ggplot(aes(long, lat)) +
+            geom_polygon_interactive(
+                aes_string(group = "group", fill = input$air_pollution_type),
+                color = "white", size = 0.3
+            ) +
+            coord_map(
+                projection = "mercator",
+                xlim = c(-180, 180)
+            ) +
+            scale_fill_viridis_c(
+                option = "cividis",
+                name = "Death rate",
+                labels = label_number(big.mark = ","),
+                na.value = "lightgray"
+            ) +
+            theme_void() +
+            theme(
+                text = element_text(color = "black"),
+                legend.direction = "vertical",
+                legend.position = "left",
+                legend.key.height = unit(2, "cm"),
+                plot.background = element_rect(fill = "white", color = "white"),
+                plot.title = element_blank(),
+                plot.subtitle = element_blank()
+            )
+    })
+    output$plot6 <- renderPlot({
+        total_joined %>%
+            filter(year == input$selected_year) %>%
+            ggplot(aes(long, lat)) +
+            geom_polygon_interactive(
+                aes_string(group = "group", fill = input$air_pollution_type),
+                color = "white", size = 0.3
+            ) +
+            coord_map(
+                projection = "mercator",
+                xlim = c(-180, 180)
+            ) +
+            scale_fill_viridis_c(
+                option = "mako",
+                name = "Death rate",
+                labels = label_number(big.mark = ","),
+                na.value = "lightgray"
+            ) +
+            theme_void() +
+            theme(
+                text = element_text(color = "black"),
+                legend.direction = "vertical",
+                legend.position = "left",
+                legend.key.height = unit(2, "cm"),
+                plot.background = element_rect(fill = "white", color = "white"),
+                plot.title = element_blank(),
+                plot.subtitle = element_blank()
+            )
     })
     }
 
