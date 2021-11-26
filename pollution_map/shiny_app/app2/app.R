@@ -42,7 +42,13 @@ ui <- fluidPage(
                      ),
                      mainPanel(
                          plotOutput(outputId = "plot",
-                                    hover = "plot_hover"),
+                                    hover = "plot_hover",
+                                    dblclick = "plot1_dblclick", # this code should make the zoom work
+                                    brush = brushOpts(
+                                        id = "plot1_brush",
+                                        resetOnNew = TRUE)
+                                    )
+                         ),
                          verbatimTextOutput("info"),
                          sliderInput(
                              inputId = "selected_year",
@@ -219,7 +225,7 @@ ui <- fluidPage(
                  )
         )
     )
-)
+
 
 
 server <- function(input, output) {
@@ -231,6 +237,9 @@ server <- function(input, output) {
     #-match(input$air_pollution_type,
     # names(total_joined)))]
     # })
+
+    ranges <- reactiveValues(x = NULL, y = NULL) # this is for the zoom
+
     output$plot <- renderPlot({
         total_joined %>%
             filter(year == input$selected_year) %>%
@@ -244,6 +253,7 @@ server <- function(input, output) {
                 projection = "mercator",
                 xlim = c(-180, 180)
             ) +
+            coord_cartesian(xlim = ranges$x, ylim = ranges$y, expand = FALSE) + # for the zoom
             scale_fill_viridis_c(
                 limits = c(0, 300),
                 option = "turbo",
@@ -264,6 +274,20 @@ server <- function(input, output) {
                 plot.subtitle = element_blank()
             )
     })
+    # When a double-click happens, check if there's a brush on the plot.
+    # If so, zoom to the brush bounds; if not, reset the zoom.
+    observeEvent(input$plot1_dblclick, {
+        brush <- input$plot1_brush
+        if (!is.null(brush)) {
+            ranges$x <- c(brush$xmin, brush$xmax)
+            ranges$y <- c(brush$ymin, brush$ymax)
+
+        } else {
+            ranges$x <- NULL
+            ranges$y <- NULL
+        }
+    })
+
     output$info <- renderText({
             paste0("country:\n Death Rate:")
     })
