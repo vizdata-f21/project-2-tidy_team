@@ -38,12 +38,6 @@ knitr::opts_chunk$set(
 # Load your data here
 ```
 
-```{r style-slides, echo = FALSE}
-style_xaringan(
-  title_slide_background_image = "img/watercolour_sys02_img34_teacup-ocean.jpg"
-)
-```
-
 class: inverse, middle, center
 
 # Motivation
