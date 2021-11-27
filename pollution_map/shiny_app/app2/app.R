@@ -1,4 +1,4 @@
-# Load packages ----------------------------------------------------------------
+# LOAD PACKAGES  ----------------------------------------------------------------
 
 library(shiny)
 library(shinythemes)
@@ -11,12 +11,12 @@ library(janitor)
 library(maps)
 library(scales)
 
-# Load pre-cleaned data --------------------------------------------------------
+# LOAD PRE-CLEANED DATA --------------------------------------------------------
 
 total_joined <- read_rds(
     here("data", "compressed_final_data.rds"))
 
-# Define UI --------------------------------------------------------------------
+# DEFINE UI --------------------------------------------------------------------
 
 ui <- fluidPage(
     theme = shinytheme("cosmo"),
@@ -227,7 +227,7 @@ ui <- fluidPage(
     )
 
 
-
+# SERVER -----------------------------------------------------------------------
 server <- function(input, output) {
     # remaining <- reactive({
     # names(total_joined)[c("death_rate_air_pollution",
@@ -440,5 +440,5 @@ server <- function(input, output) {
 
 # summary info: caption = "Source: Our World in Data"
 
-# Run the application
+# RUN THE APPLICATION ----------------------------------------------------------
 shinyApp(ui = ui, server = server)
