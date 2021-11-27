@@ -4,7 +4,7 @@ library(shinythemes)
 library(tidyverse)
 library(scales)
 
-
+# defining choices & random selection
 regions_choices <- substance_use_regions %>%
     distinct(entity) %>%
     arrange(entity) %>%
@@ -12,7 +12,7 @@ regions_choices <- substance_use_regions %>%
 
 selected_regions_choices <- sample(regions_choices, 3)
 
-# Define UI for application that draws a histogram
+# Define UI -----------------------------------------------------------
 ui <- fluidPage(
     theme = shinytheme("cosmo"),
 
@@ -37,15 +37,13 @@ ui <- fluidPage(
                 )
             )
         ),
-
-        # Show a plot of the generated distribution
         mainPanel(
            plotOutput("substance_plot")
         )
     )
 )
 
-# Define server logic required to draw a histogram
+# Define server------------------------------------------------------
 server <- function(input, output, session) {
 
     output$selected_regions <- reactive({
@@ -83,5 +81,5 @@ server <- function(input, output, session) {
     })
 }
 
-# Run the application
+# Run the application--------------------------------------
 shinyApp(ui = ui, server = server)
