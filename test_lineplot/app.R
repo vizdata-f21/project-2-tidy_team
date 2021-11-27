@@ -1,5 +1,6 @@
 
 library(shiny)
+library(shinythemes)
 library(tidyverse)
 library(scales)
 
@@ -13,6 +14,7 @@ selected_regions_choices <- sample(regions_choices, 3)
 
 # Define UI for application that draws a histogram
 ui <- fluidPage(
+    theme = shinytheme("cosmo"),
 
     # Application title
     titlePanel("LinePlotTest"),
@@ -65,15 +67,19 @@ server <- function(input, output, session) {
             geom_line(aes_string(group = "entity",
                                  color = "entity",
                                  x = "year",
-                                 y = input$risk_factor)) +
-            theme_minimal() +
-            theme(legend.position = "bottom") +
+                                 y = input$risk_factor), size = 1) +
+            theme_gray(base_size = 16) +
+            theme(legend.position = "bottom",
+                  panel.grid.minor.x = element_blank()) +
             scale_y_continuous(labels = comma) +
+            scale_x_continuous(breaks = seq(from = 1990, to = 2017, by = 3),
+                                 limits = c(1990, 2017)) +
+            scale_color_viridis_d(option = "inferno", begin = 0.1) +
             labs(
                 x = "Year",
                 y = "Number of Deaths",
                 color = "Regions",
-                title = "Number of Deaths by [Risk Factor]")
+                title = paste("Number of Deaths by", input$risk_factor))
     })
 }
 
