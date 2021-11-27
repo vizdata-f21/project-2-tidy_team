@@ -1,6 +1,6 @@
 ---
 title: "Air Pollution Deaths"
-subtitle: "Presentation subtitle: SOMETHING ABOUT SHINY APP/ 1 SENTENCE SUMMARY"
+subtitle: "A shiny app hosting interactive spatio-temporal visualizations. "
 author: "Tidy Team  <br> Drew Flanagan, Courtney Lee, Kathryn Thomas, Raghav Rasal"
 institute: "Duke University"
 date: "`r Sys.Date()`"
@@ -52,33 +52,19 @@ class: inverse, middle, center
 
 ## Inspiration + Data
 
-- text, text, text
-
-- Use `---` to separate slides and `--` for incremental builds
-
+- Data from Our World in Data
 --
 
-- Like this
+- GOAL: The goal of our Shiny App is to communicate the harmful effects of air pollution on the world through time by visually displaying the deaths caused by air pollution and other risk factors.
 
 ---
 
 ## Workflow
 
-You can use plain text
+- RMD, for trial and error of plots
+--
 
-- or bullet points
-
-.pull-left[
-or text in two columns $^*$
-]
-.pull-right[
-- like
-- this
-]
-
-.footnote[
-[*] And add footnotes
-]
+- Then, Shiny
 
 ---
 
