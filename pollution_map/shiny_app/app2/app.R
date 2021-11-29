@@ -393,9 +393,9 @@ server <- function(input, output) {
       filter(entity %in% input$entity)
   })
   output$plot_substance_line <- renderPlot({
-    validate(
-      need(length(input$entity) <= 8, "Please select a maxiumum of 8 regions")
-    )
+     validate(
+       need(length(input$entity) <= 8, "Please select a maxiumum of 8 regions")
+     )
     ggplot(data = substance_regions_filtered()) +
       geom_line(aes_string(group = "entity",
                            color = "entity",
