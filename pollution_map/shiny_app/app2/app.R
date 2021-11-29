@@ -40,7 +40,7 @@ ui <- fluidPage(
                  )
                ),
                mainPanel(
-                 plotOutput(outputId = "plot",
+                 plotOutput(outputId = "plot_air",
                             click = "plot_click"),
                  verbatimTextOutput("info"),
                  sliderInput(
@@ -71,7 +71,7 @@ ui <- fluidPage(
                  )
                ),
                mainPanel(
-                 plotOutput(outputId = "plot2"),
+                 plotOutput(outputId = "plot_substance"),
                  sliderInput(
                    inputId = "selected_year",
                    label = "Select year",
@@ -103,7 +103,7 @@ ui <- fluidPage(
                  )
                ),
                mainPanel(
-                 plotOutput(outputId = "plot3"),
+                 plotOutput(outputId = "plot_diet"),
                  sliderInput(
                    inputId = "selected_year",
                    label = "Select year",
@@ -132,7 +132,7 @@ ui <- fluidPage(
                  )
                ),
                mainPanel(
-                 plotOutput(outputId = "plot4"),
+                 plotOutput(outputId = "plot_sanitation"),
                  sliderInput(
                    inputId = "selected_year",
                    label = "Select year",
@@ -170,7 +170,7 @@ ui <- fluidPage(
                  )
                ),
                mainPanel(
-                 plotOutput(outputId = "plot5"),
+                 plotOutput(outputId = "plot_health"),
                  sliderInput(
                    inputId = "selected_year",
                    label = "Select year",
@@ -203,7 +203,7 @@ ui <- fluidPage(
                  )
                ),
                mainPanel(
-                 plotOutput(outputId = "plot6"),
+                 plotOutput(outputId = "plot_natal"),
                  sliderInput(
                    inputId = "selected_year",
                    label = "Select year",
@@ -230,7 +230,7 @@ server <- function(input, output) {
   #-match(input$air_pollution_type,
   # names(total_joined)))]
   # })
-  output$plot <- renderPlot({
+  output$plot_air <- renderPlot({
     total_joined %>%
       filter(year == input$selected_year) %>%
       ggplot(aes(long, lat)) +
@@ -244,7 +244,8 @@ server <- function(input, output) {
         xlim = c(-180, 180)
       ) +
       scale_fill_viridis_c(
-        limits = c(0, 300),
+        limits = c(0, 350),
+        begin = 0.3,
         option = "turbo",
         # turbo pallet coordinates with AQI colors:
         # (https://webcam.srs.fs.fed.us/test/AQI.shtml)
@@ -262,13 +263,11 @@ server <- function(input, output) {
         plot.title = element_blank(),
         plot.subtitle = element_blank()
       )
-    # plotly(output$plot, tooltip = c("group"))
-    # how to display this info?
   })
   output$info <- renderText({
-    paste0("Country:", input$plot_click$l)
+    paste0("Country:", input$plot_click$entity)
   })
-  output$plot2 <- renderPlot({
+  output$plot_substance <- renderPlot({
     total_joined %>%
       filter(year == input$selected_year) %>%
       ggplot(aes(long, lat)) +
@@ -300,7 +299,7 @@ server <- function(input, output) {
         plot.subtitle = element_blank()
       )
   })
-  output$plot3 <- renderPlot({
+  output$plot_diet <- renderPlot({
     total_joined %>%
       filter(year == input$selected_year) %>%
       ggplot(aes(long, lat)) +
@@ -330,7 +329,7 @@ server <- function(input, output) {
         plot.subtitle = element_blank()
       )
   })
-  output$plot4 <- renderPlot({
+  output$plot_sanitation <- renderPlot({
     total_joined %>%
       filter(year == input$selected_year) %>%
       ggplot(aes(long, lat)) +
@@ -361,7 +360,7 @@ server <- function(input, output) {
         plot.subtitle = element_blank()
       )
   })
-  output$plot5 <- renderPlot({
+  output$plot_health <- renderPlot({
     total_joined %>%
       filter(year == input$selected_year) %>%
       ggplot(aes(long, lat)) +
@@ -391,7 +390,7 @@ server <- function(input, output) {
         plot.subtitle = element_blank()
       )
   })
-  output$plot6 <- renderPlot({
+  output$plot_natal <- renderPlot({
     total_joined %>%
       filter(year == input$selected_year) %>%
       ggplot(aes(long, lat)) +
