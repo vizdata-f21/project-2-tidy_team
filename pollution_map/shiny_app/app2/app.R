@@ -26,44 +26,45 @@ regions_choices_substance <- substance_use_regions %>%
 
 selected_regions_choices_substance <- sample(regions_choices_substance, 3)
 
-# # diet
-# regions_choices_diet <- diet_regions %>%
-#   distinct(entity) %>%
-#   arrange(entity) %>%
-#   pull(entity)
-#
-# selected_regions_choices_diet <- sample(regions_choices_diet, 3)
-#
-# # health
-# regions_choices_health <- health_regions %>%
-#   distinct(entity) %>%
-#   arrange(entity) %>%
-#   pull(entity)
-#
-# selected_regions_choices_health <- sample(regions_choices_health, 3)
-#
-# # sanitation
-# regions_choices_sanitation <- sanitation_regions %>%
-#   distinct(entity) %>%
-#   arrange(entity) %>%
-#   pull(entity)
-#
-# selected_regions_choices_sanitation <- sample(regions_choices_sanitation, 3)
-#
-# # post natal care
-# regions_choices_post_natal_care <- post_natal_care_regions %>%
-#   distinct(entity) %>%
-#   arrange(entity) %>%
-#   pull(entity)
-#
-# selected_regions_choices_post_natal_care <-
-#   sample(regions_choices_post_natal_care, 3)
+# diet
+regions_choices_diet <- diet_regions %>%
+  distinct(entity) %>%
+  arrange(entity) %>%
+  pull(entity)
+
+selected_regions_choices_diet <- sample(regions_choices_diet, 3)
+
+# sanitation
+regions_choices_sanitation <- sanitation_regions %>%
+  distinct(entity) %>%
+  arrange(entity) %>%
+  pull(entity)
+
+selected_regions_choices_sanitation <- sample(regions_choices_sanitation, 3)
+
+# health
+regions_choices_health <- health_regions %>%
+  distinct(entity) %>%
+  arrange(entity) %>%
+  pull(entity)
+
+selected_regions_choices_health <- sample(regions_choices_health, 3)
+
+# post natal care
+regions_choices_post_natal_care <- post_natal_care_regions %>%
+  distinct(entity) %>%
+  arrange(entity) %>%
+  pull(entity)
+
+selected_regions_choices_post_natal_care <-
+  sample(regions_choices_post_natal_care, 3)
 
 # Define UI --------------------------------------------------------------------
 
 ui <- fluidPage(
   theme = shinytheme("cosmo"),
   titlePanel("Deaths By Risk Factors"),
+  # air pollution
   tabsetPanel(
     tabPanel("Air Pollution",
              sidebarLayout(
@@ -83,11 +84,11 @@ ui <- fluidPage(
                  )
                ),
                mainPanel(
-                 plotOutput(outputId = "plot_air",
-                            click = "plot_click"),
-                 verbatimTextOutput("info"),
+                 plotOutput(outputId = "plot_air"),
+                          #  click = "plot_click"),
+               #  verbatimTextOutput("info"),
                  sliderInput(
-                   inputId = "selected_year",
+                   inputId = "selected_year_air",
                    label = "Select year",
                    min = 1990,
                    value = 1990,
@@ -99,6 +100,7 @@ ui <- fluidPage(
                )
              )
     ),
+    # substance
     tabPanel("Substance Use",
              sidebarLayout(
                sidebarPanel(
@@ -122,7 +124,7 @@ ui <- fluidPage(
                mainPanel(
                  plotOutput(outputId = "plot_substance"),
                  sliderInput(
-                   inputId = "selected_year",
+                   inputId = "selected_year_substance",
                    label = "Select year",
                    min = 1990,
                    value = 1990,
@@ -135,6 +137,7 @@ ui <- fluidPage(
                )
              )
     ),
+    # diet
     tabPanel("Diet",
              sidebarLayout(
                sidebarPanel(
@@ -150,12 +153,17 @@ ui <- fluidPage(
                      "Low in Nuts and Seeds" =
                        "diet_low_in_nuts_and_seeds"
                    )
+                 ),
+                 checkboxGroupInput(inputId = "entity",
+                                    label = "Select up to 8 regions:",
+                                    choices = regions_choices_diet,
+                                    selected = selected_regions_choices_diet
                  )
                ),
                mainPanel(
                  plotOutput(outputId = "plot_diet"),
                  sliderInput(
-                   inputId = "selected_year",
+                   inputId = "selected_year_diet",
                    label = "Select year",
                    min = 1990,
                    value = 1990,
@@ -163,10 +171,12 @@ ui <- fluidPage(
                    width = "100%",
                    animate = TRUE,
                    sep = ""
-                 )
+                 ),
+                 plotOutput(outputId = "plot_diet_line")
                )
              )
     ),
+    # sanitation
     tabPanel("Sanitation",
              sidebarLayout(
                sidebarPanel(
@@ -179,12 +189,18 @@ ui <- fluidPage(
                      "No Hand Wash" =
                        "no_access_to_handwash_facility"
                    )
+                 ),
+                 checkboxGroupInput(inputId = "entity",
+                                    label = "Select up to 8 regions:",
+                                    choices = regions_choices_sanitation,
+                                    selected =
+                                      selected_regions_choices_sanitation
                  )
                ),
                mainPanel(
                  plotOutput(outputId = "plot_sanitation"),
                  sliderInput(
-                   inputId = "selected_year",
+                   inputId = "selected_year_sanitation",
                    label = "Select year",
                    min = 1990,
                    value = 1990,
@@ -192,10 +208,12 @@ ui <- fluidPage(
                    width = "100%",
                    animate = TRUE,
                    sep = ""
-                 )
+                  ),
+                  plotOutput(outputId = "plot_sanitation_line")
                )
              )
     ),
+    # health
     tabPanel("Health",
              sidebarLayout(
                sidebarPanel(
@@ -217,12 +235,17 @@ ui <- fluidPage(
                      "Low Bone Mineral Density" =
                        "low_bone_mineral_density"
                    )
+                 ),
+                 checkboxGroupInput(inputId = "entity",
+                                    label = "Select up to 8 regions:",
+                                    choices = regions_choices_health,
+                                    selected = selected_regions_choices_health
                  )
                ),
                mainPanel(
                  plotOutput(outputId = "plot_health"),
                  sliderInput(
-                   inputId = "selected_year",
+                   inputId = "selected_year_health",
                    label = "Select year",
                    min = 1990,
                    value = 1990,
@@ -230,15 +253,17 @@ ui <- fluidPage(
                    width = "100%",
                    animate = TRUE,
                    sep = ""
-                 )
+                 ),
+                 plotOutput(outputId = "plot_health_line")
                )
              )
     ),
+    # post natal care
     tabPanel("Post-Natal Care",
              sidebarLayout(
                sidebarPanel(
                  selectInput(
-                   inputId = "risk_factor_natal",
+                   inputId = "risk_factor_post_natal_care",
                    label = "Type of Post-Natal Care",
                    choices = c(
                      "Nonexclusive Breastfeeding" =
@@ -250,12 +275,18 @@ ui <- fluidPage(
                      "Low Birth Weight" =
                        "low_birth_weight_for_gestation"
                    )
+                 ),
+                 checkboxGroupInput(inputId = "entity",
+                                    label = "Select up to 8 regions:",
+                                    choices = regions_choices_post_natal_care,
+                                    selected =
+                                      selected_regions_choices_post_natal_care
                  )
                ),
                mainPanel(
-                 plotOutput(outputId = "plot_natal"),
+                 plotOutput(outputId = "plot_post_natal_care"),
                  sliderInput(
-                   inputId = "selected_year",
+                   inputId = "selected_year_post_natal_care",
                    label = "Select year",
                    min = 1990,
                    value = 1990,
@@ -263,7 +294,8 @@ ui <- fluidPage(
                    width = "100%",
                    animate = TRUE,
                    sep = ""
-                 )
+                 ),
+                 plotOutput(outputId = "plot_post_natal_care_line")
                )
              )
     )
@@ -284,13 +316,10 @@ server <- function(input, output) {
     paste("You've selected", length(input$entity), "regions.")
   })
 
-  substance_use_regions_filtered <- reactive({
-    substance_use_regions %>%
-      filter(entity %in% input$entity)
-  })
+  # air pollution
   output$plot_air <- renderPlot({
     total_joined %>%
-      filter(year == input$selected_year) %>%
+      filter(year == input$selected_year_air) %>%
       ggplot(aes(long, lat)) +
       geom_polygon_interactive(
         aes_string(
@@ -325,9 +354,11 @@ server <- function(input, output) {
   output$info <- renderText({
     paste0("Country:", input$plot_click$entity)
   })
+
+  # substance
   output$plot_substance <- renderPlot({
     total_joined %>%
-      filter(year == input$selected_year) %>%
+      filter(year == input$selected_year_substance) %>%
       ggplot(aes(long, lat)) +
       geom_polygon_interactive(
         aes_string(group = "group", fill = input$risk_factor_substance),
@@ -357,11 +388,15 @@ server <- function(input, output) {
         plot.subtitle = element_blank()
       )
   })
+  substance_regions_filtered <- reactive({
+    substance_use_regions %>%
+      filter(entity %in% input$entity)
+  })
   output$plot_substance_line <- renderPlot({
     validate(
       need(length(input$entity) <= 8, "Please select a maxiumum of 8 regions")
     )
-    ggplot(data = substance_use_regions_filtered()) +
+    ggplot(data = substance_regions_filtered()) +
       geom_line(aes_string(group = "entity",
                            color = "entity",
                            x = "year",
@@ -379,9 +414,11 @@ server <- function(input, output) {
         color = "Regions",
         title = paste("Number of Deaths by", input$risk_factor_substance))
   })
+
+  # diet
   output$plot_diet <- renderPlot({
     total_joined %>%
-      filter(year == input$selected_year) %>%
+      filter(year == input$selected_year_diet) %>%
       ggplot(aes(long, lat)) +
       geom_polygon_interactive(
         aes_string(group = "group", fill = input$risk_factor_diet),
@@ -409,9 +446,38 @@ server <- function(input, output) {
         plot.subtitle = element_blank()
       )
   })
+  diet_regions_filtered <- ({reactive({
+    diet_regions %>%
+      filter(entity %in% input$entity)
+  })
+  })
+  output$plot_diet_line <- renderPlot({
+    validate(
+      need(length(input$entity) <= 8, "Please select a maxiumum of 8 regions")
+    )
+    ggplot(data = diet_regions_filtered()) +
+      geom_line(aes_string(group = "entity",
+                           color = "entity",
+                           x = "year",
+                           y = input$risk_factor_diet), size = 1) +
+      theme_gray(base_size = 16) +
+      theme(legend.position = "bottom",
+            panel.grid.minor.x = element_blank()) +
+      scale_y_continuous(labels = comma) +
+      scale_x_continuous(breaks = seq(from = 1990, to = 2017, by = 3),
+                         limits = c(1990, 2017)) +
+      scale_color_viridis_d(option = "plasma", begin = 0.1) +
+      labs(
+        x = "Year",
+        y = "Number of Deaths",
+        color = "Regions",
+        title = paste("Number of Deaths by", input$risk_factor_diet))
+  })
+
+  # sanitation
   output$plot_sanitation <- renderPlot({
     total_joined %>%
-      filter(year == input$selected_year) %>%
+      filter(year == input$selected_year_sanitation) %>%
       ggplot(aes(long, lat)) +
       geom_polygon_interactive(
         aes_string(group = "group", fill = input$risk_factor_sanitation),
@@ -440,9 +506,38 @@ server <- function(input, output) {
         plot.subtitle = element_blank()
       )
   })
+  sanitation_regions_filtered <- ({reactive({
+    sanitation_regions %>%
+      filter(entity %in% input$entity)
+  })
+  })
+  output$plot_sanitation_line <- renderPlot({
+    validate(
+      need(length(input$entity) <= 8, "Please select a maxiumum of 8 regions")
+    )
+    ggplot(data = sanitation_regions_filtered()) +
+      geom_line(aes_string(group = "entity",
+                           color = "entity",
+                           x = "year",
+                           y = input$risk_factor_sanitation), size = 1) +
+      theme_gray(base_size = 16) +
+      theme(legend.position = "bottom",
+            panel.grid.minor.x = element_blank()) +
+      scale_y_continuous(labels = comma) +
+      scale_x_continuous(breaks = seq(from = 1990, to = 2017, by = 3),
+                         limits = c(1990, 2017)) +
+      scale_color_viridis_d(option = "magma", begin = 0.1) +
+      labs(
+        x = "Year",
+        y = "Number of Deaths",
+        color = "Regions",
+        title = paste("Number of Deaths by", input$risk_factor_sanitation))
+  })
+
+  # health
   output$plot_health <- renderPlot({
     total_joined %>%
-      filter(year == input$selected_year) %>%
+      filter(year == input$selected_year_health) %>%
       ggplot(aes(long, lat)) +
       geom_polygon_interactive(
         aes_string(group = "group", fill = input$risk_factor_health),
@@ -470,12 +565,41 @@ server <- function(input, output) {
         plot.subtitle = element_blank()
       )
   })
-  output$plot_natal <- renderPlot({
+  health_regions_filtered <- ({reactive({
+    health_regions %>%
+      filter(entity %in% input$entity)
+  })
+  })
+  output$plot_health_line <- renderPlot({
+    validate(
+      need(length(input$entity) <= 8, "Please select a maxiumum of 8 regions")
+    )
+    ggplot(data = health_regions_filtered()) +
+      geom_line(aes_string(group = "entity",
+                           color = "entity",
+                           x = "year",
+                           y = input$risk_factor_health), size = 1) +
+      theme_gray(base_size = 16) +
+      theme(legend.position = "bottom",
+            panel.grid.minor.x = element_blank()) +
+      scale_y_continuous(labels = comma) +
+      scale_x_continuous(breaks = seq(from = 1990, to = 2017, by = 3),
+                         limits = c(1990, 2017)) +
+      scale_color_viridis_d(option = "cividis", begin = 0.1) +
+      labs(
+        x = "Year",
+        y = "Number of Deaths",
+        color = "Regions",
+        title = paste("Number of Deaths by", input$risk_factor_health))
+  })
+
+  # post natal care
+  output$plot_post_natal_care <- renderPlot({
     total_joined %>%
-      filter(year == input$selected_year) %>%
+      filter(year == input$selected_year_post_natal_care) %>%
       ggplot(aes(long, lat)) +
       geom_polygon_interactive(
-        aes_string(group = "group", fill = input$risk_factor_natal),
+        aes_string(group = "group", fill = input$risk_factor_post_natal_care),
         color = "white", size = 0.3
       ) +
       coord_map(
@@ -500,6 +624,33 @@ server <- function(input, output) {
         plot.title = element_blank(),
         plot.subtitle = element_blank()
       )
+  })
+  post_natal_care_regions_filtered <- ({reactive({
+    post_natal_care_regions %>%
+      filter(entity %in% input$entity)
+  })
+  })
+  output$plot_post_natal_care_line <- renderPlot({
+    validate(
+      need(length(input$entity) <= 8, "Please select a maxiumum of 8 regions")
+    )
+    ggplot(data = post_natal_care_regions_filtered()) +
+      geom_line(aes_string(group = "entity",
+                           color = "entity",
+                           x = "year",
+                           y = input$risk_factor_post_natal_care), size = 1) +
+      theme_gray(base_size = 16) +
+      theme(legend.position = "bottom",
+            panel.grid.minor.x = element_blank()) +
+      scale_y_continuous(labels = comma) +
+      scale_x_continuous(breaks = seq(from = 1990, to = 2017, by = 3),
+                         limits = c(1990, 2017)) +
+      scale_color_viridis_d(option = "mako", begin = 0.1) +
+      labs(
+        x = "Year",
+        y = "Number of Deaths",
+        color = "Regions",
+        title = paste("Number of Deaths by", input$risk_factor_post_natal_care))
   })
 }
 
