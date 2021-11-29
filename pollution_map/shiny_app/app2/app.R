@@ -100,6 +100,7 @@ ui <- fluidPage(
                )
              )
     ),
+    # Substance Use Tab
     tabPanel("Substance Use",
              sidebarLayout(
                sidebarPanel(
@@ -134,6 +135,7 @@ ui <- fluidPage(
                )
              )
     ),
+    # Diet Tab
     tabPanel("Diet",
              sidebarLayout(
                sidebarPanel(
@@ -172,6 +174,7 @@ ui <- fluidPage(
                )
              )
     ),
+    # Sanitation Tab
     tabPanel("Sanitation",
              sidebarLayout(
                sidebarPanel(
@@ -205,6 +208,8 @@ ui <- fluidPage(
                )
              )
     ),
+
+  # Health Tab
     tabPanel("Health",
              sidebarLayout(
                sidebarPanel(
@@ -247,6 +252,7 @@ ui <- fluidPage(
                )
              )
     ),
+  # Post Natal Care Tab
     tabPanel("Post-Natal Care",
              sidebarLayout(
                sidebarPanel(
@@ -288,16 +294,7 @@ ui <- fluidPage(
 )
 
 # Define Server ------------------------------------------
-server <- function(input, output) {
-  # remaining <- reactive({
-  # names(total_joined)[c("death_rate_air_pollution",
-  # "death_rate_household_pollution",
-  # "death_rate_ambient_matter_pollution",
-  # "death_rate_ozone_pollution",
-  #-match(input$air_pollution_type,
-  # names(total_joined)))]
-  # })
-
+server <- function(input, output, session) {
 
   # Air Pollution Map Plot
 
