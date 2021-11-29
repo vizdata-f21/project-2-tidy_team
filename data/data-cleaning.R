@@ -4,8 +4,10 @@ library(tidyverse)
 library(here)
 library(janitor)
 library(maps)
+library(readxl)
+library(janitor)
 
-# Load data ---------------------------------------------------------
+# Load data for pollutants ---------------------------------------------------------
 
 # air pollution data
 death_rates_from_air_pollution_csv <- read_csv(
@@ -171,5 +173,17 @@ write_rds(total_joined, "data/compressed_final_data.rds", "gz")
 
 
 
+# population data -------------------------------------------------------------
 
+# importing population data from [Our World in Data](https://ourworldindata.org/grapher/population?time=1899..latest&country=AFG~Africa~ALB~DZA~ASM~AND~AGO~AIA~ATG~ARM~ABW~ARG~Asia~AUS~AUT~AZE~BHS~BHR~BGD)
+
+population <- read_excel("data/population.xlsx", skip = 1)
+
+population <- clean_names(population)
+
+population <- population %>%
+  filter(year >= 1990 & year <= 2017)
+
+air_pollution_joined <- death_rates_from_air_pollution %>%
+  left_join(number_deaths_by_risk_factor, by = c("entity", "year", "code"))
 
