@@ -144,12 +144,14 @@ diet_regions <- regions %>%
          diet_high_in_sodium)
 
 sanitation_regions <- regions %>%
-  select(unsafe_water_source,
+  select(entity, code, year,
+         unsafe_water_source,
          unsafe_sanitation,
          no_access_to_handwashing_facility)
 
 health_regions <- regions %>%
-  select(low_physical_activity,
+  select(entity, code, year,
+         low_physical_activity,
          high_fasting_plasma_glucose,
          high_total_cholesterol,
          high_body_mass_index,
@@ -159,7 +161,8 @@ health_regions <- regions %>%
          low_bone_mineral_density)
 
 post_natal_care_regions <- regions %>%
-  select(non_exclusive_breastfeeding,
+  select(entity, code, year,
+         non_exclusive_breastfeeding,
          discontinued_breastfeeding,
          child_wasting,
          child_stunting,
