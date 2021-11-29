@@ -16,6 +16,50 @@ library(scales)
 total_joined <- read_rds(
   here("data", "compressed_final_data.rds"))
 
+# defining choices & random selection for risk factors
+
+# substance
+regions_choices_substance <- substance_use_regions %>%
+  distinct(entity) %>%
+  arrange(entity) %>%
+  pull(entity)
+
+selected_regions_choices_substance <- sample(regions_choices_substance, 3)
+
+# diet
+
+regions_choices_diet <- diet_regions %>%
+  distinct(entity) %>%
+  arrange(entity) %>%
+  pull(entity)
+
+selected_regions_choices_diet <- sample(regions_choices_diet, 3)
+
+# health ---
+regions_choices_health <- health_regions %>%
+  distinct(entity) %>%
+  arrange(entity) %>%
+  pull(entity)
+
+selected_regions_choices_health <- sample(regions_choices_health, 3)
+
+# sanitation ---
+regions_choices_sanitation <- sanitation_regions %>%
+  distinct(entity) %>%
+  arrange(entity) %>%
+  pull(entity)
+
+selected_regions_choices_sanitation <- sample(regions_choices_sanitation, 3)
+
+# post natal care
+
+regions_choices_post_natal_care <- post_natal_care_regions %>%
+  distinct(entity) %>%
+  arrange(entity) %>%
+  pull(entity)
+
+selected_regions_choices_post_natal_care <- sample(regions_choices_post_natal_care, 3)
+
 # Define UI --------------------------------------------------------------------
 
 ui <- fluidPage(
@@ -56,6 +100,7 @@ ui <- fluidPage(
                )
              )
     ),
+    # Substance Use Tab
     tabPanel("Substance Use",
              sidebarLayout(
                sidebarPanel(
@@ -68,8 +113,12 @@ ui <- fluidPage(
                      "Drug Use" = "drug_use",
                      "Smoking" = "smoking"
                    )
-                 )
-               ),
+                 ),
+                checkboxGroupInput(inputId = "entity",
+                                      label = "Select up to 8 regions:",
+                                      choices = regions_choices_substance,
+                                      selected = selected_regions_choices_substance)
+             ),
                mainPanel(
                  plotOutput(outputId = "plot_substance"),
                  sliderInput(
@@ -81,10 +130,12 @@ ui <- fluidPage(
                    width = "100%",
                    animate = TRUE,
                    sep = ""
-                 )
+                 ),
+                 plotOutput(outputId = "substance_line_plot")
                )
              )
     ),
+    # Diet Tab
     tabPanel("Diet",
              sidebarLayout(
                sidebarPanel(
@@ -100,7 +151,12 @@ ui <- fluidPage(
                      "Low in Nuts and Seeds" =
                        "diet_low_in_nuts_and_seeds"
                    )
-                 )
+                 ),
+                 checkboxGroupInput(inputId = "entity",
+                                       label = "Select up to 8 regions:",
+                                       choices = regions_choices_diet,
+                                       selected = selected_regions_choices_diet)
+
                ),
                mainPanel(
                  plotOutput(outputId = "plot_diet"),
@@ -113,10 +169,12 @@ ui <- fluidPage(
                    width = "100%",
                    animate = TRUE,
                    sep = ""
-                 )
+                 ),
+                 plotOutput(outputId = "diet_line_plot")
                )
              )
     ),
+    # Sanitation Tab
     tabPanel("Sanitation",
              sidebarLayout(
                sidebarPanel(
@@ -129,7 +187,11 @@ ui <- fluidPage(
                      "No Hand Wash" =
                        "no_access_to_handwash_facility"
                    )
-                 )
+                 ),
+                 checkboxGroupInput(inputId = "entity",
+                                    label = "Select up to 8 regions:",
+                                    choices = regions_choices_sanitation,
+                                    selected = selected_regions_choices_sanitation)
                ),
                mainPanel(
                  plotOutput(outputId = "plot_sanitation"),
@@ -146,6 +208,8 @@ ui <- fluidPage(
                )
              )
     ),
+
+  # Health Tab
     tabPanel("Health",
              sidebarLayout(
                sidebarPanel(
@@ -167,7 +231,11 @@ ui <- fluidPage(
                      "Low Bone Mineral Density" =
                        "low_bone_mineral_density"
                    )
-                 )
+                 ),
+                 checkboxGroupInput(inputId = "entity",
+                                    label = "Select up to 8 regions:",
+                                    choices = regions_choices_health,
+                                    selected = selected_regions_choices_health)
                ),
                mainPanel(
                  plotOutput(outputId = "plot_health"),
@@ -184,6 +252,7 @@ ui <- fluidPage(
                )
              )
     ),
+  # Post Natal Care Tab
     tabPanel("Post-Natal Care",
              sidebarLayout(
                sidebarPanel(
@@ -200,7 +269,11 @@ ui <- fluidPage(
                      "Low Birth Weight" =
                        "low_birth_weight_for_gestation"
                    )
-                 )
+                 ),
+                 checkboxGroupInput(inputId = "entity",
+                                    label = "Select up to 8 regions:",
+                                    choices = regions_choices_post_natal_care,
+                                    selected = selected_regions_choices_post_natal_care)
                ),
                mainPanel(
                  plotOutput(outputId = "plot_natal"),
@@ -220,16 +293,11 @@ ui <- fluidPage(
   )
 )
 
+# Define Server ------------------------------------------
+server <- function(input, output, session) {
 
-server <- function(input, output) {
-  # remaining <- reactive({
-  # names(total_joined)[c("death_rate_air_pollution",
-  # "death_rate_household_pollution",
-  # "death_rate_ambient_matter_pollution",
-  # "death_rate_ozone_pollution",
-  #-match(input$air_pollution_type,
-  # names(total_joined)))]
-  # })
+  # Air Pollution Map Plot
+
   output$plot_air <- renderPlot({
     total_joined %>%
       filter(year == input$selected_year) %>%
@@ -267,6 +335,8 @@ server <- function(input, output) {
   output$info <- renderText({
     paste0("Country:", input$plot_click$entity)
   })
+
+  # Substance Map
   output$plot_substance <- renderPlot({
     total_joined %>%
       filter(year == input$selected_year) %>%
@@ -299,6 +369,44 @@ server <- function(input, output) {
         plot.subtitle = element_blank()
       )
   })
+
+# Substance Line Plot
+
+  output$selected_regions <- reactive({
+    paste("You've selected", length(input$entity), "regions.")
+  })
+
+  substance_use_regions_filtered <- reactive({
+    regions_choices_substance %>%
+      filter(entity %in% input$entity)
+  })
+
+output$substance_line_plot <- renderPlot({
+    validate(
+      need(length(input$entity) <= 8, "Please select a maxiumum of 8 regions")
+    )
+
+    ggplot(data = substance_use_regions_filtered()) +
+      geom_line(aes_string(group = "entity",
+                           color = "entity",
+                           x = "year",
+                           y = input$risk_factor_substance), size = 1) +
+      theme_gray(base_size = 16) +
+      theme(legend.position = "bottom",
+            panel.grid.minor.x = element_blank()) +
+      scale_y_continuous(labels = comma) +
+      scale_x_continuous(breaks = seq(from = 1990, to = 2017, by = 3),
+                         limits = c(1990, 2017)) +
+      scale_color_viridis_d(option = "inferno", begin = 0.1) +
+      labs(
+        x = "Year",
+        y = "Number of Deaths",
+        color = "Regions",
+        title = paste("Number of Deaths by", input$risk_factor_substance))
+  })
+
+# Diet Map
+
   output$plot_diet <- renderPlot({
     total_joined %>%
       filter(year == input$selected_year) %>%
@@ -329,6 +437,46 @@ server <- function(input, output) {
         plot.subtitle = element_blank()
       )
   })
+
+# Diet Line Plot
+
+  output$selected_regions <- reactive({
+    paste("You've selected", length(input$entity), "regions.")
+  })
+
+  diet_regions_filtered <- reactive({
+    diet_regions %>%
+      filter(entity %in% input$entity)
+  })
+
+  output$diet_line_plot <- renderPlot({
+
+    validate(
+      need(length(input$entity) <= 8, "Please select a maximum of 8 regions")
+    )
+
+    ggplot(data = diet_regions_filtered()) +
+      geom_line(aes_string(group = "entity",
+                           color = "entity",
+                           x = "year",
+                           y = input$risk_factor), size = 1) +
+      theme_gray(base_size = 16) +
+      theme(legend.position = "bottom",
+            panel.grid.minor.x = element_blank()) +
+      scale_y_continuous(labels = comma) +
+      scale_x_continuous(breaks = seq(from = 1990, to = 2017, by = 3),
+                         limits = c(1990, 2017)) +
+      scale_color_viridis_d(option = "plasma", begin = 0.1) +
+      labs(
+        x = "Year",
+        y = "Number of Deaths",
+        color = "Regions",
+        title = paste("Number of Deaths by", input$risk_factor))
+  })
+
+
+# Sanitation Map
+
   output$plot_sanitation <- renderPlot({
     total_joined %>%
       filter(year == input$selected_year) %>%
@@ -425,5 +573,5 @@ server <- function(input, output) {
 
 # summary info: caption = "Source: Our World in Data"
 
-# Run the application
+# Run the application ---------------------------------------------------------
 shinyApp(ui = ui, server = server)
