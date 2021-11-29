@@ -298,7 +298,8 @@ server <- function(input, output) {
   # names(total_joined)))]
   # })
 
-  ## Air Pollution Map Plot
+
+  # Air Pollution Map Plot
 
   output$plot_air <- renderPlot({
     total_joined %>%
