@@ -82,6 +82,94 @@ air_pollution_joined <- air_pollution_joined %>%
 total_joined <- world_map_data %>%
   left_join(air_pollution_joined, by = c("region" = "entity"))
 
+# for regions line plot
+
+# filter for regions
+regions <- air_pollution_joined %>%
+  filter(entity == "Central Asia" |
+           entity == "Central Europe" |
+           entity == "Central Latin America"|
+           entity == "Central Sub-Saharan Africa" |
+           entity == "East Asia "|
+           entity == "Eastern Europe"|
+           entity == "Eastern Sub-Saharan Africa"|
+           entity == "Latin America and Caribbean"|
+           entity == "North Africa and Middle East"|
+           entity == "North America"|
+           entity == "South Asia"|
+           entity == "Southeast Asia"|
+           entity == "Southern Latin America"|
+           entity == "Southern Sub-Saharan Africa"|
+           entity == "Sub-Saharan Africa"|
+           entity == "Tropical Latin America"|
+           entity == "Western Europe"|
+           entity == "Western Sub-Saharan Africa")
+
+# relevel factors
+regions$entity <- factor(regions$entity,
+                         levels = c("Central Asia",
+                                    "East Asia ",
+                                    "South Asia",
+                                    "Southeast Asia",
+                                    "Central Europe",
+                                    "Eastern Europe",
+                                    "Western Europe",
+                                    "Sub-Saharan Africa",
+                                    "Central Sub-Saharan Africa",
+                                    "Southern Sub-Saharan Africa",
+                                    "Western Sub-Saharan Africa",
+                                    "Eastern Sub-Saharan Africa",
+                                    "North Africa and Middle East",
+                                    "North America",
+                                    "Latin America and Caribbean",
+                                    "Central Latin America",
+                                    "Southern Latin America",
+                                    "Tropical Latin America"))
+
+# make datasets for risk factors via region line plots
+
+substance_use_regions <- regions %>%
+  select(entity, code, year,
+         secondhand_smoke,
+         alcohol_use,
+         drug_use,
+         smoking)
+
+diet_regions <- regions %>%
+  select(entity, code, year,
+         diet_low_in_fruits,
+         diet_low_in_vegetables,
+         diet_low_in_nuts_and_seeds,
+         diet_low_in_whole_grains,
+         diet_high_in_sodium)
+
+sanitation_regions <- regions %>%
+  select(unsafe_water_source,
+         unsafe_sanitation,
+         no_access_to_handwashing_facility)
+
+health_regions <- regions %>%
+  select(low_physical_activity,
+         high_fasting_plasma_glucose,
+         high_total_cholesterol,
+         high_body_mass_index,
+         high_systolic_blood_pressure,
+         iron_deficiency,
+         vitamin_a_deficiency,
+         low_bone_mineral_density)
+
+post_natal_care_regions <- regions %>%
+  select(non_exclusive_breastfeeding,
+         discontinued_breastfeeding,
+         child_wasting,
+         child_stunting,
+         low_birth_weight_for_gestation)
+
+# write rds file
+
 write_rds(total_joined, "data/compressed_final_data.rds", "gz")
+
+
+
 
 
