@@ -101,6 +101,7 @@ ui <- fluidPage(
                )
              )
     ),
+    # Substance Use Tab
     tabPanel("Substance Use",
              sidebarLayout(
                sidebarPanel(
@@ -137,6 +138,7 @@ ui <- fluidPage(
                )
              )
     ),
+    # Diet Tab
     tabPanel("Diet",
              sidebarLayout(
                sidebarPanel(
@@ -169,6 +171,7 @@ ui <- fluidPage(
                )
              )
     ),
+    # Sanitation Tab
     tabPanel("Sanitation",
              sidebarLayout(
                sidebarPanel(
@@ -198,6 +201,8 @@ ui <- fluidPage(
                )
              )
     ),
+
+  # Health Tab
     tabPanel("Health",
              sidebarLayout(
                sidebarPanel(
@@ -236,6 +241,7 @@ ui <- fluidPage(
                )
              )
     ),
+  # Post Natal Care Tab
     tabPanel("Post-Natal Care",
              sidebarLayout(
                sidebarPanel(
@@ -272,6 +278,7 @@ ui <- fluidPage(
   )
 )
 
+<<<<<<< HEAD
 
 server <- function(input, output) {
   # remaining <- reactive({
@@ -290,6 +297,13 @@ server <- function(input, output) {
     substance_use_regions %>%
       filter(entity %in% input$entity)
   })
+=======
+# Define Server ------------------------------------------
+server <- function(input, output, session) {
+
+  # Air Pollution Map Plot
+
+>>>>>>> 5bc15bcdc8191393e647334c1fc1798e4867b271
   output$plot_air <- renderPlot({
     total_joined %>%
       filter(year == input$selected_year) %>%
