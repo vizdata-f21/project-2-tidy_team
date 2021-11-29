@@ -47,9 +47,9 @@ ui <- fluidPage(
                                     #brush = brushOpts(
                                      #   id = "plot1_brush",
                                       #  resetOnNew = TRUE)
-                                    )
-                         ),
+                                    ),
                          verbatimTextOutput("info"),
+                         ),
                          sliderInput(
                              inputId = "selected_year",
                              label = "Select year",
@@ -59,7 +59,7 @@ ui <- fluidPage(
                              width = "100%",
                              animate = TRUE,
                              sep = ""
-                         )
+                        )
                      )
                  )
         ),
@@ -239,7 +239,9 @@ server <- function(input, output) {
     # })
 
   #  ranges <- reactiveValues(x = NULL, y = NULL) # this is for the zoom
-
+  #  output$info <- renderText({
+   #     paste0("country:", input$plot_hover$x)
+    #})
     output$plot <- renderPlot({
         total_joined %>%
             filter(year == input$selected_year) %>%
@@ -287,10 +289,6 @@ server <- function(input, output) {
    #         ranges$y <- NULL
    #     }
    # })
-
-    output$info <- renderText({
-            paste0("country:\n Death Rate:")
-    })
     output$plot2 <- renderPlot({
         total_joined %>%
             filter(year == input$selected_year) %>%
