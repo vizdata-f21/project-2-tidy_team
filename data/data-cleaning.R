@@ -84,6 +84,10 @@ air_pollution_joined <- air_pollution_joined %>%
 total_joined <- world_map_data %>%
   left_join(air_pollution_joined, by = c("region" = "entity"))
 
+# write rds file for total joined
+
+write_rds(total_joined, "data/compressed_final_data.rds", "gz")
+
 # for regions line plot
 
 # filter for regions
@@ -137,6 +141,9 @@ substance_use_regions <- regions %>%
          drug_use,
          smoking)
 
+write_rds(substance_use_regions, "data/substance_use_regions.rds", "gz")
+
+
 diet_regions <- regions %>%
   select(entity, code, year,
          diet_low_in_fruits,
@@ -145,11 +152,15 @@ diet_regions <- regions %>%
          diet_low_in_whole_grains,
          diet_high_in_sodium)
 
+write_rds(diet_regions, "data/diet_regions.rds", "gz")
+
 sanitation_regions <- regions %>%
   select(entity, code, year,
          unsafe_water_source,
          unsafe_sanitation,
          no_access_to_handwashing_facility)
+
+write_rds(sanitation_regions, "data/sanitation_regions.rds", "gz")
 
 health_regions <- regions %>%
   select(entity, code, year,
@@ -162,6 +173,8 @@ health_regions <- regions %>%
          vitamin_a_deficiency,
          low_bone_mineral_density)
 
+write_rds(health_regions, "data/health_regions.rds", "gz")
+
 post_natal_care_regions <- regions %>%
   select(entity, code, year,
          non_exclusive_breastfeeding,
@@ -170,10 +183,7 @@ post_natal_care_regions <- regions %>%
          child_stunting,
          low_birth_weight_for_gestation)
 
-# write rds file
-
-write_rds(total_joined, "data/compressed_final_data.rds", "gz")
-
+write_rds(post_natal_care_regions, "data/post_natal_care_regions.rds", "gz")
 
 
 # population data -------------------------------------------------------------
