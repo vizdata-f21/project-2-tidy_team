@@ -113,7 +113,12 @@ ui <- fluidPage(
                      "Low in Nuts and Seeds" =
                        "diet_low_in_nuts_and_seeds"
                    )
-                 )
+                 ),
+                 checkboxGroupInput(inputId = "entity",
+                                       label = "Select up to 8 regions:",
+                                       choices = regions_choices,
+                                       selected = selected_regions_choices)
+
                ),
                mainPanel(
                  plotOutput(outputId = "plot_diet"),
@@ -126,7 +131,9 @@ ui <- fluidPage(
                    width = "100%",
                    animate = TRUE,
                    sep = ""
-                 )
+                 ),
+                 plotOutput("diet_plot")
+
                )
              )
     ),
@@ -142,7 +149,11 @@ ui <- fluidPage(
                      "No Hand Wash" =
                        "no_access_to_handwash_facility"
                    )
-                 )
+                 ),
+                 checkboxGroupInput(inputId = "entity",
+                                    label = "Select up to 8 regions:",
+                                    choices = regions_choices,
+                                    selected = selected_regions_choices)
                ),
                mainPanel(
                  plotOutput(outputId = "plot_sanitation"),
@@ -180,7 +191,11 @@ ui <- fluidPage(
                      "Low Bone Mineral Density" =
                        "low_bone_mineral_density"
                    )
-                 )
+                 ),
+                 checkboxGroupInput(inputId = "entity",
+                                    label = "Select up to 8 regions:",
+                                    choices = regions_choices,
+                                    selected = selected_regions_choices)
                ),
                mainPanel(
                  plotOutput(outputId = "plot_health"),
@@ -213,7 +228,11 @@ ui <- fluidPage(
                      "Low Birth Weight" =
                        "low_birth_weight_for_gestation"
                    )
-                 )
+                 ),
+                 checkboxGroupInput(inputId = "entity",
+                                    label = "Select up to 8 regions:",
+                                    choices = regions_choices,
+                                    selected = selected_regions_choices)
                ),
                mainPanel(
                  plotOutput(outputId = "plot_natal"),
@@ -372,6 +391,7 @@ output$plot_substance_line <- renderPlot({
         plot.subtitle = element_blank()
       )
   })
+
   output$plot_sanitation <- renderPlot({
     total_joined %>%
       filter(year == input$selected_year) %>%
