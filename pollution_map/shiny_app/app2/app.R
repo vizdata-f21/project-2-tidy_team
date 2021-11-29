@@ -168,7 +168,7 @@ ui <- fluidPage(
                    animate = TRUE,
                    sep = ""
                  ),
-                 plotOutput("diet_line_plot")
+                 plotOutput(outputId = "diet_line_plot")
                )
              )
     ),
