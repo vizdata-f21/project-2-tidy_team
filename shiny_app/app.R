@@ -141,17 +141,7 @@ ui <- fluidPage(
                  )
                ),
                mainPanel(
-                 plotOutput(outputId = "plot_substance"),
-                 sliderInput(
-                   inputId = "selected_year_substance",
-                   label = "Select year",
-                   min = 1990,
-                   value = 1990,
-                   max = 2017,
-                   width = "100%",
-                   animate = TRUE,
-                   sep = ""
-                 ),
+                 plotlyOutput(outputId = "plot_substance"),
                  plotOutput(outputId = "plot_substance_line")
                )
              )
@@ -180,17 +170,7 @@ ui <- fluidPage(
                  )
                ),
                mainPanel(
-                 plotOutput(outputId = "plot_diet"),
-                 sliderInput(
-                   inputId = "selected_year_diet",
-                   label = "Select year",
-                   min = 1990,
-                   value = 1990,
-                   max = 2017,
-                   width = "100%",
-                   animate = TRUE,
-                   sep = ""
-                 ),
+                 plotlyOutput(outputId = "plot_diet"),
                  plotOutput(outputId = "plot_diet_line")
                )
              )
@@ -217,17 +197,7 @@ ui <- fluidPage(
                  )
                ),
                mainPanel(
-                 plotOutput(outputId = "plot_sanitation"),
-                 sliderInput(
-                   inputId = "selected_year_sanitation",
-                   label = "Select year",
-                   min = 1990,
-                   value = 1990,
-                   max = 2017,
-                   width = "100%",
-                   animate = TRUE,
-                   sep = ""
-                 ),
+                 plotlyOutput(outputId = "plot_sanitation"),
                  plotOutput(outputId = "plot_sanitation_line")
                )
              )
@@ -260,17 +230,7 @@ ui <- fluidPage(
                  )
                ),
                mainPanel(
-                 plotOutput(outputId = "plot_health"),
-                 sliderInput(
-                   inputId = "selected_year_health",
-                   label = "Select year",
-                   min = 1990,
-                   value = 1990,
-                   max = 2017,
-                   width = "100%",
-                   animate = TRUE,
-                   sep = ""
-                 ),
+                 plotlyOutput(outputId = "plot_health"),
                  plotOutput(outputId = "plot_health_line")
                )
              )
@@ -301,17 +261,7 @@ ui <- fluidPage(
                  )
                ),
                mainPanel(
-                 plotOutput(outputId = "plot_post_natal_care"),
-                 sliderInput(
-                   inputId = "selected_year_post_natal_care",
-                   label = "Select year",
-                   min = 1990,
-                   value = 1990,
-                   max = 2017,
-                   width = "100%",
-                   animate = TRUE,
-                   sep = ""
-                 ),
+                 plotlyOutput(outputId = "plot_post_natal_care"),
                  plotOutput(outputId = "plot_post_natal_care_line")
                )
              )
@@ -354,7 +304,7 @@ server <- function(input, output) {
                        option = "turbo",
                        # turbo pallet coordinates with AQI colors:
                        # (https://webcam.srs.fs.fed.us/test/AQI.shtml)
-                       name = "Death rate",
+                       name = "Death Rate",
                        labels = label_number(big.mark = ","),
                        na.value = "lightgray"
                      ) +
@@ -373,22 +323,19 @@ server <- function(input, output) {
       animation_opts(frame = 27)
 
   })
-  # The output right now shows long and lat of map. Would like country name and death rate
-  #output$info_air <- renderPrint ({
-  # req(input$plot_click)
-  # x <- round(input$plot_click$x, 2)
-  # y <- round(input$plot_click$y, 2)
-  #  cat("Long:", x, ", Lat:", y, sep = "")
-  #})
 
   # substance
-  output$plot_substance <- renderPlot({
-    total_joined %>%
+  output$plot_substance <- renderPlotly({
+    substance_plotly <- (total_joined %>%
       filter(year == input$selected_year_substance) %>%
       ggplot(aes(long, lat)) +
-      geom_polygon_interactive(
-        aes_string(group = "group", fill = input$risk_factor_substance),
-        color = "white", size = 0.1
+      geom_polygon(
+        aes_string(group = "group",
+                   fill = input$risk_factor_substance,
+                   label = "region",
+                   frame = "year"),
+          color = "white",
+          size = 0.1
       ) +
       coord_map(
         projection = "mercator",
@@ -400,7 +347,7 @@ server <- function(input, output) {
         direction = -1,
         begin = 0.2,
         end = 0.9,
-        name = "Death rate",
+        name = "Death Rate",
         labels = label_number(big.mark = ","),
         na.value = "lightgray"
       ) +
@@ -413,7 +360,11 @@ server <- function(input, output) {
         plot.background = element_rect(fill = "white", color = "white"),
         plot.title = element_blank(),
         plot.subtitle = element_blank()
-      )
+      ))
+
+    ggplotly(p = substance_plotly) %>%
+      animation_opts(frame = 27)
+
   })
 
   output$plot_substance_line <- renderPlot({
@@ -440,12 +391,15 @@ server <- function(input, output) {
   })
 
   # diet
-  output$plot_diet <- renderPlot({
-    total_joined %>%
+  output$plot_diet <- renderPlotly({
+    diet_plotly <- (total_joined %>%
       filter(year == input$selected_year_diet) %>%
       ggplot(aes(long, lat)) +
-      geom_polygon_interactive(
-        aes_string(group = "group", fill = input$risk_factor_diet),
+      geom_polygon(
+        aes_string(group = "group",
+                   fill = input$risk_factor_diet,
+                   label = "region",
+                   frame = "year"),
         color = "white", size = 0.3
       ) +
       coord_map(
@@ -456,7 +410,7 @@ server <- function(input, output) {
         trans = "log10",
         option = "plasma",
         direction = -1,
-        name = "Death rate",
+        name = "Death Rate",
         labels = label_number(big.mark = ","),
         na.value = "lightgray"
       ) +
@@ -469,8 +423,13 @@ server <- function(input, output) {
         plot.background = element_rect(fill = "white", color = "white"),
         plot.title = element_blank(),
         plot.subtitle = element_blank()
-      )
+      ))
+
+    ggplotly(p = diet_plotly) %>%
+      animation_opts(frame = 27)
   })
+
+
   diet_regions_filtered <- ({reactive({
     diet_regions %>%
       filter(entity %in% input$entity)
@@ -500,13 +459,17 @@ server <- function(input, output) {
   })
 
   # sanitation
-  output$plot_sanitation <- renderPlot({
-    total_joined %>%
+  output$plot_sanitation <- renderPlotly({
+    sanitation_plotly <- (total_joined %>%
       filter(year == input$selected_year_sanitation) %>%
       ggplot(aes(long, lat)) +
-      geom_polygon_interactive(
-        aes_string(group = "group", fill = input$risk_factor_sanitation),
-        color = "white", size = 0.3
+      geom_polygon(
+        aes_string(group = "group",
+                   fill = input$risk_factor_sanitation,
+                   label = "region",
+                   frame = "year"),
+        color = "white",
+        size = 0.3
       ) +
       coord_map(
         projection = "mercator",
@@ -517,7 +480,7 @@ server <- function(input, output) {
         option = "magma",
         direction = -1,
         end = 0.9,
-        name = "Death rate",
+        name = "Death Rate",
         labels = label_number(big.mark = ","),
         na.value = "lightgray"
       ) +
@@ -530,8 +493,13 @@ server <- function(input, output) {
         plot.background = element_rect(fill = "white", color = "white"),
         plot.title = element_blank(),
         plot.subtitle = element_blank()
-      )
+      ))
+
+    ggplotly(p = sanitation_plotly) %>%
+      animation_opts(frame = 27)
   })
+
+  # sanitation line plot
   sanitation_regions_filtered <- ({reactive({
     sanitation_regions %>%
       filter(entity %in% input$entity)
@@ -560,13 +528,16 @@ server <- function(input, output) {
         title = paste("Number of Deaths by", input$risk_factor_sanitation))
   })
 
-  # health
-  output$plot_health <- renderPlot({
-    total_joined %>%
+  # health map
+  output$plot_health <- renderPlotly({
+    health_plotly <- (total_joined %>%
       filter(year == input$selected_year_health) %>%
       ggplot(aes(long, lat)) +
-      geom_polygon_interactive(
-        aes_string(group = "group", fill = input$risk_factor_health),
+      geom_polygon(
+        aes_string(group = "group",
+                   fill = input$risk_factor_health,
+                   label = "region",
+                   frame = "year"),
         color = "white", size = 0.3
       ) +
       coord_map(
@@ -577,7 +548,7 @@ server <- function(input, output) {
         trans = "log10",
         option = "cividis",
         direction = -1,
-        name = "Death rate",
+        name = "Death Rate",
         labels = label_number(big.mark = ","),
         na.value = "lightgray"
       ) +
@@ -590,8 +561,14 @@ server <- function(input, output) {
         plot.background = element_rect(fill = "white", color = "white"),
         plot.title = element_blank(),
         plot.subtitle = element_blank()
-      )
+      ))
+    ggplotly(p = health_plotly) %>%
+      animation_opts(frame = 27)
+
   })
+
+  # health line plot
+
   health_regions_filtered <- ({reactive({
     health_regions %>%
       filter(entity %in% input$entity)
@@ -622,13 +599,17 @@ server <- function(input, output) {
         title = paste("Number of Deaths by", input$risk_factor_health))
   })
 
-  # post natal care
-  output$plot_post_natal_care <- renderPlot({
-    total_joined %>%
+  # post natal care map
+
+  output$plot_post_natal_care <- renderPlotly({
+    post_natal_care_plotly <- (total_joined %>%
       filter(year == input$selected_year_post_natal_care) %>%
       ggplot(aes(long, lat)) +
-      geom_polygon_interactive(
-        aes_string(group = "group", fill = input$risk_factor_post_natal_care),
+      geom_polygon(
+        aes_string(group = "group",
+                   fill = input$risk_factor_post_natal_care,
+                   label = "region",
+                   frame = "year"),
         color = "white", size = 0.3
       ) +
       coord_map(
@@ -640,7 +621,7 @@ server <- function(input, output) {
         option = "mako",
         direction = -1,
         end = 0.9,
-        name = "Death rate",
+        name = "Death Rate",
         labels = label_number(big.mark = ","),
         na.value = "lightgray"
       ) +
@@ -653,8 +634,12 @@ server <- function(input, output) {
         plot.background = element_rect(fill = "white", color = "white"),
         plot.title = element_blank(),
         plot.subtitle = element_blank()
-      )
+      ))
+    ggplotly(p = post_natal_care_plotly) %>%
+      animation_opts(frame = 27)
   })
+
+  # post natal care line plot
   post_natal_care_regions_filtered <- ({reactive({
     post_natal_care_regions %>%
       filter(entity %in% input$entity)
