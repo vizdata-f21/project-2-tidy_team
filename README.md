@@ -1,4 +1,4 @@
 # project-2-tidy_team
 
-An interactive spatio-temporal visualization of worldwide deaths related to air pollution.
+An interactive spatio-temporal visualization of worldwide deaths related to air pollution and various other risk factors.
 
