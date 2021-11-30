@@ -3,7 +3,6 @@
 library(shiny)
 library(shinythemes)
 library(shinyBS)
-library(plotly)
 library(ggiraph)
 library(tidyverse)
 library(here)
@@ -99,8 +98,12 @@ ui <- fluidPage(
                    )
                  )
                ),
+               # trying to make plot_click show country name and death rate
+               # output code on line: 373
                mainPanel(
-                 plotOutput(outputId = "plot_air"),
+                 plotOutput(outputId = "plot_air",
+                            click = "plot_click"),
+                 verbatimTextOutput("info_air"),
                  sliderInput(
                    inputId = "selected_year_air",
                    label = "Select year",
@@ -366,6 +369,13 @@ server <- function(input, output) {
         plot.title = element_blank(),
         plot.subtitle = element_blank()
       )
+  })
+  # The output right now shows long and lat of map. Would like country name and death rate
+  output$info_air <- renderPrint ({
+    req(input$plot_click)
+    x <- round(input$plot_click$x, 2)
+    y <- round(input$plot_click$y, 2)
+    cat("Long:", x, ", Lat:", y, sep = "")
   })
 
   # substance
