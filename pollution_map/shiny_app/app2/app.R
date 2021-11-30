@@ -108,10 +108,10 @@ ui <- fluidPage(
                    inputId = "risk_factor_substance",
                    label = "Type of Substance",
                    choices = c(
-                     "Secondhand Smoking" = "secondhand_smoke",
-                     "Alcohol Use" = "alcohol_use",
-                     "Drug Use" = "drug_use",
-                     "Smoking" = "smoking"
+                     "Secondhand Smoking" = "secondhand_smoke_rate",
+                     "Alcohol Use" = "alcohol_use_rate",
+                     "Drug Use" = "drug_use_rate",
+                     "Smoking" = "smoking_rate"
                    )
                  ),
                  checkboxGroupInput(inputId = "entity",
@@ -145,13 +145,13 @@ ui <- fluidPage(
                    inputId = "risk_factor_diet",
                    label = "Type of Diet",
                    choices = c(
-                     "Low in Fruits" = "diet_low_in_fruits",
-                     "Low in Vegetables" = "diet_low_in_vegetables",
-                     "High in Sodium" = "diet_high_in_sodium",
+                     "Low in Fruits" = "diet_low_in_fruits_rate",
+                     "Low in Vegetables" = "diet_low_in_vegetables_rate",
+                     "High in Sodium" = "diet_high_in_sodium_rate",
                      "Low in Whole Grains" =
-                       "diet_low_in_whole_grains",
+                       "diet_low_in_whole_grains_rate",
                      "Low in Nuts and Seeds" =
-                       "diet_low_in_nuts_and_seeds"
+                       "diet_low_in_nuts_and_seeds_rate"
                    )
                  ),
                  checkboxGroupInput(inputId = "entity",
@@ -184,10 +184,10 @@ ui <- fluidPage(
                    inputId = "risk_factor_sanitation",
                    label = "Type of Sanitation",
                    choices = c(
-                     "Unsafe Water Source" = "unsafe_water_source",
-                     "Unsafe Sanitation" = "unsafe_sanitation",
+                     "Unsafe Water Source" = "unsafe_water_source_rate",
+                     "Unsafe Sanitation" = "unsafe_sanitation_rate",
                      "No Hand Wash" =
-                       "no_access_to_handwash_facility"
+                       "no_access_to_handwash_facility_rate"
                    )
                  ),
                  checkboxGroupInput(inputId = "entity",
@@ -223,17 +223,15 @@ ui <- fluidPage(
                    choices = c(
                      "Low Physical Activity" =
                        "low_physical_activity",
-                     "High Glucose" = "high_fasting_plasma_glucose",
-                     "High Cholesterol" = "high_total_cholesterol",
-                     "High Body Mass Index" =
-                       "high_body_mass_index",
+                     "High Glucose" = "high_fasting_plasma_glucose_rate",
+                     "High Cholesterol" = "high_total_cholesterol_rate",
+                     "High Body Mass Index" = "high_body_mass_index_rate",
                      "High Blood Pressure" =
-                       "high_systolic_blood_pressure",
-                     "Iron Deficiency" = "iron_deficiency",
-                     "Vitamin A Defficiency" =
-                       "vitamin_a_deficiency",
+                       "high_systolic_blood_pressure_rate",
+                     "Iron Deficiency" = "iron_deficiency_rate",
+                     "Vitamin A Defficiency" = "vitamin_a_deficiency_rate",
                      "Low Bone Mineral Density" =
-                       "low_bone_mineral_density"
+                       "low_bone_mineral_density_rate"
                    )
                  ),
                  checkboxGroupInput(inputId = "entity",
@@ -267,13 +265,13 @@ ui <- fluidPage(
                    label = "Type of Post-Natal Care",
                    choices = c(
                      "Nonexclusive Breastfeeding" =
-                       "non_exclusive_breastfeeding",
+                       "non_exclusive_breastfeeding_rate",
                      "Discontinued Breastfeeding" =
-                       "discontinued_breastfeeding",
-                     "Child Wasting" = "child_wasting",
-                     "Child Stunting" = "child_stunting",
+                       "discontinued_breastfeeding_rate",
+                     "Child Wasting" = "child_wasting_rate",
+                     "Child Stunting" = "child_stunting_rate",
                      "Low Birth Weight" =
-                       "low_birth_weight_for_gestation"
+                       "low_birth_weight_for_gestation_rate"
                    )
                  ),
                  checkboxGroupInput(inputId = "entity",
@@ -314,6 +312,10 @@ server <- function(input, output) {
   # })
   output$selected_regions <- reactive({
     paste("You've selected", length(input$entity), "regions.")
+  })
+    substance_use_regions_filtered <- reactive({
+    substance_use_regions %>%
+      filter(entity %in% input$entity)
   })
 
   # air pollution
@@ -388,15 +390,12 @@ server <- function(input, output) {
         plot.subtitle = element_blank()
       )
   })
-  substance_regions_filtered <- reactive({
-    substance_use_regions %>%
-      filter(entity %in% input$entity)
-  })
+
   output$plot_substance_line <- renderPlot({
      validate(
-       need(length(input$entity) <= 8, "Please select a maxiumum of 8 regions")
+       need(length(input$entity) <= 9, "Please select a maxiumum of 8 regions")
      )
-    ggplot(data = substance_regions_filtered()) +
+    ggplot(data = substance_use_regions_filtered()) +
       geom_line(aes_string(group = "entity",
                            color = "entity",
                            x = "year",
