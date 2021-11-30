@@ -16,6 +16,21 @@ library(scales)
 total_joined <- read_rds(
   here("data", "compressed_final_data.rds"))
 
+substance_use_regions <- read_rds(
+  here("data", "substance_use_regions"))
+
+sanitation_regions <- read_rds(
+  here("data", "sanitation_regions"))
+
+diet_regions <- read_rds(
+  here("data", "diet_regions"))
+
+health_regions <- read_rds(
+  here("data", "health_regions"))
+
+post_natal_care_regions <- read_rds(
+  here("data", "post_natal_care_regions"))
+
 # Define choices & random selection --------------------------------------------
 
 # substance

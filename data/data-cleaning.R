@@ -115,8 +115,8 @@ total_joined <- joined_population %>%
             outdoor_air_pollution_rate = outdoor_air_pollution / population_historical_estimates * 100000,
             diet_high_in_sodium_rate = diet_high_in_sodium / population_historical_estimates * 100000,
             diet_low_in_whole_grains_rate = diet_low_in_whole_grains / population_historical_estimates * 100000,
-            diet_low_in_nuts_and_seeds_rate = diet_low_in_nuts_and_seeds / population_historical_estimates * 100000,
-            .groups = "drop"
+            diet_low_in_nuts_and_seeds_rate = diet_low_in_nuts_and_seeds / population_historical_estimates * 100000
+            #.groups = "drop"
             ) %>%
 
 #`summarise()` has grouped output by 'region', 'year'. You can override using the `.groups` argument.
