@@ -10,6 +10,7 @@ library(here)
 library(janitor)
 library(maps)
 library(scales)
+library(readr)
 
 # Load pre-cleaned data --------------------------------------------------------
 
@@ -385,6 +386,7 @@ server <- function(input, output) {
         xlim = c(-180, 180)
       ) +
       scale_fill_viridis_c(
+        trans = "log10",
         option = "inferno",
         direction = -1,
         begin = 0.2,
@@ -442,6 +444,7 @@ server <- function(input, output) {
         xlim = c(-180, 180)
       ) +
       scale_fill_viridis_c(
+        trans = "log10",
         option = "plasma",
         direction = -1,
         name = "Death rate",
@@ -501,6 +504,7 @@ server <- function(input, output) {
         xlim = c(-180, 180)
       ) +
       scale_fill_viridis_c(
+        trans = "log10",
         option = "magma",
         direction = -1,
         end = 0.9,
@@ -561,6 +565,7 @@ server <- function(input, output) {
         xlim = c(-180, 180)
       ) +
       scale_fill_viridis_c(
+        trans = "log10",
         option = "cividis",
         direction = -1,
         name = "Death rate",
@@ -598,7 +603,9 @@ server <- function(input, output) {
       scale_y_continuous(labels = comma) +
       scale_x_continuous(breaks = seq(from = 1990, to = 2017, by = 3),
                          limits = c(1990, 2017)) +
-      scale_color_viridis_d(option = "cividis", begin = 0.1) +
+      scale_color_viridis_d(
+        option = "cividis",
+        begin = 0.1) +
       labs(
         x = "Year",
         y = "Number of Deaths",
@@ -620,6 +627,7 @@ server <- function(input, output) {
         xlim = c(-180, 180)
       ) +
       scale_fill_viridis_c(
+        trans = "log10",
         option = "mako",
         direction = -1,
         end = 0.9,
