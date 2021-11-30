@@ -237,7 +237,7 @@ ui <- fluidPage(
                    label = "Type of Health",
                    choices = c(
                      "Low Physical Activity" =
-                       "low_physical_activity",
+                       "low_physical_activity_rate",
                      "High Glucose" = "high_fasting_plasma_glucose_rate",
                      "High Cholesterol" = "high_total_cholesterol_rate",
                      "High Body Mass Index" = "high_body_mass_index_rate",

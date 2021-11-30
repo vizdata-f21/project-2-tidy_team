@@ -83,7 +83,7 @@ population <- read_rds(
 total_joined <- total_joined %>%
   left_join(population, by = c("region" = "entity", "year"))
 
-total_joined <- joined_population %>%
+total_joined <- total_joined %>%
   group_by(region, year) %>%
   summarize(unsafe_water_source_rate = unsafe_water_source / population_historical_estimates * 100000,
             unsafe_sanitation_rate = unsafe_sanitation / population_historical_estimates * 100000,
@@ -220,3 +220,4 @@ post_natal_care_regions <- regions %>%
          low_birth_weight_for_gestation)
 
 write_rds(post_natal_care_regions, "data/post_natal_care_regions.rds", "gz")
+
