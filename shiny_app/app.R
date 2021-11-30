@@ -9,6 +9,7 @@ library(here)
 library(janitor)
 library(maps)
 library(scales)
+library(plotly)
 library(readr)
 
 # Load pre-cleaned data --------------------------------------------------------
@@ -332,12 +333,16 @@ server <- function(input, output) {
   # air pollution
   output$plot_air <- renderPlotly({
    air_plotly <- (total_joined %>%
-      filter(year == input$selected_year_air) %>%
+      #filter(year == input$selected_year_air) %>%
       ggplot(aes(long, lat)) +
       geom_polygon(
         aes_string(
-          group = "group", fill = input$air_pollution_type),
-        color = "white", size = 0.1
+          group = "group",
+          fill = input$air_pollution_type,
+          label = "region"),
+         # frame = "year"),
+          color = "white",
+          size = 0.1
       ) +
       coord_map(
         projection = "mercator",
