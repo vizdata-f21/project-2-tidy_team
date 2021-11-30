@@ -177,7 +177,7 @@ substance_use_regions <- regions %>%
          drug_use,
          smoking)
 
-write_rds(substance_use_regions, "data/substance_use_regions.rds", "gz")
+write_rds(substance_use_regions, here("data","substance_use_regions.rds"), "gz")
 
 
 diet_regions <- regions %>%
@@ -188,7 +188,7 @@ diet_regions <- regions %>%
          diet_low_in_whole_grains,
          diet_high_in_sodium)
 
-write_rds(diet_regions, "data/diet_regions.rds", "gz")
+write_rds(diet_regions, here("data","diet_regions.rds"), "gz")
 
 sanitation_regions <- regions %>%
   select(entity, code, year,
@@ -196,7 +196,7 @@ sanitation_regions <- regions %>%
          unsafe_sanitation,
          no_access_to_handwashing_facility)
 
-write_rds(sanitation_regions, "data/sanitation_regions.rds", "gz")
+write_rds(sanitation_regions, here("data","sanitation_regions.rds"), "gz")
 
 health_regions <- regions %>%
   select(entity, code, year,
@@ -209,7 +209,7 @@ health_regions <- regions %>%
          vitamin_a_deficiency,
          low_bone_mineral_density)
 
-write_rds(health_regions, "data/health_regions.rds", "gz")
+write_rds(health_regions, here("data","health_regions.rds"), "gz")
 
 post_natal_care_regions <- regions %>%
   select(entity, code, year,
@@ -219,4 +219,4 @@ post_natal_care_regions <- regions %>%
          child_stunting,
          low_birth_weight_for_gestation)
 
-write_rds(post_natal_care_regions, "data/post_natal_care_regions.rds", "gz")
+write_rds(post_natal_care_regions, here("data","post_natal_care_regions.rds"), "gz")

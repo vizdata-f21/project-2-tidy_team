@@ -100,8 +100,6 @@ ui <- fluidPage(
                ),
                mainPanel(
                  plotOutput(outputId = "plot_air"),
-                          #  click = "plot_click"),
-               #  verbatimTextOutput("info"),
                  sliderInput(
                    inputId = "selected_year_air",
                    label = "Select year",
