@@ -84,8 +84,15 @@ air_pollution_joined <- air_pollution_joined %>%
 total_joined <- world_map_data %>%
   left_join(air_pollution_joined, by = c("region" = "entity"))
 
-# write rds file for total joined
+# load filtered population data
+# population data from [Our World in Data](https://ourworldindata.org/grapher/population?time=1899..latest&country=AFG~Africa~ALB~DZA~ASM~AND~AGO~AIA~ATG~ARM~ABW~ARG~Asia~AUS~AUT~AZE~BHS~BHR~BGD)
 
+population <- read_rds("~/R/project-2-tidy_team/data/population_data.RData")
+
+new <- total_joined %>%
+  left_join(population, by = c("region" = "entity", "year"))
+
+# write rds file for total joined
 write_rds(total_joined, "data/compressed_final_data.rds", "gz")
 
 # for regions line plot
@@ -184,19 +191,3 @@ post_natal_care_regions <- regions %>%
          low_birth_weight_for_gestation)
 
 write_rds(post_natal_care_regions, "data/post_natal_care_regions.rds", "gz")
-
-
-# population data -------------------------------------------------------------
-
-# importing population data from [Our World in Data](https://ourworldindata.org/grapher/population?time=1899..latest&country=AFG~Africa~ALB~DZA~ASM~AND~AGO~AIA~ATG~ARM~ABW~ARG~Asia~AUS~AUT~AZE~BHS~BHR~BGD)
-
-population <- read_excel("data/population.xlsx", skip = 1)
-
-population <- clean_names(population)
-
-population <- population %>%
-  filter(year >= 1990 & year <= 2017)
-
-air_pollution_joined <- death_rates_from_air_pollution %>%
-  left_join(number_deaths_by_risk_factor, by = c("entity", "year", "code"))
-
