@@ -79,6 +79,7 @@ selected_regions_choices_post_natal_care <-
 ui <- fluidPage(
   theme = shinytheme("cosmo"),
   titlePanel("Deaths By Risk Factors"),
+
   # air pollution
   tabsetPanel(
     tabPanel("Air Pollution",
@@ -100,8 +101,6 @@ ui <- fluidPage(
                ),
                mainPanel(
                  plotOutput(outputId = "plot_air"),
-                 #  click = "plot_click"),
-                 #  verbatimTextOutput("info"),
                  sliderInput(
                    inputId = "selected_year_air",
                    label = "Select year",
@@ -367,9 +366,6 @@ server <- function(input, output) {
         plot.title = element_blank(),
         plot.subtitle = element_blank()
       )
-  })
-  output$info <- renderText({
-    paste0("Country:", input$plot_click$entity)
   })
 
   # substance
