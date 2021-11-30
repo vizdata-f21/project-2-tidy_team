@@ -79,6 +79,16 @@ total_joined <- world_map_data %>%
 population <- read_rds(
   here("data", "population_data.RData"))
 
+population <- population %>%
+  mutate(entity = case_when(
+    entity == "United States" ~ "USA",
+    entity == "United Kingdom" ~ "UK",
+    entity == "Czechia" ~ "Czech Republic",
+    entity == "Congo" ~ "Republic of Congo",
+    entity == "Democratic Republic of Congo" ~ "Democratic Republic of the Congo",
+    TRUE ~ entity
+  ))
+
 total_joined <- total_joined %>%
   left_join(population, by = c("region" = "entity", "year"))
 
