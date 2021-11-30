@@ -103,19 +103,19 @@ ui <- fluidPage(
                # output code on line: 373
                mainPanel(
                  plotlyOutput(outputId = "plot_air"),
-                              #,
-                            #click = "plot_click"),
+                 #,
+                 #click = "plot_click"),
                  #verbatimTextOutput("info_air"),
-                 sliderInput(
-                   inputId = "selected_year_air",
-                   label = "Select year",
-                   min = 1990,
-                   value = 1990,
-                   max = 2017,
-                   width = "100%",
-                   animate = TRUE,
-                   sep = ""
-                 )
+                 # sliderInput(
+                 #   inputId = "selected_year_air",
+                 #   label = "Select year",
+                 #   min = 1990,
+                 #   value = 1990,
+                 #   max = 2017,
+                 #   width = "100%",
+                 #   animate = TRUE,
+                 #   sep = ""
+                 # )
                )
              )
     ),
@@ -332,51 +332,52 @@ server <- function(input, output) {
 
   # air pollution
   output$plot_air <- renderPlotly({
-   air_plotly <- (total_joined %>%
-      #filter(year == input$selected_year_air) %>%
-      ggplot(aes(long, lat)) +
-      geom_polygon(
-        aes_string(
-          group = "group",
-          fill = input$air_pollution_type,
-          label = "region"),
-         # frame = "year"),
-          color = "white",
-          size = 0.1
-      ) +
-      coord_map(
-        projection = "mercator",
-        xlim = c(-180, 180)
-      ) +
-      scale_fill_viridis_c(
-        limits = c(0, 350),
-        begin = 0.3,
-        option = "turbo",
-        # turbo pallet coordinates with AQI colors:
-        # (https://webcam.srs.fs.fed.us/test/AQI.shtml)
-        name = "Death rate",
-        labels = label_number(big.mark = ","),
-        na.value = "lightgray"
-      ) +
-      theme_void() +
-      theme(
-        text = element_text(color = "black"),
-        legend.direction = "vertical",
-        legend.position = "left",
-        legend.key.height = unit(2, "cm"),
-        plot.background = element_rect(fill = "white", color = "white"),
-        plot.title = element_blank(),
-        plot.subtitle = element_blank()
-      ))
+    air_plotly <- (total_joined %>%
+                     #filter(year == input$selected_year_air) %>%
+                     ggplot(aes(long, lat)) +
+                     geom_polygon(
+                       aes_string(
+                         group = "group",
+                         fill = input$air_pollution_type,
+                         label = "region",
+                         frame = "year"),
+                       color = "white",
+                       size = 0.1
+                     ) +
+                     coord_map(
+                       projection = "mercator",
+                       xlim = c(-180, 180)
+                     ) +
+                     scale_fill_viridis_c(
+                       limits = c(0, 350),
+                       begin = 0.3,
+                       option = "turbo",
+                       # turbo pallet coordinates with AQI colors:
+                       # (https://webcam.srs.fs.fed.us/test/AQI.shtml)
+                       name = "Death rate",
+                       labels = label_number(big.mark = ","),
+                       na.value = "lightgray"
+                     ) +
+                     theme_void() +
+                     theme(
+                       text = element_text(color = "black"),
+                       legend.direction = "vertical",
+                       legend.position = "left",
+                       legend.key.height = unit(2, "cm"),
+                       plot.background = element_rect(fill = "white", color = "white"),
+                       plot.title = element_blank(),
+                       plot.subtitle = element_blank()
+                     ))
 
-   ggplotly(air_plotly)
+    ggplotly(p = air_plotly) %>%
+      animation_opts(frame = 27)
 
   })
   # The output right now shows long and lat of map. Would like country name and death rate
   #output$info_air <- renderPrint ({
-   # req(input$plot_click)
-   # x <- round(input$plot_click$x, 2)
-   # y <- round(input$plot_click$y, 2)
+  # req(input$plot_click)
+  # x <- round(input$plot_click$x, 2)
+  # y <- round(input$plot_click$y, 2)
   #  cat("Long:", x, ", Lat:", y, sep = "")
   #})
 
