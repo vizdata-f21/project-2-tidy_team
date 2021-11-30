@@ -116,8 +116,6 @@ total_joined <- total_joined %>%
          diet_low_in_whole_grains_rate = diet_low_in_whole_grains / population_historical_estimates * 100000,
          diet_low_in_nuts_and_seeds_rate = diet_low_in_nuts_and_seeds / population_historical_estimates * 100000)
 
-
-#`summarise()` has grouped output by 'region', 'year'. You can override using the `.groups` argument.
 # write rds file for total joined
 
 write_rds(total_joined, here("data", "compressed_final_data.rds"), "gz")
@@ -218,4 +216,3 @@ post_natal_care_regions <- regions %>%
          low_birth_weight_for_gestation)
 
 write_rds(post_natal_care_regions, "data/post_natal_care_regions.rds", "gz")
-
