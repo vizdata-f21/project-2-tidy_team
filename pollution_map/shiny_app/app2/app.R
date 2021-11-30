@@ -17,19 +17,19 @@ total_joined <- read_rds(
   here("data", "compressed_final_data.rds"))
 
 substance_use_regions <- read_rds(
-  here("data", "substance_use_regions"))
+  here("data", "substance_use_regions.rds"))
 
 sanitation_regions <- read_rds(
-  here("data", "sanitation_regions"))
+  here("data", "sanitation_regions.rds"))
 
 diet_regions <- read_rds(
-  here("data", "diet_regions"))
+  here("data", "diet_regions.rds"))
 
 health_regions <- read_rds(
-  here("data", "health_regions"))
+  here("data", "health_regions.rds"))
 
 post_natal_care_regions <- read_rds(
-  here("data", "post_natal_care_regions"))
+  here("data", "post_natal_care_regions.rds"))
 
 # Define choices & random selection --------------------------------------------
 
