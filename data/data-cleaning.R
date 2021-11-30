@@ -79,7 +79,7 @@ https://ourworldindata.org/grapher/population?time=1899..latest&country=AFG~Afri
 
 population <- read_rds("~/R/project-2-tidy_team/data/population_data.RData")
 
-joined_population <- total_joined %>%
+total_joined <- total_joined %>%
   left_join(population, by = c("region" = "entity", "year"))
 
 total_joined <- joined_population %>%
