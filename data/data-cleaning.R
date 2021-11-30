@@ -7,34 +7,27 @@ library(maps)
 library(readxl)
 library(janitor)
 
-# Load data for pollutants ---------------------------------------------------------
+# Load data for pollutants ----------------------------------------------------
 
 # air pollution data
-death_rates_from_air_pollution_csv <- read_csv(
+death_rates_from_air_pollution <- read_csv(
   here("data", "death-rates-from-air-pollution.csv"),
   show_col_types = FALSE
 )
 
-number_deaths_by_risk_factor_csv <- read_csv(
+number_deaths_by_risk_factor <- read_csv(
   here("data", "number-of-deaths-by-risk-factor.csv"),
   show_col_types = FALSE
 )
 
-# gdp data
-gdp_by_country_csv <- read_csv(
-  here("data", "gdp-data.csv"),
-  show_col_types = FALSE
-)
 
-# NOTE: added _csv ending to eliminate need for naming later versions "clean"
-
-# world map data
+# load world map data
 world_map_data <- map_data("world") %>%
   as_tibble()
 
 # renaming variables to clean them up
 
-death_rates_from_air_pollution <- death_rates_from_air_pollution_csv %>%
+death_rates_from_air_pollution <- death_rates_from_air_pollution %>%
   clean_names() %>%
   rename(
     death_rate_air_pollution =
@@ -45,12 +38,8 @@ death_rates_from_air_pollution <- death_rates_from_air_pollution_csv %>%
       deaths_ambient_ozone_pollution_sex_both_age_age_standardized_rate
   )
 
-number_deaths_by_risk_factor <- number_deaths_by_risk_factor_csv %>%
+number_deaths_by_risk_factor <- number_deaths_by_risk_factor %>%
   clean_names()
-
-gdp_by_country <- gdp_by_country_csv %>%
-  clean_names() %>%
-  pivot_wider()
 
 # joining air pollution data together
 air_pollution_joined <- death_rates_from_air_pollution %>%
@@ -85,12 +74,49 @@ total_joined <- world_map_data %>%
   left_join(air_pollution_joined, by = c("region" = "entity"))
 
 # load filtered population data
-# population data from [Our World in Data](https://ourworldindata.org/grapher/population?time=1899..latest&country=AFG~Africa~ALB~DZA~ASM~AND~AGO~AIA~ATG~ARM~ABW~ARG~Asia~AUS~AUT~AZE~BHS~BHR~BGD)
+# population data from [Our World in Data](https://ourworldindata.org/grapher/population?time=1899..latest&country=AFG~Africa~ALB~DZA~ASM~AND~AGO~AIA~ATG~ARM~ABW~ARG~Asia~AUS~AUT~AZE~BHS~BHR~BGD
+https://ourworldindata.org/grapher/population?time=1899..latest&country=AFG~Africa~ALB~DZA~ASM~AND~AGO~AIA~ATG~ARM~ABW~ARG~Asia~AUS~AUT~AZE~BHS~BHR~BGD)
 
 population <- read_rds("~/R/project-2-tidy_team/data/population_data.RData")
 
-new <- total_joined %>%
+joined_population <- total_joined %>%
   left_join(population, by = c("region" = "entity", "year"))
+
+total_joined <- joined_population %>%
+  group_by(region, year) %>%
+  summarize(unsafe_water_source_rate = unsafe_water_source / population_historical_estimates * 100000,
+            unsafe_sanitation_rate = unsafe_sanitation / population_historical_estimates * 100000,
+            no_access_to_handwashing_facility_rate = no_access_to_handwashing_facility / population_historical_estimates * 100000,
+            household_air_pollution_from_solid_fuels_rate = household_air_pollution_from_solid_fuels / population_historical_estimates * 100000,
+            non_exclusive_breastfeeding_rate = non_exclusive_breastfeeding / population_historical_estimates * 100000,
+            household_air_pollution_from_solid_fuels_rate = household_air_pollution_from_solid_fuels / population_historical_estimates * 100000,
+            non_exclusive_breastfeeding_rate = non_exclusive_breastfeeding / population_historical_estimates * 100000,
+            discontinued_breastfeeding_rate = discontinued_breastfeeding / population_historical_estimates * 100000,
+            child_wasting_rate = child_wasting / population_historical_estimates * 100000,
+            child_stunting_rate = child_stunting / population_historical_estimates * 100000,
+            low_birth_weight_for_gestation_rate = low_birth_weight_for_gestation / population_historical_estimates * 100000,
+            secondhand_smoke_rate = secondhand_smoke / population_historical_estimates * 100000,
+            alcohol_use_rate = alcohol_use / population_historical_estimates * 100000,
+            drug_use_rate = drug_use / population_historical_estimates * 100000,
+            diet_low_in_fruits_rate = diet_low_in_fruits / population_historical_estimates * 100000,
+            diet_low_in_vegetables_rate = diet_low_in_vegetables / population_historical_estimates * 100000,
+            unsafe_sex_rate = unsafe_sex/ population_historical_estimates * 100000,
+            low_physical_activity_rate = low_physical_activity / population_historical_estimates * 100000,
+            high_fasting_plasma_glucose_rate = high_fasting_plasma_glucose / population_historical_estimates * 100000,
+            high_total_cholesterol_rate = high_total_cholesterol / population_historical_estimates * 100000,
+            high_body_mass_index_rate = high_body_mass_index / population_historical_estimates * 100000,
+            high_systolic_blood_pressure_rate = high_systolic_blood_pressure / population_historical_estimates * 100000,
+            smoking_rate = smoking / population_historical_estimates * 100000,
+            iron_deficiency_rate = iron_deficiency / population_historical_estimates * 100000,
+            vitamin_a_deficiency_rate = vitamin_a_deficiency / population_historical_estimates * 100000,
+            low_bone_mineral_density_rate = low_bone_mineral_density / population_historical_estimates * 100000,
+            air_pollution_rate = air_pollution / population_historical_estimates * 100000,
+            outdoor_air_pollution_rate = outdoor_air_pollution / population_historical_estimates * 100000,
+            diet_high_in_sodium_rate = diet_high_in_sodium / population_historical_estimates * 100000,
+            diet_low_in_whole_grains_rate = diet_low_in_whole_grains / population_historical_estimates * 100000,
+            diet_low_in_nuts_and_seeds_rate = diet_low_in_nuts_and_seeds / population_historical_estimates * 100000,
+            )
+
 
 # write rds file for total joined
 write_rds(total_joined, "data/compressed_final_data.rds", "gz")
