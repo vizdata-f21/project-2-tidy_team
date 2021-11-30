@@ -101,9 +101,10 @@ ui <- fluidPage(
                # trying to make plot_click show country name and death rate
                # output code on line: 373
                mainPanel(
-                 plotOutput(outputId = "plot_air",
-                            click = "plot_click"),
-                 verbatimTextOutput("info_air"),
+                 plotlyOutput(outputId = "plot_air"),
+                              #,
+                            #click = "plot_click"),
+                 #verbatimTextOutput("info_air"),
                  sliderInput(
                    inputId = "selected_year_air",
                    label = "Select year",
@@ -319,14 +320,7 @@ ui <- fluidPage(
 
 
 server <- function(input, output) {
-  # remaining <- reactive({
-  # names(total_joined)[c("death_rate_air_pollution",
-  # "death_rate_household_pollution",
-  # "death_rate_ambient_matter_pollution",
-  # "death_rate_ozone_pollution",
-  #-match(input$air_pollution_type,
-  # names(total_joined)))]
-  # })
+
   output$selected_regions <- reactive({
     paste("You've selected", length(input$entity), "regions.")
   })
@@ -336,11 +330,11 @@ server <- function(input, output) {
   })
 
   # air pollution
-  output$plot_air <- renderPlot({
-    total_joined %>%
+  output$plot_air <- renderPlotly({
+   air_plotly <- (total_joined %>%
       filter(year == input$selected_year_air) %>%
       ggplot(aes(long, lat)) +
-      geom_polygon_interactive(
+      geom_polygon(
         aes_string(
           group = "group", fill = input$air_pollution_type),
         color = "white", size = 0.1
@@ -368,15 +362,18 @@ server <- function(input, output) {
         plot.background = element_rect(fill = "white", color = "white"),
         plot.title = element_blank(),
         plot.subtitle = element_blank()
-      )
+      ))
+
+   ggplotly(air_plotly)
+
   })
   # The output right now shows long and lat of map. Would like country name and death rate
-  output$info_air <- renderPrint ({
-    req(input$plot_click)
-    x <- round(input$plot_click$x, 2)
-    y <- round(input$plot_click$y, 2)
-    cat("Long:", x, ", Lat:", y, sep = "")
-  })
+  #output$info_air <- renderPrint ({
+   # req(input$plot_click)
+   # x <- round(input$plot_click$x, 2)
+   # y <- round(input$plot_click$y, 2)
+  #  cat("Long:", x, ", Lat:", y, sep = "")
+  #})
 
   # substance
   output$plot_substance <- renderPlot({
