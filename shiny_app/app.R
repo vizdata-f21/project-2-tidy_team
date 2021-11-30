@@ -283,7 +283,6 @@ server <- function(input, output) {
   # air pollution
   output$plot_air <- renderPlotly({
     air_plotly <- (total_joined %>%
-                     #filter(year == input$selected_year_air) %>%
                      ggplot(aes(long, lat)) +
                      geom_polygon(
                        aes_string(
@@ -327,7 +326,6 @@ server <- function(input, output) {
   # substance
   output$plot_substance <- renderPlotly({
     substance_plotly <- (total_joined %>%
-      filter(year == input$selected_year_substance) %>%
       ggplot(aes(long, lat)) +
       geom_polygon(
         aes_string(group = "group",
@@ -393,7 +391,6 @@ server <- function(input, output) {
   # diet
   output$plot_diet <- renderPlotly({
     diet_plotly <- (total_joined %>%
-      filter(year == input$selected_year_diet) %>%
       ggplot(aes(long, lat)) +
       geom_polygon(
         aes_string(group = "group",
@@ -461,7 +458,6 @@ server <- function(input, output) {
   # sanitation
   output$plot_sanitation <- renderPlotly({
     sanitation_plotly <- (total_joined %>%
-      filter(year == input$selected_year_sanitation) %>%
       ggplot(aes(long, lat)) +
       geom_polygon(
         aes_string(group = "group",
@@ -531,7 +527,6 @@ server <- function(input, output) {
   # health map
   output$plot_health <- renderPlotly({
     health_plotly <- (total_joined %>%
-      filter(year == input$selected_year_health) %>%
       ggplot(aes(long, lat)) +
       geom_polygon(
         aes_string(group = "group",
@@ -603,7 +598,6 @@ server <- function(input, output) {
 
   output$plot_post_natal_care <- renderPlotly({
     post_natal_care_plotly <- (total_joined %>%
-      filter(year == input$selected_year_post_natal_care) %>%
       ggplot(aes(long, lat)) +
       geom_polygon(
         aes_string(group = "group",
