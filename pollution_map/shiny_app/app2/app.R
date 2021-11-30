@@ -100,6 +100,8 @@ ui <- fluidPage(
                ),
                mainPanel(
                  plotOutput(outputId = "plot_air"),
+                 #  click = "plot_click"),
+                 #  verbatimTextOutput("info"),
                  sliderInput(
                    inputId = "selected_year_air",
                    label = "Select year",
@@ -221,8 +223,8 @@ ui <- fluidPage(
                    width = "100%",
                    animate = TRUE,
                    sep = ""
-                  ),
-                  plotOutput(outputId = "plot_sanitation_line")
+                 ),
+                 plotOutput(outputId = "plot_sanitation_line")
                )
              )
     ),
@@ -235,7 +237,7 @@ ui <- fluidPage(
                    label = "Type of Health",
                    choices = c(
                      "Low Physical Activity" =
-                       "low_physical_activity",
+                       "low_physical_activity_rate",
                      "High Glucose" = "high_fasting_plasma_glucose_rate",
                      "High Cholesterol" = "high_total_cholesterol_rate",
                      "High Body Mass Index" = "high_body_mass_index_rate",
@@ -326,7 +328,7 @@ server <- function(input, output) {
   output$selected_regions <- reactive({
     paste("You've selected", length(input$entity), "regions.")
   })
-    substance_use_regions_filtered <- reactive({
+  substance_use_regions_filtered <- reactive({
     substance_use_regions %>%
       filter(entity %in% input$entity)
   })
@@ -405,9 +407,9 @@ server <- function(input, output) {
   })
 
   output$plot_substance_line <- renderPlot({
-     validate(
-       need(length(input$entity) <= 9, "Please select a maxiumum of 8 regions")
-     )
+    validate(
+      need(length(input$entity) <= 9, "Please select a maxiumum of 8 regions")
+    )
     ggplot(data = substance_use_regions_filtered()) +
       geom_line(aes_string(group = "entity",
                            color = "entity",
