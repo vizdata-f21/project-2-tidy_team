@@ -6,11 +6,12 @@ library(shinyBS)
 library(ggiraph)
 library(tidyverse)
 library(here)
-library(janitor)
+#library(janitor)
 library(maps)
 library(scales)
 library(plotly)
 library(readr)
+library(mapproj)
 
 # Load pre-cleaned data --------------------------------------------------------
 
@@ -366,12 +367,12 @@ server <- function(input, output) {
   })
 
   output$plot_substance_line <- renderPlot({
-    validate(
-      need(length(input$entity) <= 9, "Please select a maxiumum of 8 regions")
-    )
+    #validate(
+      #need(length(input$entity) <= 9, "Please select a maxiumum of 8 regions")
+    #)
     ggplot(data = substance_use_regions_filtered()) +
-      geom_line(aes_string(group = "entity",
-                           color = "entity",
+      geom_line(aes_string(group = input$entity, # used to be "entity"
+                           color = input$entity, # used to be "entity"
                            x = "year",
                            y = input$risk_factor_substance), size = 1) +
       theme_gray(base_size = 16) +
@@ -570,12 +571,12 @@ server <- function(input, output) {
   })
   })
   output$plot_health_line <- renderPlot({
-    validate(
-      need(length(input$entity) <= 8, "Please select a maxiumum of 8 regions")
-    )
+    #validate(
+      #need(length(input$entity) <= 8, "Please select a maximum of 8 regions")
+    #)
     ggplot(data = health_regions_filtered()) +
-      geom_line(aes_string(group = "entity",
-                           color = "entity",
+      geom_line(aes_string(group = input$entity,
+                           color = input$entity,
                            x = "year",
                            y = input$risk_factor_health), size = 1) +
       theme_gray(base_size = 16) +
