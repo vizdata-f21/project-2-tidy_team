@@ -44,7 +44,7 @@ number_deaths_by_risk_factor <- number_deaths_by_risk_factor %>%
 air_pollution_joined <- death_rates_from_air_pollution %>%
   left_join(number_deaths_by_risk_factor, by = c("entity", "year", "code"))
 
-# Next Step: Do a series of case_when (before join) to resolve inconsistencies
+# A series of case_when (before join) to resolve inconsistencies
 # noticeable ones include: French Guiana (but there might just not be data on this)
 
 # clean world_map_data
@@ -84,38 +84,38 @@ total_joined <- total_joined %>%
 
 total_joined <- total_joined %>%
   group_by(region, year) %>%
-  summarize(unsafe_water_source_rate = unsafe_water_source / population_historical_estimates * 100000,
-            unsafe_sanitation_rate = unsafe_sanitation / population_historical_estimates * 100000,
-            no_access_to_handwashing_facility_rate = no_access_to_handwashing_facility / population_historical_estimates * 100000,
-            household_air_pollution_from_solid_fuels_rate = household_air_pollution_from_solid_fuels / population_historical_estimates * 100000,
-            non_exclusive_breastfeeding_rate = non_exclusive_breastfeeding / population_historical_estimates * 100000,
-            household_air_pollution_from_solid_fuels_rate = household_air_pollution_from_solid_fuels / population_historical_estimates * 100000,
-            non_exclusive_breastfeeding_rate = non_exclusive_breastfeeding / population_historical_estimates * 100000,
-            discontinued_breastfeeding_rate = discontinued_breastfeeding / population_historical_estimates * 100000,
-            child_wasting_rate = child_wasting / population_historical_estimates * 100000,
-            child_stunting_rate = child_stunting / population_historical_estimates * 100000,
-            low_birth_weight_for_gestation_rate = low_birth_weight_for_gestation / population_historical_estimates * 100000,
-            secondhand_smoke_rate = secondhand_smoke / population_historical_estimates * 100000,
-            alcohol_use_rate = alcohol_use / population_historical_estimates * 100000,
-            drug_use_rate = drug_use / population_historical_estimates * 100000,
-            diet_low_in_fruits_rate = diet_low_in_fruits / population_historical_estimates * 100000,
-            diet_low_in_vegetables_rate = diet_low_in_vegetables / population_historical_estimates * 100000,
-            unsafe_sex_rate = unsafe_sex/ population_historical_estimates * 100000,
-            low_physical_activity_rate = low_physical_activity / population_historical_estimates * 100000,
-            high_fasting_plasma_glucose_rate = high_fasting_plasma_glucose / population_historical_estimates * 100000,
-            high_total_cholesterol_rate = high_total_cholesterol / population_historical_estimates * 100000,
-            high_body_mass_index_rate = high_body_mass_index / population_historical_estimates * 100000,
-            high_systolic_blood_pressure_rate = high_systolic_blood_pressure / population_historical_estimates * 100000,
-            smoking_rate = smoking / population_historical_estimates * 100000,
-            iron_deficiency_rate = iron_deficiency / population_historical_estimates * 100000,
-            vitamin_a_deficiency_rate = vitamin_a_deficiency / population_historical_estimates * 100000,
-            low_bone_mineral_density_rate = low_bone_mineral_density / population_historical_estimates * 100000,
-            air_pollution_rate = air_pollution / population_historical_estimates * 100000,
-            outdoor_air_pollution_rate = outdoor_air_pollution / population_historical_estimates * 100000,
-            diet_high_in_sodium_rate = diet_high_in_sodium / population_historical_estimates * 100000,
-            diet_low_in_whole_grains_rate = diet_low_in_whole_grains / population_historical_estimates * 100000,
-            diet_low_in_nuts_and_seeds_rate = diet_low_in_nuts_and_seeds / population_historical_estimates * 100000)
-            #.groups = "drop"
+  mutate(unsafe_water_source_rate = unsafe_water_source / population_historical_estimates * 100000,
+         unsafe_sanitation_rate = unsafe_sanitation / population_historical_estimates * 100000,
+         no_access_to_handwashing_facility_rate = no_access_to_handwashing_facility / population_historical_estimates * 100000,
+         household_air_pollution_from_solid_fuels_rate = household_air_pollution_from_solid_fuels / population_historical_estimates * 100000,
+         non_exclusive_breastfeeding_rate = non_exclusive_breastfeeding / population_historical_estimates * 100000,
+         household_air_pollution_from_solid_fuels_rate = household_air_pollution_from_solid_fuels / population_historical_estimates * 100000,
+         non_exclusive_breastfeeding_rate = non_exclusive_breastfeeding / population_historical_estimates * 100000,
+         discontinued_breastfeeding_rate = discontinued_breastfeeding / population_historical_estimates * 100000,
+         child_wasting_rate = child_wasting / population_historical_estimates * 100000,
+         child_stunting_rate = child_stunting / population_historical_estimates * 100000,
+         low_birth_weight_for_gestation_rate = low_birth_weight_for_gestation / population_historical_estimates * 100000,
+         secondhand_smoke_rate = secondhand_smoke / population_historical_estimates * 100000,
+         alcohol_use_rate = alcohol_use / population_historical_estimates * 100000,
+         drug_use_rate = drug_use / population_historical_estimates * 100000,
+         diet_low_in_fruits_rate = diet_low_in_fruits / population_historical_estimates * 100000,
+         diet_low_in_vegetables_rate = diet_low_in_vegetables / population_historical_estimates * 100000,
+         unsafe_sex_rate = unsafe_sex/ population_historical_estimates * 100000,
+         low_physical_activity_rate = low_physical_activity / population_historical_estimates * 100000,
+         high_fasting_plasma_glucose_rate = high_fasting_plasma_glucose / population_historical_estimates * 100000,
+         high_total_cholesterol_rate = high_total_cholesterol / population_historical_estimates * 100000,
+         high_body_mass_index_rate = high_body_mass_index / population_historical_estimates * 100000,
+         high_systolic_blood_pressure_rate = high_systolic_blood_pressure / population_historical_estimates * 100000,
+         smoking_rate = smoking / population_historical_estimates * 100000,
+         iron_deficiency_rate = iron_deficiency / population_historical_estimates * 100000,
+         vitamin_a_deficiency_rate = vitamin_a_deficiency / population_historical_estimates * 100000,
+         low_bone_mineral_density_rate = low_bone_mineral_density / population_historical_estimates * 100000,
+         air_pollution_rate = air_pollution / population_historical_estimates * 100000,
+         outdoor_air_pollution_rate = outdoor_air_pollution / population_historical_estimates * 100000,
+         diet_high_in_sodium_rate = diet_high_in_sodium / population_historical_estimates * 100000,
+         diet_low_in_whole_grains_rate = diet_low_in_whole_grains / population_historical_estimates * 100000,
+         diet_low_in_nuts_and_seeds_rate = diet_low_in_nuts_and_seeds / population_historical_estimates * 100000)
+
 
 #`summarise()` has grouped output by 'region', 'year'. You can override using the `.groups` argument.
 # write rds file for total joined
