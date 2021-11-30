@@ -100,23 +100,8 @@ ui <- fluidPage(
                    )
                  )
                ),
-               # trying to make plot_click show country name and death rate
-               # output code on line: 373
                mainPanel(
-                 plotlyOutput(outputId = "plot_air"),
-                 #,
-                 #click = "plot_click"),
-                 #verbatimTextOutput("info_air"),
-                 # sliderInput(
-                 #   inputId = "selected_year_air",
-                 #   label = "Select year",
-                 #   min = 1990,
-                 #   value = 1990,
-                 #   max = 2017,
-                 #   width = "100%",
-                 #   animate = TRUE,
-                 #   sep = ""
-                 # )
+                 plotlyOutput(outputId = "plot_air")
                )
              )
     ),
@@ -270,7 +255,7 @@ ui <- fluidPage(
   )
 )
 
-
+# Define Surver ----------------------------------------------------------------
 server <- function(input, output) {
 
   output$selected_regions <- reactive({
@@ -367,9 +352,9 @@ server <- function(input, output) {
   })
 
   output$plot_substance_line <- renderPlot({
-    #validate(
-      #need(length(input$entity) <= 9, "Please select a maxiumum of 8 regions")
-    #)
+    validate(
+      need(length(input$entity) <= 9, "Please select a maximum of 8 regions")
+    )
     ggplot(data = substance_use_regions_filtered()) +
       geom_line(aes_string(group = input$entity, # used to be "entity"
                            color = input$entity, # used to be "entity"
