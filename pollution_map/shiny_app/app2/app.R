@@ -13,8 +13,7 @@ library(scales)
 
 # Load pre-cleaned data --------------------------------------------------------
 
-total_joined <- read_rds(
-  here("data", "compressed_final_data.rds"))
+total_joined <- read_rds(here("data", "compressed_final_data.rds"))
 
 substance_use_regions <- read_rds(
   here("data", "substance_use_regions.rds"))
