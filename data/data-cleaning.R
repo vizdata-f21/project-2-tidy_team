@@ -245,13 +245,6 @@ substance_use_regions <- regions %>%
          drug_use,
          smoking)
 
-# fixing variable name to presentable form for plots
-substance_use_regions <- substance_use_regions %>%
-  rename('Secondhand_Smoking' = secondhand_smoke,
-         'Alcohol_Use' = alcohol_use,
-         'Drug_Use' = drug_use,
-         'Smoking' = smoking)
-
 write_rds(substance_use_regions, "data/substance_use_regions.rds", "gz")
 
 sanitation_regions <- regions %>%
