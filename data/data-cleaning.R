@@ -221,6 +221,10 @@ regions$entity <- factor(regions$entity,
                                     "Southern Latin America",
                                     "Tropical Latin America"))
 
+regions <- regions %>%
+  mutate(entity = as.character(entity))
+
+
 # make data sets for risk factors via region line plots
 
 air_pollution_regions <- regions %>%

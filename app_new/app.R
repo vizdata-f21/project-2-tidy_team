@@ -6,14 +6,13 @@ library(shinyBS)
 library(ggiraph)
 library(tidyverse)
 library(here)
-#library(janitor)
 library(maps)
 library(scales)
 library(plotly)
 library(readr)
 library(mapproj)
 
-# Load pre-cleaned data --------------------------------------------------------
+# Load pre-cleaned, compressed data --------------------------------------------------------
 
 total_joined <- read_rds(here("data", "compressed_final_data.rds"))
 
@@ -82,14 +81,14 @@ ui <- fluidPage(
                    inputId = "risk_factor_substance",
                    label = "Type of Substance",
                    choices = c(
-                     "Secondhand Smoking" = "secondhand_smoke_rate",
-                     "Alcohol Use" = "alcohol_use_rate",
-                     "Drug Use" = "drug_use_rate",
-                     "Smoking" = "smoking_rate"
+                     "Secondhand Smoking" = "secondhand_smoking",
+                     "Alcohol Use" = "alcohol_use",
+                     "Drug Use" = "drug_use",
+                     "Smoking" = "smoking"
                    )
                  ),
                  checkboxGroupInput(inputId = "entity",
-                                    label = "Select up to 8 regions:",
+                                    label = "Select up to 3 regions:",
                                     choices = regions_choices_substance,
                                     selected =
                                       selected_regions_choices_substance
@@ -235,21 +234,26 @@ server <- function(input, output) {
 
   output$plot_substance_line <- renderPlot({
     validate(
-      need(length(input$entity) <= 8, "Please select a maximum of 8 regions")
+      need(length(input$entity) <= 3, "Please select a maximum of 3 regions.")
     )
     ggplot(data = substance_use_regions_filtered(),
-           aes_string(group = input$entity, # used to be "entity"
-                      color = input$entity, # used to be "entity"
-                      x = "year",
-                      y = input$risk_factor_substance)) +
+           aes_string(x = "year",
+                      y = input$risk_factor_substance,
+                      group = "entity",
+                      color = "entity")) +
       geom_line(size = 1) +
-      theme_gray(base_size = 16) +
+      theme_minimal(base_size = 16) +
       theme(legend.position = "bottom",
-            panel.grid.minor.x = element_blank()) +
+            aspect.ratio = 0.4,
+            axis.ticks.x = element_blank(),
+            axis.ticks.y = element_blank(),
+            panel.grid.minor.x = element_blank(),
+            panel.grid.minor.y = element_blank()) +
       scale_y_continuous(labels = comma) +
       scale_x_continuous(breaks = seq(from = 1990, to = 2017, by = 3),
-                         limits = c(1990, 2017)) +
-      scale_color_viridis_d(option = "inferno", begin = 0.1) +
+                         limits = c(1990, 2017),
+                         expand = c(0, 0)) +
+      scale_color_viridis_d() +
       labs(
         x = "Year",
         y = "Number of Deaths",
