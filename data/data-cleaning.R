@@ -221,7 +221,16 @@ regions$entity <- factor(regions$entity,
                                     "Southern Latin America",
                                     "Tropical Latin America"))
 
-# make datasets for risk factors via region line plots
+# make data sets for risk factors via region line plots
+
+air_pollution_regions <- regions %>%
+  select(entity, code, year,
+         death_rate_air_pollution,
+         death_rate_household_pollution,
+         death_rate_ambient_matter_pollution,
+         death_rate_ozone_pollution)
+
+write_rds(air_pollution_regions, "data/air_pollution_regions.rds", "gz")
 
 substance_use_regions <- regions %>%
   select(entity, code, year,
@@ -232,17 +241,6 @@ substance_use_regions <- regions %>%
 
 write_rds(substance_use_regions, "data/substance_use_regions.rds", "gz")
 
-
-diet_regions <- regions %>%
-  select(entity, code, year,
-         diet_low_in_fruits,
-         diet_low_in_vegetables,
-         diet_low_in_nuts_and_seeds,
-         diet_low_in_whole_grains,
-         diet_high_in_sodium)
-
-write_rds(diet_regions, "data/diet_regions.rds", "gz")
-
 sanitation_regions <- regions %>%
   select(entity, code, year,
          unsafe_water_source,
@@ -251,25 +249,4 @@ sanitation_regions <- regions %>%
 
 write_rds(sanitation_regions, "data/sanitation_regions.rds", "gz")
 
-health_regions <- regions %>%
-  select(entity, code, year,
-         low_physical_activity,
-         high_fasting_plasma_glucose,
-         high_total_cholesterol,
-         high_body_mass_index,
-         high_systolic_blood_pressure,
-         iron_deficiency,
-         vitamin_a_deficiency,
-         low_bone_mineral_density)
 
-write_rds(health_regions, "data/health_regions.rds", "gz")
-
-post_natal_care_regions <- regions %>%
-  select(entity, code, year,
-         non_exclusive_breastfeeding,
-         discontinued_breastfeeding,
-         child_wasting,
-         child_stunting,
-         low_birth_weight_for_gestation)
-
-write_rds(post_natal_care_regions, "data/post_natal_care_regions.rds", "gz")
