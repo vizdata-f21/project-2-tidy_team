@@ -6,14 +6,13 @@ library(shinyBS)
 library(ggiraph)
 library(tidyverse)
 library(here)
-#library(janitor)
 library(maps)
 library(scales)
 library(plotly)
 library(readr)
 library(mapproj)
 
-# Load pre-cleaned data --------------------------------------------------------
+# Load pre-cleaned, compressed data --------------------------------------------------------
 
 total_joined <- read_rds(here("data", "compressed_final_data.rds"))
 
