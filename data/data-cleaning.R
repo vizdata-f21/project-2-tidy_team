@@ -126,6 +126,45 @@ total_joined <- total_joined %>%
          diet_low_in_whole_grains_rate = diet_low_in_whole_grains / population_historical_estimates * 100000,
          diet_low_in_nuts_and_seeds_rate = diet_low_in_nuts_and_seeds / population_historical_estimates * 100000)
 
+total_joined <- total_joined %>%
+  select(-code.x,
+         -drug_use,
+         -unsafe_water_source,
+         -unsafe_sanitation,
+         -no_access_to_handwashing_facility,
+         -household_air_pollution_from_solid_fuels,
+         -non_exclusive_breastfeeding,
+         -discontinued_breastfeeding,
+         -child_wasting,
+         -child_stunting,
+         -low_birth_weight_for_gestation,
+         -secondhand_smoke,
+         -alcohol_use,
+         -diet_low_in_fruits,
+         -diet_low_in_vegetables,
+         -unsafe_sex,
+         -low_physical_activity,
+         -high_fasting_plasma_glucose,
+         -high_total_cholesterol,
+         -high_body_mass_index,
+         -high_systolic_blood_pressure,
+         -smoking,
+         -iron_deficiency,
+         -vitamin_a_deficiency,
+         -low_bone_mineral_density,
+         -air_pollution,
+         -outdoor_air_pollution,
+         -diet_high_in_sodium,
+         -diet_low_in_whole_grains,
+         -diet_low_in_nuts_and_seeds,
+         -code.y,
+         -population_historical_estimates,
+         -high_body_mass_index
+         )
+
+#total_joined %>%
+  #filter(year == 1990)
+
 # write rds file for total joined
 
 write_rds(total_joined, here("data", "compressed_final_data.rds"), "gz")
