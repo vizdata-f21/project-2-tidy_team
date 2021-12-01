@@ -31,7 +31,7 @@ regions_choices_substance <- substance_use_regions %>%
   arrange(entity) %>%
   pull(entity)
 
-selected_regions_choices_substance <- sample(regions_choices_substance, 1)
+#selected_regions_choices_substance <- sample(regions_choices_substance, 1)
 
 # sanitation
 regions_choices_sanitation <- sanitation_regions %>%
@@ -39,7 +39,7 @@ regions_choices_sanitation <- sanitation_regions %>%
   arrange(entity) %>%
   pull(entity)
 
-selected_regions_choices_sanitation <- sample(regions_choices_sanitation, 1)
+#selected_regions_choices_sanitation <- sample(regions_choices_sanitation, 1)
 
 # Define UI --------------------------------------------------------------------
 
@@ -99,8 +99,8 @@ ui <- fluidPage(
                  checkboxGroupInput(inputId = "entity",
                                     label = "Select Up to 3 Regions",
                                     choices = regions_choices_substance,
-                                    selected =
-                                      selected_regions_choices_substance
+                                    #selected =
+                                      #selected_regions_choices_substance
                )),
                mainPanel(fluidRow(
                  plotlyOutput(outputId = "plot_substance"),
@@ -125,8 +125,8 @@ ui <- fluidPage(
                  checkboxGroupInput(inputId = "entity",
                                     label = "Select up to 8 regions:",
                                     choices = regions_choices_sanitation,
-                                    selected =
-                                      selected_regions_choices_sanitation
+                                   # selected =
+                                      #selected_regions_choices_sanitation
                  )
                ),
                mainPanel(
