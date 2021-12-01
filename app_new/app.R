@@ -295,7 +295,9 @@ server <- function(input, output) {
                              plot.subtitle = element_blank()))
 
     ggplotly(p = substance_plotly, width = 800, height = 600) %>%
-      animation_opts(frame = 27)
+      animation_opts(frame = 27) %>%
+      layout(yaxis = list(showline= F),
+             xaxis = list(showline= F)) # removing axis lines: https://plotly.com/r/axes/
 
   })
 
