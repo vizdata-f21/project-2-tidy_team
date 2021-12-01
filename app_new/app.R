@@ -31,7 +31,7 @@ regions_choices_substance <- substance_use_regions %>%
   arrange(entity) %>%
   pull(entity)
 
-selected_regions_choices_substance <- sample(regions_choices_substance, 3)
+selected_regions_choices_substance <- sample(regions_choices_substance, 1)
 
 # sanitation
 regions_choices_sanitation <- sanitation_regions %>%
@@ -39,7 +39,7 @@ regions_choices_sanitation <- sanitation_regions %>%
   arrange(entity) %>%
   pull(entity)
 
-selected_regions_choices_sanitation <- sample(regions_choices_sanitation, 3)
+selected_regions_choices_sanitation <- sample(regions_choices_sanitation, 1)
 
 # Define UI --------------------------------------------------------------------
 
@@ -119,7 +119,7 @@ ui <- fluidPage(
                      "Unsafe Water Source" = "unsafe_water_source",
                      "Unsafe Sanitation" = "unsafe_sanitation",
                      "No Hand Wash" =
-                       "no_access_to_handwash_facility"
+                       "no_access_to_handwashing_facility"
                    )
                  ),
                  checkboxGroupInput(inputId = "entity",
