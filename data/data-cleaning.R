@@ -230,10 +230,8 @@ regions <- regions %>%
 air_pollution_regions <- regions %>%
   select(entity,
          year,
-         death_rate_air_pollution,
-         death_rate_household_pollution,
-         death_rate_ambient_matter_pollution,
-         death_rate_ozone_pollution)
+         air_pollution,
+         outdoor_air_pollution)
 
 write_rds(air_pollution_regions, "data/air_pollution_regions.rds", "gz")
 

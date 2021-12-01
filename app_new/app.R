@@ -51,7 +51,7 @@ ui <- fluidPage(
                sidebarPanel(
                  selectInput(
                    inputId = "air_pollution_type",
-                   label = "Type of Air Pollution",
+                   label = "Select Type of Air Pollution for Map",
                    choices = c(
                      "Air Pollution Death Rate" = "death_rate_air_pollution",
                      "Household Pollution Death Rate" =
@@ -61,10 +61,22 @@ ui <- fluidPage(
                      "Ozone Pollution Death Rate" =
                        "death_rate_ozone_pollution"
                    )
-                 )
+                 ),
+                 selectInput(
+                   inputId = "air_pollution_line",
+                   label = "Select Type of Air Pollution for Line Plot",
+                   choices = c(
+                     "Air Pollution" = "air_pollution",
+                     "Outdoor Air Pollution" = "outdoor_air_pollution")
+                 ),
+                 checkboxGroupInput(inputId = "entity",
+                                    label = "Select Up to 3 Regions",
+                                    choices = regions_choices_substance
+                 ),
                ),
                mainPanel(
-                 plotlyOutput(outputId = "plot_air")
+                 plotlyOutput(outputId = "plot_air"),
+                 plotOutput(outputId = "plot_air_pollution_line")
                )
              )
     ),
@@ -109,7 +121,7 @@ ui <- fluidPage(
                sidebarPanel(
                  selectInput(
                    inputId = "risk_factor_sanitation_map",
-                   label = "Type of Sanitation",
+                   label = "Select Type of Sanitation Issue for Map",
                    choices = c(
                      "Unsafe Water Source" = "unsafe_water_source_rate",
                      "Unsafe Sanitation" = "unsafe_sanitation_rate",
@@ -119,7 +131,7 @@ ui <- fluidPage(
                  ),
                  selectInput(
                    inputId = "risk_factor_sanitation_line",
-                   label = "Type of Sanitation",
+                   label = "Select Type of Sanitation Issue for Line Plot",
                    choices = c(
                      "Unsafe Water Source" = "unsafe_water_source",
                      "Unsafe Sanitation" = "unsafe_sanitation",
@@ -186,6 +198,49 @@ server <- function(input, output) {
       animation_opts(frame = 27)
 
   })
+
+  # interactivity for air pollution line plot
+
+  output$selected_regions_air <- reactive({
+    paste("You've selected", length(input$entity), "regions.")
+  })
+
+  air_pollution_regions_filtered <- reactive({
+    air_pollution_regions %>%
+      filter(entity %in% input$entity)
+  })
+
+  # air pollution line plot
+
+  output$plot_air_pollution_line <- renderPlot({
+    validate(
+      need(length(input$entity) <= 3, "Please select a maximum of 3 regions.")
+    )
+    ggplot(data = air_pollution_regions_filtered(),
+           aes_string(x = "year",
+                      y = input$air_pollution_line,
+                      group = "entity",
+                      color = "entity")) +
+      geom_line(size = 1) +
+      theme_minimal(base_size = 16) +
+      theme(legend.position = "bottom",
+            aspect.ratio = 0.4,
+            axis.ticks.x = element_blank(),
+            axis.ticks.y = element_blank(),
+            panel.grid.minor.x = element_blank(),
+            panel.grid.minor.y = element_blank()) +
+      scale_y_continuous(labels = comma) +
+      scale_x_continuous(breaks = seq(from = 1990, to = 2017, by = 3),
+                         limits = c(1990, 2017),
+                         expand = c(0, 0)) +
+      scale_color_viridis_d() +
+      labs(
+        x = "Year",
+        y = "Number of Deaths",
+        color = "Regions",
+        title = paste("Number of Deaths by", input$air_pollution_line))
+  })
+
 
   # substance
   output$plot_substance <- renderPlotly({
@@ -334,7 +389,7 @@ server <- function(input, output) {
                            color = "entity",
                            x = "year",
                            y = input$risk_factor_sanitation_line), size = 1) +
-      theme_gray(base_size = 16) +
+      theme_minimal(base_size = 16) +
       theme(legend.position = "bottom",
             panel.grid.minor.x = element_blank()) +
       scale_y_continuous(labels = comma) +
