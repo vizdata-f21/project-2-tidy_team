@@ -24,7 +24,7 @@ sanitation_regions <- read_rds(
   here("data", "sanitation_regions.rds"))
 
 
-# Define choices & random selection --------------------------------------------
+# Define choices & random selection for regions lineplots -----------------------
 
 # substance
 regions_choices_substance <- substance_use_regions %>%
@@ -45,10 +45,12 @@ selected_regions_choices_sanitation <- sample(regions_choices_sanitation, 3)
 # Define UI --------------------------------------------------------------------
 
 ui <- fluidPage(
+  # set theme for shiny app
   theme = shinytheme("cosmo"),
+  # make title for shiny app
   titlePanel("Deaths By Risk Factors"),
 
-  # air pollution
+  # air pollution tab
   tabsetPanel(
     tabPanel("Air Pollution",
              sidebarLayout(
@@ -72,7 +74,7 @@ ui <- fluidPage(
                )
              )
     ),
-    # substance
+    # substance tab
     tabPanel("Substance Use",
              sidebarLayout(
                sidebarPanel(
@@ -100,7 +102,7 @@ ui <- fluidPage(
              )
     ),
 
-    # sanitation
+    # sanitation tab
     tabPanel("Sanitation",
              sidebarLayout(
                sidebarPanel(
@@ -133,15 +135,7 @@ ui <- fluidPage(
 # Define Server ----------------------------------------------------------------
 server <- function(input, output) {
 
-  output$selected_regions <- reactive({
-    paste("You've selected", length(input$entity), "regions.")
-  })
-  substance_use_regions_filtered <- reactive({
-    substance_use_regions %>%
-      filter(entity %in% input$entity)
-  })
-
-  # air pollution
+  # air pollution map
   output$plot_air <- renderPlotly({
     air_plotly <- (total_joined %>%
                      ggplot(aes(long, lat)) +
@@ -226,6 +220,19 @@ server <- function(input, output) {
 
   })
 
+  # interactivity for substance line plot
+
+  output$selected_regions_sub <- reactive({
+    paste("You've selected", length(input$entity), "regions.")
+  })
+
+  substance_use_regions_filtered <- reactive({
+    substance_use_regions %>%
+      filter(entity %in% input$entity)
+  })
+
+  # substance line plot
+
   output$plot_substance_line <- renderPlot({
     validate(
       need(length(input$entity) <= 9, "Please select a maximum of 8 regions")
@@ -249,7 +256,7 @@ server <- function(input, output) {
         title = paste("Number of Deaths by", input$risk_factor_substance))
   })
 
-  # sanitation
+  # sanitation map
   output$plot_sanitation <- renderPlotly({
     sanitation_plotly <- (total_joined %>%
                             ggplot(aes(long, lat)) +
@@ -290,11 +297,18 @@ server <- function(input, output) {
   })
 
   # sanitation line plot
-  sanitation_regions_filtered <- ({reactive({
+
+  # interactivity for sanitation line plot
+  output$selected_regions_san <- reactive({
+    paste("You've selected", length(input$entity), "regions.")
+  })
+
+   sanitation_regions_filtered <- ({reactive({
     sanitation_regions %>%
       filter(entity %in% input$entity)
   })
   })
+
   output$plot_sanitation_line <- renderPlot({
     validate(
       need(length(input$entity) <= 8, "Please select a maxiumum of 8 regions")
