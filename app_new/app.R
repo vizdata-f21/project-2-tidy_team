@@ -31,15 +31,11 @@ regions_choices_substance <- substance_use_regions %>%
   arrange(entity) %>%
   pull(entity)
 
-#selected_regions_choices_substance <- sample(regions_choices_substance, 1)
-
 # sanitation
 regions_choices_sanitation <- sanitation_regions %>%
   distinct(entity) %>%
   arrange(entity) %>%
   pull(entity)
-
-#selected_regions_choices_sanitation <- sample(regions_choices_sanitation, 1)
 
 # Define UI --------------------------------------------------------------------
 
@@ -98,9 +94,7 @@ ui <- fluidPage(
                  ),
                  checkboxGroupInput(inputId = "entity",
                                     label = "Select Up to 3 Regions",
-                                    choices = regions_choices_substance,
-                                    #selected =
-                                      #selected_regions_choices_substance
+                                    choices = regions_choices_substance
                )),
                mainPanel(fluidRow(
                  plotlyOutput(outputId = "plot_substance"),
@@ -108,12 +102,23 @@ ui <- fluidPage(
                ))
              )
     ),
-    # sanitation tab
+
+     # sanitation tab
     tabPanel("Sanitation",
              sidebarLayout(
                sidebarPanel(
                  selectInput(
-                   inputId = "risk_factor_sanitation",
+                   inputId = "risk_factor_sanitation_map",
+                   label = "Type of Sanitation",
+                   choices = c(
+                     "Unsafe Water Source" = "unsafe_water_source_rate",
+                     "Unsafe Sanitation" = "unsafe_sanitation_rate",
+                     "No Hand Wash" =
+                       "no_access_to_handwashing_facility_rate"
+                   )
+                 ),
+                 selectInput(
+                   inputId = "risk_factor_sanitation_line",
                    label = "Type of Sanitation",
                    choices = c(
                      "Unsafe Water Source" = "unsafe_water_source",
@@ -123,10 +128,8 @@ ui <- fluidPage(
                    )
                  ),
                  checkboxGroupInput(inputId = "entity",
-                                    label = "Select up to 8 regions:",
-                                    choices = regions_choices_sanitation,
-                                   # selected =
-                                      #selected_regions_choices_sanitation
+                                    label = "Select Up to 3 Regions",
+                                    choices = regions_choices_sanitation
                  )
                ),
                mainPanel(
@@ -275,7 +278,7 @@ server <- function(input, output) {
                             ggplot(aes(long, lat)) +
                             geom_polygon(
                               aes_string(group = "group",
-                                         fill = input$risk_factor_sanitation,
+                                         fill = input$risk_factor_sanitation_map,
                                          label = "region",
                                          frame = "year"),
                               color = "white",
@@ -324,13 +327,13 @@ server <- function(input, output) {
 
   output$plot_sanitation_line <- renderPlot({
     validate(
-      need(length(input$entity) <= 8, "Please select a maxiumum of 8 regions")
+      need(length(input$entity) <= 3, "Please select a maxiumum of 3 regions")
     )
     ggplot(data = sanitation_regions_filtered()) +
       geom_line(aes_string(group = "entity",
                            color = "entity",
                            x = "year",
-                           y = input$risk_factor_sanitation), size = 1) +
+                           y = input$risk_factor_sanitation_line), size = 1) +
       theme_gray(base_size = 16) +
       theme(legend.position = "bottom",
             panel.grid.minor.x = element_blank()) +
@@ -342,7 +345,7 @@ server <- function(input, output) {
         x = "Year",
         y = "Number of Deaths",
         color = "Regions",
-        title = paste("Number of Deaths by", input$risk_factor_sanitation))
+        title = paste("Number of Deaths by", input$risk_factor_sanitation_line))
   })
 }
 
