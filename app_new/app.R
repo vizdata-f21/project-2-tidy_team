@@ -201,6 +201,7 @@ server <- function(input, output) {
 
   # interactivity for air pollution line plot
 
+  # this prints a sentence
   output$selected_regions_air <- reactive({
     paste("You've selected", length(input$entity), "regions.")
   })
