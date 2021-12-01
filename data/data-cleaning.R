@@ -160,7 +160,7 @@ total_joined <- total_joined %>%
          -code.y,
          -population_historical_estimates,
          -high_body_mass_index
-         )
+  )
 
 total_joined <- total_joined %>%
   filter(year == 1990 |
@@ -224,7 +224,8 @@ regions$entity <- factor(regions$entity,
 # make data sets for risk factors via region line plots
 
 air_pollution_regions <- regions %>%
-  select(entity, code, year,
+  select(entity,
+         year,
          death_rate_air_pollution,
          death_rate_household_pollution,
          death_rate_ambient_matter_pollution,
@@ -233,7 +234,8 @@ air_pollution_regions <- regions %>%
 write_rds(air_pollution_regions, "data/air_pollution_regions.rds", "gz")
 
 substance_use_regions <- regions %>%
-  select(entity, code, year,
+  select(entity,
+         year,
          secondhand_smoke,
          alcohol_use,
          drug_use,
@@ -242,11 +244,10 @@ substance_use_regions <- regions %>%
 write_rds(substance_use_regions, "data/substance_use_regions.rds", "gz")
 
 sanitation_regions <- regions %>%
-  select(entity, code, year,
+  select(entity,
+         year,
          unsafe_water_source,
          unsafe_sanitation,
          no_access_to_handwashing_facility)
 
 write_rds(sanitation_regions, "data/sanitation_regions.rds", "gz")
-
-

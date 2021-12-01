@@ -129,8 +129,8 @@ ui <- fluidPage(
                )
              )
     )
-             )
-    )
+  )
+)
 
 # Define Server ----------------------------------------------------------------
 server <- function(input, output) {
@@ -303,7 +303,7 @@ server <- function(input, output) {
     paste("You've selected", length(input$entity), "regions.")
   })
 
-   sanitation_regions_filtered <- ({reactive({
+  sanitation_regions_filtered <- ({reactive({
     sanitation_regions %>%
       filter(entity %in% input$entity)
   })
