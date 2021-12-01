@@ -233,14 +233,15 @@ server <- function(input, output) {
   # substance line plot
 
   output$plot_substance_line <- renderPlot({
-    validate(
-      need(length(input$entity) <= 8, "Please select a maximum of 8 regions")
-    )
-    ggplot(data = substance_use_regions_filtered()) +
+    #validate(
+      #need(length(input$entity) <= 8, "Please select a maximum of 8 regions")
+    #)
+    ggplot(data = substance_use_regions_filtered(),
+           aes_string(x = "year",
+           y = input$risk_factor_substance)) +
       geom_line(aes_string(group = input$entity, # used to be "entity"
-                           color = input$entity, # used to be "entity"
-                           x = "year",
-                           y = input$risk_factor_substance), size = 1) +
+                           color = input$entity), # used to be "entity"
+                           size = 1) +
       theme_gray(base_size = 16) +
       theme(legend.position = "bottom",
             panel.grid.minor.x = element_blank()) +

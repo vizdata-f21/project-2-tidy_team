@@ -221,6 +221,10 @@ regions$entity <- factor(regions$entity,
                                     "Southern Latin America",
                                     "Tropical Latin America"))
 
+regions <- regions %>%
+  mutate(entity = as.character(entity))
+
+
 # make data sets for risk factors via region line plots
 
 air_pollution_regions <- regions %>%
@@ -240,6 +244,13 @@ substance_use_regions <- regions %>%
          alcohol_use,
          drug_use,
          smoking)
+
+# fixing variable name to presentable form for plots
+substance_use_regions <- substance_use_regions %>%
+  rename('Secondhand_Smoking' = secondhand_smoke,
+         'Alcohol_Use' = alcohol_use,
+         'Drug_Use' = drug_use,
+         'Smoking' = smoking)
 
 write_rds(substance_use_regions, "data/substance_use_regions.rds", "gz")
 
