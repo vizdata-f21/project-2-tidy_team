@@ -69,7 +69,7 @@ ui <- fluidPage(
                      "Air Pollution" = "air_pollution",
                      "Outdoor Air Pollution" = "outdoor_air_pollution")
                  ),
-                 checkboxGroupInput(inputId = "entity",
+                 checkboxGroupInput(inputId = "entity_air",
                                     label = "Select Up to 3 Regions for Line Plot",
                                     choices = regions_choices_substance
                  ),
@@ -107,7 +107,7 @@ ui <- fluidPage(
                      "Smoking" = "smoking"
                    )
                  ),
-                 checkboxGroupInput(inputId = "entity",
+                 checkboxGroupInput(inputId = "entity_sub",
                                     label = "Select Up to 3 Regions for Line Plot",
                                     choices = regions_choices_substance
                )),
@@ -142,7 +142,7 @@ ui <- fluidPage(
                        "no_access_to_handwashing_facility"
                    )
                  ),
-                 checkboxGroupInput(inputId = "entity",
+                 checkboxGroupInput(inputId = "entity_san",
                                     label = "Select Up to 3 Regions for Line Plot",
                                     choices = regions_choices_sanitation
                  )
@@ -197,7 +197,7 @@ server <- function(input, output) {
                        plot.subtitle = element_blank()
                      ))
 
-    ggplotly(p = air_plotly, width = 1200, height = 900) %>%
+    ggplotly(p = air_plotly, width = 800, height = 600) %>%
       animation_opts(frame = 27, redraw = FALSE)
 
   })
@@ -206,19 +206,19 @@ server <- function(input, output) {
 
   # this prints a sentence
   output$selected_regions_air <- reactive({
-    paste("You've selected", length(input$entity), "regions.")
+    paste("You've selected", length(input$entity_air), "regions.")
   })
 
   air_pollution_regions_filtered <- reactive({
     air_pollution_regions %>%
-      filter(entity %in% input$entity)
+      filter(entity %in% input$entity_air)
   })
 
   # air pollution line plot
 
   output$plot_air_pollution_line <- renderPlot({
     validate(
-      need(length(input$entity) <= 3, "Please select a maximum of 3 regions.")
+      need(length(input$entity_air) <= 3, "Please select a maximum of 3 regions.")
     )
     ggplot(data = air_pollution_regions_filtered(),
            aes_string(x = "year",
@@ -291,12 +291,12 @@ server <- function(input, output) {
   # interactivity for substance line plot
 
   output$selected_regions_sub <- reactive({
-    paste("You've selected", length(input$entity), "regions.")
+    paste("You've selected", length(input$entity_sub), "regions.")
   })
 
   substance_use_regions_filtered <- reactive({
     substance_use_regions %>%
-      filter(entity %in% input$entity)
+      filter(entity %in% input$entity_sub)
   })
 
   # substance line plot
@@ -375,18 +375,18 @@ server <- function(input, output) {
 
   # interactivity for sanitation line plot
   output$selected_regions_san <- reactive({
-    paste("You've selected", length(input$entity), "regions.")
+    paste("You've selected", length(input$entity_san), "regions.")
   })
 
   sanitation_regions_filtered <- ({reactive({
     sanitation_regions %>%
-      filter(entity %in% input$entity)
+      filter(entity %in% input$entity_san)
   })
   })
 
   output$plot_sanitation_line <- renderPlot({
     validate(
-      need(length(input$entity) <= 3, "Please select a maxiumum of 3 regions")
+      need(length(input$entity_san) <= 3, "Please select a maxiumum of 3 regions")
     )
     ggplot(data = sanitation_regions_filtered()) +
       geom_line(aes_string(group = "entity",
