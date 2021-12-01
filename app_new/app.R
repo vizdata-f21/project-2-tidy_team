@@ -37,6 +37,10 @@ regions_choices_sanitation <- sanitation_regions %>%
   arrange(entity) %>%
   pull(entity)
 
+# Make Okabe-Ito Palette for Line Plot
+
+cbPalette <- c("#0072B2", "#D55E00", "#CC79A7")
+
 # Define UI --------------------------------------------------------------------
 
 ui <- fluidPage(
@@ -245,7 +249,7 @@ server <- function(input, output) {
       scale_x_continuous(breaks = seq(from = 1990, to = 2017, by = 3),
                          limits = c(1990, 2017),
                          expand = c(0, 0)) +
-      scale_color_viridis_d() +
+      scale_color_manual(values = cbPalette) +
       labs(
         x = "Year",
         y = "Number of Deaths",
@@ -276,7 +280,7 @@ server <- function(input, output) {
                              direction = -1,
                              begin = 0.2,
                              end = 0.9,
-                             name = "Death Rate",
+                             name = "Log of Death Rate",
                              labels = label_number(big.mark = ","),
                              na.value = "lightgray"
                            ) +
@@ -288,8 +292,7 @@ server <- function(input, output) {
                              legend.key.height = unit(2, "cm"),
                              plot.background = element_rect(fill = "white", color = "white"),
                              plot.title = element_blank(),
-                             plot.subtitle = element_blank()
-                           ))
+                             plot.subtitle = element_blank()))
 
     ggplotly(p = substance_plotly, width = 800, height = 600) %>%
       animation_opts(frame = 27)
@@ -330,7 +333,7 @@ server <- function(input, output) {
       scale_x_continuous(breaks = seq(from = 1990, to = 2017, by = 3),
                          limits = c(1990, 2017),
                          expand = c(0, 0)) +
-      scale_color_viridis_d() +
+      scale_color_manual(values = cbPalette) +
       labs(
         x = "Year",
         y = "Number of Deaths",
@@ -360,7 +363,7 @@ server <- function(input, output) {
                               option = "magma",
                               direction = -1,
                               end = 0.9,
-                              name = "Death Rate",
+                              name = "Log of Death Rate",
                               labels = label_number(big.mark = ","),
                               na.value = "lightgray"
                             ) +
@@ -407,7 +410,7 @@ server <- function(input, output) {
       scale_y_continuous(labels = comma) +
       scale_x_continuous(breaks = seq(from = 1990, to = 2017, by = 3),
                          limits = c(1990, 2017)) +
-      scale_color_viridis_d(option = "magma", begin = 0.1) +
+      scale_color_manual(values = cbPalette) +
       labs(
         x = "Year",
         y = "Number of Deaths",
