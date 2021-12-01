@@ -259,7 +259,7 @@ server <- function(input, output) {
                                          label = "region",
                                          frame = "year"),
                               color = "white",
-                              size = 0.3
+                              size = 0.1
                             ) +
                             coord_map(
                               projection = "mercator",
