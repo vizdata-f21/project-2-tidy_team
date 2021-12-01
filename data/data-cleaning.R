@@ -162,8 +162,16 @@ total_joined <- total_joined %>%
          -high_body_mass_index
          )
 
-#total_joined %>%
-  #filter(year == 1990)
+total_joined <- total_joined %>%
+  filter(year == 1990 |
+           year == 1993 |
+           year == 1996 |
+           year == 1999 |
+           year == 2002 |
+           year == 2005 |
+           year == 2008 |
+           year == 2011 |
+           year == 2015)
 
 # write rds file for total joined
 
