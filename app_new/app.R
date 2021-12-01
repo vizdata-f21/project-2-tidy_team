@@ -210,7 +210,9 @@ server <- function(input, output) {
                      ))
 
     ggplotly(p = air_plotly, width = 800, height = 600) %>%
-      animation_opts(frame = 27)
+      animation_opts(frame = 27) %>%
+      layout(yaxis = list(showline= F),
+             xaxis = list(showline= F)) # removing axis lines: https://plotly.com/r/axes/
 
   })
 
@@ -381,7 +383,10 @@ server <- function(input, output) {
                             ))
 
     ggplotly(p = sanitation_plotly, width = 800, height = 600) %>%
-      animation_opts(frame = 27)
+      animation_opts(frame = 27) %>%
+      layout(yaxis = list(showline= F),
+             xaxis = list(showline= F)) # removing axis lines: https://plotly.com/r/axes/
+
   })
 
   # sanitation line plot
