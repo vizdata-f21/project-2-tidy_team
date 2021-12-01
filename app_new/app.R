@@ -70,14 +70,17 @@ ui <- fluidPage(
                      "Outdoor Air Pollution" = "outdoor_air_pollution")
                  ),
                  checkboxGroupInput(inputId = "entity",
-                                    label = "Select Up to 3 Regions",
+                                    label = "Select Up to 3 Regions for Line Plot",
                                     choices = regions_choices_substance
                  ),
                ),
                mainPanel(
+                 fluidPage(
+                 verticalLayout(
                  plotlyOutput(outputId = "plot_air"),
-                 plotOutput(outputId = "plot_air_pollution_line")
+                 plotOutput(outputId = "plot_air_pollution_line"))
                )
+             )
              )
     ),
     # substance tab
@@ -105,7 +108,7 @@ ui <- fluidPage(
                    )
                  ),
                  checkboxGroupInput(inputId = "entity",
-                                    label = "Select Up to 3 Regions",
+                                    label = "Select Up to 3 Regions for Line Plot",
                                     choices = regions_choices_substance
                )),
                mainPanel(fluidRow(
@@ -140,7 +143,7 @@ ui <- fluidPage(
                    )
                  ),
                  checkboxGroupInput(inputId = "entity",
-                                    label = "Select Up to 3 Regions",
+                                    label = "Select Up to 3 Regions for Line Plot",
                                     choices = regions_choices_sanitation
                  )
                ),
@@ -194,8 +197,8 @@ server <- function(input, output) {
                        plot.subtitle = element_blank()
                      ))
 
-    ggplotly(p = air_plotly) %>%
-      animation_opts(frame = 27)
+    ggplotly(p = air_plotly, width = 1200, height = 900) %>%
+      animation_opts(frame = 27, redraw = FALSE)
 
   })
 
