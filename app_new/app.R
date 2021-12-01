@@ -48,7 +48,6 @@ ui <- fluidPage(
   theme = shinytheme("cosmo"),
   # make title for shiny app
   titlePanel("Deaths By Risk Factors"),
-
   # air pollution tab
   tabsetPanel(
     tabPanel("Air Pollution",
@@ -78,29 +77,37 @@ ui <- fluidPage(
              sidebarLayout(
                sidebarPanel(
                  selectInput(
-                   inputId = "risk_factor_substance",
-                   label = "Type of Substance",
+                   inputId = "risk_factor_substance_map",
+                   label = "Select Type of Substance for Map",
                    choices = c(
-                     "Secondhand Smoking" = "secondhand_smoking",
+                     "Secondhand Smoking" = "secondhand_smoke_rate",
+                     "Alcohol Use" = "alcohol_use_rate",
+                     "Drug Use" = "drug_use_rate",
+                     "Smoking" = "smoking_rate"
+                   )
+                 ),
+                 selectInput(
+                   inputId = "risk_factor_substance_line",
+                   label = "Select Type of Substance for Line Plot",
+                   choices = c(
+                     "Secondhand Smoking" = "secondhand_smoke",
                      "Alcohol Use" = "alcohol_use",
                      "Drug Use" = "drug_use",
                      "Smoking" = "smoking"
                    )
                  ),
                  checkboxGroupInput(inputId = "entity",
-                                    label = "Select up to 3 regions:",
+                                    label = "Select Up to 3 Regions",
                                     choices = regions_choices_substance,
                                     selected =
                                       selected_regions_choices_substance
-                 )
-               ),
-               mainPanel(
+               )),
+               mainPanel(fluidRow(
                  plotlyOutput(outputId = "plot_substance"),
                  plotOutput(outputId = "plot_substance_line")
-               )
+               ))
              )
     ),
-
     # sanitation tab
     tabPanel("Sanitation",
              sidebarLayout(
@@ -109,10 +116,10 @@ ui <- fluidPage(
                    inputId = "risk_factor_sanitation",
                    label = "Type of Sanitation",
                    choices = c(
-                     "Unsafe Water Source" = "unsafe_water_source_rate",
-                     "Unsafe Sanitation" = "unsafe_sanitation_rate",
+                     "Unsafe Water Source" = "unsafe_water_source",
+                     "Unsafe Sanitation" = "unsafe_sanitation",
                      "No Hand Wash" =
-                       "no_access_to_handwash_facility_rate"
+                       "no_access_to_handwash_facility"
                    )
                  ),
                  checkboxGroupInput(inputId = "entity",
@@ -183,7 +190,7 @@ server <- function(input, output) {
                            ggplot(aes(long, lat)) +
                            geom_polygon(
                              aes_string(group = "group",
-                                        fill = input$risk_factor_substance,
+                                        fill = input$risk_factor_substance_map,
                                         label = "region",
                                         frame = "year"),
                              color = "white",
@@ -238,7 +245,7 @@ server <- function(input, output) {
     )
     ggplot(data = substance_use_regions_filtered(),
            aes_string(x = "year",
-                      y = input$risk_factor_substance,
+                      y = input$risk_factor_substance_line,
                       group = "entity",
                       color = "entity")) +
       geom_line(size = 1) +
@@ -258,8 +265,9 @@ server <- function(input, output) {
         x = "Year",
         y = "Number of Deaths",
         color = "Regions",
-        title = paste("Number of Deaths by", input$risk_factor_substance))
+        title = paste("Number of Deaths by", input$risk_factor_substance_line))
   })
+
 
   # sanitation map
   output$plot_sanitation <- renderPlotly({
