@@ -78,6 +78,8 @@ ui <- fluidPage(
                  fluidPage(
                  verticalLayout(
                  plotlyOutput(outputId = "plot_air"),
+                 br(), br(), br(), br(), br(), br(), br(), br(),
+                 br(), br(), br(), br(),
                  plotOutput(outputId = "plot_air_pollution_line"))
                )
              )
