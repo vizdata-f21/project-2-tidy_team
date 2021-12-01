@@ -113,9 +113,12 @@ ui <- fluidPage(
                                     label = "Select Up to 3 Regions for Line Plot",
                                     choices = regions_choices_substance
                )),
-               mainPanel(fluidRow(
+               mainPanel(fluidPage(
+                 verticalLayout(
                  plotlyOutput(outputId = "plot_substance"),
-                 plotOutput(outputId = "plot_substance_line")
+                 br(), br(), br(), br(), br(), br(), br(), br(),
+                 br(), br(), br(), br(),
+                 plotOutput(outputId = "plot_substance_line"))
                ))
              )
     ),
@@ -149,9 +152,12 @@ ui <- fluidPage(
                                     choices = regions_choices_sanitation
                  )
                ),
-               mainPanel(
+               mainPanel(fluidPage(
+                 verticalLayout(
                  plotlyOutput(outputId = "plot_sanitation"),
-                 plotOutput(outputId = "plot_sanitation_line")
+                 br(), br(), br(), br(), br(), br(), br(), br(),
+                 br(), br(), br(), br(),
+                 plotOutput(outputId = "plot_sanitation_line")))
                )
              )
     )
@@ -200,7 +206,7 @@ server <- function(input, output) {
                      ))
 
     ggplotly(p = air_plotly, width = 800, height = 600) %>%
-      animation_opts(frame = 27, redraw = FALSE)
+      animation_opts(frame = 27)
 
   })
 
@@ -285,7 +291,7 @@ server <- function(input, output) {
                              plot.subtitle = element_blank()
                            ))
 
-    ggplotly(p = substance_plotly) %>%
+    ggplotly(p = substance_plotly, width = 800, height = 600) %>%
       animation_opts(frame = 27)
 
   })
@@ -369,7 +375,7 @@ server <- function(input, output) {
                               plot.subtitle = element_blank()
                             ))
 
-    ggplotly(p = sanitation_plotly) %>%
+    ggplotly(p = sanitation_plotly, width = 800, height = 600) %>%
       animation_opts(frame = 27)
   })
 
