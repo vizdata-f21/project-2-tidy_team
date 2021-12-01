@@ -237,11 +237,12 @@ server <- function(input, output) {
     validate(
       need(length(input$entity) <= 8, "Please select a maximum of 8 regions")
     )
-    ggplot(data = substance_use_regions_filtered()) +
-      geom_line(aes_string(group = input$entity, # used to be "entity"
-                           color = input$entity, # used to be "entity"
-                           x = "year",
-                           y = input$risk_factor_substance), size = 1) +
+    ggplot(data = substance_use_regions_filtered(),
+           aes_string(group = input$entity, # used to be "entity"
+                      color = input$entity, # used to be "entity"
+                      x = "year",
+                      y = input$risk_factor_substance)) +
+      geom_line(size = 1) +
       theme_gray(base_size = 16) +
       theme(legend.position = "bottom",
             panel.grid.minor.x = element_blank()) +
