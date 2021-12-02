@@ -16,7 +16,7 @@ library(rsconnect)
 
 # Load pre-cleaned, compressed data --------------------------------------------------------
 
-total_joined <- read_rds("data/compressed_final_data.rds"))
+total_joined <- read_rds("data/compressed_final_data.rds")
 
 air_pollution_regions <- read_rds("data/air_pollution_regions.rds")
 
