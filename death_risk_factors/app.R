@@ -88,7 +88,8 @@ ui <- fluidPage(
                                     label = "Select Up to 3 Regions for Line Plot",
                                     choices = regions_choices_substance
                  ),
-                 p("Data Source: Our World in Data")
+                 p("Data Source: Our World in Data"),
+                 a(href = "https://vizdata-f21.github.io/project-2-tidy_team/", "Click Here to View Write Up")
                ),
                mainPanel(
                  fluidPage(
@@ -133,7 +134,8 @@ ui <- fluidPage(
                  checkboxGroupInput(inputId = "entity_sub",
                                     label = "Select Up to 3 Regions for Line Plot",
                                     choices = regions_choices_substance),
-               p("Data Source: Our World in Data")),
+               p("Data Source: Our World in Data"),
+               a(href = "https://vizdata-f21.github.io/project-2-tidy_team/", "Click Here to View Write Up")),
 
                mainPanel(fluidPage(
                  verticalLayout(
@@ -178,7 +180,8 @@ ui <- fluidPage(
                                     label = "Select Up to 3 Regions for Line Plot",
                                     choices = regions_choices_sanitation
                  ),
-                 p("Data Source: Our World in Data")
+                 p("Data Source: Our World in Data"),
+                 a(href = "https://vizdata-f21.github.io/project-2-tidy_team/", "Click Here to View Write Up")
                ),
                mainPanel(fluidPage(
                  verticalLayout(
