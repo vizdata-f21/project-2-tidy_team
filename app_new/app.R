@@ -12,6 +12,7 @@ library(plotly)
 library(readr)
 library(mapproj)
 
+
 # Load pre-cleaned, compressed data --------------------------------------------------------
 
 total_joined <- read_rds(here("data", "compressed_final_data.rds"))
@@ -46,7 +47,7 @@ regions_choices_sanitation <- sanitation_regions %>%
   arrange(entity) %>%
   pull(entity)
 
-# Make Okabe-Ito Palette for Line Plot
+# Make Manual Okabe-Ito Palette for Line Plot
 
 cbPalette <- c("#0072B2", "#D55E00", "#CC79A7")
 
@@ -56,7 +57,7 @@ ui <- fluidPage(
   # set theme for shiny app
   theme = shinytheme("cosmo"),
   # make title for shiny app
-  titlePanel(strong("Global Deaths By Risk Factors")),
+  titlePanel(strong("Global Deaths by Risk Factors")),
   # air pollution tab
   tabsetPanel(
     tabPanel("Air Pollution",
@@ -185,11 +186,7 @@ ui <- fluidPage(
                  plotOutput(outputId = "plot_sanitation_line")))
                )
              )
-    ),
-      tabPanel("Trends and Analysis",
-               mainPanel(p("This is where our trends + analysis will go.")
-  )
-)
+    )
 )
 )
 
@@ -273,7 +270,7 @@ server <- function(input, output) {
             axis.ticks.y = element_blank(),
             panel.grid.minor.x = element_blank(),
             panel.grid.minor.y = element_blank(),
-            text = element_text(family = "mono")) +
+            text = element_text(family = "sans")) +
       scale_y_continuous(labels = comma) +
       scale_x_continuous(breaks = seq(from = 1990, to = 2017, by = 3),
                          limits = c(1990, 2017),
@@ -361,7 +358,7 @@ server <- function(input, output) {
             axis.ticks.y = element_blank(),
             panel.grid.minor.x = element_blank(),
             panel.grid.minor.y = element_blank(),
-            text = element_text(family = "mono")) +
+            text = element_text(family = "sans")) +
       scale_y_continuous(labels = comma) +
       scale_x_continuous(breaks = seq(from = 1990, to = 2017, by = 3),
                          limits = c(1990, 2017),
@@ -448,7 +445,7 @@ server <- function(input, output) {
             axis.ticks.y = element_blank(),
             panel.grid.minor.x = element_blank(),
             panel.grid.minor.y = element_blank(),
-            text = element_text(family = "mono")) +
+            text = element_text(family = "sans")) +
       scale_y_continuous(labels = comma) +
       scale_x_continuous(breaks = seq(from = 1990, to = 2017, by = 3),
                          limits = c(1990, 2017)) +
