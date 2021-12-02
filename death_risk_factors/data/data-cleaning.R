@@ -11,12 +11,12 @@ library(janitor)
 
 # air pollution data
 death_rates_from_air_pollution <- read_csv(
-  here("data", "death-rates-from-air-pollution.csv"),
+  here("death_risk_factors", "data", "death-rates-from-air-pollution.csv"),
   show_col_types = FALSE
 )
 
 number_deaths_by_risk_factor <- read_csv(
-  here("data", "number-of-deaths-by-risk-factor.csv"),
+  here("death_risk_factors", "data", "number-of-deaths-by-risk-factor.csv"),
   show_col_types = FALSE
 )
 
@@ -76,7 +76,7 @@ total_joined <- world_map_data %>%
 # https://ourworldindata.org/grapher/population?time=1899..latest&country=AFG~Africa~ALB~DZA~ASM~AND~AGO~AIA~ATG~ARM~ABW~ARG~Asia~AUS~AUT~AZE~BHS~BHR~BGD)
 
 population <- read_rds(
-  here("data", "population_data.RData"))
+  here("death_risk_factors", "data", "population_data.RData"))
 
 population <- population %>%
   mutate(entity = case_when(
@@ -174,7 +174,7 @@ total_joined <- total_joined %>%
 
 # write rds file for total joined
 
-write_rds(total_joined, here("data", "compressed_final_data.rds"), "gz")
+write_rds(total_joined, file = here("death_risk_factors", "data", "compressed_final_data.rds"), "gz")
 
 # for regions line plot
 
@@ -232,7 +232,7 @@ air_pollution_regions <- regions %>%
          air_pollution,
          outdoor_air_pollution)
 
-write_rds(air_pollution_regions, "data/air_pollution_regions.rds", "gz")
+write_rds(air_pollution_regions, file = here("death_risk_factors", "data", "air_pollution_regions.rds"), "gz")
 
 substance_use_regions <- regions %>%
   select(entity,
@@ -242,7 +242,7 @@ substance_use_regions <- regions %>%
          drug_use,
          smoking)
 
-write_rds(substance_use_regions, "data/substance_use_regions.rds", "gz")
+write_rds(substance_use_regions, file = here("death_risk_factors", "data","data/substance_use_regions.rds"), "gz")
 
 sanitation_regions <- regions %>%
   select(entity,
@@ -251,4 +251,4 @@ sanitation_regions <- regions %>%
          unsafe_sanitation,
          no_access_to_handwashing_facility)
 
-write_rds(sanitation_regions, "data/sanitation_regions.rds", "gz")
+write_rds(sanitation_regions, file = here("death_risk_factors", "data", "data/sanitation_regions.rds"), "gz")
