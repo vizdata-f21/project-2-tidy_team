@@ -94,9 +94,7 @@ ui <- fluidPage(
                  verticalLayout(
                  h3(strong("Death Rate of Selected Air Pollution Type by Country", align = "left")),
                  h4("As measured by the number of deaths per 100,000 people (Age-standardized)", align = "left"),
-                 plotlyOutput(outputId = "plot_air"),
-                 br(), br(), br(), br(), br(), br(), br(), br(),
-                 br(), br(), br(), br(),
+                 plotlyOutput(outputId = "plot_air", height = "600px"),
                  h3(strong("Number of Deaths from Selected Air Pollution Type by Region", align = "left")),
                  h4("As measured by the raw number of deaths", align = "left"),
                  plotOutput(outputId = "plot_air_pollution_line"))
