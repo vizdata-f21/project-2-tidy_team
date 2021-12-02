@@ -1,1 +1,1 @@
-This folder holds the data used in our project and the data dictionary. 
+This folder holds the data used in our project, the data cleaning script, and the data dictionary. 

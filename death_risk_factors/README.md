@@ -1,0 +1,1 @@
+This folder holds the data used in our shiny app (within the folder `data`) and the code for our shiny app. 
