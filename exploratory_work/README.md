@@ -1,2 +1,0 @@
-This folder is where we are keeping exploratory work for Project 2. 
-Contents might include initial drafts of plots and alternative methods to tasks in our project. This folder will be deleted before we complete the project, but for now we are utilizing it as a workspace. 
