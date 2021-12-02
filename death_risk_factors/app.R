@@ -233,7 +233,7 @@ server <- function(input, output) {
                      ))
 
     ggplotly(p = air_plotly, width = 900, height = 600) %>%
-      animation_opts(frame = 27) %>%
+      animation_opts(frame = 9) %>%
       layout(yaxis = list(showline= F),
              xaxis = list(showline= F))    # removing axis lines: https://plotly.com/r/axes/
 
@@ -323,7 +323,7 @@ server <- function(input, output) {
                              plot.subtitle = element_blank()))
 
     ggplotly(p = substance_plotly, width = 900, height = 600) %>%
-      animation_opts(frame = 27) %>%
+      animation_opts(frame = 9) %>%
       layout(yaxis = list(showline= F),
              xaxis = list(showline= F)) # removing axis lines: https://plotly.com/r/axes/
 
@@ -411,7 +411,7 @@ server <- function(input, output) {
                             ))
 
     ggplotly(p = sanitation_plotly, width = 900, height = 600) %>%
-      animation_opts(frame = 27) %>%
+      animation_opts(frame = 9) %>%
       layout(yaxis = list(showline= F),
              xaxis = list(showline= F)) # removing axis lines: https://plotly.com/r/axes/
 

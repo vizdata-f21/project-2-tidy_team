@@ -242,7 +242,7 @@ substance_use_regions <- regions %>%
          drug_use,
          smoking)
 
-write_rds(substance_use_regions, file = here("death_risk_factors", "data","data/substance_use_regions.rds"), "gz")
+write_rds(substance_use_regions, file = here("death_risk_factors", "data", "substance_use_regions.rds"), "gz")
 
 sanitation_regions <- regions %>%
   select(entity,
@@ -251,4 +251,4 @@ sanitation_regions <- regions %>%
          unsafe_sanitation,
          no_access_to_handwashing_facility)
 
-write_rds(sanitation_regions, file = here("death_risk_factors", "data", "data/sanitation_regions.rds"), "gz")
+write_rds(sanitation_regions, file = here("death_risk_factors", "data", "sanitation_regions.rds"), "gz")
