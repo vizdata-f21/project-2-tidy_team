@@ -56,7 +56,7 @@ ui <- fluidPage(
   # set theme for shiny app
   theme = shinytheme("cosmo"),
   # make title for shiny app
-  titlePanel("Deaths By Risk Factors"),
+  titlePanel(strong("Global Deaths By Risk Factors")),
   # air pollution tab
   tabsetPanel(
     tabPanel("Air Pollution",
@@ -90,10 +90,12 @@ ui <- fluidPage(
                mainPanel(
                  fluidPage(
                  verticalLayout(
+                 h3(strong("Death Rate of Selected Air Pollution Type by Country", align = "left")),
+                 h4("As measured by the number of deaths per 100,000 people (Age-standardized)", align = "left"),
                  plotlyOutput(outputId = "plot_air"),
-                 p("Death rates are measured as the number of deaths per 100,000 population. Rates are age-standardized."),
                  br(), br(), br(), br(), br(), br(), br(), br(),
                  br(), br(), br(), br(),
+                 h3(strong("Number of Deaths from Selected Air Pollution Type by Region", align = "left")),
                  plotOutput(outputId = "plot_air_pollution_line"))
                )
              )
@@ -129,10 +131,12 @@ ui <- fluidPage(
                )),
                mainPanel(fluidPage(
                  verticalLayout(
+                 h3(strong("Death Rate of Selected Substance Type by Country", align = "left")),
+                 h4("As measured by the number of deaths per 100,000 people", align = "left"),
                  plotlyOutput(outputId = "plot_substance"),
-                 p("Death rates are measured as the number of deaths per 100,000 population."),
                  br(), br(), br(), br(), br(), br(), br(), br(),
                  br(), br(), br(), br(),
+                 h3(strong("Number of Deaths from Selected Substance Type by Region", align = "left")),
                  plotOutput(outputId = "plot_substance_line"))
                ))
              )
@@ -169,10 +173,12 @@ ui <- fluidPage(
                ),
                mainPanel(fluidPage(
                  verticalLayout(
+                 h3(strong("Death Rate of Selected Sanitation Issue by Country", align = "left")),
+                 h4("As measured by the number of deaths per 100,000 people", align = "left"),
                  plotlyOutput(outputId = "plot_sanitation"),
-                 p("Death rates are measured as the number of deaths per 100,000 population."),
                  br(), br(), br(), br(), br(), br(), br(), br(),
                  br(), br(), br(), br(),
+                 h3(strong("Number of Deaths from Selected Sanitation Issue by Region", align = "left")),
                  plotOutput(outputId = "plot_sanitation_line")))
                )
              )
@@ -222,17 +228,16 @@ server <- function(input, output) {
                        legend.direction = "vertical",
                        legend.position = "left",
                        legend.key.height = unit(2, "cm"),
-                       plot.background = element_rect(fill = "white", color = "white"),
-                       plot.title = element_blank(),
-                       plot.subtitle = element_blank()
+                       plot.background = element_rect(fill = "white", color = "white")
                      ))
 
     ggplotly(p = air_plotly, width = 900, height = 600) %>%
       animation_opts(frame = 27) %>%
       layout(yaxis = list(showline= F),
-             xaxis = list(showline= F)) # removing axis lines: https://plotly.com/r/axes/
+             xaxis = list(showline= F))    # removing axis lines: https://plotly.com/r/axes/
 
   })
+
 
   # interactivity for air pollution line plot
 
@@ -274,7 +279,7 @@ server <- function(input, output) {
         x = "Year",
         y = "Number of Deaths",
         color = "Regions",
-        title = paste("Number of Deaths by", input$air_pollution_line))
+        title = input$air_pollution_line)
   })
 
 
@@ -292,7 +297,8 @@ server <- function(input, output) {
                            ) +
                            coord_map(
                              projection = "mercator",
-                             xlim = c(-180, 180)
+                             xlim = c(-180, 180),
+                             clip = "off"
                            ) +
                            scale_fill_viridis_c(
                              trans = "log10",
@@ -336,7 +342,7 @@ server <- function(input, output) {
 
   output$plot_substance_line <- renderPlot({
     validate(
-      need(length(input$entity) <= 3, "Please select a maximum of 3 regions.")
+      need(length(input$entity_sub) <= 3, "Please select a maximum of 3 regions.")
     )
     ggplot(data = substance_use_regions_filtered(),
            aes_string(x = "year",
@@ -360,7 +366,7 @@ server <- function(input, output) {
         x = "Year",
         y = "Number of Deaths",
         color = "Regions",
-        title = paste("Number of Deaths by", input$risk_factor_substance_line))
+        title = input$risk_factor_substance_line)
   })
 
 
@@ -378,7 +384,8 @@ server <- function(input, output) {
                             ) +
                             coord_map(
                               projection = "mercator",
-                              xlim = c(-180, 180)
+                              xlim = c(-180, 180),
+                              clip = "off"
                             ) +
                             scale_fill_viridis_c(
                               trans = "log10",
@@ -440,7 +447,7 @@ server <- function(input, output) {
         x = "Year",
         y = "Number of Deaths",
         color = "Regions",
-        title = paste("Number of Deaths by", input$risk_factor_sanitation_line))
+        title = input$risk_factor_sanitation_line)
   })
 }
 
