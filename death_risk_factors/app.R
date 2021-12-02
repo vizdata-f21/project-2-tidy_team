@@ -134,9 +134,7 @@ ui <- fluidPage(
                  verticalLayout(
                  h3(strong("Death Rate of Selected Substance Type by Country", align = "left")),
                  h4("As measured by the number of deaths per 100,000 people", align = "left"),
-                 plotlyOutput(outputId = "plot_substance"),
-                 br(), br(), br(), br(), br(), br(), br(), br(),
-                 br(), br(), br(), br(),
+                 plotlyOutput(outputId = "plot_substance", height = "600px"),
                  h3(strong("Number of Deaths from Selected Substance Type by Region", align = "left")),
                  h4("As measured by the raw number of deaths", align = "left"),
                  plotOutput(outputId = "plot_substance_line"))
@@ -177,9 +175,7 @@ ui <- fluidPage(
                  verticalLayout(
                  h3(strong("Death Rate of Selected Sanitation Issue by Country", align = "left")),
                  h4("As measured by the number of deaths per 100,000 people", align = "left"),
-                 plotlyOutput(outputId = "plot_sanitation"),
-                 br(), br(), br(), br(), br(), br(), br(), br(),
-                 br(), br(), br(), br(),
+                 plotlyOutput(outputId = "plot_sanitation", height = "600px"),
                  h3(strong("Number of Deaths from Selected Sanitation Issue by Region", align = "left")),
                  h4("As measured by the raw number of deaths", align = "left"),
                  plotOutput(outputId = "plot_sanitation_line")))
