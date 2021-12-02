@@ -16,16 +16,13 @@ library(rsconnect)
 
 # Load pre-cleaned, compressed data --------------------------------------------------------
 
-total_joined <- read_rds(here("death_risk_factors", "data", "compressed_final_data.rds"))
+total_joined <- read_rds("data/compressed_final_data.rds"))
 
-air_pollution_regions <- read_rds(
-  here("death_risk_factors", "data", "air_pollution_regions.rds"))
+air_pollution_regions <- read_rds("data/air_pollution_regions.rds")
 
-substance_use_regions <- read_rds(
-  here("death_risk_factors", "data", "substance_use_regions.rds"))
+substance_use_regions <- read_rds("data/substance_use_regions.rds")
 
-sanitation_regions <- read_rds(
-  here("death_risk_factors", "data", "sanitation_regions.rds"))
+sanitation_regions <- read_rds("data/sanitation_regions.rds")
 
 
 # Define choices & random selection for regions lineplots -----------------------

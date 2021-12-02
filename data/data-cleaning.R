@@ -11,12 +11,12 @@ library(janitor)
 
 # air pollution data
 death_rates_from_air_pollution <- read_csv(
-  here("death_risk_factors", "data", "death-rates-from-air-pollution.csv"),
+  here("data", "death-rates-from-air-pollution.csv"),
   show_col_types = FALSE
 )
 
 number_deaths_by_risk_factor <- read_csv(
-  here("death_risk_factors", "data", "number-of-deaths-by-risk-factor.csv"),
+  here("data", "number-of-deaths-by-risk-factor.csv"),
   show_col_types = FALSE
 )
 
@@ -76,7 +76,7 @@ total_joined <- world_map_data %>%
 # https://ourworldindata.org/grapher/population?time=1899..latest&country=AFG~Africa~ALB~DZA~ASM~AND~AGO~AIA~ATG~ARM~ABW~ARG~Asia~AUS~AUT~AZE~BHS~BHR~BGD)
 
 population <- read_rds(
-  here("death_risk_factors", "data", "population_data.RData"))
+  here("data", "population_data.RData"))
 
 population <- population %>%
   mutate(entity = case_when(
