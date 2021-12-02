@@ -16,6 +16,9 @@ library(mapproj)
 
 total_joined <- read_rds(here("data", "compressed_final_data.rds"))
 
+air_pollution_regions <- read_rds(
+  here("data", "air_pollution_regions.rds"))
+
 substance_use_regions <- read_rds(
   here("data", "substance_use_regions.rds"))
 
@@ -24,6 +27,12 @@ sanitation_regions <- read_rds(
 
 
 # Define choices & random selection for regions lineplots -----------------------
+
+# air pollution
+regions_choices_air_pollution <- air_pollution_regions %>%
+  distinct(entity) %>%
+  arrange(entity) %>%
+  pull(entity)
 
 # substance
 regions_choices_substance <- substance_use_regions %>%
