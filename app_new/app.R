@@ -91,6 +91,7 @@ ui <- fluidPage(
                  fluidPage(
                  verticalLayout(
                  plotlyOutput(outputId = "plot_air"),
+                 p("Death rates are measured as the number of deaths per 100,000 population. Rates are age-standardized."),
                  br(), br(), br(), br(), br(), br(), br(), br(),
                  br(), br(), br(), br(),
                  plotOutput(outputId = "plot_air_pollution_line"))
@@ -129,6 +130,7 @@ ui <- fluidPage(
                mainPanel(fluidPage(
                  verticalLayout(
                  plotlyOutput(outputId = "plot_substance"),
+                 p("Death rates are measured as the number of deaths per 100,000 population."),
                  br(), br(), br(), br(), br(), br(), br(), br(),
                  br(), br(), br(), br(),
                  plotOutput(outputId = "plot_substance_line"))
@@ -168,14 +170,20 @@ ui <- fluidPage(
                mainPanel(fluidPage(
                  verticalLayout(
                  plotlyOutput(outputId = "plot_sanitation"),
+                 p("Death rates are measured as the number of deaths per 100,000 population."),
                  br(), br(), br(), br(), br(), br(), br(), br(),
                  br(), br(), br(), br(),
                  plotOutput(outputId = "plot_sanitation_line")))
                )
              )
-    )
+    ),
+      tabPanel("Trends and Analysis",
+               mainPanel(p("This is where our trends + analysis will go.")
   )
 )
+)
+)
+
 
 # Define Server ----------------------------------------------------------------
 server <- function(input, output) {
@@ -195,8 +203,9 @@ server <- function(input, output) {
                      ) +
                      coord_map(
                        projection = "mercator",
-                       xlim = c(-180, 180)
-                     ) +
+                       xlim = c(-180, 180),
+                       clip = "off"
+                       ) +
                      scale_fill_viridis_c(
                        limits = c(0, 350),
                        begin = 0.3,
@@ -218,7 +227,7 @@ server <- function(input, output) {
                        plot.subtitle = element_blank()
                      ))
 
-    ggplotly(p = air_plotly, width = 800, height = 600) %>%
+    ggplotly(p = air_plotly, width = 900, height = 600) %>%
       animation_opts(frame = 27) %>%
       layout(yaxis = list(showline= F),
              xaxis = list(showline= F)) # removing axis lines: https://plotly.com/r/axes/
@@ -305,7 +314,7 @@ server <- function(input, output) {
                              plot.title = element_blank(),
                              plot.subtitle = element_blank()))
 
-    ggplotly(p = substance_plotly, width = 800, height = 600) %>%
+    ggplotly(p = substance_plotly, width = 900, height = 600) %>%
       animation_opts(frame = 27) %>%
       layout(yaxis = list(showline= F),
              xaxis = list(showline= F)) # removing axis lines: https://plotly.com/r/axes/
@@ -391,7 +400,7 @@ server <- function(input, output) {
                               plot.subtitle = element_blank()
                             ))
 
-    ggplotly(p = sanitation_plotly, width = 800, height = 600) %>%
+    ggplotly(p = sanitation_plotly, width = 900, height = 600) %>%
       animation_opts(frame = 27) %>%
       layout(yaxis = list(showline= F),
              xaxis = list(showline= F)) # removing axis lines: https://plotly.com/r/axes/

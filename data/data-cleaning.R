@@ -45,7 +45,6 @@ air_pollution_joined <- death_rates_from_air_pollution %>%
   left_join(number_deaths_by_risk_factor, by = c("entity", "year", "code"))
 
 # A series of case_when (before join) to resolve inconsistencies
-# noticeable ones include: French Guiana (but there might just not be data on this)
 
 # clean world_map_data
 world_map_data <- world_map_data %>%
