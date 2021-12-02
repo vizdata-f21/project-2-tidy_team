@@ -77,6 +77,9 @@ ui <- fluidPage(
                      "Air Pollution Death Rate (Total)" = "death_rate_air_pollution"
                    )
                  ),
+                 br(), br(), br(), br(), br(), br(), br(), br(), br(), br(),
+                 br(), br(), br(), br(), br(), br(), br(), br(), br(), br(),
+                 br(), br(), br(), br(), br(), br(), br(), br(), br(), br(), br(),
                  selectInput(
                    inputId = "air_pollution_line",
                    label = "Select Type of Air Pollution for Line Plot",
@@ -88,6 +91,7 @@ ui <- fluidPage(
                                     label = "Select Up to 3 Regions for Line Plot",
                                     choices = regions_choices_substance
                  ),
+                 p("Data Source: Our World in Data")
                ),
                mainPanel(
                  fluidPage(
