@@ -79,7 +79,7 @@ ui <- fluidPage(
                  ),
                  br(), br(), br(), br(), br(), br(), br(), br(), br(), br(),
                  br(), br(), br(), br(), br(), br(), br(), br(), br(), br(),
-                 br(), br(), br(), br(), br(), br(), br(), br(), br(), br(), br(),
+                 br(), br(), br(), br(), br(), br(), br(), br(), br(), br(),
                  selectInput(
                    inputId = "air_pollution_line",
                    label = "Select Type of Air Pollution for Line Plot",
@@ -120,6 +120,9 @@ ui <- fluidPage(
                      "Smoking" = "smoking_rate"
                    )
                  ),
+                 br(), br(), br(), br(), br(), br(), br(), br(), br(), br(),
+                 br(), br(), br(), br(), br(), br(), br(), br(), br(), br(),
+                 br(), br(), br(), br(), br(), br(), br(), br(), br(), br(),
                  selectInput(
                    inputId = "risk_factor_substance_line",
                    label = "Select Type of Substance for Line Plot",
@@ -132,8 +135,9 @@ ui <- fluidPage(
                  ),
                  checkboxGroupInput(inputId = "entity_sub",
                                     label = "Select Up to 3 Regions for Line Plot",
-                                    choices = regions_choices_substance
-               )),
+                                    choices = regions_choices_substance),
+               p("Data Source: Our World in Data")),
+
                mainPanel(fluidPage(
                  verticalLayout(
                  h3(strong("Death Rate of Selected Substance Type by Country", align = "left")),
@@ -160,6 +164,9 @@ ui <- fluidPage(
                        "no_access_to_handwashing_facility_rate"
                    )
                  ),
+                 br(), br(), br(), br(), br(), br(), br(), br(), br(), br(),
+                 br(), br(), br(), br(), br(), br(), br(), br(), br(), br(),
+                 br(), br(), br(), br(), br(), br(), br(), br(), br(), br(),
                  selectInput(
                    inputId = "risk_factor_sanitation_line",
                    label = "Select Type of Sanitation Issue for Line Plot",
@@ -173,7 +180,8 @@ ui <- fluidPage(
                  checkboxGroupInput(inputId = "entity_san",
                                     label = "Select Up to 3 Regions for Line Plot",
                                     choices = regions_choices_sanitation
-                 )
+                 ),
+                 p("Data Source: Our World in Data")
                ),
                mainPanel(fluidPage(
                  verticalLayout(
