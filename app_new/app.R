@@ -66,13 +66,13 @@ ui <- fluidPage(
                    inputId = "air_pollution_type",
                    label = "Select Type of Air Pollution for Map",
                    choices = c(
-                     "Air Pollution Death Rate" = "death_rate_air_pollution",
                      "Household Pollution Death Rate" =
                        "death_rate_household_pollution",
                      "Ambient Matter Pollution Death Rate" =
                        "death_rate_ambient_matter_pollution",
                      "Ozone Pollution Death Rate" =
-                       "death_rate_ozone_pollution"
+                       "death_rate_ozone_pollution",
+                     "Air Pollution Death Rate (Total)" = "death_rate_air_pollution"
                    )
                  ),
                  selectInput(
@@ -269,7 +269,8 @@ server <- function(input, output) {
             axis.ticks.x = element_blank(),
             axis.ticks.y = element_blank(),
             panel.grid.minor.x = element_blank(),
-            panel.grid.minor.y = element_blank()) +
+            panel.grid.minor.y = element_blank(),
+            text = element_text(family = "mono")) +
       scale_y_continuous(labels = comma) +
       scale_x_continuous(breaks = seq(from = 1990, to = 2017, by = 3),
                          limits = c(1990, 2017),
@@ -279,7 +280,7 @@ server <- function(input, output) {
         x = "Year",
         y = "Number of Deaths",
         color = "Regions",
-        title = input$air_pollution_line)
+        title = paste("Selected:", input$air_pollution_line))
   })
 
 
@@ -356,7 +357,8 @@ server <- function(input, output) {
             axis.ticks.x = element_blank(),
             axis.ticks.y = element_blank(),
             panel.grid.minor.x = element_blank(),
-            panel.grid.minor.y = element_blank()) +
+            panel.grid.minor.y = element_blank(),
+            text = element_text(family = "mono")) +
       scale_y_continuous(labels = comma) +
       scale_x_continuous(breaks = seq(from = 1990, to = 2017, by = 3),
                          limits = c(1990, 2017),
@@ -366,7 +368,7 @@ server <- function(input, output) {
         x = "Year",
         y = "Number of Deaths",
         color = "Regions",
-        title = input$risk_factor_substance_line)
+        title = paste("Selected:", input$risk_factor_substance_line))
   })
 
 
@@ -438,7 +440,12 @@ server <- function(input, output) {
                            y = input$risk_factor_sanitation_line), size = 1) +
       theme_minimal(base_size = 16) +
       theme(legend.position = "bottom",
-            panel.grid.minor.x = element_blank()) +
+            aspect.ratio = 0.4,
+            axis.ticks.x = element_blank(),
+            axis.ticks.y = element_blank(),
+            panel.grid.minor.x = element_blank(),
+            panel.grid.minor.y = element_blank(),
+            text = element_text(family = "mono")) +
       scale_y_continuous(labels = comma) +
       scale_x_continuous(breaks = seq(from = 1990, to = 2017, by = 3),
                          limits = c(1990, 2017)) +
@@ -447,7 +454,7 @@ server <- function(input, output) {
         x = "Year",
         y = "Number of Deaths",
         color = "Regions",
-        title = input$risk_factor_sanitation_line)
+        title = paste("Selected:", input$risk_factor_sanitation_line))
   })
 }
 
