@@ -96,6 +96,7 @@ ui <- fluidPage(
                  br(), br(), br(), br(), br(), br(), br(), br(),
                  br(), br(), br(), br(),
                  h3(strong("Number of Deaths from Selected Air Pollution Type by Region", align = "left")),
+                 h4("As measured by the raw number of deaths", align = "left"),
                  plotOutput(outputId = "plot_air_pollution_line"))
                )
              )
@@ -137,6 +138,7 @@ ui <- fluidPage(
                  br(), br(), br(), br(), br(), br(), br(), br(),
                  br(), br(), br(), br(),
                  h3(strong("Number of Deaths from Selected Substance Type by Region", align = "left")),
+                 h4("As measured by the raw number of deaths", align = "left"),
                  plotOutput(outputId = "plot_substance_line"))
                ))
              )
@@ -179,6 +181,7 @@ ui <- fluidPage(
                  br(), br(), br(), br(), br(), br(), br(), br(),
                  br(), br(), br(), br(),
                  h3(strong("Number of Deaths from Selected Sanitation Issue by Region", align = "left")),
+                 h4("As measured by the raw number of deaths", align = "left"),
                  plotOutput(outputId = "plot_sanitation_line")))
                )
              )
