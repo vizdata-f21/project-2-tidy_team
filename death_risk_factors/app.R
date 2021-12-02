@@ -220,7 +220,7 @@ server <- function(input, output) {
                        # turbo pallet coordinates with AQI colors:
                        # (https://webcam.srs.fs.fed.us/test/AQI.shtml)
                        name = "Death Rate",
-                       labels = label_number(big.mark = ","),
+                       labels = scales::comma,
                        na.value = "lightgray"
                      ) +
                      theme_void() +
@@ -234,8 +234,9 @@ server <- function(input, output) {
 
     ggplotly(p = air_plotly, width = 900, height = 600) %>%
       animation_opts(frame = 9) %>%
-      layout(yaxis = list(showline= F),
-             xaxis = list(showline= F))    # removing axis lines: https://plotly.com/r/axes/
+      layout(yaxis = list(showline= F), # removing axis lines: https://plotly.com/r/axes/
+             xaxis = list(showline= F)) %>%
+      config(displaylogo = FALSE) # remove plotly logo https://cran.r-project.org/web/packages/plotly/plotly.pdf
 
   })
 
@@ -325,7 +326,8 @@ server <- function(input, output) {
     ggplotly(p = substance_plotly, width = 900, height = 600) %>%
       animation_opts(frame = 9) %>%
       layout(yaxis = list(showline= F),
-             xaxis = list(showline= F)) # removing axis lines: https://plotly.com/r/axes/
+             xaxis = list(showline= F)) %>%  # removing axis lines: https://plotly.com/r/axes/
+      config(displaylogo = FALSE) # remove plotly logo https://cran.r-project.org/web/packages/plotly/plotly.pdf
 
   })
 
@@ -413,7 +415,8 @@ server <- function(input, output) {
     ggplotly(p = sanitation_plotly, width = 900, height = 600) %>%
       animation_opts(frame = 9) %>%
       layout(yaxis = list(showline= F),
-             xaxis = list(showline= F)) # removing axis lines: https://plotly.com/r/axes/
+             xaxis = list(showline= F)) %>%  # removing axis lines: https://plotly.com/r/axes/
+      config(displaylogo = FALSE) # remove plotly logo https://cran.r-project.org/web/packages/plotly/plotly.pdf
 
   })
 
