@@ -12,9 +12,10 @@ library(plotly)
 library(readr)
 library(mapproj)
 library(rsconnect)
+library(styler)
 
 
-# Load pre-cleaned, compressed data --------------------------------------------------------
+# Load pre-cleaned, compressed data --------------------------------------------
 
 total_joined <- read_rds("data/compressed_final_data.rds")
 
@@ -25,7 +26,7 @@ substance_use_regions <- read_rds("data/substance_use_regions.rds")
 sanitation_regions <- read_rds("data/sanitation_regions.rds")
 
 
-# Define choices & random selection for regions lineplots -----------------------
+# Define choices & random selection for regions lineplots ----------------------
 
 # air pollution
 regions_choices_air_pollution <- air_pollution_regions %>%
@@ -45,22 +46,28 @@ regions_choices_sanitation <- sanitation_regions %>%
   arrange(entity) %>%
   pull(entity)
 
-# Make Manual Okabe-Ito Palette for Line Plot
+# Make Manual Okabe-Ito Palette for Line Plot ----------------------------------
 
 cbPalette <- c("#0072B2", "#D55E00", "#CC79A7")
+
+# we chose to do this manually because the colorblindr package was not loading
 
 # Define UI --------------------------------------------------------------------
 
 ui <- fluidPage(
+
   # set theme for shiny app
   theme = shinytheme("cosmo"),
+
   # make title for shiny app
   titlePanel(strong("Global Deaths by Risk Factors")),
-  # air pollution tab
+
+  # air pollution tab set up
   tabsetPanel(
     tabPanel("Air Pollution",
              sidebarLayout(
                sidebarPanel(
+                 # select input for map
                  selectInput(
                    inputId = "air_pollution_type",
                    label = "Select Type of Air Pollution for Map",
@@ -71,12 +78,15 @@ ui <- fluidPage(
                        "death_rate_ambient_matter_pollution",
                      "Ozone Pollution Death Rate" =
                        "death_rate_ozone_pollution",
-                     "Air Pollution Death Rate (Total)" = "death_rate_air_pollution"
+                     "Air Pollution Death Rate (Total)" =
+                       "death_rate_air_pollution"
                    )
                  ),
+                 # adding line breaks so side bar aligns with plots
                  br(), br(), br(), br(), br(), br(), br(), br(), br(), br(),
                  br(), br(), br(), br(), br(), br(), br(), br(), br(), br(),
                  br(), br(), br(), br(), br(), br(), br(), br(), br(), br(),
+                 # select input for line plot
                  selectInput(
                    inputId = "air_pollution_line",
                    label = "Select Type of Air Pollution for Line Plot",
@@ -84,28 +94,49 @@ ui <- fluidPage(
                      "Air Pollution" = "air_pollution",
                      "Outdoor Air Pollution" = "outdoor_air_pollution")
                  ),
+                 # check box input for regions on line plot
                  checkboxGroupInput(inputId = "entity_air",
                                     label = "Select Up to 3 Regions for Line Plot",
                                     choices = regions_choices_substance
                  ),
-                 p("Data Source: Our World in Data"),
-                 a(href = "https://vizdata-f21.github.io/project-2-tidy_team/", "Click Here to View Write Up")
+                # adding data source and hyperlink to write up
+                  p("Data Source: Our World in Data"),
+                 a(href = "https://vizdata-f21.github.io/project-2-tidy_team/",
+                   "Click Here to View Write Up")
                ),
+
+               # user interface for main panel
                mainPanel(
                  fluidPage(
                  verticalLayout(
-                 h3(strong("Death Rate of Selected Air Pollution Type by Country", align = "left")),
-                 h4("As measured by the number of deaths per 100,000 people (Age-standardized)", align = "left"),
-                 bsTooltip("plot_air", "Alt Text", placement = "bottom", trigger = "hover", options = NULL),
-                 plotlyOutput(outputId = "plot_air", height = "600px"),
-                 h3(strong("Number of Deaths from Selected Air Pollution Type by Region", align = "left")),
-                 h4("As measured by the raw number of deaths", align = "left"),
-                 bsTooltip("plot_air_pollution_line", "Alt Text", placement = "bottom", trigger = "hover", options = NULL),
+                 # title and subtitle for map plot
+                 h3(strong("Death Rate of Selected Air Pollution Type by Country",
+                           align = "left")),
+                 h4("As measured by the number of deaths per 100,000 people (Age-standardized)",
+                    align = "left"),
+
+                  # bsTooltip allows us to have alt text appear below the plot when a user hovers
+                 bsTooltip("plot_air", "Alt Text",
+                           placement = "bottom",
+                           trigger = "hover",
+                           options = NULL),
+                 plotlyOutput(outputId = "plot_air",
+                              height = "600px"),
+
+                 h3(strong("Number of Deaths from Selected Air Pollution Type by Region",
+                           align = "left")),
+                 h4("As measured by the raw number of deaths",
+                    align = "left"),
+                 bsTooltip("plot_air_pollution_line", "Alt Text",
+                           placement = "bottom",
+                           trigger = "hover",
+                           options = NULL),
                  plotOutput(outputId = "plot_air_pollution_line"))
                )
              )
              )
     ),
+
     # substance tab
     tabPanel("Substance Use",
              sidebarLayout(
@@ -137,17 +168,30 @@ ui <- fluidPage(
                                     label = "Select Up to 3 Regions for Line Plot",
                                     choices = regions_choices_substance),
                p("Data Source: Our World in Data"),
-               a(href = "https://vizdata-f21.github.io/project-2-tidy_team/", "Click Here to View Write Up")),
+               a(href = "https://vizdata-f21.github.io/project-2-tidy_team/",
+                 "Click Here to View Write Up")),
 
                mainPanel(fluidPage(
                  verticalLayout(
-                 h3(strong("Death Rate of Selected Substance Type by Country", align = "left")),
-                 h4("As measured by the number of deaths per 100,000 people", align = "left"),
-                 bsTooltip("plot_substance", "Alt Text", placement = "bottom", trigger = "hover", options = NULL),
-                 plotlyOutput(outputId = "plot_substance", height = "600px"),
-                 h3(strong("Number of Deaths from Selected Substance Type by Region", align = "left")),
-                 h4("As measured by the raw number of deaths", align = "left"),
-                 bsTooltip("plot_substance_line", "Alt Text", placement = "bottom", trigger = "hover", options = NULL),
+                 h3(strong("Death Rate of Selected Substance Type by Country",
+                           align = "left")),
+                 h4("As measured by the number of deaths per 100,000 people",
+                    align = "left"),
+                 bsTooltip("plot_substance", "Alt Text",
+                           placement = "bottom",
+                           trigger = "hover",
+                           options = NULL),
+
+                 plotlyOutput(outputId = "plot_substance",
+                              height = "600px"),
+                 h3(strong("Number of Deaths from Selected Substance Type by Region",
+                           align = "left")),
+                 h4("As measured by the raw number of deaths",
+                    align = "left"),
+                 bsTooltip("plot_substance_line", "Alt Text",
+                           placement = "bottom",
+                           trigger = "hover",
+                           options = NULL),
                  plotOutput(outputId = "plot_substance_line"))
                ))
              )
@@ -185,17 +229,30 @@ ui <- fluidPage(
                                     choices = regions_choices_sanitation
                  ),
                  p("Data Source: Our World in Data"),
-                 a(href = "https://vizdata-f21.github.io/project-2-tidy_team/", "Click Here to View Write Up")
+                 a(href = "https://vizdata-f21.github.io/project-2-tidy_team/",
+                   "Click Here to View Write Up")
                ),
                mainPanel(fluidPage(
                  verticalLayout(
-                 h3(strong("Death Rate of Selected Sanitation Issue by Country", align = "left")),
-                 h4("As measured by the number of deaths per 100,000 people", align = "left"),
-                 bsTooltip("plot_sanitation", "Alt Text", placement = "bottom", trigger = "hover", options = NULL),
-                 plotlyOutput(outputId = "plot_sanitation", height = "600px"),
-                 h3(strong("Number of Deaths from Selected Sanitation Issue by Region", align = "left")),
-                 h4("As measured by the raw number of deaths", align = "left"),
-                 bsTooltip("plot_sanitation_line", "Alt Text", placement = "bottom", trigger = "hover", options = NULL),
+                 h3(strong("Death Rate of Selected Sanitation Issue by Country",
+                           align = "left")),
+                 h4("As measured by the number of deaths per 100,000 people",
+                    align = "left"),
+                 bsTooltip("plot_sanitation", "The figure is a world map visualization titled 'Death Rate of Selected Sanitation Issue by Country' that displays the death rate, as measured by the number of deaths per 100,000 people, due to the selected sanitation issue. The three possible sanitation issues that can be selected are “Unsafe Water Source,” “Unsafe Sanitation,” and “No Hand Wash.” Each country on the map is assigned a color on a gradient scale based on the value of the death rate. The user can view the exact death rate for a specific country by hovering over the country of interest. Moreover, the user can use a timeline slider below the map to select a year of interest in order to see what the death rate is in that year. The range of years is is every three years from 1990 to 2015. For more details on specific trends observed from the map over time, please see the analysis section of the write up.",
+                           placement = "bottom",
+                           trigger = "hover",
+                           options = NULL),
+
+                 plotlyOutput(outputId = "plot_sanitation",
+                              height = "600px"),
+                 h3(strong("Number of Deaths from Selected Sanitation Issue by Region",
+                           align = "left")),
+                 h4("As measured by the raw number of deaths",
+                    align = "left"),
+                 bsTooltip("plot_sanitation_line", "Alt Text",
+                           placement = "bottom",
+                           trigger = "hover",
+                           options = NULL),
                  plotOutput(outputId = "plot_sanitation_line")))
                )
              )
@@ -229,8 +286,7 @@ server <- function(input, output) {
                        limits = c(0, 350),
                        begin = 0.3,
                        option = "turbo",
-                       # turbo pallet coordinates with AQI colors:
-                       # (https://webcam.srs.fs.fed.us/test/AQI.shtml)
+                       # turbo pallet coordinates with AQI colors
                        name = "Death Rate",
                        labels = scales::comma,
                        na.value = "lightgray"
@@ -241,10 +297,13 @@ server <- function(input, output) {
                        legend.direction = "vertical",
                        legend.position = "left",
                        legend.key.height = unit(2, "cm"),
-                       plot.background = element_rect(fill = "white", color = "white")
+                       plot.background = element_rect(fill = "white",
+                                                      color = "white")
                      ))
 
-    ggplotly(p = air_plotly, width = 900, height = 600) %>%
+    ggplotly(p = air_plotly,
+             width = 900,
+             height = 600) %>%
       animation_opts(frame = 9) %>%
       layout(yaxis = list(showline= F), # removing axis lines: https://plotly.com/r/axes/
              xaxis = list(showline= F)) %>%
@@ -255,7 +314,6 @@ server <- function(input, output) {
 
   # interactivity for air pollution line plot
 
-  # this prints a sentence
   output$selected_regions_air <- reactive({
     paste("You've selected", length(input$entity_air), "regions.")
   })
@@ -269,7 +327,8 @@ server <- function(input, output) {
 
   output$plot_air_pollution_line <- renderPlot({
     validate(
-      need(length(input$entity_air) <= 3, "Please select a maximum of 3 regions.")
+      need(length(input$entity_air) <= 3,
+           "Please select a maximum of 3 regions.")
     )
     ggplot(data = air_pollution_regions_filtered(),
            aes_string(x = "year",
@@ -331,11 +390,14 @@ server <- function(input, output) {
                              legend.direction = "vertical",
                              legend.position = "left",
                              legend.key.height = unit(2, "cm"),
-                             plot.background = element_rect(fill = "white", color = "white"),
+                             plot.background = element_rect(fill = "white",
+                                                            color = "white"),
                              plot.title = element_blank(),
                              plot.subtitle = element_blank()))
 
-    ggplotly(p = substance_plotly, width = 900, height = 600) %>%
+    ggplotly(p = substance_plotly,
+             width = 900,
+             height = 600) %>%
       animation_opts(frame = 9) %>%
       layout(yaxis = list(showline= F),
              xaxis = list(showline= F)) %>%  # removing axis lines: https://plotly.com/r/axes/
@@ -358,7 +420,8 @@ server <- function(input, output) {
 
   output$plot_substance_line <- renderPlot({
     validate(
-      need(length(input$entity_sub) <= 3, "Please select a maximum of 3 regions.")
+      need(length(input$entity_sub) <= 3,
+           "Please select a maximum of 3 regions.")
     )
     ggplot(data = substance_use_regions_filtered(),
            aes_string(x = "year",
@@ -419,12 +482,15 @@ server <- function(input, output) {
                               legend.direction = "vertical",
                               legend.position = "left",
                               legend.key.height = unit(2, "cm"),
-                              plot.background = element_rect(fill = "white", color = "white"),
+                              plot.background = element_rect(fill = "white",
+                                                             color = "white"),
                               plot.title = element_blank(),
                               plot.subtitle = element_blank()
                             ))
 
-    ggplotly(p = sanitation_plotly, width = 900, height = 600) %>%
+    ggplotly(p = sanitation_plotly,
+             width = 900,
+             height = 600) %>%
       animation_opts(frame = 9) %>%
       layout(yaxis = list(showline= F),
              xaxis = list(showline= F)) %>%  # removing axis lines: https://plotly.com/r/axes/
@@ -447,7 +513,8 @@ server <- function(input, output) {
 
   output$plot_sanitation_line <- renderPlot({
     validate(
-      need(length(input$entity_san) <= 3, "Please select a maxiumum of 3 regions")
+      need(length(input$entity_san) <= 3,
+           "Please select a maxiumum of 3 regions")
     )
     ggplot(data = sanitation_regions_filtered()) +
       geom_line(aes_string(group = "entity",
@@ -474,7 +541,6 @@ server <- function(input, output) {
   })
 }
 
-# summary info: caption = "Source: Our World in Data"
 
-# Run the application
+# Run the application ----------------------------------------------------------
 shinyApp(ui = ui, server = server)
