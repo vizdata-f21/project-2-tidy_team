@@ -103,7 +103,7 @@ Regarding the line plots, our group wanted to compare the raw death rates in Nor
 
 ### Substance Use
 
-Alcohol use and secondhand smoking provided fascinating insights. For instance, from 1990 to 2015, death rates due to secondhand smoking in the US continuously decreased, from 1.14 to 0.87. Similarly, Canada’s death rate due to secondhand smoking decreased from 1.29 to 0.93 between 1990 and 2015. China and Russia faced the highest death rates due to secondhand smoking, with the latter experiencing continuously rising death rates until 2008, after which death rates started to plateau. 
+Alcohol use and secondhand smoking provided fascinating insights. For instance, from 1990 to 2015, death rates due to secondhand smoking in the US continuously decreased, from 1.14 to 0.87. Similarly, Canada’s death rate due to secondhand smoking decreased from 1.13 to 0.93 between 1990 and 2015. China and Russia faced the highest death rates due to secondhand smoking, with the latter experiencing continuously rising death rates until 2008, after which death rates started to plateau. 
 
 Alcohol use death rates painted a surprisingly different story. Canada and the US in 1990 started with polar opposite death rates of 0.37 and 1.08, respectively. However, both countries faced continuously rising death rates, and by 2015, death rates due to alcohol use in Canada and the US were 1.16 and 1.38. However, the region with the highest death rates due to alcohol in 2015 was Eastern Europe - particularly Russia, Romania, and Ukraine, each with a death rate higher than two.  
 
