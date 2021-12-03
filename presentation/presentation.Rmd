@@ -146,9 +146,9 @@ to air pollution (total) has dropped from 31.19 in 1990 to 19.95 in 2015.
 
 ## Trends - Alcohol Use
 
-Canada and the US in 1990 started with polar opposite deaths of 0.37 and 1.08 respectively. However, both countries faced continuously rising death rates, and by 2015, death rates due to alcohol use in Canada and the US were 1.16 and 1.38. 
+Canada and the US in 1990 started with polar opposite death rates of 0.37 and 1.08 respectively. However, both countries faced continuously rising death rates, and by 2015, death rates due to alcohol use in Canada and the US were 1.16 and 1.38. 
 
-Regions with the highest death rates due to alcohol use: Eastern Europe (particularly Russia, Romania, and Ukraine, each with a death rate higher than two).  
+Region with the highest death rates in 2015 due to alcohol use: Eastern Europe (particularly Russia, Romania, and Ukraine, each with a death rate higher than two).  
 
 
 ```{r risk-factor-alc, echo = FALSE, out.width = "100%", fig.align = "center"}
@@ -170,6 +170,16 @@ Regions with the highest death rates due to alcohol use: Eastern Europe (particu
 - Original data includes negative death rates
 
 
+---
+
+
+# Presentation Image Sources
+
+- https://en.wikipedia.org/wiki/Air_pollution
+
+- https://www.vecteezy.com/video/2019067-dark-world-map-animate-background
+
+- https://www.itprotoday.com/devops-and-software-development/programming-evolution-how-coding-has-grown-easier-past-decade
 
 ---
 
