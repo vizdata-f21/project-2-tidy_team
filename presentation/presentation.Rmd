@@ -37,7 +37,7 @@ knitr::opts_chunk$set(
 
 ```{r title-slide, echo = FALSE}
 style_xaringan(title_slide_background_image = 
-                 here("presentation","presentation_files","title_image.jpg"))
+                 "presentation_files/title_image.jpg")
 ```
 
 class: inverse
@@ -64,7 +64,7 @@ the world through time via a Shiny app
 ]
 
 ```{r risk-factor, echo = FALSE, out.width = "50%", fig.align = "right"}
-include_graphics(here("presentation","presentation_files","airpollution.jpg"))
+include_graphics("presentation_files/airpollution.jpg")
 ```
 
 ---
@@ -98,7 +98,7 @@ class: inverse, middle
 ]
 
 ```{r approach-image, echo = FALSE, out.width = "50%", fig.align = "right"}
-include_graphics(here("presentation","presentation_files","coding.jpg"))
+include_graphics("presentation_files/coding.jpg")
 ```
 
 ---
@@ -106,7 +106,7 @@ include_graphics(here("presentation","presentation_files","coding.jpg"))
 ### Map Example
 
 ```{r map-example, echo = FALSE, out.width = "60%", fig.align = "center"}
-include_graphics(here("presentation","presentation_files","map.jpg"))
+include_graphics("presentation_files/map.jpg")
 ```
 
 ---
@@ -114,7 +114,7 @@ include_graphics(here("presentation","presentation_files","map.jpg"))
 ### Line Graph Example
 
 ```{r line-graph-example, echo = FALSE, out.width = "90%", fig.align = "center"}
-include_graphics(here("presentation","presentation_files","linegraph.jpg"))
+include_graphics("presentation_files/linegraph.jpg")
 ```
 
 ---
@@ -148,11 +148,11 @@ Africa, South America and South/South East Asia.
 
 
 ```{r risk-factor-1990_air, echo = FALSE, out.width = "50%", fig.align = "right"}
-  include_graphics(here("presentation","presentation_files","1990_air.PNG"))
+  include_graphics("presentation_files/1990_air.PNG")
 ```
 
 ```{r risk-factor-2015_air, echo = FALSE, out.width = "50%", fig.align = "right"}
-  include_graphics(here("presentation","presentation_files","air_2015.PNG"))
+  include_graphics("presentation_files/air_2015.PNG")
 ```
 ---
 
