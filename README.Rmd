@@ -11,7 +11,7 @@ library(maps)
 library(tidyverse)
 ```
 
-# Write up 
+# Write Up 
 
 ```{r load-data, echo = FALSE, message = FALSE, warning = FALSE}
 # air pollution data
@@ -134,6 +134,8 @@ Our presentation can be found [here](https://vizdata-f21.github.io/project-2-tid
 
 # References
 
+## Data References: 
+ADD DATA REFERENCES 
 ## Packages:
 
 Winston Chang, Joe Cheng, JJ Allaire, Carson Sievert, Barret Schloerke, Yihui Xie, Jeff Allen, Jonathan McPherson, Alan Dipert and Barbara Borges
@@ -153,7 +155,6 @@ Kirill Müller (2020). here: A Simpler Way to Find Your Files. https://here.r-li
 Original S code by Richard A. Becker, Allan R. Wilks. R version by Ray Brownrigg. Enhancements by Thomas P Minka and Alex Deckmyn. (2021). maps: Draw
   Geographical Maps. R package version 3.4.0.
 
-
 Hadley Wickham and Dana Seidel (2020). scales: Scale Functions for Visualization. https://scales.r-lib.org, https://github.com/r-lib/scales.
 
 C. Sievert. Interactive Web-Based Data Visualization with R, plotly, and shiny. Chapman and Hall/CRC Florida, 2020.
@@ -171,6 +172,9 @@ Kirill Müller and Lorenz Walthert (2021). styler: Non-Invasive Pretty Printing 
 Sam Firke (2021). janitor: Simple Tools for Examining and Cleaning Dirty Data. R package version 2.1.0. https://github.com/sfirke/janitor
 
 Hadley Wickham and Jennifer Bryan (2019). readxl: Read Excel Files. https://readxl.tidyverse.org, https://github.com/tidyverse/readxl.
+
+## Shiny App Code Sources: 
+LINK TO READ ME 
 
 ## Presentation Images:
 
