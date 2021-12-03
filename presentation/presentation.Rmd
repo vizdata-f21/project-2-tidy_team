@@ -127,9 +127,7 @@ class: inverse
 
 ---
 
-class: inverse, middle
-
-## Trends - Air pollution
+## Trends - Air Pollution
 
 Death rates attributable to air pollution in total have consistently fallen 
 throughout the 25 years on the time slider. For instance, the US’ death rate due 
@@ -142,10 +140,7 @@ to air pollution (total) has dropped from 31.19 in 1990 to 19.95 in 2015.
 
 ---
 
-class: inverse, middle
-
-
-## Trends - Alcohol use
+## Trends - Alcohol Use
 
 Canada and the US in 1990 started with polar opposite deaths of 0.37 and 1.08 respectively. However, both countries faced continuously rising death rates, and by 2015, death rates due to alcohol use in Canada and the US were 1.16 and 1.38. 
 
@@ -157,8 +152,6 @@ Regions with the highest death rates due to alcohol use: Eastern Europe (particu
 ```
 
 ---
-
-class: inverse, middle
 
 ## Limitations
 
@@ -178,7 +171,8 @@ class: inverse, middle
 
 class: inverse, middle, center
 
-# Thank you for listening!
+# Thank You! 
+# Questions?
 
 
 
