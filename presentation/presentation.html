@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>Air Pollution Deaths</title>
+    <title>Global Deaths by Risk Factor</title>
     <meta charset="utf-8" />
     <meta name="author" content="Tidy Team   Drew Flanagan, Courtney Lee, Kathryn Thomas, Raghav Rasal" />
     <meta name="date" content="2021-12-02" />
@@ -12,7 +12,7 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
-# Air Pollution Deaths
+# Global Deaths by Risk Factor
 ## A shiny app hosting interactive spatio-temporal visualizations.
 ### Tidy Team <br> Drew Flanagan, Courtney Lee, Kathryn Thomas, Raghav Rasal
 ### Duke University
@@ -27,48 +27,109 @@ class: center, middle, inverse, title-slide
 
 
 
-class: inverse, middle, center
-
-# Motivation + Data
 
 
+class: inverse
 
+# Motivation 
+
+.pull-left[
 
 - Aim and motivation: Communicate the harmful effects of certain risk factors on 
 the world through time via a Shiny app
 
-- 3 main data sets:
+- Potential Users:
 
-  - The World Pollution Data from Kaggle ()
+  - Global researchers, policymakers, citizens
+
+- 3 Categories of Risk Factors: 
+
+1. air pollution
+
+2. substance use
+
+3. sanitation
   
-  - The World Map Data from Maps Package ()
-  
-  - Pollution Data from Our World in Data
+]
+
+&lt;img src="presentation_files/airpollution.jpg" width="50%" style="display: block; margin: auto 0 auto auto;" /&gt;
 
 ---
 
-# The Shiny App
-
-### try to hyperlink this directly to the shiny app
-
----
+class: inverse, middle
 
 ## Approach
 
-- Data cleaning and merging
+.pull-left[
 
- - Utilizing Rds files 
+- Data cleaning and merging
   
-- Map with a time functionality 
- - Plotly
+  - Utilizing Rds files
+  
+- 3 main data sets:
+
+  - The Death by Risk Factor Data from Our World in Data via Kaggle 
+  
+  - The World Map Data from Maps Package
+  
+  - Population Data from Our World in Data
+  
+- Map with a time and interactive functionality
+
+  - Plotly
 
 - Line plots 
 
+]
+
+&lt;img src="presentation_files/coding.jpg" width="50%" style="display: block; margin: auto 0 auto auto;" /&gt;
+
 ---
 
-class: inverse, middle, center
+### Map Example
 
-## Trends and limitations 
+&lt;img src="presentation_files/map.jpg" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+
+### Line Graph Example
+
+&lt;img src="presentation_files/linegraph.jpg" width="90%" style="display: block; margin: auto;" /&gt;
+
+---
+
+class: inverse
+
+# The Shiny App
+
+&lt;iframe height="360" width="640" src="https://warpwire.duke.edu/w/-VUGAA/" frameborder="0" scrolling="0" allow="autoplay *; encrypted-media *; fullscreen *; picture-in-picture *;" allowfullscreen&gt;&lt;/iframe&gt;
+
+---
+
+class: inverse, middle
+
+## Trends
+
+- xxx
+
+- xxx
+
+- xxx
+
+---
+
+class: inverse, middle
+
+## Limitations
+
+- Speed of Shiny app
+
+- Not all age standardized
+
+- Variable names as labels
+
+- Did not include all risk categories
+
 
 
 ---

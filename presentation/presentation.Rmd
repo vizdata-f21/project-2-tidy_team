@@ -23,7 +23,7 @@ library(knitr)
 library(xaringanthemer)
 ```
 
-```{r setup, include=FALSE}
+```{r setup, include = FALSE}
 # For better figure resolution
 knitr::opts_chunk$set(
   fig.retina = 3, 
@@ -34,52 +34,123 @@ knitr::opts_chunk$set(
   )
 ```
 
-```{r load-data, include=FALSE}
+```{r load-data, include = FALSE}
 # Load your data here
 ```
 
-class: inverse, middle, center
+```{r title-slide, echo = FALSE}
+style_xaringan(title_slide_background_image = "presentation_files/title_image.jpg")
+```
 
-# Motivation + Data
+class: inverse
 
+# Motivation 
 
-
+.pull-left[
 
 - Aim and motivation: Communicate the harmful effects of certain risk factors on 
 the world through time via a Shiny app
 
-- 3 main data sets:
+- Potential Users:
 
-  - The World Pollution Data from Kaggle ()
+  - Global researchers, policymakers, citizens
+
+- 3 Categories of Risk Factors: 
+
+1. air pollution
+
+2. substance use
+
+3. sanitation
   
-  - The World Map Data from Maps Package ()
-  
-  - Pollution Data from Our World in Data
+]
+
+```{r risk-factor, echo = FALSE, out.width = "50%", fig.align = "right"}
+include_graphics("presentation_files/airpollution.jpg")
+```
 
 ---
 
-# The Shiny App
-
-### try to hyperlink this directly to the shiny app
-
----
+class: inverse, middle
 
 ## Approach
 
-- Data cleaning and merging
+.pull-left[
 
- - Utilizing Rds files 
+- Data cleaning and merging
   
-- Map with a time functionality 
- - Plotly
+  - Utilizing Rds files
+  
+- 3 main data sets:
+
+  - The Death by Risk Factor Data from Our World in Data via Kaggle 
+  
+  - The World Map Data from Maps Package
+  
+  - Population Data from Our World in Data
+  
+- Map with a time and interactive functionality
+
+  - Plotly
 
 - Line plots 
 
+]
+
+```{r approach-image, echo = FALSE, out.width = "50%", fig.align = "right"}
+include_graphics("presentation_files/coding.jpg")
+```
+
 ---
 
-class: inverse, middle, center
+### Map Example
 
-## Trends and limitations 
+```{r map, echo = FALSE, out.width = "80%", fig.align = "center"}
+include_graphics("presentation_files/map.jpg")
+```
+
+---
+
+### Line Graph Example
+
+```{r line-graph, echo = FALSE, out.width = "90%", fig.align = "center"}
+include_graphics("presentation_files/linegraph.jpg")
+```
+
+---
+
+class: inverse
+
+# The Shiny App
+
+<iframe height="360" width="640" src="https://warpwire.duke.edu/w/-VUGAA/" frameborder="0" scrolling="0" allow="autoplay *; encrypted-media *; fullscreen *; picture-in-picture *;" allowfullscreen></iframe>
+
+---
+
+class: inverse, middle
+
+## Trends
+
+- xxx
+
+- xxx
+
+- xxx
+
+---
+
+class: inverse, middle
+
+## Limitations
+
+- Speed of Shiny app
+
+- Not all age standardized
+
+- Variable names as labels
+
+- Did not include all risk categories
+
 
 
 ---
