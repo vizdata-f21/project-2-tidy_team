@@ -1,5 +1,5 @@
 ---
-title: "Air Pollution Deaths"
+title: "Global Deaths by Risk Factor"
 subtitle: "A shiny app hosting interactive spatio-temporal visualizations. "
 author: "Tidy Team  <br> Drew Flanagan, Courtney Lee, Kathryn Thomas, Raghav Rasal"
 institute: "Duke University"
