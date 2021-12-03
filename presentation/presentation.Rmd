@@ -38,21 +38,16 @@ knitr::opts_chunk$set(
 # Load your data here
 ```
 
-class: inverse, middle, center
-
 # Motivation + Data
-
-
-
 
 - Aim and motivation: Communicate the harmful effects of certain risk factors on 
 the world through time via a Shiny app
 
 - 3 main data sets:
 
-  - The World Pollution Data from Kaggle ()
+  - The World Pollution Data from Kaggle
   
-  - The World Map Data from Maps Package ()
+  - The World Map Data from Maps Package
   
   - Pollution Data from Our World in Data
 
