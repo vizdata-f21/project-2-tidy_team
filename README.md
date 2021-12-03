@@ -124,7 +124,11 @@ All these factors would require a large time investment towards technical troubl
 
 # Shiny App
 
+Our Shiny App can be found [here](xxx)
+
 # Presentation Slides
+
+Our presentation can be found [here](https://vizdata-f21/project-2-tidy_team/blob/main/presentation/presentation.html)
 
 # References
 
