@@ -96,9 +96,11 @@ ui <- fluidPage(
                  verticalLayout(
                  h3(strong("Death Rate of Selected Air Pollution Type by Country", align = "left")),
                  h4("As measured by the number of deaths per 100,000 people (Age-standardized)", align = "left"),
+                 bsTooltip("plot_air", "Alt Text", placement = "bottom", trigger = "hover", options = NULL),
                  plotlyOutput(outputId = "plot_air", height = "600px"),
                  h3(strong("Number of Deaths from Selected Air Pollution Type by Region", align = "left")),
                  h4("As measured by the raw number of deaths", align = "left"),
+                 bsTooltip("plot_air_pollution_line", "Alt Text", placement = "bottom", trigger = "hover", options = NULL),
                  plotOutput(outputId = "plot_air_pollution_line"))
                )
              )
@@ -141,9 +143,11 @@ ui <- fluidPage(
                  verticalLayout(
                  h3(strong("Death Rate of Selected Substance Type by Country", align = "left")),
                  h4("As measured by the number of deaths per 100,000 people", align = "left"),
+                 bsTooltip("plot_substance", "Alt Text", placement = "bottom", trigger = "hover", options = NULL),
                  plotlyOutput(outputId = "plot_substance", height = "600px"),
                  h3(strong("Number of Deaths from Selected Substance Type by Region", align = "left")),
                  h4("As measured by the raw number of deaths", align = "left"),
+                 bsTooltip("plot_substance_line", "Alt Text", placement = "bottom", trigger = "hover", options = NULL),
                  plotOutput(outputId = "plot_substance_line"))
                ))
              )
@@ -187,9 +191,11 @@ ui <- fluidPage(
                  verticalLayout(
                  h3(strong("Death Rate of Selected Sanitation Issue by Country", align = "left")),
                  h4("As measured by the number of deaths per 100,000 people", align = "left"),
+                 bsTooltip("plot_sanitation", "Alt Text", placement = "bottom", trigger = "hover", options = NULL),
                  plotlyOutput(outputId = "plot_sanitation", height = "600px"),
                  h3(strong("Number of Deaths from Selected Sanitation Issue by Region", align = "left")),
                  h4("As measured by the raw number of deaths", align = "left"),
+                 bsTooltip("plot_sanitation_line", "Alt Text", placement = "bottom", trigger = "hover", options = NULL),
                  plotOutput(outputId = "plot_sanitation_line")))
                )
              )
