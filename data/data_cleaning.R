@@ -214,7 +214,8 @@ air_pollution_regions <- regions %>%
     entity,
     year,
     air_pollution,
-    outdoor_air_pollution
+    outdoor_air_pollution,
+    household_air_pollution_from_solid_fuels
   )
 
 write_rds(air_pollution_regions, file = here("death_risk_factors", "data", "air_pollution_regions.rds"), "gz")

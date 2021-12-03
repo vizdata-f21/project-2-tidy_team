@@ -92,8 +92,9 @@ ui <- fluidPage(
             inputId = "air_pollution_line",
             label = "Select Type of Air Pollution for Line Plot",
             choices = c(
-              "Air Pollution" = "air_pollution",
-              "Outdoor Air Pollution" = "outdoor_air_pollution"
+              "Outdoor Air Pollution" = "outdoor_air_pollution",
+              "Household Air Pollution from Solid Fuels" = "household_air_pollution_from_solid_fuels",
+              "Air Pollution (Total)" = "air_pollution"
             )
           ),
           # check box input for regions on line plot
