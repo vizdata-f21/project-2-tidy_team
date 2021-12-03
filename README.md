@@ -3,7 +3,7 @@ Global Deaths by Risk Factors
 Tidy Team
 12/2/2021
 
-# Write up
+# Write Up
 
 ## Introduction
 
@@ -266,7 +266,9 @@ Our presentation can be found
 
 # References
 
-## Packages:
+## Data References:
+
+ADD DATA REFERENCES ## Packages:
 
 Winston Chang, Joe Cheng, JJ Allaire, Carson Sievert, Barret Schloerke,
 Yihui Xie, Jeff Allen, Jonathan McPherson, Alan Dipert and Barbara
@@ -320,6 +322,10 @@ Data. R package version 2.1.0. <https://github.com/sfirke/janitor>
 
 Hadley Wickham and Jennifer Bryan (2019). readxl: Read Excel Files.
 <https://readxl.tidyverse.org>, <https://github.com/tidyverse/readxl>.
+
+## Shiny App Code Sources:
+
+LINK TO READ ME
 
 ## Presentation Images:
 
