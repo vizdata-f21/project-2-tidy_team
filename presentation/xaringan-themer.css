@@ -135,7 +135,7 @@ a, a > code {
 }
 .title-slide {
   background-color: var(--title-slide-background-color);
-  background-image: url("/home/guest/project2/project-2-tidy_team/presentation_files/title_image.jpg");
+  background-image: url("/home/guest/project2/project-2-tidy_team/presentation/presentation_files/title_image.jpg");
   background-size: cover;
 }
 .title-slide .remark-slide-number {
