@@ -100,7 +100,7 @@ class: inverse, middle
 ]
 
 ```{r approach-image, echo = FALSE, out.width = "50%", fig.align = "right"}
-include_graphics("presentation_files/coding.jpg")
+include_graphics("presentation_files/map_appendix.jpg")
 ```
 
 ---
@@ -179,7 +179,6 @@ Region with the highest death rates in 2015 due to alcohol use: Eastern Europe (
 
 - https://www.vecteezy.com/video/2019067-dark-world-map-animate-background
 
-- https://www.itprotoday.com/devops-and-software-development/programming-evolution-how-coding-has-grown-easier-past-decade
 
 ---
 
