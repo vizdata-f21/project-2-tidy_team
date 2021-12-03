@@ -32,6 +32,7 @@ https://plotly.com/ggplot2/choropleth-maps/
 https://cran.r-project.org/web/packages/plotly/plotly.pdf
 https://community.plotly.com/t/plotly-shiny-reactive-height-of-plots/1503
 https://stackoverflow.com/questions/56112037/how-to-make-text-appear-when-mouse-hovers-over-an-area
+https://plotly-r.com/control-modebar.html
 https://plotly.com/r/axes/
 https://cran.r-project.org/web/packages/plotly/plotly.pdf
 https://webcam.srs.fs.fed.us/test/AQI.shtml
