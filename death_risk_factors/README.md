@@ -1,6 +1,8 @@
 This folder holds the cleaned data used in our shiny app (within the folder `data`) and the code for our shiny app. 
 
-Below are the sources used to make the `app.R` code. We are also grateful to Mine for her continued support and guidance.
+Below are the sources used to make the `app.R` code and for the `data.cleaning.R` file (found in the `data` folder outside the `death_risk_factors` folder). 
+
+We are also grateful to Mine for her continued support and guidance.
 
 https://shiny.rstudio.com/articles/plot-interaction.html
 https://mastering-shiny.org/action-graphics.html
