@@ -136,7 +136,8 @@ Our presentation can be found [here](https://vizdata-f21.github.io/project-2-tid
 
 ## Data References: 
 ADD DATA REFERENCES 
-## Packages:
+
+## Package References:
 
 Winston Chang, Joe Cheng, JJ Allaire, Carson Sievert, Barret Schloerke, Yihui Xie, Jeff Allen, Jonathan McPherson, Alan Dipert and Barbara Borges
   (2021). shiny: Web Application Framework for R. R package version 1.7.1. https://shiny.rstudio.com/
@@ -173,10 +174,10 @@ Sam Firke (2021). janitor: Simple Tools for Examining and Cleaning Dirty Data. R
 
 Hadley Wickham and Jennifer Bryan (2019). readxl: Read Excel Files. https://readxl.tidyverse.org, https://github.com/tidyverse/readxl.
 
-## Shiny App Code Sources: 
+## Shiny App Code References: 
 LINK TO READ ME 
 
-## Presentation Images:
+## Presentation Image References:
 
 - https://en.wikipedia.org/wiki/Air_pollution
 - https://www.vecteezy.com/video/2019067-dark-world-map-animate-background
