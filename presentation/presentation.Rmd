@@ -155,7 +155,7 @@ Region with the highest death rates in 2015 due to alcohol use: Eastern Europe (
 
 - Speed of Shiny app
 
-- Not all age standardized
+- Death rates not all age standardized
 
 - Variable names as labels
 
