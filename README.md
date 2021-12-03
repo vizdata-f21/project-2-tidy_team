@@ -52,7 +52,7 @@ Data, which includes 4 different variables and 6814 observations.
 
 The data can be found in our [data dictionary](data/data_dictionary.md).
 We first created a data cleaning script to separate all the data
-cleaning from the app. We compressed the .csv files into rds files and
+cleaning from the app. We compressed the .csv files into .rds files and
 combined and separated components of the data sets to create our
 visualizations.
 
@@ -74,37 +74,36 @@ The Data cleaning file can be found [here](data/data_cleaning.R).
 To create the map, we used a series of `case_when` functions to resolve
 naming inconsistencies between the two data sets. However, a limitation
 was that we could not fix all the country names, especially those we
-could not identify on the map. The data cleaning file can be found We
-aimed to make all three maps show death rate–not total death count–to
-account for varying population sizes. However, only the air pollution
-category had the death rate in the original data set, the others had
-death count. Therefore, we used population data to find the total
-population of each country between 1990 and 2017. Then we mutated a new
-column for the death rate by dividing the total number of deaths by
-total population, then multiplying by 100,000 to show the number of
-deaths per 100,000 people. However, we did not age-standardize the death
-rate as we did not feel equipped to undertake this calculation.
+could not identify on the map. We aimed to make all three maps show
+death rate–not total death count–to account for varying population
+sizes. However, only the air pollution category had the death rate in
+the original data set, the others had death count. Therefore, we used
+population data to find the total population of each country between
+1990 and 2017. Then we mutated a new column for the death rate by
+dividing the total number of deaths by total population, then
+multiplying by 100,000 to show the number of deaths per 100,000 people.
+However, we did not age-standardize the death rate as we did not feel
+equipped to undertake this calculation.
 
 ### Time
 
 For the map, we filtered for every three years between 1990 and 2015
-instead of plotting every year to enhance loading speed on the app.
-These intervals also show more meaningful change when playing the
-animation. We chose to keep data for every year for the line graphs for
-the integrity of the chart. This decision did not slow down the Shiny
-app since it is plotted in a line graph and not a plotly map. The code
-for the plotly map can be found [here](death_risk_factors/app.R).
+instead of plotting every year to enhance the loading speed. These
+intervals also show more meaningful change when playing the animation.
+We chose to keep data for every year for the line graphs for the
+integrity of the chart. This decision did not slow down the Shiny app
+since it is plotted in a line graph and not a plotly map. The code for
+the plotly map and line graph can be found
+[here](death_risk_factors/app.R).
 
 ### Shiny App
 
-Our app displays a dashboard with three tabs, each displaying a world
-map and a line chart according to the three main categories of risk
-factors: Air pollution, Substance Use, and Sanitation.
+Each of the three main categories of risk factors are given a separate
+tab: Air pollution, Substance Use, and Sanitation.
 
 The world map is a plotly map highlighting the death rates for the
-chosen risk factor tab. Furthermore, there is a time slider below the
-map. Each type of pollution is associated with a different continuous
-color scale.
+chosen risk factor tab. Each type of risk factor is given a different
+continuous color scale.
 
 Within the three tabs, the user will interact with a side panel,
 allowing them to select the subcategory to display. For instance, within
@@ -116,7 +115,7 @@ After the map reloads according to the user’s selection, the user can
 interact with the map by sliding the time slider located under the map
 to select a specific year to display, ranging from 1990 to 2017.
 Additionally, the user can click the play button near the time slider to
-animate the map.
+animate.
 
 On the map, the user can use their mouse to hover over each country,
 displaying a small box that shows the country’s name and death rate by
@@ -124,18 +123,16 @@ the chosen category.
 
 Below the map and time slider, a line graph indicates the changes in the
 number of deaths for the given risk factor over the time the data was
-collected. Instead of the death rate, we used the total number of deaths
-for the y-axis because this graph focuses more on the change over time
-for each region, not direct comparisons between regions. The user will
-be able to choose up to three regions to view how the death rates per
-risk factor changed from 1990 to 2017. There are 17 regions the user can
-select from.
-
-This graph is intended for users investigating a specific region, like
-South Asia, and how the number of deaths from a particular risk factor
-has changed between 1990 and 2017. We set the maximum number of regions
-to three, so the plot displays trends and comparisons with meaningful
-color differences, time loading, and clarity.
+collected. The user will be able to choose up to three regions to view
+how the death number per risk factor changed from 1990 to 2017. There
+are 17 regions the user can select from. Instead of the death rate, we
+used the total number of deaths for the y-axis because this allows
+absolute number of deaths to be evaluated between regions so decision
+makers know where to allocate resources. While death rate is helpful for
+comparative purposes, the absolute number is also essential to
+understand where most people are suffering. We set the maximum number of
+regions to three, so the plot displays trends and comparisons with
+meaningful color differences, time loading, and clarity.
 
 If the user wants to explore our general findings and conclusions, they
 can click on our hyperlink located at the bottom of each sidebar. This
@@ -146,12 +143,13 @@ sources, approach, and discussion.
 
 Initially, our group attempted to utilize Leaflet, but this method did
 not work because it required spatial data that we could not join with
-the World Pollution data sets. Next, we tried using `geom_polygon,`
-which worked visually but limited interactivity. We were determined to
-include hover and zoom-in features to provide adequate information for
-users, because the color scale is not detailed enough to compare across
-space and time. We finally chose the plotly package to enhance
-interactivity.
+our data given the skills we learned and also limited color filling in
+the polygons. Next, we tried using the Shiny slider which worked
+visually but limited interactivity and speed. We were determined to
+include hover and zoom-in features with detailed death rates, because
+the color scale alone is not detailed enough to compare death rates
+across countries and time. We finally chose the plotly package for
+`geom_polygon` to enhance interactivity and speed.
 
 ### Accessibility
 
