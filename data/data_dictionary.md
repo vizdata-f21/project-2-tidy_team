@@ -1,11 +1,11 @@
 # Data Dictionary 
 
-## World Pollution Data:
+## World Pollution Data
 
 Source: [Kaggle](https://www.kaggle.com/pavan9065/air-pollution?select=death-rates-from-air-pollution.csv)
 
 
-### death-rates-from-air-pollution:
+### death-rates-from-air-pollution
 
 |Variable         |Description |
 |:----------------|:-----------|
@@ -23,7 +23,7 @@ both outdoor and indoor air pollution. Rates are
 age-standardized, meaning they assume a constant age structure of the 
 population to allow for comparisons between countries and over time."
 
-### number_deaths_by_riskfactor:
+### number_deaths_by_riskfactor
 
 |Variable         |Description |
 |:----------------|:-----------|
@@ -58,11 +58,10 @@ population to allow for comparisons between countries and over time."
 |diet_low_in_whole_grains | Total annual number of deaths from diet low in whole grains | 
 |diet_low_in_nuts_and_seeds | Total annual number of deaths from diet low in nuts and seeds|
 
-## World Map Data: 
+## World Map Data 
 
-Source: Maps Package
+Source: Maps Package world_map
 
-### world_map
 |Variable         |Description |
 |:----------------|:-----------|
 |long           | Longitude |
@@ -76,16 +75,14 @@ Source: Maps Package
 
 Source: [Our World in Data](https://ourworldindata.org/grapher/population?time=1899..latest&country=AFG~Africa~ALB~DZA~ASM~AND~AGO~AIA~ATG~ARM~ABW~ARG~Asia~AUS~AUT~AZE~BHS~BHR~BGD)
 
-
-
 |Variable         |Description |
 |:----------------|:-----------|
 |entity           | Entity name |
-|code |           | Code for entity | 
+|code            | Code for entity | 
 |year             | Year data was collected |
 |population_historical_estimates    | Estimated population size in the designated year |
 
-## RDS Files We Created For Visualizations: 
+## RDS Files We Created For Visualizations 
 
 ## compressed_final_data.rds
 
@@ -151,7 +148,6 @@ Source: [Our World in Data](https://ourworldindata.org/grapher/population?time=1
 |alcohol_use | Number of deaths attributed to alcohol use | 
 |drug_use | Number of deaths attributed to drug use | 
 |smoking | Number of deaths attributed to smoking | 
-
 
 ## sanitation_regions.rds 
 
