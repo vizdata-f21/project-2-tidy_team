@@ -69,6 +69,8 @@ the world through time via a Shiny app
 include_graphics("presentation_files/airpollution.jpg")
 ```
 
+<!-- include_graphics: https://www.rdocumentation.org/packages/knitr/versions/1.36/topics/include_graphics -->
+
 ---
 
 class: inverse, middle
@@ -124,6 +126,8 @@ class: inverse
 # The Shiny App
 
 <iframe height="360" width="640" src="https://warpwire.duke.edu/w/-VUGAA/" frameborder="0" scrolling="0" allow="autoplay *; encrypted-media *; fullscreen *; picture-in-picture *;" allowfullscreen></iframe>
+
+<!-- iframe: https://rdrr.io/cran/shinyLP/man/iframe.html -->
 
 ---
 
