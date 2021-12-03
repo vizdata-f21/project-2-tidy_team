@@ -45,25 +45,25 @@ The goal of our Shiny App is to communicate the harmful effects of certain risk 
 
 ### Data Description
 
-We utilize three different datasets. 
+We utilize three different data sets. 
 
-The first dataset is The World Pollution Data from Our World in Data via Kaggle. This dataset contains two separate CSV files. The first includes the death rate by air pollution type and country from 1990 to 2017 - `r ncol(death_rates_from_air_pollution)` variables and `r nrow(death_rates_from_air_pollution)` observations. The second CSV has the raw number of deaths by risk factor and by country from 1990 to 2017 - `r ncol(number_deaths_by_risk_factor)` variables and `r nrow(number_deaths_by_risk_factor)` observations. 
-The second dataset is The World Map Data from Maps Package, which includes `r ncol(map_data)` variables  and `r nrow(map_data)` observations. The third dataset is Population Data from Our World in Data, which includes `r ncol(population_data)` different variables and `r nrow(population_data)` observations.
+The first data set is The World Pollution Data from Our World in Data via Kaggle. This data set contains two separate CSV files. The first includes the death rate by air pollution type and country from 1990 to 2017 - `r ncol(death_rates_from_air_pollution)` variables and `r nrow(death_rates_from_air_pollution)` observations. The second CSV has the raw number of deaths by risk factor and by country from 1990 to 2017 - `r ncol(number_deaths_by_risk_factor)` variables and `r nrow(number_deaths_by_risk_factor)` observations. 
+The second data set is The World Map Data from Maps Package, which includes `r ncol(map_data)` variables  and `r nrow(map_data)` observations. The third data set is Population Data from Our World in Data, which includes `r ncol(population_data)` different variables and `r nrow(population_data)` observations.
 
 ## Justification of Approach 
 
 ### Data Cleaning and Merging
 
 The data can be found in our [data dictionary](data/data_dictionary.md).
-We first created a data cleaning script to separate all the data cleaning from the app. We compressed the .csv files into rds files and combined and separated components of the datasets to create our visualizations. 
+We first created a data cleaning script to separate all the data cleaning from the app. We compressed the .csv files into rds files and combined and separated components of the data sets to create our visualizations. 
 
-Specifically, we created `compressed_final_data.rds` by combining all the datasets above so each region has information about the different death rates by various risk factors. However, we needed to organize death rates by different risk factors for each country for the map. Therefore, we created three rds files for each risk factor category (death by air pollution, substance use, and sanitation). We chose three categories because the Shiny App rendered too slowly with more than three interactive maps. Also, we selected air pollution, substance use, and sanitation because those categories had the most significant effect on the death rate worldwide. 
+Specifically, we created `compressed_final_data.rds` by combining all the data sets above so each region has information about the different death rates by various risk factors. However, we needed to organize death rates by different risk factors for each country for the map. Therefore, we created three rds files for each risk factor category (death by air pollution, substance use, and sanitation). We chose three categories because the Shiny App rendered too slowly with more than three interactive maps. Also, we selected air pollution, substance use, and sanitation because those categories had the most significant effect on the death rate worldwide. 
 
 The Data cleaning file can be found [here](data/data_cleaning.R).
 
 ### Map Dataset
-To create the map, we used a series of `case_when` functions to resolve naming inconsistencies between the two datasets. However, a limitation was that we could not fix all the country names, especially those we could not identify on the map. The data cleaning file can be found 
-We aimed to make all three maps show death rate–not total death count–to account for varying population sizes. However, only the air pollution category had the death rate in the original dataset, the others had death count. Therefore, we used population data to find the total population of each country between 1990 and 2017. Then we mutated a new column for the death rate by dividing the total number of deaths by total population, then multiplying by 100,000 to show the number of deaths per 100,000 people. However, we did not age-standardize the death rate as we did not feel equipped to undertake this calculation.
+To create the map, we used a series of `case_when` functions to resolve naming inconsistencies between the two data sets. However, a limitation was that we could not fix all the country names, especially those we could not identify on the map. The data cleaning file can be found 
+We aimed to make all three maps show death rate–not total death count–to account for varying population sizes. However, only the air pollution category had the death rate in the original data set, the others had death count. Therefore, we used population data to find the total population of each country between 1990 and 2017. Then we mutated a new column for the death rate by dividing the total number of deaths by total population, then multiplying by 100,000 to show the number of deaths per 100,000 people. However, we did not age-standardize the death rate as we did not feel equipped to undertake this calculation.
 
 ### Time
 For the map, we filtered for every three years between 1990 and 2015 instead of plotting every year to enhance loading speed on the app. These intervals also show more meaningful change when playing the animation. We chose to keep data for every year for the line graphs for the integrity of the chart. This decision did not slow down the Shiny app since it is plotted in a line graph and not a plotly map. The code for the plotly map can be found [here](death_risk_factors/app.R).
@@ -86,7 +86,7 @@ This graph is intended for users investigating a specific region, like South Asi
 If the user wants to explore our general findings and conclusions, they can click on our hyperlink located at the bottom of each sidebar. This hyperlink brings the user to our GitHub Write-up to find our data sources, approach, and discussion.
 
 ### Use of Plotly for Map
-Initially, our group attempted to utilize Leaflet, but this method did not work because it required spatial data that we could not join with the World Pollution datasets. Next, we tried using `geom_polygon,` which worked visually but limited interactivity. We were determined to include hover and zoom-in features to provide adequate information for users, because the color scale is not detailed enough to compare across space and time. We finally chose the plotly package to enhance interactivity.
+Initially, our group attempted to utilize Leaflet, but this method did not work because it required spatial data that we could not join with the World Pollution data sets. Next, we tried using `geom_polygon,` which worked visually but limited interactivity. We were determined to include hover and zoom-in features to provide adequate information for users, because the color scale is not detailed enough to compare across space and time. We finally chose the plotly package to enhance interactivity.
 
 ### Accessibility
 All the color scales chosen are color-blind friendly. Each map shows a different Viridis palette, so comparing death rates between different countries is more accessible. We used a different, yet consistent Viridis palette for the line graphs. Each color corresponds with a region instead of corresponding with the death rate. Additionally, we added Alt Text to our app, specifically when the user hovers over the map and the line plot. This way, users who can not see the plots clearly can use their computer’s text reader to listen to our descriptions.
@@ -99,7 +99,7 @@ Below, we discuss critical findings from our visualizations for each of the thre
 
 Death rates attributable to air pollution in total have consistently fallen throughout the 25 years on the time slider. For instance, the US death rate due to air pollution (total) has dropped from 31.19 in 1990 to 19.95 in 2015. This was a surprising finding since our group’s intuition was that air pollution has increased over the years due to industrialization; therefore, air pollution-related deaths would also increase. However, this finding does not suggest that air pollution has necessarily decreased, but rather the possibility that people have developed better methods to prevent death from air pollution. 
 
-Regarding the line plots, our group wanted to compare the raw deaths in North America, Eastern Europe, and Latin America and the Caribbean since we wanted to compare two well-developed regions with a less developed one. For instance, in 2017, North America had 115000 deaths attributed to air pollution, whereas Eastern Europe and Latin America and the Caribbean had approximately 150000 and 200000, respectively. This finding is surprising given that Latin America and the Caribbean have a much smaller population than the other two regions. 
+Regarding the line plots, our group wanted to compare the raw deaths in North America, Eastern Europe, and Latin America and the Caribbean since we wanted to compare two well-developed regions with a less developed one. For instance, in 2017, North America had 115,000 deaths attributed to air pollution, whereas Eastern Europe and Latin America and the Caribbean had approximately 150,000 and 200,000, respectively. This finding is surprising given that Latin America and the Caribbean have a much smaller population than the other two regions. 
 
 ### Substance Use
 
@@ -110,9 +110,9 @@ Alcohol use death rates painted a surprisingly different story. Canada and the U
 Comparing the three regions mentioned earlier for the line plots, we can see that Eastern Europe continuously has a more significant number of deaths for alcohol use-related deaths, followed by Latin America and the Caribbean and North America. Interestingly, the number of alcohol-related deaths for Eastern Europe and Latin America and the Caribbean were roughly the same in 1990; however, by 2017, the disparity was vast (100,000 deaths). 
 
 ### Sanitation
-This risk factor indicates the most significant difference between developed and less developed countries. For instance, in 1990, the regions with the highest death rates due to unsafe water sources were Africa, South America, and South/South East Asia. Countries in this region would be considered less developed countries; therefore, this aligns with our group’s initial hypothesis. A similar trend can also be seen for death rates attributable to unsafe sanitation and a lack of access to handwashing facilities.
+This risk factor indicates the most significant difference between developed and less developed countries. For instance, in 1990, the regions with the highest death rates due to unsafe water sources were Africa, South America, and South/South East Asia. Countries in this region would be considered less developed countries; therefore, this aligns with our group’s initial hypothesis. A similar trend can also be seen for death rates attributable to unsafe sanitation and a lack of access to hand washing facilities.
 	
-Latin America and the Caribbean have far greater deaths attributed to unsafe water sources than Eastern Europe or North America. In 2017, Eastern Europe and North America had around 300 deaths due to unsafe water sources, whereas Latin America and the Caribbean had around 12,000 deaths. Although Latin America and the Caribbean have a much smaller population, they are less economically developed than the other two. 
+Latin America and the Caribbean have far greater deaths attributed to unsafe water sources than Eastern Europe or North America. In 2017, Eastern Europe and North America had around 300 deaths due to unsafe water sources, whereas Latin America and the Caribbean had around 12,000 deaths. Although Latin America and the Caribbean have a much smaller population, they are less economically developed than the other two regions, and so the death count disparity makes intuitive sense. 
 
 ## Conclusion and Limitations
 

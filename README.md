@@ -183,9 +183,9 @@ developed better methods to prevent death from air pollution.
 Regarding the line plots, our group wanted to compare the raw deaths in
 North America, Eastern Europe, and Latin America and the Caribbean since
 we wanted to compare two well-developed regions with a less developed
-one. For instance, in 2017, North America had 115000 deaths attributed
+one. For instance, in 2017, North America had 115,000 deaths attributed
 to air pollution, whereas Eastern Europe and Latin America and the
-Caribbean had approximately 150000 and 200000, respectively. This
+Caribbean had approximately 150,000 and 200,000, respectively. This
 finding is surprising given that Latin America and the Caribbean have a
 much smaller population than the other two regions.
 
@@ -231,7 +231,8 @@ unsafe water sources than Eastern Europe or North America. In 2017,
 Eastern Europe and North America had around 300 deaths due to unsafe
 water sources, whereas Latin America and the Caribbean had around 12,000
 deaths. Although Latin America and the Caribbean have a much smaller
-population, they are less economically developed than the other two.
+population, they are less economically developed than the other two
+regions, and so the death count disparity makes intuitive sense.
 
 ## Conclusion and Limitations
 
