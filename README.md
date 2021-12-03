@@ -324,6 +324,13 @@ Visualization. <https://scales.r-lib.org>,
 C. Sievert. Interactive Web-Based Data Visualization with R, plotly, and
 shiny. Chapman and Hall/CRC Florida, 2020.
 
+Yihui Xie (2021). knitr: A General-Purpose Package for Dynamic Report 
+Generation in R. R package version 1.36.
+
+Garrick Aden-Buie (2021). xaringanthemer: Custom 'xaringan' CSS Themes.
+https://pkg.garrickadenbuie.com/xaringanthemer/,
+  https://github.com/gadenbuie/xaringanthemer.
+
 Hadley Wickham and Jim Hester (2021). readr: Read Rectangular Text Data.
 <https://readr.tidyverse.org>, <https://github.com/tidyverse/readr>.
 
