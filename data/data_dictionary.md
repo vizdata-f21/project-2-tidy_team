@@ -123,7 +123,7 @@ Source: [Our World in Data](https://ourworldindata.org/grapher/population?time=1
 |iron_deficiency_rate | Death rate for iron deficiency| 
 |vitamin_a_deficiency_rate | Death rate for vitamin a deficiency| 
 |low_bone_mineral_density_rate | Death rate for  low bone mineral density| 
-|air_pollution_rate | Death rate for| air pollution 
+|air_pollution_rate | Death rate for air pollution| 
 |outdoor_air_pollution_rate |  Death rate for outdoor air pollution| 
 |diet_high_in_sodium_rate | Death rate for diet high in sodium| 
 |diet_low_in_whole_grains_rate | Death rate for diet low in whole grains| 
