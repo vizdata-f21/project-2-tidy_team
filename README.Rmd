@@ -48,7 +48,7 @@ The goal of our Shiny App is to communicate the harmful effects of certain risk 
 We utilize three different data sets. 
 
 The first data set is The World Pollution Data from Our World in Data via Kaggle. This data set contains two separate CSV files. The first includes the death rate by air pollution type and country from 1990 to 2017 - `r ncol(death_rates_from_air_pollution)` variables and `r nrow(death_rates_from_air_pollution)` observations. The second CSV has the raw number of deaths by risk factor and by country from 1990 to 2017 - `r ncol(number_deaths_by_risk_factor)` variables and `r nrow(number_deaths_by_risk_factor)` observations. 
-The second data set is The World Map Data from Maps Package, which includes `r ncol(map_data)` variables  and `r nrow(map_data)` observations. The third data set is Population Data from Our World in Data, which includes `r ncol(population_data)` different variables and `r nrow(population_data)` observations.
+The second data set is The World Map Data from Maps Package, which includes `r ncol(world_map_data)` variables  and `r nrow(world_map_data)` observations. The third data set is Population Data from Our World in Data, which includes `r ncol(population_data)` different variables and `r nrow(population_data)` observations.
 
 ## Justification of Approach 
 

@@ -34,17 +34,17 @@ risk factors compared to other countries and through time.
 
 ### Data Description
 
-We utilize three different datasets.
+We utilize three different data sets.
 
-The first dataset is The World Pollution Data from Our World in Data via
-Kaggle. This dataset contains two separate CSV files. The first includes
-the death rate by air pollution type and country from 1990 to 2017 - 7
-variables and 6468 observations. The second CSV has the raw number of
-deaths by risk factor and by country from 1990 to 2017 - 32 variables
-and 6468 observations. The second dataset is The World Map Data from
-Maps Package, which includes variables and observations. The third
-dataset is Population Data from Our World in Data, which includes 4
-different variables and 6814 observations.
+The first data set is The World Pollution Data from Our World in Data
+via Kaggle. This data set contains two separate CSV files. The first
+includes the death rate by air pollution type and country from 1990 to
+2017 - 7 variables and 6468 observations. The second CSV has the raw
+number of deaths by risk factor and by country from 1990 to 2017 - 32
+variables and 6468 observations. The second data set is The World Map
+Data from Maps Package, which includes 6 variables and 99338
+observations. The third data set is Population Data from Our World in
+Data, which includes 4 different variables and 6814 observations.
 
 ## Justification of Approach
 
@@ -53,11 +53,11 @@ different variables and 6814 observations.
 The data can be found in our [data dictionary](data/data_dictionary.md).
 We first created a data cleaning script to separate all the data
 cleaning from the app. We compressed the .csv files into rds files and
-combined and separated components of the datasets to create our
+combined and separated components of the data sets to create our
 visualizations.
 
 Specifically, we created `compressed_final_data.rds` by combining all
-the datasets above so each region has information about the different
+the data sets above so each region has information about the different
 death rates by various risk factors. However, we needed to organize
 death rates by different risk factors for each country for the map.
 Therefore, we created three rds files for each risk factor category
@@ -72,12 +72,12 @@ The Data cleaning file can be found [here](data/data_cleaning.R).
 ### Map Dataset
 
 To create the map, we used a series of `case_when` functions to resolve
-naming inconsistencies between the two datasets. However, a limitation
+naming inconsistencies between the two data sets. However, a limitation
 was that we could not fix all the country names, especially those we
 could not identify on the map. The data cleaning file can be found We
 aimed to make all three maps show death rate–not total death count–to
 account for varying population sizes. However, only the air pollution
-category had the death rate in the original dataset, the others had
+category had the death rate in the original data set, the others had
 death count. Therefore, we used population data to find the total
 population of each country between 1990 and 2017. Then we mutated a new
 column for the death rate by dividing the total number of deaths by
@@ -146,11 +146,12 @@ sources, approach, and discussion.
 
 Initially, our group attempted to utilize Leaflet, but this method did
 not work because it required spatial data that we could not join with
-the World Pollution datasets. Next, we tried using `geom_polygon,` which
-worked visually but limited interactivity. We were determined to include
-hover and zoom-in features to provide adequate information for users,
-because the color scale is not detailed enough to compare across space
-and time. We finally chose the plotly package to enhance interactivity.
+the World Pollution data sets. Next, we tried using `geom_polygon,`
+which worked visually but limited interactivity. We were determined to
+include hover and zoom-in features to provide adequate information for
+users, because the color scale is not detailed enough to compare across
+space and time. We finally chose the plotly package to enhance
+interactivity.
 
 ### Accessibility
 
@@ -224,7 +225,7 @@ Africa, South America, and South/South East Asia. Countries in this
 region would be considered less developed countries; therefore, this
 aligns with our group’s initial hypothesis. A similar trend can also be
 seen for death rates attributable to unsafe sanitation and a lack of
-access to handwashing facilities.
+access to hand washing facilities.
 
 Latin America and the Caribbean have far greater deaths attributed to
 unsafe water sources than Eastern Europe or North America. In 2017,
