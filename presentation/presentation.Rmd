@@ -40,31 +40,53 @@ knitr::opts_chunk$set(
 
 class: inverse, middle, center
 
-# Motivation
+# Motivation + Data
+
+
+
+
+- Aim and motivation: Communicate the harmful effects of certain risk factors on 
+the world through time via a Shiny app
+
+- 3 main data sets:
+
+  - The World Pollution Data from Kaggle ()
+  
+  - The World Map Data from Maps Package ()
+  
+  - Pollution Data from Our World in Data
 
 ---
 
-## Inspiration + Data
+# The Shiny App
 
-- Data from Our World in Data
---
-
-- GOAL: The goal of our Shiny App is to communicate the harmful effects of air pollution on the world through time by visually displaying the deaths caused by air pollution and other risk factors.
+### try to hyperlink this directly to the shiny app
 
 ---
 
-## Workflow
+## Approach
 
-- RMD, for trial and error of plots
---
+- Data cleaning and merging
 
-- Then, Shiny
+ - Utilizing Rds files 
+  
+- Map with a time functionality 
+ - Plotly
+
+- Line plots 
 
 ---
 
 class: inverse, middle, center
 
-# The Shiny App
+## Trends and limitations 
 
-### try to hyperlink this directly to the shiny app
+
+---
+
+class: inverse, middle, center
+
+# Thank you for listening!
+
+
 
