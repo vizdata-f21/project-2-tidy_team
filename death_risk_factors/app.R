@@ -305,10 +305,11 @@ server <- function(input, output) {
              width = 900,
              height = 600) %>%
       animation_opts(frame = 9) %>%
-      layout(yaxis = list(showline= F), # removing axis lines: https://plotly.com/r/axes/
+      # removing axis lines
+      layout(yaxis = list(showline= F),
              xaxis = list(showline= F)) %>%
-      config(displaylogo = FALSE) # remove plotly logo https://cran.r-project.org/web/packages/plotly/plotly.pdf
-
+      # remove plotly logo
+      config(displaylogo = FALSE)
   })
 
 
