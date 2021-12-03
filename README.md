@@ -153,14 +153,15 @@ across countries and time. We finally chose the plotly package for
 
 ### Accessibility
 
-All the color scales chosen are color-blind friendly. Each map shows a
-different Viridis palette, so comparing death rates between different
-countries is more accessible. We used a different, yet consistent
-Viridis palette for the line graphs. Each color corresponds with a
-region instead of corresponding with the death rate. Additionally, we
-added Alt Text to our app, specifically when the user hovers over the
-map and the line plot. This way, users who can not see the plots clearly
-can use their computer’s text reader to listen to our descriptions.
+All the color scales chosen are color-blind friendly using a Viridis
+palette so comparing death rates between different countries is more
+accessible. Each map shows a different Viridis palette, while using a
+different, yet consistent Viridis palette for the line graphs. For the
+line graph, each color corresponds with a region instead of
+corresponding with the death rate. Additionally, we added Alt Text to
+our app, specifically when the user hovers over the map and the line
+plot. This way, users who can not see the plots clearly can use their
+computer’s text reader to listen to our descriptions.
 
 ## Discussion
 
