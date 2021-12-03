@@ -38,6 +38,7 @@ knitr::opts_chunk$set(
 # Load your data here
 ```
 
+<<<<<<< HEAD
 ```{r title-slide, echo = FALSE}
 style_xaringan(title_slide_background_image = "presentation_files/title_image.jpg")
 ```
@@ -48,6 +49,10 @@ class: inverse
 
 .pull-left[
 
+=======
+# Motivation + Data
+
+>>>>>>> f7dd62863ce674763244e1b6c4c9d17859310fce
 - Aim and motivation: Communicate the harmful effects of certain risk factors on 
 the world through time via a Shiny app
 
@@ -83,11 +88,17 @@ class: inverse, middle
   
 - 3 main data sets:
 
+<<<<<<< HEAD
   - The Death by Risk Factor Data from Our World in Data via Kaggle 
   
   - The World Map Data from Maps Package
   
   - Population Data from Our World in Data
+=======
+  - The World Pollution Data from Kaggle
+  
+  - The World Map Data from Maps Package
+>>>>>>> f7dd62863ce674763244e1b6c4c9d17859310fce
   
 - Map with a time and interactive functionality
 
