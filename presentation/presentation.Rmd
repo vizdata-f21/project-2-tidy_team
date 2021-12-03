@@ -34,13 +34,9 @@ knitr::opts_chunk$set(
   )
 ```
 
-```{r load-data, include = FALSE}
-# Load your data here
-```
-
-<<<<<<< HEAD
 ```{r title-slide, echo = FALSE}
-style_xaringan(title_slide_background_image = "presentation_files/title_image.jpg")
+style_xaringan(title_slide_background_image = 
+                 "presentation_files/title_image.jpg")
 ```
 
 class: inverse
@@ -49,10 +45,6 @@ class: inverse
 
 .pull-left[
 
-=======
-# Motivation + Data
-
->>>>>>> f7dd62863ce674763244e1b6c4c9d17859310fce
 - Aim and motivation: Communicate the harmful effects of certain risk factors on 
 the world through time via a Shiny app
 
@@ -88,17 +80,13 @@ class: inverse, middle
   
 - 3 main data sets:
 
-<<<<<<< HEAD
   - The Death by Risk Factor Data from Our World in Data via Kaggle 
   
   - The World Map Data from Maps Package
   
   - Population Data from Our World in Data
-=======
-  - The World Pollution Data from Kaggle
   
   - The World Map Data from Maps Package
->>>>>>> f7dd62863ce674763244e1b6c4c9d17859310fce
   
 - Map with a time and interactive functionality
 
@@ -116,7 +104,7 @@ include_graphics("presentation_files/coding.jpg")
 
 ### Map Example
 
-```{r map, echo = FALSE, out.width = "80%", fig.align = "center"}
+```{r map-example, echo = FALSE, out.width = "60%", fig.align = "center"}
 include_graphics("presentation_files/map.jpg")
 ```
 
@@ -124,7 +112,7 @@ include_graphics("presentation_files/map.jpg")
 
 ### Line Graph Example
 
-```{r line-graph, echo = FALSE, out.width = "90%", fig.align = "center"}
+```{r line-graph-example, echo = FALSE, out.width = "90%", fig.align = "center"}
 include_graphics("presentation_files/linegraph.jpg")
 ```
 
@@ -142,11 +130,21 @@ class: inverse, middle
 
 ## Trends
 
-- xxx
+- Death rates attributable to air pollution in total have consistently fallen 
+throughout the 25 years on the time slider. For instance, the US’ death rate due 
+to air pollution (total) has dropped from 31.19 in 1990 to 19.95 in 2015. 
 
-- xxx
+- China and Russia faced the highest death rates due to secondhand smoking, with 
+the latter experiencing continuously rising death rates until 2008, after which 
+death rates started to plateau. 
 
-- xxx
+- The region that has the highest death rates due to alcohol is Eastern Europe, 
+particularly Russia, Romania and Ukraine, each having a death rate higher than 
+2.
+
+- The regions with the highest death rates due to unsafe water sources are 
+Africa, South America and South/South East Asia. 
+
 
 ---
 
