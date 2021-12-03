@@ -16,8 +16,6 @@ output:
 ---
 
 ```{r load-packages, include = FALSE}
-# Add any additional packages you need to this chunk
-# Remove any packages from this list that you're not using
 library(tidyverse)
 library(knitr)
 library(xaringanthemer)
@@ -40,6 +38,10 @@ style_xaringan(title_slide_background_image =
                  "presentation_files/title_image.jpg")
 ```
 
+class: middle, inverse
+
+# bit.ly/tidy-team
+---
 class: inverse
 
 # Motivation 
