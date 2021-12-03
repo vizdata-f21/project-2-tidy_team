@@ -50,11 +50,11 @@ different variables and 6814 observations.
 
 ### Data Cleaning and Merging
 
-The data can be found
-[here](../project-2-tidy_team/data/data_dictionary.md). We first created
-a data cleaning script to separate all the data cleaning from the app.
-We compressed the .csv files into rds files and combined and separated
-components of the datasets to create our visualizations.
+The data can be found in our [data dictionary](data/data_dictionary.md).
+We first created a data cleaning script to separate all the data
+cleaning from the app. We compressed the .csv files into rds files and
+combined and separated components of the datasets to create our
+visualizations.
 
 Specifically, we created `compressed_final_data.rds` by combining all
 the datasets above so each region has information about the different
@@ -67,8 +67,7 @@ three interactive maps. Also, we selected air pollution, substance use,
 and sanitation because those categories had the most significant effect
 on the death rate worldwide.
 
-The Data cleaning file can be found
-[here](https://github.com/vizdata-f21/project-2-tidy_team/blob/4a15ae80a3fb6726b2dda110fb79c4d142032f3e/data/data_cleaning.R).
+The Data cleaning file can be found [here](data/data_cleaning.R).
 
 ### Map Dataset
 
@@ -94,8 +93,7 @@ These intervals also show more meaningful change when playing the
 animation. We chose to keep data for every year for the line graphs for
 the integrity of the chart. This decision did not slow down the Shiny
 app since it is plotted in a line graph and not a plotly map. The code
-for the plotly map can be found
-[here](https://github.com/vizdata-f21/project-2-tidy_team/blob/main/death_risk_factors/app.R).
+for the plotly map can be found [here](death_risk_factors/app.R).
 
 ### Shiny App
 
@@ -112,8 +110,7 @@ Within the three tabs, the user will interact with a side panel,
 allowing them to select the subcategory to display. For instance, within
 the Substance Use tab, the side menu will allow the user to display
 death rates from secondhand smoking, alcohol use, drug use, or smoking.
-All subcategories of risk factors are listed in the [data
-dictionary](https://vizdata-f21.github.io/project-2-tidy_team/project-2-tidy_team/data/data_cleaning.R)
+All subcategories of risk factors are listed in the data dictionary.
 
 After the map reloads according to the user’s selection, the user can
 interact with the map by sliding the time slider located under the map

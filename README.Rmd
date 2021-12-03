@@ -54,26 +54,26 @@ The second dataset is The World Map Data from Maps Package, which includes `r nc
 
 ### Data Cleaning and Merging
 
-The data can be found [here](../project-2-tidy_team/data/data_dictionary.md).
+The data can be found in our [data dictionary](data/data_dictionary.md).
 We first created a data cleaning script to separate all the data cleaning from the app. We compressed the .csv files into rds files and combined and separated components of the datasets to create our visualizations. 
 
 Specifically, we created `compressed_final_data.rds` by combining all the datasets above so each region has information about the different death rates by various risk factors. However, we needed to organize death rates by different risk factors for each country for the map. Therefore, we created three rds files for each risk factor category (death by air pollution, substance use, and sanitation). We chose three categories because the Shiny App rendered too slowly with more than three interactive maps. Also, we selected air pollution, substance use, and sanitation because those categories had the most significant effect on the death rate worldwide. 
 
-The Data cleaning file can be found [here](https://github.com/vizdata-f21/project-2-tidy_team/blob/4a15ae80a3fb6726b2dda110fb79c4d142032f3e/data/data_cleaning.R).
+The Data cleaning file can be found [here](data/data_cleaning.R).
 
 ### Map Dataset
 To create the map, we used a series of `case_when` functions to resolve naming inconsistencies between the two datasets. However, a limitation was that we could not fix all the country names, especially those we could not identify on the map. The data cleaning file can be found 
 We aimed to make all three maps show death rate–not total death count–to account for varying population sizes. However, only the air pollution category had the death rate in the original dataset, the others had death count. Therefore, we used population data to find the total population of each country between 1990 and 2017. Then we mutated a new column for the death rate by dividing the total number of deaths by total population, then multiplying by 100,000 to show the number of deaths per 100,000 people. However, we did not age-standardize the death rate as we did not feel equipped to undertake this calculation.
 
 ### Time
-For the map, we filtered for every three years between 1990 and 2015 instead of plotting every year to enhance loading speed on the app. These intervals also show more meaningful change when playing the animation. We chose to keep data for every year for the line graphs for the integrity of the chart. This decision did not slow down the Shiny app since it is plotted in a line graph and not a plotly map. The code for the plotly map can be found [here](https://github.com/vizdata-f21/project-2-tidy_team/blob/main/death_risk_factors/app.R).
+For the map, we filtered for every three years between 1990 and 2015 instead of plotting every year to enhance loading speed on the app. These intervals also show more meaningful change when playing the animation. We chose to keep data for every year for the line graphs for the integrity of the chart. This decision did not slow down the Shiny app since it is plotted in a line graph and not a plotly map. The code for the plotly map can be found [here](death_risk_factors/app.R).
 
 ### Shiny App
 Our app displays a dashboard with three tabs, each displaying a world map and a line chart according to the three main categories of risk factors: Air pollution, Substance Use, and Sanitation. 
 
 The world map is a plotly map highlighting the death rates for the chosen risk factor tab. Furthermore, there is a time slider below the map. Each type of pollution is associated with a different continuous color scale. 
 
-Within the three tabs, the user will interact with a side panel, allowing them to select the subcategory to display. For instance, within the Substance Use tab, the side menu will allow the user to display death rates from secondhand smoking, alcohol use, drug use, or smoking. All subcategories of risk factors are listed in the [data dictionary](https://vizdata-f21.github.io/project-2-tidy_team/project-2-tidy_team/data/data_cleaning.R)
+Within the three tabs, the user will interact with a side panel, allowing them to select the subcategory to display. For instance, within the Substance Use tab, the side menu will allow the user to display death rates from secondhand smoking, alcohol use, drug use, or smoking. All subcategories of risk factors are listed in the data dictionary.
 
 After the map reloads according to the user’s selection, the user can interact with the map by sliding the time slider located under the map to select a specific year to display, ranging from 1990 to 2017. Additionally, the user can click the play button near the time slider to animate the map.
 
