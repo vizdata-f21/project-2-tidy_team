@@ -180,39 +180,40 @@ increase. However, this finding does not suggest that air pollution has
 necessarily decreased, but rather the possibility that people have
 developed better methods to prevent death from air pollution.
 
-Regarding the line plots, our group wanted to compare the raw death
-rates in North America, Eastern Europe, and Latin America and the
-Caribbean since we wanted to compare two well-developed regions with a
-less developed one. For instance, in 2017, North America had 115000
-deaths attributed to air pollution, whereas Eastern Europe and Latin
-America and the Caribbean had approximately 150000 and 200000,
-respectively. This finding is surprising given that Latin America and
-the Caribbean have a much smaller population than the other two regions.
+Regarding the line plots, our group wanted to compare the raw deaths in
+North America, Eastern Europe, and Latin America and the Caribbean since
+we wanted to compare two well-developed regions with a less developed
+one. For instance, in 2017, North America had 115000 deaths attributed
+to air pollution, whereas Eastern Europe and Latin America and the
+Caribbean had approximately 150000 and 200000, respectively. This
+finding is surprising given that Latin America and the Caribbean have a
+much smaller population than the other two regions.
 
 ### Substance Use
 
 Alcohol use and secondhand smoking provided fascinating insights. For
 instance, from 1990 to 2015, death rates due to secondhand smoking in
 the US continuously decreased, from 1.14 to 0.87. Similarly, Canada’s
-death rate due to secondhand smoking decreased from 1.29 to 0.93 between
+death rate due to secondhand smoking decreased from 1.13 to 0.93 between
 1990 and 2015. China and Russia faced the highest death rates due to
 secondhand smoking, with the latter experiencing continuously rising
-death rates until 2008, after which death rates started to plateau.
+death rates until 2008, after which death rates started to decrease
 
 Alcohol use death rates painted a surprisingly different story. Canada
-and the US in 1990 started with polar opposite deaths of 0.37 and 1.08,
-respectively. However, both countries faced continuously rising death
-rates, and by 2015, death rates due to alcohol use in Canada and the US
-were 1.16 and 1.38. However, the region with the highest death rates due
-to alcohol is Eastern Europe, particularly Russia, Romania, and Ukraine,
-each with a death rate higher than two.
+and the US in 1990 started with polar opposite death rates of 0.37 and
+1.08, respectively. However, both countries faced continuously rising
+death rates, and by 2015, death rates due to alcohol use in Canada and
+the US were 1.16 and 1.38. However, the region with the highest death
+rates due to alcohol in 2015 was Eastern Europe - particularly Russia,
+Romania, and Ukraine, each with a death rate higher than two.
 
-Comparing the three regions mentioned, we can see that Eastern Europe
-continuously has a more significant number of deaths for alcohol
-use-related deaths, followed by Latin America and the Caribbean and
-North America. Interestingly, the number of alcohol-related deaths for
-Eastern Europe and Latin America and the Caribbean were roughly the same
-in 1990; however, by 2017, the disparity was vast (100,000 deaths).
+Comparing the three regions mentioned earlier for the line plots, we can
+see that Eastern Europe continuously has a more significant number of
+deaths for alcohol use-related deaths, followed by Latin America and the
+Caribbean and North America. Interestingly, the number of
+alcohol-related deaths for Eastern Europe and Latin America and the
+Caribbean were roughly the same in 1990; however, by 2017, the disparity
+was vast (100,000 deaths).
 
 ### Sanitation
 
@@ -265,7 +266,35 @@ Our presentation can be found
 
 ## Data References:
 
-ADD DATA REFERENCES ## Packages:
+Although accessed via
+[Kaggle](https://www.kaggle.com/pavan9065/air-pollution), the risk
+factor death data’s original source is [Our World in
+Data](https://ourworldindata.org/air-pollution), which is a public data
+collection initiative led by the nonprofit Global Change Data Lab. The
+nonprofit shares knowledge (and data) about the world’s most pressing
+issues so that anyone has the tools and information they need to work
+toward combating a particular global problem. Our World in Data notes
+that their data sources include the [Institute for Health Metrics and
+Evaluation (Global Burden of
+Disease)](http://www.healthdata.org/results/data-visualizations) and
+[State of Global Air](https://www.stateofglobalair.org/data) The data
+was posted to Kaggle about a month ago and includes data spanning the
+years 1990 to 2017.
+
+Since some of the risk factors had death rates and some included the
+absolute number of deaths, we used population data over the years of
+interest via the [Our World in
+Data](https://ourworldindata.org/grapher/population?time=1899..latest&country=AFG~Africa~ALB~DZA~ASM~AND~AGO~AIA~ATG~ARM~ABW~ARG~Asia~AUS~AUT~AZE~BHS~BHR~BGD)
+to make a rate. It appears from the Our World in D
+
+Data website that the data was collected via
+[Gapminder](https://www.gapminder.org/data/documentation/gd003/),
+[HYDE](https://dataportaal.pbl.nl/downloads/HYDE/), and [United Nations
+Population
+Division](https://population.un.org/wpp/Download/Standard/Population/)
+databases.
+
+## Package References:
 
 Winston Chang, Joe Cheng, JJ Allaire, Carson Sievert, Barret Schloerke,
 Yihui Xie, Jeff Allen, Jonathan McPherson, Alan Dipert and Barbara
@@ -320,11 +349,20 @@ Data. R package version 2.1.0. <https://github.com/sfirke/janitor>
 Hadley Wickham and Jennifer Bryan (2019). readxl: Read Excel Files.
 <https://readxl.tidyverse.org>, <https://github.com/tidyverse/readxl>.
 
-## Shiny App Code Sources:
+Yihui Xie (2021). knitr: A General-Purpose Package for Dynamic Report
+Generation in R. R package version 1.36.
 
-LINK TO READ ME
+Garrick Aden-Buie (2021). xaringanthemer: Custom ‘xaringan’ CSS Themes.
+<https://pkg.garrickadenbuie.com/xaringanthemer/>,
+<https://github.com/gadenbuie/xaringanthemer>.
 
-## Presentation Images:
+## Shiny App Code References:
+
+The sources used to build the Shiny app can be found in the `README.md`
+of the `death_risk_factors` folder where the app is located. The direct
+link is [here](death_risk_factors/README.md).
+
+## Presentation Image References:
 
 -   <https://en.wikipedia.org/wiki/Air_pollution>
 -   <https://www.vecteezy.com/video/2019067-dark-world-map-animate-background>
