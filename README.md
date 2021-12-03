@@ -265,7 +265,32 @@ Our presentation can be found
 
 ## Data References:
 
-ADD DATA REFERENCES ## Packages:
+Although accessed via
+[Kaggle](https://www.kaggle.com/pavan9065/air-pollution), the risk factor 
+death data’s original source is 
+[Our World in Data](https://ourworldindata.org/air-pollution), which is a
+public data collection initiative led by the nonprofit Global Change Data Lab. 
+The nonprofit shares knowledge (and data) about the world’s most pressing
+issues so that anyone has the tools and information they need to work
+toward combating a particular global problem. Our World in Data notes
+that their data sources include the [Institute for Health Metrics and
+Evaluation (Global Burden of
+Disease)](http://www.healthdata.org/results/data-visualizations) and
+[State of Global Air](https://www.stateofglobalair.org/data) The data
+was posted to Kaggle about a month ago and includes data spanning the
+years 1990 to 2017.
+
+Since some of the risk factors had death rates and some included the absolute 
+number of deaths, we used population data over the years of interest
+via the 
+[Our World in Data](https://ourworldindata.org/grapher/population?time=1899..latest&country=AFG~Africa~ALB~DZA~ASM~AND~AGO~AIA~ATG~ARM~ABW~ARG~Asia~AUS~AUT~AZE~BHS~BHR~BGD) to make a rate. It appears from the Our World in Data website that the data
+was collected via 
+[Gapminder](https://www.gapminder.org/data/documentation/gd003/), 
+[HYDE](https://dataportaal.pbl.nl/downloads/HYDE/), and 
+[United Nations Population Division](https://population.un.org/wpp/Download/Standard/Population/) 
+databases.
+
+## Packages:
 
 Winston Chang, Joe Cheng, JJ Allaire, Carson Sievert, Barret Schloerke,
 Yihui Xie, Jeff Allen, Jonathan McPherson, Alan Dipert and Barbara
@@ -322,7 +347,9 @@ Hadley Wickham and Jennifer Bryan (2019). readxl: Read Excel Files.
 
 ## Shiny App Code Sources:
 
-LINK TO READ ME
+The sources used to build the Shiny app can be found in the `README.md` of the
+`death_risk_factors` folder where the app is located. The direct link is 
+[here](https://github.com/vizdata-f21/project-2-tidy_team/blob/9457e9c9f9bc56e008439baa45b7c035f6cf06cf/death_risk_factors/README.md).
 
 ## Presentation Images:
 
