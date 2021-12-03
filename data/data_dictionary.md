@@ -72,7 +72,7 @@ Source: Maps Package
 |region | Region Name| 
 |subregion | Subregion Name | 
 
-## Pollution Data 
+## Population Data 
 
 Source: [Our World in Data](https://ourworldindata.org/grapher/population?time=1899..latest&country=AFG~Africa~ALB~DZA~ASM~AND~AGO~AIA~ATG~ARM~ABW~ARG~Asia~AUS~AUT~AZE~BHS~BHR~BGD)
 
