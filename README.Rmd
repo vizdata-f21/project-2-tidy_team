@@ -130,7 +130,7 @@ All these factors would require a large time investment towards technical troubl
 
 # Presentation Slides
 
-Our presentation can be found [here](https://vizdata-f21.github.io/project-2-tidy_team/presentation/presentation.html)
+Our presentation can be found [here](https://vizdata-f21.github.io/project-2-tidy_team/presentation/presentation.html#4)
 
 # References
 
